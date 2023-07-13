@@ -9,9 +9,9 @@ var testArr: Array[Requirement] = [
 var testParty: Party = Party.new();
 
 func _ready():
-	testParty._members.push_back(Adventurer.new("Aerithus Sól", 19, 2, Adventurer.AdventurerRace.DEMI_HUMAN));
-	testParty._members.push_back(Adventurer.new("Monrose Faertag", 19, 2, Adventurer.AdventurerRace.DEMI_HUMAN));
-	testParty._members.push_back(Adventurer.new("Atou Graeli", 21, 3, Adventurer.AdventurerRace.HUMAN));
+	testParty._members.push_back(Adventurer.new("Aerithus Sól", 19, 10, 2, Adventurer.Race.DEMI_HUMAN));
+	testParty._members.push_back(Adventurer.new("Monrose Faertag", 19, 10, 2, Adventurer.Race.DEMI_HUMAN));
+	testParty._members.push_back(Adventurer.new("Atou Graeli", 21, 10, 3, Adventurer.Race.HUMAN));
 	
 	for i in testArr:
 		var result = i.validate(testParty);
