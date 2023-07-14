@@ -29,10 +29,26 @@ func _init(name: String, age: int, health: int, level : int, race: Race):
 	_race = race;
 	pass;
 
-func set_state(new_state: Status) -> void:
-	_status = new_state;
+func take_damage(amount: int) -> void:
+	_health.x = clampi(_health.x - amount, 0, _health.y);
+	if _health.x == 0:
+		set_status(Status.DEAD);
 
-func update_state() -> void:
+func heal_damage(amount: int) -> void:
+	if _status == Status.DEAD: return;
+	_health.x = clampi(_health.x - amount, 0, _health.y);
+
+func tick_fatigue(build_amount: float, falloff_amount: float) -> void:
+	if _status == Status.ON_MISSION: _fatigue = clampf(_fatigue + build_amount, 0, 1);
+	elif _status == Status.TIRED: _fatigue = clampf(_fatigue - falloff_amount, 0, 1);
+	
+	update_status();
+
+func set_status(new_status: Status) -> void:
+	_status = new_status;
+	update_status();
+
+func update_status() -> void:
 	match _status:
 		Status.DEAD: # Controlled externally via set_state()
 			return;
