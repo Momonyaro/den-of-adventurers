@@ -9,20 +9,22 @@ enum Nationality { Blacholer, Montian, Vignarran };
 #  References to graphics (Body, Head, Hair and equipment)
 #  
 
-var _name : String = "";
+var _given_name : String = "";
+var _family_name : String = "";
 var _age : int = 0;
 var _race : Race = Race.HUMAN; 
 var _nationality : Nationality = Nationality.Blacholer;
 var _status : Status = Status.IDLE;
 
 var _health : Vector2i = Vector2i(10, 10);
-var _fatigue : float = 0; # When it reaches 1, the character needs to rest and enters it's sleeping state if idle.
+var _fatigue : float = 0; # When it reaches 1, the character needs to rest and enters it's tired state if idle.
 
-var _level : int = 0;
+var _level : int = 1;
 var _xp : Vector2i = Vector2i.ZERO;
 
-func _init(name: String, age: int, health: int, level : int, race: Race):
-	_name = name;
+func _init(given_name: String, family_name: String, age: int, health: int, level: int, race: Race):
+	_given_name = given_name;
+	_family_name = family_name;
 	_age = age;
 	_health = Vector2i(health, health);
 	_level = level;
