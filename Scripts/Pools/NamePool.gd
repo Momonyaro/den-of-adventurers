@@ -36,6 +36,13 @@ func get_new_name(nationality: Adventurer.Nationality) -> Array[String]:
 	print(str("Failed to create unique name, reused: [", given_name, " ", family_name, "]"));
 	return [given_name, family_name];
 
+func reserve_name(given: String, family: String):
+	var key = str(family, "_", given);
+	if used_names.has(key):
+		print("Name [", given, " ", family, "] already in use! Failed to reserve!");
+	else:
+		used_names.push_back(key);
+
 func parse_name_file(path: String, family_pool: Array[String], given_pool: Array[String]):
 	const f_n_marker : String = "--FAMILY";
 	const g_n_f_marker : String = "--GIVEN_F";

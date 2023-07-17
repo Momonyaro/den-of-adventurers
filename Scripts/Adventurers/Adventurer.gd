@@ -11,6 +11,7 @@ enum Nationality { Blacholer, Montian, Vignarran };
 
 var _given_name : String = "";
 var _family_name : String = "";
+var _unique_id : String = "";
 var _age : int = 0;
 var _race : Race = Race.HUMAN; 
 var _nationality : Nationality = Nationality.Blacholer;
@@ -22,16 +23,20 @@ var _fatigue : float = 0; # When it reaches 1, the character needs to rest and e
 var _level : int = 1;
 var _xp : Vector2i = Vector2i.ZERO;
 
-func _init(given_name: String, family_name: String, age: int, health: int, level: int, race: Race):
+func _init(given_name: String, family_name: String, age: int, health: int, level: int, race: Race, nationality: Nationality, adventurer_index: int):
 	_given_name = given_name;
 	_family_name = family_name;
 	_age = age;
 	_health = Vector2i(health, health);
 	_level = level;
 	_race = race;
+	
+	var toId = str(adventurer_index, "--", given_name, "_", family_name);
+	_unique_id = Marshalls.utf8_to_base64(toId);
 	pass;
 
 func take_damage(amount: int) -> void:
+	if _status == Status.DEAD: return;
 	_health.x = clampi(_health.x - amount, 0, _health.y);
 	if _health.x == 0:
 		set_status(Status.DEAD);
@@ -64,3 +69,6 @@ func update_status() -> void:
 			if _fatigue == 1:
 				_status = Status.TIRED;
 			return;
+
+func adv_name() -> String:
+	return str(_given_name, " ", _family_name);

@@ -10,15 +10,18 @@ var testParty: Party = Party.new();
 
 func _ready():
 	randomize();
-	var pool = NamePool.new();
+	var name_pool = NamePool.new();
+	var adv_pool = AdventurerPool.new(name_pool);
 	
-	for i in 4: 
-		var name = pool.get_new_name(Adventurer.Nationality.Blacholer);
-		var rand_race = Adventurer.Race.HUMAN;
-		if randi() % 2 == 1:
-			rand_race = Adventurer.Race.DEMI_HUMAN;
-		testParty._members.push_back(Adventurer.new(name[0], name[1], 20, 5, 2, rand_race));
-		print(str("Name: ", name, " Race: ", Adventurer.Race.keys()[rand_race]));
+	print(name_pool.used_names.size());
+	
+	for id in adv_pool._adv_pool:
+		var adv = adv_pool._adv_pool[id];
+		print(str(adv.adv_name(), " -- ", id))
+	
+	testParty._members.push_back(adv_pool._adv_pool['MC0tQWVyaXRodXNfU8OzbA==']);
+	testParty._members.push_back(adv_pool._adv_pool['MS0tTW9ucm9zZV9GYWVydGFn']);
+	testParty._members.push_back(adv_pool._adv_pool['Mi0tQXRvdV9HcmFlbGk=']);
 	
 	for i in testArr:
 		var result = i.validate(testParty);
