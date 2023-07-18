@@ -19,9 +19,9 @@ func _ready():
 		var adv = adv_pool._adv_pool[id];
 		print(str(adv.adv_name(), " -- ", id))
 	
-	testParty._members.push_back(adv_pool._adv_pool['MC0tQWVyaXRodXNfU8OzbA==']);
-	testParty._members.push_back(adv_pool._adv_pool['MS0tTW9ucm9zZV9GYWVydGFn']);
-	testParty._members.push_back(adv_pool._adv_pool['Mi0tQXRvdV9HcmFlbGk=']);
+	testParty._members.push_back(adv_pool.get_adventurer('MC0tQWVyaXRodXNfU8OzbA=='));
+	testParty._members.push_back(adv_pool.get_adventurer('MS0tTW9ucm9zZV9GYWVydGFn'));
+	testParty._members.push_back(adv_pool.get_adventurer('Mi0tQXRvdV9HcmFlbGk='));
 	
 	for i in testArr:
 		var result = i.validate(testParty);

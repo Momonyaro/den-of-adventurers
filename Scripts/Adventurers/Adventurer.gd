@@ -1,7 +1,7 @@
 extends Node
 class_name Adventurer
 
-enum Status { IDLE, ON_MISSION, TIRED, DEAD };
+enum Status { RECRUIT, IDLE, ON_MISSION, RESTING, TIRED, DEAD };
 enum Race { HUMAN, DEMI_HUMAN };
 enum Nationality { Blacholer, Montian, Vignarran };
 
@@ -15,7 +15,7 @@ var _unique_id : String = "";
 var _age : int = 0;
 var _race : Race = Race.HUMAN; 
 var _nationality : Nationality = Nationality.Blacholer;
-var _status : Status = Status.IDLE;
+var _status : Status = Status.RECRUIT;
 
 var _health : Vector2i = Vector2i(10, 10);
 var _fatigue : float = 0; # When it reaches 1, the character needs to rest and enters it's tired state if idle.

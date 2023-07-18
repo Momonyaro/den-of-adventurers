@@ -10,6 +10,7 @@ var _status : PartyStatus = PartyStatus.IDLE;
 func get_party_score() -> int:
 	var score : int = 0;
 	for i in _members:
+		if i == null: continue;
 		score += i._level;
 		
 	return score;

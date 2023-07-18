@@ -35,3 +35,8 @@ func generate_adventurer():
 	var adv = Adventurer.new(rand_name[0], rand_name[1], 20, 10, 1, rand_race, Adventurer.Nationality.Blacholer, adv_index);
 	_adv_pool[adv._unique_id] = adv;
 	pass;
+
+func get_adventurer(id: String) -> Adventurer:
+	if _adv_pool.has(id):
+		return _adv_pool[id];
+	return null;
