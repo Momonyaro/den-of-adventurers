@@ -9,3 +9,8 @@ var _requirements : Array[Requirement] = [];
 var _partyScoreReq : int = 0;
 
 var _goldReward : int = 0;
+
+# Timers
+var TIMER_travel_to : String;
+var TIMER_mission_duration : String;
+var TIMER_travel_home : String;
