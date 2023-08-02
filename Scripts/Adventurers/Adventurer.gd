@@ -1,7 +1,6 @@
-extends Node
 class_name Adventurer
 
-enum Status { RECRUIT, IDLE, ON_MISSION, RESTING, TIRED, DEAD };
+enum Status { RECRUIT, IDLE, AWAY, RESTING, EXHAUSTED, EATING, DEAD, DISMISSED };
 enum Race { HUMAN, DEMI_HUMAN };
 enum Nationality { Blacholer, Montian, Vignarran };
 
@@ -12,6 +11,7 @@ enum Nationality { Blacholer, Montian, Vignarran };
 var _given_name : String = "";
 var _family_name : String = "";
 var _unique_id : String = "";
+var _defined : bool = false;
 var _age : int = 0;
 var _race : Race = Race.HUMAN; 
 var _nationality : Nationality = Nationality.Blacholer;
@@ -25,6 +25,7 @@ var _level : int = 1;
 var _xp : Vector2i = Vector2i.ZERO;
 
 #Timers
+var TIMER_recruit : String;
 var TIMER_resting : String;
 
 
@@ -52,8 +53,8 @@ func heal_damage(amount: int) -> void:
 	_health.x = clampi(_health.x - amount, 0, _health.y);
 
 func tick_fatigue(build_amount: float, falloff_amount: float) -> void:
-	if _status == Status.ON_MISSION: _fatigue = clampf(_fatigue + build_amount, 0, 1);
-	elif _status == Status.TIRED: _fatigue = clampf(_fatigue - falloff_amount, 0, 1);
+	if _status == Status.AWAY: _fatigue = clampf(_fatigue + build_amount, 0, 1);
+	elif _status == Status.EXHAUSTED: _fatigue = clampf(_fatigue - falloff_amount, 0, 1);
 	
 	update_status();
 
@@ -65,16 +66,24 @@ func update_status() -> void:
 	match _status:
 		Status.DEAD: # Controlled externally via set_state()
 			return;
-		Status.ON_MISSION: # Controlled externally via set_state()
+		Status.AWAY: # Controlled externally via set_state()
 			return;
-		Status.TIRED:
+		Status.RECRUIT: # Controlled externally via set_state()
+			return;
+		Status.EXHAUSTED:
 			if _fatigue == 0:
 				_status = Status.IDLE;
 			return;
 		Status.IDLE:
 			if _fatigue == 1:
-				_status = Status.TIRED;
+				_status = Status.EXHAUSTED;
 			return;
 
 func adv_name() -> String:
 	return str(_given_name, " ", _family_name);
+
+func _on_timer_done(id: String):
+	match id:
+		TIMER_recruit:
+			set_status(Status.DISMISSED);
+			TIMER_recruit = "";

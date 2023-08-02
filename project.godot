@@ -10,6 +10,6 @@ config_version=5
 
 [application]
 
-config/name="DenOfAdventurers"
+config/name="Den Of Hungry Adventurers"
 run/main_scene="res://Scenes/Testing.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")

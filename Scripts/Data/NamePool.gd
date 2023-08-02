@@ -1,4 +1,3 @@
-extends Node
 class_name NamePool;
 
 const blachol_txt_path : String = "res://Resources/Names/blachol.txt";

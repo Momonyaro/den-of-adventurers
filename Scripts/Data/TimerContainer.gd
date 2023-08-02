@@ -25,11 +25,12 @@ func _process(delta):
 func create_timer(length: float) -> String:
 	var id = _create_id();
 	_timers[id] = InternalTimer.new(id, length);
+	print(str("[TIMER STARTED] -> <", id, "> :: [", _timers[id].get_timer_text(),"]"));
 	return id;
 
 func _create_id() -> String:
 	var id = str(_timerIndex,"__timer");
-	_timerIndex = (_timerIndex + 1) % 99999;
+	_timerIndex = (_timerIndex + 100) % 99999;
 	return Marshalls.utf8_to_base64(id);
 
 
@@ -64,6 +65,9 @@ class InternalTimer:
 		var minutes : float = (hours - hours_floored) * 60;
 		var minutes_floored = floori(minutes);
 		var seconds : float = (minutes - minutes_floored) * 60;
-		var seconds_floored = floori(seconds);
+		var seconds_rounded = roundi(seconds);
 		
-		return str("%02d" % hours_floored, ":", "%02d" % minutes_floored, ":", "%02d" % seconds_floored).pad_zeros(2);
+		return str("%02d" % hours_floored, ":", "%02d" % minutes_floored, ":", "%02d" % seconds_rounded);
+	
+	func get_timer_seconds() -> float:
+		return floori(_length - _value);
