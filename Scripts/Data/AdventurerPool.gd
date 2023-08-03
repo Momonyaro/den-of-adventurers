@@ -28,7 +28,7 @@ func define_adventurer(given_name: String, family_name: String, race: Adventurer
 func generate_adventurer():
 	var rand_name = _name_pool.get_new_name(Adventurer.Nationality.Blacholer);
 	var rand_race = Adventurer.Race.HUMAN;
-	if randi() % 2 == 1:
+	if randi() % 3 == 1:
 		rand_race = Adventurer.Race.DEMI_HUMAN;
 	
 	var adv_index = _adv_pool.keys().size();

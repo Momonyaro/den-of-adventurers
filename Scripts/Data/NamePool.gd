@@ -28,15 +28,15 @@ func get_new_name(nationality: Adventurer.Nationality) -> Array[String]:
 	
 		family_name = family_pool[randi() % family_pool.size()];
 		given_name = given_pool[randi() % given_pool.size()];
-		if not used_names.has(str(family_name, "_", given_name)):
-			used_names.push_back(str(family_name, "_", given_name));
+		if not used_names.has(str(family_name, "_", given_name).to_lower()):
+			used_names.push_back(str(family_name, "_", given_name).to_lower());
 			return [given_name, family_name];
 		i -= 1;
 	print(str("Failed to create unique name, reused: [", given_name, " ", family_name, "]"));
 	return [given_name, family_name];
 
 func reserve_name(given: String, family: String):
-	var key = str(family, "_", given);
+	var key = str(family, "_", given).to_lower();
 	if used_names.has(key):
 		print("Name [", given, " ", family, "] already in use! Failed to reserve!");
 	else:
