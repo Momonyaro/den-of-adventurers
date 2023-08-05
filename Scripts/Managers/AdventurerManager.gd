@@ -1,5 +1,7 @@
 extends Node
 class_name AdventurerManager;
+const D_T = "[ADV_MAN]";
+
 var _adventurers : Dictionary = {};
 
 # Timers
@@ -14,10 +16,11 @@ func _ready():
 
 func _process(delta):
 	if recruits().size() == 0 and TIMER_recruit_refresh == "":
-		TIMER_recruit_refresh = timers.create_timer(1200);
+		TIMER_recruit_refresh = timers.create_timer(1200*0.25);
 		var adv = data.adv_pool.get_rand_adventurer();
-		adv.TIMER_recruit = timers.create_timer(300);
+		adv.TIMER_recruit = timers.create_timer(300*0.25);
 		_adventurers[adv._unique_id] = adv;
+		print(str(D_T, " -> New ", adv.race(), " Recruit \"", adv.name(), "\" Created! "));
 	pass;
 
 func recruits() -> Array[String]:

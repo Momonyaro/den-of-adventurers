@@ -1,4 +1,5 @@
 class_name Adventurer
+const D_T = "    [ADV]";
 
 enum Status { RECRUIT, IDLE, AWAY, RESTING, EXHAUSTED, EATING, DEAD, DISMISSED };
 enum Race { HUMAN, DEMI_HUMAN };
@@ -79,11 +80,17 @@ func update_status() -> void:
 				_status = Status.EXHAUSTED;
 			return;
 
-func adv_name() -> String:
+func name() -> String:
 	return str(_given_name, " ", _family_name);
+
+func race() -> String:
+	match _race:
+		Race.DEMI_HUMAN: return "Demi-Human";
+		_: return "Human";
 
 func _on_timer_done(id: String):
 	match id:
 		TIMER_recruit:
 			set_status(Status.DISMISSED);
+			print(str(D_T, " -> ", name(), " has been dismissed."));
 			TIMER_recruit = "";

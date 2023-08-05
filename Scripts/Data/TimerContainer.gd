@@ -1,5 +1,6 @@
 extends Node
 class_name TimerContainer;
+const D_T = "  [TIMER]";
 
 signal timer_done(id: String);
 
@@ -12,7 +13,7 @@ func _process(delta):
 	for key in _timers:
 		var timer = _timers[key];
 		if timer.tick(delta):
-			print(str("Timer <", timer._id, "> [", str(timer._value).pad_decimals(2), " / ", timer._length, " seconds] ran out."));
+			print(str(D_T, " -> <", timer._id, "> [", str(timer._value).pad_decimals(2), " / ", timer._length, " seconds] ran out."));
 			timer_done.emit(timer._id);
 			to_delete.push_back(timer._id);
 	
@@ -25,7 +26,7 @@ func _process(delta):
 func create_timer(length: float) -> String:
 	var id = _create_id();
 	_timers[id] = InternalTimer.new(id, length);
-	print(str("[TIMER STARTED] -> <", id, "> :: [", _timers[id].get_timer_text(),"]"));
+	print(str(D_T, " -> <", id, "> :: [", _timers[id].get_timer_text(),"] Created."));
 	return id;
 
 func _create_id() -> String:
