@@ -18,20 +18,20 @@ func _process(delta):
 			update_target_pos(get_random_pos());
 	elif current_anim != "WALK":
 		current_anim = "WALK";
-		model.find_child("AnimationPlayer").play("WALK", 0.2);
+		model.find_child("AnimationPlayer").play("WALK", 0.1);
 
 func _physics_process(delta):
 	var pos = global_transform.origin;
 	var next_pos = nav_agent.get_next_path_position();
-	if nav_agent.distance_to_target() > .1:
+	if nav_agent.distance_to_target() > .1 and next_pos != pos:
 		look_at(next_pos, Vector3.UP);
 		self.rotate_object_local(Vector3.UP, PI);
 	var new_velocity = (next_pos - pos).normalized() * move_speed;
 	
-	if pos.distance_to(next_pos) < .2:
+	if pos.distance_to(next_pos) < .1:
 		if current_anim != "IDLE":
 			current_anim = "IDLE";
-			model.find_child("AnimationPlayer").play("IDLE", 0.2);
+			model.find_child("AnimationPlayer").play("IDLE", 0.1);
 		new_velocity = Vector3.ZERO;
 	
 	velocity = new_velocity;
@@ -42,8 +42,8 @@ func update_target_pos(target_pos):
 	nav_agent.target_position = target_pos;
 
 func get_random_pos() -> Vector3:
-	var rand_x = randf_range(-2, 2);
-	var rand_z = randf_range(-2, 2);
+	var rand_x = randf_range(-3, 3);
+	var rand_z = randf_range(-3, 3);
 	var rand_point = start_point + Vector3(rand_x, 0, rand_z);
 	
 	return rand_point;
