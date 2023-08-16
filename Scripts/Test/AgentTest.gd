@@ -36,14 +36,12 @@ func _physics_process(delta):
 	if pos.distance_to(next_pos) < .1 and current_anim != "CHEER":
 		new_velocity = Vector3.ZERO;
 	
-	if current_anim == "CHEER" and anim_player.is_playing():
-		pass;
-	elif new_velocity.length() > 0:
-		try_set_anim("WALK");
-		anim_player.play(current_anim, 0.1);
+	if new_velocity.length() > 0:
+		if try_set_anim("WALK"):
+			anim_player.play(current_anim, 0.2);
 	else:
-		try_set_anim("IDLE");
-		anim_player.play(current_anim, 0.1);
+		if try_set_anim("IDLE"):
+			anim_player.play(current_anim, 0.25);
 	
 	
 	velocity = new_velocity;
@@ -61,7 +59,7 @@ func get_random_pos() -> Vector3:
 	return rand_point;
 
 func try_set_anim(name: String) -> bool:
-	if name == "CHEER" and model.find_child("AnimationPlayer").is_playing():
+	if current_anim == "CHEER" and anim_player.is_playing():
 		return false;
 	if name == current_anim: 
 		return false;

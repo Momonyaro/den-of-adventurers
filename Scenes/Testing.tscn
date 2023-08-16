@@ -90,6 +90,20 @@ disabled = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Agent2"]
 
+[node name="Agent3" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.339835, -4.76837e-07, -1.00289)
+script = ExtResource("4_bbaja")
+move_speed = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Agent3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.528857, 0)
+shape = SubResource("CapsuleShape3D_ki8gd")
+disabled = true
+
+[node name="little_guy" parent="Agent3" instance=ExtResource("4_mij7i")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Agent3"]
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_av4e2")
 
