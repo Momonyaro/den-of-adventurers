@@ -64,41 +64,41 @@ shadow_opacity = 0.6
 shadow_blur = 2.15
 
 [node name="Agent" type="CharacterBody3D" parent="."]
+collision_layer = 64
 script = ExtResource("4_bbaja")
 move_speed = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Agent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.528857, 0)
 shape = SubResource("CapsuleShape3D_ki8gd")
-disabled = true
 
 [node name="little_guy" parent="Agent" instance=ExtResource("4_mij7i")]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Agent"]
 
 [node name="Agent2" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27316, -4.76837e-07, -0.841747)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25196, 0, -0.585099)
+collision_layer = 64
 script = ExtResource("4_bbaja")
 move_speed = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Agent2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.528857, 0)
 shape = SubResource("CapsuleShape3D_ki8gd")
-disabled = true
 
 [node name="little_guy" parent="Agent2" instance=ExtResource("4_mij7i")]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Agent2"]
 
 [node name="Agent3" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.339835, -4.76837e-07, -1.00289)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.241555, -0.0108199, -1.10955)
+collision_layer = 64
 script = ExtResource("4_bbaja")
 move_speed = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Agent3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.528857, 0)
 shape = SubResource("CapsuleShape3D_ki8gd")
-disabled = true
 
 [node name="little_guy" parent="Agent3" instance=ExtResource("4_mij7i")]
 
@@ -140,3 +140,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.76915, 0.411005, -1.1433)
 mesh = SubResource("BoxMesh_0jipx")
 skeleton = NodePath("../../NavigationObstacle3D2")
 surface_material_override/0 = SubResource("StandardMaterial3D_jqbs5")
+
+[connection signal="input_event" from="Agent" to="Agent" method="_on_input_event"]
+[connection signal="input_event" from="Agent2" to="Agent2" method="_on_input_event"]
+[connection signal="input_event" from="Agent3" to="Agent3" method="_on_input_event"]

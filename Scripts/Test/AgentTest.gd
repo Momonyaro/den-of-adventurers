@@ -28,12 +28,12 @@ func _process(delta):
 func _physics_process(delta):
 	var pos = global_transform.origin;
 	var next_pos = nav_agent.get_next_path_position();
-	if nav_agent.distance_to_target() > .1 and next_pos != pos:
+	if (nav_agent.distance_to_target() > .1 and next_pos != pos) and current_anim != "CHEER":
 		look_at(next_pos, Vector3.UP);
 		self.rotate_object_local(Vector3.UP, PI);
 	var new_velocity: Vector3 = (next_pos - pos).normalized() * move_speed;
 	
-	if pos.distance_to(next_pos) < .1 and current_anim != "CHEER":
+	if pos.distance_to(next_pos) < .1 or current_anim == "CHEER":
 		new_velocity = Vector3.ZERO;
 	
 	if new_velocity.length() > 0:
@@ -65,3 +65,11 @@ func try_set_anim(name: String) -> bool:
 		return false;
 	current_anim = name;
 	return true;
+
+
+func _on_input_event(camera, event, position, normal, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if try_set_anim("CHEER"):
+				anim_player.play(current_anim, 0.25);
+	pass # Replace with function body.
