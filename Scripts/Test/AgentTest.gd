@@ -14,6 +14,10 @@ var anim_player = null;
 func _ready():
 	anim_player = model.find_child("AnimationPlayer");
 	anim_player.play("CHEER", 0.1);
+	var test = model.find_child("HAT_MAGICIAN");
+	var rand = randi_range(0, 1);
+	if rand == 0:
+		test.hide();
 
 func _process(delta):
 	if current_anim == "CHEER":
