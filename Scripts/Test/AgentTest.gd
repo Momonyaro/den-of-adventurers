@@ -2,22 +2,27 @@ extends CharacterBody3D
 
 @onready var nav_agent = $NavigationAgent3D;
 @onready var model = $little_guy;
+@onready var adv_manager : AdventurerManager = get_node("/root/Root/Adventurers");
+@onready var timers : TimerContainer = get_node("/root/Root/Timers");
 @onready var nav_target_pos = global_transform.origin;
 @onready var start_point = global_transform.origin;
 
-@export var move_speed = 5.0;
+@export var move_speed = 2.0;
 @export var idle_time = 2.5;
 var timer = 0;
 var current_anim = "CHEER";
 var anim_player = null;
+var adv_id = "";
 
 func _ready():
+	$CHAR_NAME.visible = false;
 	anim_player = model.find_child("AnimationPlayer");
-	anim_player.play("CHEER", 0.1);
+	anim_player.play("CHEER", 0);
 	var test = model.find_child("HAT_MAGICIAN");
-	var rand = bool(randi_range(0, 1));
-	if rand:
+	if bool(randi_range(0, 1)):
 		test.hide();
+	else:
+		test.show();
 
 func _process(delta):
 	if current_anim == "CHEER":
@@ -70,10 +75,30 @@ func try_set_anim(name: String) -> bool:
 	current_anim = name;
 	return true;
 
-
 func _on_input_event(camera, event, position, normal, shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			if try_set_anim("CHEER"):
-				anim_player.play(current_anim, 0.25);
+			var adv: Adventurer = adv_manager._adventurers[adv_id];
+			if adv._status == Adventurer.Status.RECRUIT:
+				adv.set_status(Adventurer.Status.IDLE);
+				timers.delete_timer(adv.TIMER_recruit);
+				adv.TIMER_recruit = "";
+				$CHAR_NAME.text = str(adv.name(), " : ", Adventurer.Status.keys()[adv._status]);
+				if try_set_anim("CHEER"):
+					anim_player.play(current_anim, 0.25);
+	pass;
+
+
+func _on_mouse_entered():
+	if not adv_manager._adventurers.has(adv_id):
+		pass;
+		
+	var adv = adv_manager._adventurers[adv_id];
+	$CHAR_NAME.text = str(adv.name(), " : ", Adventurer.Status.keys()[adv._status]);
+	$CHAR_NAME.visible = true;
+	pass # Replace with function body.
+
+
+func _on_mouse_exited():
+	$CHAR_NAME.visible = false;
 	pass # Replace with function body.

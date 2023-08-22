@@ -29,6 +29,10 @@ func create_timer(length: float) -> String:
 	print(str(D_T, " -> <", id, "> :: [", _timers[id].get_timer_text(),"] Created."));
 	return id;
 
+func delete_timer(id: String):
+	_timers.erase(id);
+	pass;
+
 func _create_id() -> String:
 	var id = str(_timerIndex,"__timer");
 	_timerIndex = (_timerIndex + 100) % 99999;

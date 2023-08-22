@@ -41,15 +41,10 @@ func get_adventurer(id: String) -> Adventurer:
 		return _adv_pool[id];
 	return null;
 
-func get_defined_adv_pool() -> Array[Adventurer]:
-	var pool = _adv_pool.values();
-	var to_return : Array[Adventurer] = [];
-	
-	for adv in pool:
-		if adv._defined:
-			to_return.push_back(adv);
-	
-	return to_return;
+func get_defined_adv_pool() -> Array:
+	return _adv_pool.values().filter(
+		func(adv: Adventurer): return adv._defined;
+	);
 
 func get_rand_adventurer(guarantee_defined: bool = false) -> Adventurer:
 	var defined_pool = get_defined_adv_pool();

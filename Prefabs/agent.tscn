@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bthpxev4cvx8j"]
+
+[ext_resource type="Script" path="res://Scripts/Test/AgentTest.gd" id="1_bjw7s"]
+[ext_resource type="PackedScene" uid="uid://78qqxoqecl1p" path="res://Models/little_guy.glb" id="2_63leg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ki8gd"]
+radius = 0.430438
+height = 0.972774
+
+[node name="Agent" type="CharacterBody3D"]
+collision_layer = 64
+script = ExtResource("1_bjw7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.528857, 0)
+shape = SubResource("CapsuleShape3D_ki8gd")
+
+[node name="little_guy" parent="." instance=ExtResource("2_63leg")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="CHAR_NAME" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30588, 0)
+billboard = 1
+text = "NAME"
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
