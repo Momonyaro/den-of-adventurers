@@ -11,9 +11,10 @@ func _ready():
 
 func _on_new_recruit(id: String):
 	var instance = prefab_agent.instantiate();
-	var name = adv_manager._adventurers[id].name();
-	instance.name = name;
-	instance.adv_id = id;
+	var adv = adv_manager._adventurers[id];
+	instance.name = adv.name();
+	instance.adventurer = adv;
+	AgentWardrobe.dress_up(adv, instance);
 	add_child(instance);
 	instance.set_position(Vector3(0, 0, 0));
 	pass;
