@@ -21,5 +21,4 @@ func end() -> StateReference:
 	return StateReference.IDLE;
 
 func state_transition_allowed(state_ref: StateReference) -> bool:
-	if _animator == null: return false;
 	return !_animator.is_playing();

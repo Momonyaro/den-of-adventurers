@@ -19,7 +19,6 @@ func update(delta: float, adv_state: Adventurer.Status, is_moving: bool):
 			_current_state.end();
 
 			_current_state = state;
-			print("new state -> ", BaseState.StateReference.keys()[state._state_ref]);
 			_current_state.start(_animator);
 			pass;
 	

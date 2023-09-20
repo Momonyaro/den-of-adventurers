@@ -42,6 +42,7 @@ health: int, level: int, race: Race, nationality: Nationality, adventurer_index:
 	_health = Vector2i(health, health);
 	_level = level;
 	_race = race;
+	_nationality = nationality;
 	
 	var toId = str(adventurer_index, "--", given_name, "_", family_name);
 	_unique_id = Marshalls.utf8_to_base64(toId);
@@ -84,10 +85,10 @@ func update_status() -> void:
 				_status = Status.EXHAUSTED;
 			return;
 
-func name() -> String:
+func adv_name() -> String:
 	return str(_given_name, " ", _family_name);
 
-func race() -> String:
+func adv_race() -> String:
 	match _race:
 		Race.DEMI_HUMAN: return "Demi-Human";
 		_: return "Human";
@@ -96,5 +97,5 @@ func _on_timer_done(id: String):
 	match id:
 		TIMER_recruit:
 			set_status(Status.DISMISSED);
-			print(str(D_T, " -> ", name(), " has been dismissed."));
+			print(str(D_T, " -> ", adv_name(), " has been dismissed."));
 			TIMER_recruit = "";

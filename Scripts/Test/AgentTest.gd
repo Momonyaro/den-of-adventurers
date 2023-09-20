@@ -83,7 +83,7 @@ func _on_input_event(camera, event, position, normal, shape_idx):
 				adv.set_status(Adventurer.Status.IDLE);
 				timers.delete_timer(adv.TIMER_recruit);
 				adv.TIMER_recruit = "";
-				$CHAR_NAME.text = str(adv.name(), " : ", Adventurer.Status.keys()[adv._status]);
+				$CHAR_NAME.text = str(adv.adv_name(), " : ", Adventurer.Status.keys()[adv._status]);
 				if try_set_anim("CHEER"):
 					anim_player.play(current_anim, 0.25);
 	pass;
@@ -94,7 +94,7 @@ func _on_mouse_entered():
 		pass;
 		
 	var adv = adv_manager._adventurers[adv_id];
-	$CHAR_NAME.text = str(adv.name(), " : ", Adventurer.Status.keys()[adv._status]);
+	$CHAR_NAME.text = str(adv.adv_name(), " : ", Adventurer.Status.keys()[adv._status]);
 	$CHAR_NAME.visible = true;
 	pass # Replace with function body.
 

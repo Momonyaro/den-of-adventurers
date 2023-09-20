@@ -44,4 +44,4 @@ func _on_timer_done(id: String):
 
 func _on_new_recruit(id: String):
 	var adv = _adventurers[id];
-	print(str(D_T, " -> New ", adv.race(), " Recruit \"", adv.name(), "\" Created! "));
+	print(str(D_T, " -> New ", adv.adv_race(), " Recruit \"", adv.adv_name(), "\" Created! "));

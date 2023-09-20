@@ -2,7 +2,7 @@ extends BaseState;
 class_name IdleState;
 
 const IDLE_ANIME_REF = "IDLE";
-var _idle_time = randf_range(4, 30);
+var _idle_time = randf_range(4, 15);
 var _timer = 0;
 
 func _init():
@@ -14,7 +14,7 @@ func start(animator: AnimationPlayer):
     _animator.play(IDLE_ANIME_REF, 0.2);
 
 
-func evaluate(curr_state: StateReference, adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(_curr_state: StateReference, _adv_state: Adventurer.Status, has_destination: bool) -> bool:
     if !has_destination:
         return true;
     return false;
