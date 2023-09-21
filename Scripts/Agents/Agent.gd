@@ -52,9 +52,13 @@ func _on_mouse_entered():
 		
 	$CHAR_NAME.text = str(adventurer.adv_name(), " : ", Adventurer.Status.keys()[adventurer._status], " : ", BaseState.StateReference.keys()[state_manager._current_state._state_ref]);
 	$CHAR_NAME.visible = true;
+	$SELECTED.visible = true;
+	$SELECTED.get_child(0).play("spin", 0);
 	pass # Replace with function body.
 
 
 func _on_mouse_exited():
 	$CHAR_NAME.visible = false;
+	$SELECTED.visible = false;
+	$SELECTED.get_child(0).stop();
 	pass # Replace with function body.
