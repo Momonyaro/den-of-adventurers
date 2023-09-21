@@ -17,7 +17,7 @@ func _ready():
 	timers.timer_done.connect(_on_timer_done);
 	new_recruit.connect(_on_new_recruit);
 
-func _process(delta):
+func _process(_delta):
 	if recruits().size() == 0 and TIMER_recruit_refresh == "":
 		TIMER_recruit_refresh = timers.create_timer(60); #1200
 		var adv = data.adv_pool.get_rand_adventurer();

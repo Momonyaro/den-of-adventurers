@@ -4,6 +4,7 @@ var _animator: AnimationPlayer = null;
 var _current_state: BaseState = BaseState.new();
 var _states: Array[BaseState] = [
 	BaseState.new(),
+	WaveCameraState.new(),
 	CheerState.new(),
 	StartWanderState.new(),
 	IdleState.new(), 
@@ -13,7 +14,7 @@ var _states: Array[BaseState] = [
 func _init(animator: AnimationPlayer):
 	_animator = animator;
 
-func update(delta: float, adv_state: Adventurer.Status, is_moving: bool):
+func update(delta: float, adv_state: Adventurer.Status, is_moving: bool, agent: Node, camera: Node):
 	for state in _states:
 		if _current_state.state_transition_allowed(state._state_ref) && state.evaluate(_current_state._state_ref, adv_state, is_moving):
 			_current_state.end();
@@ -22,7 +23,7 @@ func update(delta: float, adv_state: Adventurer.Status, is_moving: bool):
 			_current_state.start(_animator);
 			pass;
 	
-	_current_state.update(delta);
+	_current_state.update(delta, agent, camera);
 	pass;
 
 func force_state(state_ref: String):

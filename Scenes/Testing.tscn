@@ -45,7 +45,7 @@ script = ExtResource("3_q8kab")
 unique_name_in_owner = true
 script = ExtResource("4_uo78h")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="SCENE_CAM" type="Camera3D" parent="."]
 transform = Transform3D(0.752082, -0.437961, 0.492507, 1.49012e-08, 0.747276, 0.664513, -0.65907, -0.499768, 0.562013, 3.18393, 4.02101, 3.68818)
 environment = SubResource("Environment_wun1a")
 current = true

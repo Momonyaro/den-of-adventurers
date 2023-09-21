@@ -20,7 +20,7 @@ func _ready():
 	pass;
 
 func _process(delta):
-	state_manager.update(delta, adventurer._status, navigation.is_moving);
+	state_manager.update(delta, adventurer._status, navigation.is_moving, self, get_node("/root/Root/SCENE_CAM"));
 
 	if state_manager.pick_new_wander() && navigation.nav_finished():
 		navigation.update_target_pos(navigation.get_random_pos());
@@ -43,14 +43,14 @@ func _on_input_event(_camera, event, _position, _normal, _shape_idx):
 
 				state_manager.force_state("CHEER");
 
-				$CHAR_NAME.text = str(adventurer.adv_name(), " : ", Adventurer.Status.keys()[adventurer._status]);
+				$CHAR_NAME.text = str(adventurer.adv_name(), " : ", Adventurer.Status.keys()[adventurer._status], " : ", BaseState.StateReference.keys()[state_manager._current_state._state_ref]);
 	pass;
 
 func _on_mouse_entered():
 	if adventurer == null:
 		pass;
 		
-	$CHAR_NAME.text = str(adventurer.adv_name(), " : ", Adventurer.Status.keys()[adventurer._status]);
+	$CHAR_NAME.text = str(adventurer.adv_name(), " : ", Adventurer.Status.keys()[adventurer._status], " : ", BaseState.StateReference.keys()[state_manager._current_state._state_ref]);
 	$CHAR_NAME.visible = true;
 	pass # Replace with function body.
 
