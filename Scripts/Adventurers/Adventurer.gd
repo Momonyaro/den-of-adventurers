@@ -93,6 +93,9 @@ func adv_race() -> String:
 		Race.DEMI_HUMAN: return "Demi-Human";
 		_: return "Human";
 
+func adv_status() -> String:
+	return Status.keys()[_status];
+
 func _on_timer_done(id: String):
 	match id:
 		TIMER_recruit:

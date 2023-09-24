@@ -23,9 +23,9 @@ func _process(delta):
 	to_delete.clear();
 	pass;
 
-func create_timer(length: float) -> String:
+func create_timer(length: float, description: String = "") -> String:
 	var id = _create_id();
-	_timers[id] = InternalTimer.new(id, length);
+	_timers[id] = InternalTimer.new(id, length, description);
 	print(str(D_T, " -> <", id, "> :: [", _timers[id].get_timer_text(),"] Created."));
 	return id;
 
@@ -38,18 +38,22 @@ func _create_id() -> String:
 	_timerIndex = (_timerIndex + 100) % 99999;
 	return Marshalls.utf8_to_base64(id);
 
+func _get_timers() -> Array:
+	return _timers.values();
 
 class InternalTimer:
 	var _id : String;
 	var _length : float;
 	var _value : float;
+	var _description : String;
 	var _mark_delete : bool;
 	
-	func _init(id: String, length: float):
+	func _init(id: String, length: float, description: String = ""):
 		_id = id;
 		_length = length;
 		_value = 0;
 		_mark_delete = false;
+		_description = description;
 		pass;
 	
 	func tick(delta: float) -> bool:

@@ -19,9 +19,9 @@ func _ready():
 
 func _process(_delta):
 	if recruits().size() == 0 and TIMER_recruit_refresh == "":
-		TIMER_recruit_refresh = timers.create_timer(60); #1200
+		TIMER_recruit_refresh = timers.create_timer(60, "When this timer runs out, we will create a new recruit."); #1200
 		var adv = data.adv_pool.get_rand_adventurer();
-		adv.TIMER_recruit = timers.create_timer(30); #300
+		adv.TIMER_recruit = timers.create_timer(30, str(adv.adv_name(), " dismissal timer.")); #300
 		
 		_adventurers[adv._unique_id] = adv;
 		new_recruit.emit(adv._unique_id);
@@ -44,4 +44,4 @@ func _on_timer_done(id: String):
 
 func _on_new_recruit(id: String):
 	var adv = _adventurers[id];
-	print(str(D_T, " -> New ", adv.adv_race(), " Recruit \"", adv.adv_name(), "\" Created! "));
+	print(str(D_T, " -> New ", adv.adv_race(), " Recruit \"", adv.adv_name(), "\" [", adv._unique_id, "] Created! "));
