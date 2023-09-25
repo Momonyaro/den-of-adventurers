@@ -33,6 +33,10 @@ func generate_adventurer():
 	
 	var adv_index = _adv_pool.keys().size();
 	var adv = Adventurer.new(rand_name[0], rand_name[1], 20, 10, 1, rand_race, Adventurer.Nationality.Blacholer, adv_index);
+	
+	adv._fatigue = randf_range(0, 0.9);
+	adv._xp = Vector2i(randi_range(0, 100), 200);
+
 	if bool(randi_range(0, 1)):
 		adv.LOOK_hat = "HAT_MAGICIAN";
 	_adv_pool[adv._unique_id] = adv;

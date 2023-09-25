@@ -96,6 +96,12 @@ func adv_race() -> String:
 func adv_status() -> String:
 	return Status.keys()[_status];
 
+func xp_percentage() -> float:
+	if _xp.y == 0:
+		return 0;
+	else: 
+		return _xp.x / float(_xp.y);
+
 func _on_timer_done(id: String):
 	match id:
 		TIMER_recruit:
