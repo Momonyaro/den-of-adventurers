@@ -5,6 +5,7 @@ var _current_state: BaseState = BaseState.new();
 var _states: Array[BaseState] = [
 	BaseState.new(),
 	WaveCameraState.new(),
+	TestDeleteDismissedState.new(),
 	CheerState.new(),
 	StartWanderState.new(),
 	IdleState.new(), 

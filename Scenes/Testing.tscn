@@ -1,49 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://f64ofd2jr8sn"]
+[gd_scene load_steps=13 format=3 uid="uid://f64ofd2jr8sn"]
 
 [ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_8246l"]
 [ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="2_dls8v"]
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.gd" id="2_tfev1"]
 [ext_resource type="Script" path="res://Scripts/Managers/AdventurerManager.gd" id="3_q8kab"]
 [ext_resource type="Script" path="res://Scripts/Managers/AgentManager.gd" id="4_uo78h"]
-[ext_resource type="Script" path="res://Scripts/Test/DebugTimerDisplay.gd" id="5_15mri"]
-[ext_resource type="Script" path="res://Scripts/UI/AgentSelectPanel.gd" id="7_h0tqq"]
-[ext_resource type="Texture2D" uid="uid://btxj61otcm2qj" path="res://Textures/Icons/star.png" id="8_g0p0n"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81qn1"]
-bg_color = Color(0.117647, 0.117647, 0.117647, 0.501961)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.694118, 0.501961, 0.658824, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lkprp"]
-content_margin_left = 10.0
-content_margin_top = 32.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ckfr6"]
-content_margin_left = 11.0
-content_margin_top = 6.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3u3fg"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q0xsm"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75lwl"]
-content_margin_top = 11.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_saadl"]
-content_margin_top = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.690196, 0.501961, 0.654902, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mogpt"]
-bg_color = Color(0.533333, 0.356863, 0.501961, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6e07"]
-bg_color = Color(0.309804, 0.192157, 0.290196, 1)
+[ext_resource type="PackedScene" uid="uid://bknquj2dnd2at" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
 
 [sub_resource type="Environment" id="Environment_wun1a"]
 background_mode = 1
@@ -88,140 +50,7 @@ script = ExtResource("3_q8kab")
 unique_name_in_owner = true
 script = ExtResource("4_uo78h")
 
-[node name="UI" type="Node" parent="."]
-
-[node name="DISPLAY_TIMERS" type="PanelContainer" parent="UI"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -330.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 560.0
-grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_81qn1")
-script = ExtResource("5_15mri")
-
-[node name="ItemList" type="ItemList" parent="UI/DISPLAY_TIMERS"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-theme_override_styles/panel = SubResource("StyleBoxEmpty_lkprp")
-allow_search = false
-item_count = 2
-fixed_icon_size = Vector2i(24, 24)
-item_0/text = "FGMAC=0014d"
-item_0/selectable = false
-item_1/text = "[15:00:00]"
-item_1/selectable = false
-
-[node name="Label" type="Label" parent="UI/DISPLAY_TIMERS"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_ckfr6")
-text = "[DEBUG] Display Timers"
-
-[node name="ADV_SELECT" type="PanelContainer" parent="UI" node_paths=PackedStringArray("name_label", "def_star", "race_label", "state_label", "xp_bar", "fatigue_section", "fatigue_bar", "recruit_btn")]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 322.0
-offset_bottom = 112.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_81qn1")
-script = ExtResource("7_h0tqq")
-name_label = NodePath("VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer2/ADV_NAME")
-def_star = NodePath("VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer2/TextureRect")
-race_label = NodePath("VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer/ADV_RACE")
-state_label = NodePath("VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer/ADV_STATE")
-xp_bar = NodePath("VBoxContainer2/MarginContainer/VBoxContainer/XP_BAR")
-fatigue_section = NodePath("VBoxContainer2/MarginContainer/VBoxContainer/VBoxContainer")
-fatigue_bar = NodePath("VBoxContainer2/MarginContainer/VBoxContainer/VBoxContainer/FatigueBar")
-recruit_btn = NodePath("VBoxContainer2/HBoxContainer/Button")
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/ADV_SELECT"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/ADV_SELECT/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 11
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 11
-theme_override_constants/margin_bottom = 5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="ADV_NAME" type="Label" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_3u3fg")
-text = "ADV_NAME"
-
-[node name="TextureRect" type="TextureRect" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("8_g0p0n")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="ADV_RACE" type="Label" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxEmpty_q0xsm")
-text = "Recruit"
-
-[node name="ADV_STATE" type="Label" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxEmpty_q0xsm")
-text = "Recruit"
-
-[node name="XP_BAR" type="ProgressBar" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-max_value = 1.0
-show_percentage = false
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ADV_FATIGUE" type="Label" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 13
-theme_override_styles/normal = SubResource("StyleBoxEmpty_75lwl")
-text = "Fatigue"
-
-[node name="FatigueBar" type="ProgressBar" parent="UI/ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 13
-max_value = 1.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/ADV_SELECT/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="Button" type="Button" parent="UI/ADV_SELECT/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/normal = SubResource("StyleBoxFlat_saadl")
-theme_override_styles/hover = SubResource("StyleBoxFlat_mogpt")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_m6e07")
-text = "RECRUIT"
+[node name="UI" parent="." instance=ExtResource("6_xnocw")]
 
 [node name="SCENE_CAM" type="Camera3D" parent="."]
 transform = Transform3D(0.752082, -0.437961, 0.492507, 1.49012e-08, 0.747276, 0.664513, -0.65907, -0.499768, 0.562013, 3.18393, 4.02101, 3.68818)
@@ -271,5 +100,3 @@ transform = Transform3D(0.609733, 0, -0.498952, 0, 1, 0, 0.4291, 0, 0.708989, 1.
 mesh = SubResource("BoxMesh_0jipx")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_8m8ew")
-
-[connection signal="pressed" from="UI/ADV_SELECT/VBoxContainer2/HBoxContainer/Button" to="UI/ADV_SELECT" method="_on_button_pressed"]

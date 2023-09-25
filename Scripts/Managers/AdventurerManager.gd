@@ -33,6 +33,10 @@ func recruits() -> Array:
 		func(adv: Adventurer): return adv._unique_id
 	);
 
+func _remove_adventurer(adv_id: String):
+	if _adventurers.has(adv_id):
+		_adventurers.erase(adv_id);
+
 func _on_timer_done(id: String):
 	match id:
 		TIMER_recruit_refresh:
