@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.gd" id="2_tfev1"]
 [ext_resource type="Script" path="res://Scripts/Managers/AdventurerManager.gd" id="3_q8kab"]
 [ext_resource type="Script" path="res://Scripts/Managers/AgentManager.gd" id="4_uo78h"]
-[ext_resource type="PackedScene" uid="uid://bknquj2dnd2at" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
+[ext_resource type="PackedScene" uid="uid://daoo1s5dlp1si" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
 
 [sub_resource type="Environment" id="Environment_wun1a"]
 background_mode = 1

@@ -1,0 +1,69 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://m7mvoj5x6lb5"]
+
+[ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="1_6bd6u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jwfu"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3uo43"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xfdt"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5tpnp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2tdxn"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8akhy"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j3qd"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ssbu"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvdop"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[resource]
+default_font = ExtResource("1_6bd6u")
+default_font_size = 20
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.172549, 0.172549, 0.172549, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 0)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/constants/icon_max_width = 20
+Button/font_sizes/font_size = 20
+Button/styles/hover = SubResource("StyleBoxFlat_5jwfu")
+Button/styles/normal = SubResource("StyleBoxFlat_3uo43")
+Button/styles/pressed = SubResource("StyleBoxFlat_2xfdt")
+CheckBox/colors/font_focus_color = Color(0, 0, 0, 1)
+CheckBox/font_sizes/font_size = 20
+CheckButton/colors/font_focus_color = Color(0, 0, 0, 1)
+CheckButton/font_sizes/font_size = 20
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/styles/normal = SubResource("StyleBoxEmpty_5tpnp")
+MenuButton/colors/font_color = Color(0, 0, 0, 1)
+MenuButton/colors/font_disabled_color = Color(0.109804, 0.109804, 0.109804, 1)
+MenuButton/colors/font_focus_color = Color(0, 0, 0, 1)
+MenuButton/colors/font_hover_color = Color(0, 0, 0, 1)
+MenuButton/colors/font_outline_color = Color(1, 1, 1, 1)
+MenuButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+MenuButton/constants/outline_size = 0
+MenuButton/font_sizes/font_size = 20
+MenuButton/styles/disabled = SubResource("StyleBoxFlat_2tdxn")
+MenuButton/styles/focus = SubResource("StyleBoxFlat_8akhy")
+MenuButton/styles/normal = SubResource("StyleBoxFlat_1j3qd")
+MenuButton/styles/pressed = SubResource("StyleBoxFlat_0ssbu")
+OptionButton/colors/font_focus_color = Color(0, 0, 0, 1)
+OptionButton/font_sizes/font_size = 20
+Panel/styles/panel = SubResource("StyleBoxFlat_bvdop")
