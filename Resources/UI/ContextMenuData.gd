@@ -15,17 +15,17 @@ static func get_menu_data():
 		},
 		'Exit to Main Menu': {
 			'type': 'big_action',
+			'msg': 'GOTO_MAIN',
 			'promt_warning': 'Are you sure? (Unsaved data will be lost.)',
 			'ok_option': 'Yes',
-			'no_option': 'No',
-			'msg': 'GOTO_MAIN'
+			'no_option': 'No'
 		},
 		'Exit to Desktop': {
 			'type': 'big_action',
+			'msg': 'GAME_QUIT',
 			'prompt_warning': 'Are you sure? (Unsaved data will be lost.)',
 			'ok_option': 'Yes',
 			'no_option': 'No',
-			'msg': 'GAME_QUIT'
 		}
 	},
 	'Programs': {
