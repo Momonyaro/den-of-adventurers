@@ -1,8 +1,8 @@
 class_name ContextMenuData;
 
 static func get_menu_data():
-    return {
-    'WIZ_ICON': {
+	return {
+	'WIZ_ICON': {
 		'Save Game': {
 			'type': 'action',
 			'--icon': 'res://Textures/Icons/wizard.png',

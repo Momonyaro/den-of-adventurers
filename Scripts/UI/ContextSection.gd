@@ -1,15 +1,30 @@
 extends PanelContainer
 
 var ctx_menu = null;
+var _current_item: String = "";
 var _active = false;
 var _id = "";
+@onready var _dropdown = get_child(1).get_child(0);
+
+signal new_item(id: String);
 
 func _ready():
 	ctx_menu = get_parent().get_parent().get_parent();
 	ctx_menu.new_context.connect(_on_new_context);
 	_set_active(false);
 
+func _process(_delta):
+	var mouse_is_inside = _dropdown.get_global_rect().has_point(get_global_mouse_position());
+	if !mouse_is_inside && _current_item != "":
+		set_item("");
+
+func set_item(id: String):
+	_current_item = id;
+	print(name, " -> ", id);
+	new_item.emit(id);
+
 func _set_active(active: bool):
+	set_item("");
 	var text = get_child(1);
 	var icon = get_child(0);
 	self_modulate = Color(0, 0, 0) if active else Color("#F5F5F5");

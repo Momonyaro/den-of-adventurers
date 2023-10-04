@@ -25,6 +25,7 @@ func create_menu():
 func create_section(key: String, item: Dictionary):
 	var section = section_prefab.instantiate();
 	menu_parent.add_child(section);
+	section.name = key;
 	var section_title = section.get_child(1);
 	var section_icon = section.get_child(0);
 	var section_dropdown = section_title.get_child(0);
@@ -32,7 +33,7 @@ func create_section(key: String, item: Dictionary):
 
 
 	section_dropdown.visible = false;
-	populate_section(section_content_parent, item);
+	populate_section(section, section_content_parent, item);
 	
 	section._id = key;
 	if key == 'WIZ_ICON':
@@ -42,13 +43,16 @@ func create_section(key: String, item: Dictionary):
 		section_title.text = key;
 
 
-func populate_section(parent: Node, item: Dictionary):
+func populate_section(section:Node, parent: Node, item: Dictionary):
 	for key in item.keys():
 		var entry = item[key];
 		var entry_item = section_item_prefab.instantiate();
 		parent.add_child(entry_item);
 
 		entry_item._msg_event = command_msg;
+		entry_item._section_parent = section;
+		entry_item._id = key;
+		section.new_item.connect(entry_item._on_new_item);
 
 		if entry.has('msg'):
 			entry_item._action_msg = entry['msg'];

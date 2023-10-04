@@ -1,7 +1,9 @@
 extends PanelContainer
 
 var _action_msg = "";
+var _section_parent = null;
 var _msg_event = null;
+var _id: String = "";
 
 func _ready():
 	_set_active(false);
@@ -20,10 +22,10 @@ func _gui_input(ev):
 func _send_msg():
 	_msg_event.emit(_action_msg);
 
-func _on_mouse_entered():
-	_set_active(true);
-	pass
+func _on_new_item(id: String):
+	_set_active(id == _id);
 
-func _on_mouse_exited():
-	_set_active(false);
+func _on_mouse_entered():
+	if _section_parent._current_item != _id:
+		_section_parent.set_item(_id);
 	pass
