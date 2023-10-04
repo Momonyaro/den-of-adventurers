@@ -44,6 +44,7 @@ text = "Programs"
 vertical_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="Text"]
+process_mode = 3
 layout_mode = 0
 offset_left = -5.0
 offset_top = 30.0

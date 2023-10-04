@@ -5,20 +5,26 @@ static func get_menu_data():
 	'WIZ_ICON': {
 		'Save Game': {
 			'type': 'action',
-			'--icon': 'res://Textures/Icons/wizard.png',
+			'icon': 'res://Textures/Icons/wizard.png',
 			'msg': 'GAME_SAVE'
 		},
 		'Load Game': {
 			'type': 'action',
-			'--icon': 'res://Textures/Icons/timer.png',
+			'icon': 'res://Textures/Icons/timer.png',
 			'msg': 'GAME_LOAD'
 		},
 		'Exit to Main Menu': {
 			'type': 'big_action',
+			'promt_warning': 'Are you sure? (Unsaved data will be lost.)',
+			'ok_option': 'Yes',
+			'no_option': 'No',
 			'msg': 'GOTO_MAIN'
 		},
 		'Exit to Desktop': {
 			'type': 'big_action',
+			'prompt_warning': 'Are you sure? (Unsaved data will be lost.)',
+			'ok_option': 'Yes',
+			'no_option': 'No',
 			'msg': 'GAME_QUIT'
 		}
 	},
