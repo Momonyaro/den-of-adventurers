@@ -20,7 +20,6 @@ func _process(_delta):
 
 func set_item(id: String):
 	_current_item = id;
-	print(name, " -> ", id);
 	new_item.emit(id);
 
 func _set_active(active: bool):
