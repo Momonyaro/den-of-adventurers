@@ -15,6 +15,27 @@ func _set_active(active: bool):
 	text.self_modulate = Color("#F5F5F5") if active else Color(0, 0, 0);
 	icon.self_modulate = Color("#F5F5F5") if active else Color(0, 0, 0);
 
+func is_pos_inside(pos: Vector2) -> bool:
+	var rects = _deep_search_type();
+	for rect in rects:
+		if rect.get_global_rect().has_point(get_global_mouse_position()):
+			return true;
+	
+	return false;
+
+func _deep_search_type() -> Array[Node]:
+	var toReturn: Array[Node] = [];
+	var nodes = get_children();
+	nodes.push_front(self);
+	while nodes.size() > 0:
+		var node = nodes.pop_front();
+		nodes.append_array(node.get_children());
+		
+		if node is PanelContainer:
+			toReturn.push_back(node);
+	
+	return toReturn;
+
 func _gui_input(ev):  
 	if ev is InputEventMouseButton and ev.button_index == 1 and ev.pressed:
 		_send_msg();

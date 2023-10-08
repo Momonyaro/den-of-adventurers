@@ -5,6 +5,7 @@ var _current_item: String = "";
 var _active = false;
 var _id = "";
 @onready var _dropdown = get_child(1).get_child(0);
+@onready var _dropdown_content_parent = get_child(1).get_child(0).get_child(0);
 
 signal new_item(id: String);
 
@@ -14,8 +15,9 @@ func _ready():
 	_set_active(false);
 
 func _process(_delta):
-	var mouse_is_inside = _dropdown.get_global_rect().has_point(get_global_mouse_position());
-	if !mouse_is_inside && _current_item != "":
+	var items = _dropdown_content_parent.get_children();
+	var nouse_inside = items.any(func(i): return i.is_pos_inside(get_global_mouse_position()));
+	if !nouse_inside && _current_item != "":
 		set_item("");
 
 func set_item(id: String):
