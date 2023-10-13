@@ -2,6 +2,7 @@ extends Panel
 
 var section_prefab = preload("res://Prefabs/UI/context_section.tscn");
 var section_item_prefab = preload("res://Prefabs/UI/context_section_item.tscn");
+var section_dropdown_prefab = preload("res://Prefabs/UI/context_section_dropdown_item.tscn");
 @export var menu_parent: Node = null;
 var _current_context: String = "";
 
@@ -46,12 +47,12 @@ func create_section(key: String, item: Dictionary):
 func populate_section(section:Node, parent: Node, item: Dictionary):
 	for key in item.keys():
 		var entry = item[key];
-		var entry_item = section_item_prefab.instantiate();
+		var entry_item = get_prefab(entry['type']);
 		parent.add_child(entry_item);
 
 		entry_item._msg_event = command_msg;
 		entry_item._section_parent = section;
-		entry_item._id = key;
+		entry_item._id.push_back(key);
 		section.new_item.connect(entry_item._on_new_item);
 
 		if entry.has('msg'):
@@ -59,15 +60,36 @@ func populate_section(section:Node, parent: Node, item: Dictionary):
 		
 		var entry_icon: TextureRect = entry_item.get_child(0).get_child(0);
 		var entry_title = entry_item.get_child(0).get_child(1);
-
-		entry_title.text = key;
+		
+		if entry.has('items'):
+			entry_title.text = key + " >";
+			var items = entry['items'];
+			for e_key in items.keys():
+				var sub_item = items[e_key];
+				var submenu_item = get_prefab(sub_item['type']);
+				entry_title.get_child(0).get_child(0).add_child(submenu_item);
+				submenu_item._msg_event = command_msg;
+				submenu_item._section_parent = section;
+				submenu_item._id.push_back(e_key);
+				entry_item._id.push_back(e_key);
+				section.new_item.connect(submenu_item._on_new_item);
+				var sub_icon: TextureRect = submenu_item.get_child(0).get_child(0);
+				var sub_title = submenu_item.get_child(0).get_child(1);
+				sub_title.text = e_key;
+				sub_icon.visible = sub_item.has('icon');
+				submenu_item._action_msg = sub_item['msg'] if sub_item.has('msg') else null;
+		else:
+			entry_title.text = key;
 
 		var has_icon = entry.has('icon');
 		entry_icon.visible = has_icon;
 		if has_icon:
 			entry_icon.texture = ResourceLoader.load(entry['icon']);
 
-
+func get_prefab(type: String) -> Node:
+	match type:
+		'folder': return section_dropdown_prefab.instantiate();
+		_: return section_item_prefab.instantiate();
 
 
 func clear_menu():
@@ -78,5 +100,6 @@ func clear_menu():
 func _on_command_msg(msg):
 	print(msg);
 	if msg == "GAME_QUIT":
-		get_tree().quit();
+		set_context("");
+		#get_tree().quit();
 	pass

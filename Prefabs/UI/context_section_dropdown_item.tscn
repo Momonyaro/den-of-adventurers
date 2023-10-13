@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcv347qg8pu1e"]
+
+[ext_resource type="Script" path="res://Scripts/UI/ContextSectionItem.gd" id="1_2mil7"]
+[ext_resource type="Texture2D" uid="uid://bt5w4u2lsh7df" path="res://Textures/Icons/wizard.png" id="2_v3umf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kkyvq"]
+bg_color = Color(1, 1, 1, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qnb4"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8u0ns"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="ContextSectionItem" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_kkyvq")
+script = ExtResource("1_2mil7")
+_has_dropdown = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_v3umf")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qnb4")
+text = "Solitaire"
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/Label"]
+process_mode = 3
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 4.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8u0ns")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Label/PanelContainer"]
+visibility_layer = 2
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 4
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

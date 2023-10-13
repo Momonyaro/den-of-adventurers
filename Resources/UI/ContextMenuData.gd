@@ -29,14 +29,19 @@ static func get_menu_data():
 		}
 	},
 	'Programs': {
-		'Breakout': {
-			'type': 'action',
-			'msg': 'DISTRACTION_BREAKOUT_START'
-		},
-		'Solitaire': {
-			'type': 'action',
-			'msg': 'DISTRACTION_SOLITAIRE_START'
-		},
+		'Distractions': {
+			'type': 'folder',
+			'items': {
+				'Breakout': {
+					'type': 'action',
+					'msg': 'DISTRACTION_BREAKOUT_START'
+				},
+				'Solitaire': {
+					'type': 'action',
+					'msg': 'DISTRACTION_SOLITAIRE_START'
+				}
+			}
+		}
 	}
 
 };
