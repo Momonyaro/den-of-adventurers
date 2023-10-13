@@ -62,7 +62,6 @@ func populate_section(section:Node, parent: Node, item: Dictionary):
 		var entry_title = entry_item.get_child(0).get_child(1);
 		
 		if entry.has('items'):
-			entry_title.text = key + " >";
 			var items = entry['items'];
 			for e_key in items.keys():
 				var sub_item = items[e_key];
@@ -78,8 +77,8 @@ func populate_section(section:Node, parent: Node, item: Dictionary):
 				sub_title.text = e_key;
 				sub_icon.visible = sub_item.has('icon');
 				submenu_item._action_msg = sub_item['msg'] if sub_item.has('msg') else null;
-		else:
-			entry_title.text = key;
+		
+		entry_title.text = key;
 
 		var has_icon = entry.has('icon');
 		entry_icon.visible = has_icon;
@@ -99,7 +98,8 @@ func clear_menu():
 
 func _on_command_msg(msg):
 	print(msg);
-	if msg == "GAME_QUIT":
-		set_context("");
-		#get_tree().quit();
+	match msg:
+		"GAME_QUIT": set_context(""); get_tree().quit();
+		'GOTO_MAIN': set_context("");
+		
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://daoo1s5dlp1si"]
+[gd_scene load_steps=23 format=3 uid="uid://daoo1s5dlp1si"]
 
 [ext_resource type="Script" path="res://Scripts/Test/DebugTimerDisplay.gd" id="1_13eng"]
 [ext_resource type="Script" path="res://Scripts/UI/AgentSelectPanel.gd" id="2_rdgvw"]
@@ -8,6 +8,8 @@
 [ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="5_oj32p"]
 [ext_resource type="Script" path="res://Scripts/UI/Clock.gd" id="6_bgy4b"]
 [ext_resource type="PackedScene" uid="uid://guoyybbqpe3j" path="res://Prefabs/UI/context_section.tscn" id="7_7ha3s"]
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="9_t1iy2"]
+[ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="10_t6qrh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81qn1"]
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.501961)
@@ -248,6 +250,7 @@ vertical_alignment = 1
 script = ExtResource("6_bgy4b")
 
 [node name="PromptContainer" type="Panel" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -284,6 +287,35 @@ theme_override_constants/margin_bottom = 4
 [node name="Panel" type="Panel" parent="PromptContainer/Panel/MarginContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_regga")
+
+[node name="Label" type="RichTextLabel" parent="PromptContainer/Panel/MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 480.0
+offset_bottom = 33.0
+theme = ExtResource("9_t1iy2")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/italics_font = ExtResource("10_t6qrh")
+bbcode_enabled = true
+text = "[b]This is the prompt title[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="PromptContainer/Panel/MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 48.0
+offset_right = 480.0
+offset_bottom = 130.0
+theme = ExtResource("9_t1iy2")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/italics_font = ExtResource("10_t6qrh")
+theme_override_font_sizes/italics_font_size = 15
+bbcode_enabled = true
+text = "[i]This is the reason text, use it to inform the user[/i]"
+fit_content = true
+scroll_active = false
 
 [connection signal="pressed" from="ADV_SELECT/VBoxContainer2/HBoxContainer/Button" to="ADV_SELECT" method="_on_button_pressed"]
 [connection signal="command_msg" from="ContextMenu" to="ContextMenu" method="_on_command_msg"]

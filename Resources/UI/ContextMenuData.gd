@@ -13,19 +13,26 @@ static func get_menu_data():
 			'icon': 'res://Textures/Icons/timer.png',
 			'msg': 'GAME_LOAD'
 		},
-		'Exit to Main Menu': {
-			'type': 'big_action',
-			'msg': 'GOTO_MAIN',
-			'promt_warning': 'Are you sure? (Unsaved data will be lost.)',
-			'ok_option': 'Yes',
-			'no_option': 'No'
-		},
-		'Exit to Desktop': {
-			'type': 'big_action',
-			'msg': 'GAME_QUIT',
-			'prompt_warning': 'Are you sure? (Unsaved data will be lost.)',
-			'ok_option': 'Yes',
-			'no_option': 'No',
+		'Quit...': {
+			'type': 'folder',
+			'items': {
+				'Exit to Main Menu': {
+					'type': 'big_action',
+					'msg': 'GOTO_MAIN',
+					'prompt_title': 'Quit to Main Menu',
+					'promt_warning': 'Are you sure? (Unsaved data will be lost.)',
+					'ok_option': 'Yes',
+					'no_option': 'No'
+				},
+				'Exit to Desktop': {
+					'type': 'big_action',
+					'msg': 'GAME_QUIT',
+					'prompt_title': 'Quit to Desktop',
+					'prompt_warning': 'Are you sure? (Unsaved data will be lost.)',
+					'ok_option': 'Yes',
+					'no_option': 'No',
+				}
+			}
 		}
 	},
 	'Programs': {
