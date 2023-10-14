@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm3vmjftx4ajh"]
+[gd_scene load_steps=6 format=3 uid="uid://dm3vmjftx4ajh"]
 
 [ext_resource type="Texture2D" uid="uid://bt5w4u2lsh7df" path="res://Textures/Icons/wizard.png" id="1_1sben"]
 [ext_resource type="Script" path="res://Scripts/UI/ContextSectionItem.gd" id="1_sjngl"]
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_xx52t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kkyvq"]
 content_margin_top = 2.0
@@ -15,6 +16,7 @@ content_margin_right = 5.0
 content_margin_bottom = 2.0
 
 [node name="ContextSectionItem" type="PanelContainer"]
+theme = ExtResource("1_xx52t")
 theme_override_styles/panel = SubResource("StyleBoxFlat_kkyvq")
 script = ExtResource("1_sjngl")
 

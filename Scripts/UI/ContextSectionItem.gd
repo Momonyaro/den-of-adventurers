@@ -19,7 +19,7 @@ func _set_active(active: bool, secondary: bool):
 	if _has_dropdown:
 		get_child(0).get_child(2).self_modulate = Color("#F5F5F5") if active else Color(0, 0, 0);
 		var dropdown: PanelContainer = text.get_child(0) as PanelContainer;
-		dropdown.global_position = global_position + Vector2(get_global_rect().size.x, -2);
+		dropdown.global_position = global_position + Vector2(get_global_rect().size.x, +0);
 		dropdown.visible = active or secondary;
 
 func is_pos_inside(pos: Vector2) -> bool:
@@ -55,6 +55,7 @@ func _on_new_item(id: String):
 
 func _on_mouse_entered():
 	if !get_global_rect().has_point(get_global_mouse_position()): pass;
+	if _id.size() == 0: return;
 	if _id[0] != _section_parent._current_item:
 		_section_parent.set_item(_id[0]);
 	pass

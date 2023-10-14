@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6snxqsuak4hs"]
+
+[ext_resource type="Script" path="res://Scripts/UI/ContextSectionItem.gd" id="1_qqb1q"]
+[ext_resource type="Texture2D" uid="uid://bt5w4u2lsh7df" path="res://Textures/Icons/wizard.png" id="2_g08rk"]
+[ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="3_pcxwe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kkyvq"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qnb4"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdprb"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_bottom = 4
+border_color = Color(0.729412, 0.776471, 0.854902, 1)
+corner_detail = 1
+
+[node name="ContextSectionItem" type="PanelContainer"]
+clip_contents = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_kkyvq")
+script = ExtResource("1_qqb1q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_g08rk")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.737255, 0.776471, 0.847059, 1)
+theme_override_fonts/font = ExtResource("3_pcxwe")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qnb4")
+text = "Solitaire"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cdprb")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

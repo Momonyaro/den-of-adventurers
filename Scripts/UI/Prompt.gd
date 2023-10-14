@@ -11,7 +11,7 @@ var _obj = null;
 signal set_prompt(prompt_obj);
 
 func _ready():
-	set_prompt.emit(_prompt_on_fail())
+	set_prompt.emit(null)
 	_no_option.pressed.connect(_on_no_pressed);
 	_ok_option.pressed.connect(_on_ok_pressed);
 

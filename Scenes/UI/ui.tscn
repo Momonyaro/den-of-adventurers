@@ -299,9 +299,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_regga")
 [node name="Label" type="RichTextLabel" parent="PromptContainer/Panel/MarginContainer/Panel"]
 layout_mode = 0
 offset_left = 89.0
-offset_top = 23.0
+offset_top = 22.0
 offset_right = 467.0
-offset_bottom = 47.0
+offset_bottom = 46.0
 theme = ExtResource("9_t1iy2")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/italics_font = ExtResource("10_t6qrh")
@@ -313,9 +313,9 @@ scroll_active = false
 [node name="Label2" type="RichTextLabel" parent="PromptContainer/Panel/MarginContainer/Panel"]
 layout_mode = 0
 offset_left = 90.0
-offset_top = 56.0
+offset_top = 54.0
 offset_right = 480.0
-offset_bottom = 130.0
+offset_bottom = 126.0
 theme = ExtResource("9_t1iy2")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/italics_font = ExtResource("10_t6qrh")

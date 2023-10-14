@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcv347qg8pu1e"]
+[gd_scene load_steps=8 format=3 uid="uid://dcv347qg8pu1e"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ContextSectionItem.gd" id="1_2mil7"]
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_qna3a"]
 [ext_resource type="Texture2D" uid="uid://bt5w4u2lsh7df" path="res://Textures/Icons/wizard.png" id="2_v3umf"]
 [ext_resource type="Texture2D" uid="uid://c21i62rrwtnw7" path="res://Textures/Icons/arrow_right.png" id="3_nm2t1"]
 
@@ -16,7 +17,7 @@ content_margin_right = 5.0
 content_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8u0ns"]
-bg_color = Color(0.729412, 0.776471, 0.854902, 1)
+bg_color = Color(0.947277, 0.965091, 0.967087, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -24,6 +25,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
 [node name="ContextSectionItem" type="PanelContainer"]
+theme = ExtResource("1_qna3a")
 theme_override_styles/panel = SubResource("StyleBoxFlat_kkyvq")
 script = ExtResource("1_2mil7")
 _has_dropdown = true
