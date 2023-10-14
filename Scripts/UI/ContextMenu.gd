@@ -4,6 +4,7 @@ var section_prefab = preload("res://Prefabs/UI/context_section.tscn");
 var section_item_prefab = preload("res://Prefabs/UI/context_section_item.tscn");
 var section_dropdown_prefab = preload("res://Prefabs/UI/context_section_dropdown_item.tscn");
 @export var menu_parent: Node = null;
+@export var prompt: Node = null;
 var _current_context: String = "";
 
 signal new_context(id: String);
@@ -53,6 +54,7 @@ func populate_section(section:Node, parent: Node, item: Dictionary):
 		entry_item._msg_event = command_msg;
 		entry_item._section_parent = section;
 		entry_item._id.push_back(key);
+		entry_item._obj = entry;
 		section.new_item.connect(entry_item._on_new_item);
 
 		if entry.has('msg'):
@@ -70,6 +72,7 @@ func populate_section(section:Node, parent: Node, item: Dictionary):
 				submenu_item._msg_event = command_msg;
 				submenu_item._section_parent = section;
 				submenu_item._id.push_back(e_key);
+				submenu_item._obj = sub_item;
 				entry_item._id.push_back(e_key);
 				section.new_item.connect(submenu_item._on_new_item);
 				var sub_icon: TextureRect = submenu_item.get_child(0).get_child(0);
@@ -96,9 +99,13 @@ func clear_menu():
 		child.queue_free();
 
 
-func _on_command_msg(msg):
-	print(msg);
-	match msg:
+func _on_command_msg(obj):
+	if obj.has('type') and obj['type'] == 'big_action':
+		prompt.set_prompt.emit(obj);
+		set_context("");
+		return;
+	
+	match obj['msg']:
 		"GAME_QUIT": set_context(""); get_tree().quit();
 		'GOTO_MAIN': set_context("");
 		

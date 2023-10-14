@@ -3,6 +3,7 @@ extends PanelContainer
 var _action_msg = "";
 var _section_parent = null;
 var _msg_event = null;
+var _obj = null;
 var _id: Array[String] = [];
 @export var _has_dropdown: bool = false;
 
@@ -12,7 +13,7 @@ func _ready():
 func _set_active(active: bool, secondary: bool):
 	var text = get_child(0).get_child(1);
 	var icon = get_child(0).get_child(0);
-	self_modulate = Color(0, 0, 0) if active else Color("#F5F5F5") if !secondary else Color("c5c5c5");
+	self_modulate = Color(0, 0, 0) if active else Color("#F5F5F5") if !secondary else Color("bac6da");
 	text.self_modulate = Color("#F5F5F5") if active else Color(0, 0, 0);
 	icon.self_modulate = Color("#F5F5F5") if active else Color(0, 0, 0);
 	if _has_dropdown:
@@ -47,7 +48,7 @@ func _gui_input(ev):
 		_send_msg();
 
 func _send_msg():
-	_msg_event.emit(_action_msg);
+	_msg_event.emit(_obj);
 
 func _on_new_item(id: String):
 	_set_active(_id[0] == id, _id.has(id));

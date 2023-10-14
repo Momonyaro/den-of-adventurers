@@ -20,7 +20,7 @@ static func get_menu_data():
 					'type': 'big_action',
 					'msg': 'GOTO_MAIN',
 					'prompt_title': 'Quit to Main Menu',
-					'promt_warning': 'Are you sure? (Unsaved data will be lost.)',
+					'prompt_warning': 'Are you sure? (Unsaved data will be lost.)',
 					'ok_option': 'Yes',
 					'no_option': 'No'
 				},

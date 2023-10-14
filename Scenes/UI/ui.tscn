@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://daoo1s5dlp1si"]
+[gd_scene load_steps=25 format=3 uid="uid://daoo1s5dlp1si"]
 
 [ext_resource type="Script" path="res://Scripts/Test/DebugTimerDisplay.gd" id="1_13eng"]
 [ext_resource type="Script" path="res://Scripts/UI/AgentSelectPanel.gd" id="2_rdgvw"]
@@ -8,8 +8,10 @@
 [ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="5_oj32p"]
 [ext_resource type="Script" path="res://Scripts/UI/Clock.gd" id="6_bgy4b"]
 [ext_resource type="PackedScene" uid="uid://guoyybbqpe3j" path="res://Prefabs/UI/context_section.tscn" id="7_7ha3s"]
+[ext_resource type="Script" path="res://Scripts/UI/Prompt.gd" id="9_nc0wt"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="9_t1iy2"]
 [ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="10_t6qrh"]
+[ext_resource type="Texture2D" uid="uid://c67fh2v0jf3k8" path="res://Textures/Icons/warning.png" id="11_g73no"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81qn1"]
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.501961)
@@ -204,7 +206,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mogpt")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_m6e07")
 text = "RECRUIT"
 
-[node name="ContextMenu" type="Panel" parent="." node_paths=PackedStringArray("menu_parent")]
+[node name="ContextMenu" type="Panel" parent="." node_paths=PackedStringArray("menu_parent", "prompt")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 32.0
@@ -212,6 +214,7 @@ grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f8gje")
 script = ExtResource("4_gemgs")
 menu_parent = NodePath("MarginContainer/OptionContainer")
+prompt = NodePath("../PromptContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="ContextMenu"]
 layout_mode = 1
@@ -249,13 +252,18 @@ horizontal_alignment = 2
 vertical_alignment = 1
 script = ExtResource("6_bgy4b")
 
-[node name="PromptContainer" type="Panel" parent="."]
-visible = false
+[node name="PromptContainer" type="Panel" parent="." node_paths=PackedStringArray("_prompt_title", "_prompt_warning", "_ok_option", "_no_option", "_ctx_menu")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("9_nc0wt")
+_prompt_title = NodePath("Panel/MarginContainer/Panel/Label")
+_prompt_warning = NodePath("Panel/MarginContainer/Panel/Label2")
+_ok_option = NodePath("Panel/MarginContainer/Panel/HBoxContainer/positive")
+_no_option = NodePath("Panel/MarginContainer/Panel/HBoxContainer/negative")
+_ctx_menu = NodePath("../ContextMenu")
 
 [node name="Panel" type="Panel" parent="PromptContainer"]
 layout_mode = 1
@@ -290,10 +298,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_regga")
 
 [node name="Label" type="RichTextLabel" parent="PromptContainer/Panel/MarginContainer/Panel"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 480.0
-offset_bottom = 33.0
+offset_left = 89.0
+offset_top = 23.0
+offset_right = 467.0
+offset_bottom = 47.0
 theme = ExtResource("9_t1iy2")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/italics_font = ExtResource("10_t6qrh")
@@ -304,8 +312,8 @@ scroll_active = false
 
 [node name="Label2" type="RichTextLabel" parent="PromptContainer/Panel/MarginContainer/Panel"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 48.0
+offset_left = 90.0
+offset_top = 56.0
 offset_right = 480.0
 offset_bottom = 130.0
 theme = ExtResource("9_t1iy2")
@@ -317,5 +325,40 @@ text = "[i]This is the reason text, use it to inform the user[/i]"
 fit_content = true
 scroll_active = false
 
+[node name="TextureRect" type="TextureRect" parent="PromptContainer/Panel/MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 23.0
+offset_right = 75.0
+offset_bottom = 75.0
+texture = ExtResource("11_g73no")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PromptContainer/Panel/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = -44.0
+offset_right = -13.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="positive" type="Button" parent="PromptContainer/Panel/MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("9_t1iy2")
+text = "Ignore"
+
+[node name="negative" type="Button" parent="PromptContainer/Panel/MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("9_t1iy2")
+text = "Continue"
+
 [connection signal="pressed" from="ADV_SELECT/VBoxContainer2/HBoxContainer/Button" to="ADV_SELECT" method="_on_button_pressed"]
 [connection signal="command_msg" from="ContextMenu" to="ContextMenu" method="_on_command_msg"]
+[connection signal="set_prompt" from="PromptContainer" to="PromptContainer" method="_on_set_prompt"]
