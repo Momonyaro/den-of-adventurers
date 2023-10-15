@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://daoo1s5dlp1si"]
+[gd_scene load_steps=28 format=3 uid="uid://daoo1s5dlp1si"]
 
 [ext_resource type="Script" path="res://Scripts/Test/DebugTimerDisplay.gd" id="1_13eng"]
 [ext_resource type="Script" path="res://Scripts/UI/AgentSelectPanel.gd" id="2_rdgvw"]
@@ -52,6 +52,23 @@ bg_color = Color(0.309804, 0.192157, 0.290196, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8gje"]
 bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmwhi"]
+bg_color = Color(0.729412, 0.776471, 0.854902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ls1l6"]
+content_margin_top = 0.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
@@ -247,6 +264,16 @@ size_flags_horizontal = 8
 theme_override_constants/separation = 24
 alignment = 2
 
+[node name="ProgressBar" type="ProgressBar" parent="ContextMenu/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme = ExtResource("9_t1iy2")
+theme_override_styles/background = SubResource("StyleBoxFlat_kmwhi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ls1l6")
+value = 50.0
+
 [node name="AdvCapacity" type="Label" parent="ContextMenu/MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
@@ -254,7 +281,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_oj32p")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 15
 text = "0/10 Adventurers"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -267,7 +294,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_oj32p")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 15
 text = "CLOCK [N/A]"
 horizontal_alignment = 2
 vertical_alignment = 1

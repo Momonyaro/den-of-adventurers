@@ -81,3 +81,7 @@ MenuButton/styles/pressed = SubResource("StyleBoxFlat_0ssbu")
 OptionButton/colors/font_focus_color = Color(0, 0, 0, 1)
 OptionButton/font_sizes/font_size = 20
 Panel/styles/panel = SubResource("StyleBoxFlat_bvdop")
+ProgressBar/colors/font_color = Color(0, 0, 0, 1)
+ProgressBar/constants/outline_size = 5
+ProgressBar/font_sizes/font_size = 15
+ProgressBar/fonts/font = ExtResource("1_6bd6u")
