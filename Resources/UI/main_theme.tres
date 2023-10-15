@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://m7mvoj5x6lb5"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://m7mvoj5x6lb5"]
 
 [ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="1_6bd6u"]
 
@@ -47,6 +47,22 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qkgb1"]
+bg_color = Color(0.737255, 0.776471, 0.847059, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2ihx"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
 [resource]
 default_font = ExtResource("1_6bd6u")
 default_font_size = 20
@@ -83,5 +99,7 @@ OptionButton/font_sizes/font_size = 20
 Panel/styles/panel = SubResource("StyleBoxFlat_bvdop")
 ProgressBar/colors/font_color = Color(0, 0, 0, 1)
 ProgressBar/constants/outline_size = 5
-ProgressBar/font_sizes/font_size = 15
+ProgressBar/font_sizes/font_size = 12
 ProgressBar/fonts/font = ExtResource("1_6bd6u")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_qkgb1")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_p2ihx")
