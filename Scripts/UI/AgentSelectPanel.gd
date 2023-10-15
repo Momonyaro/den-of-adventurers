@@ -9,11 +9,15 @@ extends PanelContainer
 @export var fatigue_bar : ProgressBar;
 @export var recruit_btn : Button;
 
+var _game_manager : GameManager = null;
+var _adv_manager : AdventurerManager = null;
+
 var _selected_agent : Agent = null;
 
 func _ready():
-	var game_manager : GameManager = get_node("/root/Root/Game");
-	game_manager.select_agent.connect(_on_select_agent);
+	_game_manager = get_node("/root/Root/Game");
+	_adv_manager = get_node("/root/Root/Adventurers");
+	_game_manager.select_agent.connect(_on_select_agent);
 	visible = false;
 	pass;
 
@@ -30,9 +34,10 @@ func _draw_panel(agent: Agent):
 	xp_bar.value = agent.adventurer.xp_percentage();
 	fatigue_bar.value = agent.adventurer._fatigue;
 
+	var has_capacity = _check_capacity();
 	match agent.adventurer._status:
 		Adventurer.Status.RECRUIT:
-			recruit_btn.visible = true;
+			recruit_btn.visible = has_capacity;
 			xp_bar.visible = false;
 			fatigue_section.visible = false;
 		_:
@@ -42,6 +47,11 @@ func _draw_panel(agent: Agent):
 
 
 	pass;
+
+func _check_capacity():
+	var max = _game_manager._max_adventurers;
+	var current = _adv_manager.recruited().size();
+	return current < max;
 
 func _on_select_agent(agent: Agent):
 	_selected_agent = agent;

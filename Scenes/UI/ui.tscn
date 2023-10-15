@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://daoo1s5dlp1si"]
+[gd_scene load_steps=26 format=3 uid="uid://daoo1s5dlp1si"]
 
 [ext_resource type="Script" path="res://Scripts/Test/DebugTimerDisplay.gd" id="1_13eng"]
 [ext_resource type="Script" path="res://Scripts/UI/AgentSelectPanel.gd" id="2_rdgvw"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="5_oj32p"]
 [ext_resource type="Script" path="res://Scripts/UI/Clock.gd" id="6_bgy4b"]
 [ext_resource type="PackedScene" uid="uid://guoyybbqpe3j" path="res://Prefabs/UI/context_section.tscn" id="7_7ha3s"]
+[ext_resource type="Script" path="res://Scripts/UI/AdvCapacity.gd" id="8_0qd8q"]
 [ext_resource type="Script" path="res://Scripts/UI/Prompt.gd" id="9_nc0wt"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="9_t1iy2"]
 [ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="10_t6qrh"]
@@ -240,9 +241,29 @@ stretch_mode = 5
 [node name="ContextSection" parent="ContextMenu/MarginContainer/OptionContainer" instance=ExtResource("7_7ha3s")]
 layout_mode = 2
 
-[node name="Clock" type="Label" parent="ContextMenu/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ContextMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 24
+alignment = 2
+
+[node name="AdvCapacity" type="Label" parent="ContextMenu/MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_oj32p")
+theme_override_font_sizes/font_size = 20
+text = "0/10 Adventurers"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("8_0qd8q")
+
+[node name="Clock" type="Label" parent="ContextMenu/MarginContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_oj32p")
@@ -253,6 +274,7 @@ vertical_alignment = 1
 script = ExtResource("6_bgy4b")
 
 [node name="PromptContainer" type="Panel" parent="." node_paths=PackedStringArray("_prompt_title", "_prompt_warning", "_ok_option", "_no_option", "_ctx_menu")]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
