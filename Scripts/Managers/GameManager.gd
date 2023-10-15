@@ -2,7 +2,7 @@ extends Node
 class_name GameManager
 
 var _selected_agent : Agent = null;
-@export var _max_adventurers: int = 8;
+@export var _max_adventurers: int = 4;
 
 signal select_agent(new_agent: Agent);
 
