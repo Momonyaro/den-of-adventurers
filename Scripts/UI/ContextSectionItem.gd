@@ -15,7 +15,7 @@ func _set_active(active: bool, secondary: bool):
 	var icon = get_child(0).get_child(0);
 	self_modulate = Color(0, 0, 0) if active else Color("#F5F5F5") if !secondary else Color("bac6da");
 	text.self_modulate = Color("#F5F5F5") if active else Color(0, 0, 0);
-	icon.self_modulate = Color("#F5F5F5") if active else Color(0, 0, 0);
+	#icon.self_modulate = Color("#F5F5F5") if active else Color(0, 0, 0);
 	if _has_dropdown:
 		get_child(0).get_child(2).self_modulate = Color("#F5F5F5") if active else Color(0, 0, 0);
 		var dropdown: PanelContainer = text.get_child(0) as PanelContainer;

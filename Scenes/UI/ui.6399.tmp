@@ -1,10 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://daoo1s5dlp1si"]
+[gd_scene load_steps=28 format=3 uid="uid://daoo1s5dlp1si"]
 
 [ext_resource type="Script" path="res://Scripts/Test/DebugTimerDisplay.gd" id="1_13eng"]
 [ext_resource type="Script" path="res://Scripts/UI/AgentSelectPanel.gd" id="2_rdgvw"]
 [ext_resource type="Texture2D" uid="uid://btxj61otcm2qj" path="res://Textures/Icons/star.png" id="3_r7bh2"]
-[ext_resource type="PackedScene" uid="uid://bpfgekowinx86" path="res://Prefabs/UI/prompt_container.tscn" id="4_26l7w"]
-[ext_resource type="PackedScene" uid="uid://bojaf0ukceod0" path="res://Prefabs/UI/context_menu.tscn" id="9_nahab"]
+[ext_resource type="Texture2D" uid="uid://bt5w4u2lsh7df" path="res://Textures/Icons/wizard.png" id="4_1ax6q"]
+[ext_resource type="Script" path="res://Scripts/UI/ContextMenu.gd" id="4_gemgs"]
+[ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="5_oj32p"]
+[ext_resource type="Script" path="res://Scripts/UI/Clock.gd" id="6_bgy4b"]
+[ext_resource type="PackedScene" uid="uid://guoyybbqpe3j" path="res://Prefabs/UI/context_section.tscn" id="7_7ha3s"]
+[ext_resource type="Script" path="res://Scripts/UI/AdvCapacity.gd" id="8_0qd8q"]
+[ext_resource type="Script" path="res://Scripts/UI/Prompt.gd" id="9_nc0wt"]
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="9_t1iy2"]
+[ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="10_t6qrh"]
+[ext_resource type="Texture2D" uid="uid://c6obd2s8ug4mb" path="res://Textures/Icons/grid.png" id="11_2m8hn"]
+[ext_resource type="Texture2D" uid="uid://c67fh2v0jf3k8" path="res://Textures/Icons/warning.png" id="11_g73no"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81qn1"]
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.501961)
@@ -41,6 +50,32 @@ bg_color = Color(0.533333, 0.356863, 0.501961, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6e07"]
 bg_color = Color(0.309804, 0.192157, 0.290196, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tcbmh"]
+texture = ExtResource("11_2m8hn")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_krvcy"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_regga"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8gje"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 
 [node name="UI" type="Node"]
 
@@ -178,10 +213,119 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_mogpt")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_m6e07")
 text = "RECRUIT"
 
-[node name="PromptContainer" parent="." node_paths=PackedStringArray("_ctx_menu") instance=ExtResource("4_26l7w")]
+[node name="PromptContainer" type="Panel" parent="." node_paths=PackedStringArray("_prompt_title", "_prompt_warning", "_ok_option", "_no_option", "_ctx_menu")]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tcbmh")
+script = ExtResource("9_nc0wt")
+_prompt_title = NodePath("Panel/MarginContainer/Panel/Label")
+_prompt_warning = NodePath("Panel/MarginContainer/Panel/Label2")
+_ok_option = NodePath("Panel/MarginContainer/Panel/HBoxContainer/positive")
+_no_option = NodePath("Panel/MarginContainer/Panel/HBoxContainer/negative")
 _ctx_menu = NodePath("../ContextMenu")
 
-[node name="ContextMenu" parent="." node_paths=PackedStringArray("prompt") instance=ExtResource("9_nahab")]
-prompt = NodePath("../PromptContainer")
+[node name="Panel" type="Panel" parent="PromptContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -90.0
+offset_right = 250.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_krvcy")
 
-[connection signal="pressed" from="ADV_SELECT/VBoxContainer2/HBoxContainer/Button" to="ADV_SELECT" method="_on_button_pressed"]
+[node name="MarginContainer" type="MarginContainer" parent="PromptContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="PromptContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_regga")
+
+[node name="Label" type="RichTextLabel" parent="PromptContainer/Panel/MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 22.0
+offset_right = 467.0
+offset_bottom = 46.0
+theme = ExtResource("9_t1iy2")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/italics_font = ExtResource("10_t6qrh")
+bbcode_enabled = true
+text = "[b]This is the prompt title[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="Label2" type="RichTextLabel" parent="PromptContainer/Panel/MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 54.0
+offset_right = 480.0
+offset_bottom = 126.0
+theme = ExtResource("9_t1iy2")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/italics_font = ExtResource("10_t6qrh")
+theme_override_font_sizes/italics_font_size = 15
+bbcode_enabled = true
+text = "[i]This is the reason text, use it to inform the user[/i]"
+fit_content = true
+scroll_active = false
+
+[node name="TextureRect" type="TextureRect" parent="PromptContainer/Panel/MarginContainer/Panel"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 23.0
+offset_right = 75.0
+offset_bottom = 75.0
+texture = ExtResource("11_g73no")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PromptContainer/Panel/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = -44.0
+offset_right = -13.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="positive" type="Button" parent="PromptContainer/Panel/MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("9_t1iy2")
+text = "Ignore"
+
+[node name="negative" type="Button" parent="PromptContainer/Panel/MarginContainer/Panel/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("9_t1iy2")
+text = "Continue"
+
+[node name="ContextMenu" type="Panel" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f8gje")
+script 

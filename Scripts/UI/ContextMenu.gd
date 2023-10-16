@@ -94,8 +94,11 @@ func populate_section(section:Node, parent: Node, item: Dictionary):
 				var sub_icon: TextureRect = submenu_item.get_child(0).get_child(0);
 				var sub_title = submenu_item.get_child(0).get_child(1);
 				sub_title.text = e_key;
-				sub_icon.visible = sub_item.has('icon');
+				var has_sub_icon = sub_item.has('icon');
+				sub_icon.visible = has_sub_icon;
 				submenu_item._action_msg = sub_item['msg'] if sub_item.has('msg') else null;
+				if has_sub_icon:
+					sub_icon.texture = ResourceLoader.load(sub_item['icon']);
 		
 		entry_title.text = key;
 
@@ -132,3 +135,11 @@ func _on_command_msg(obj):
 		'GOTO_MAIN': set_context("");
 		
 	pass
+
+
+# func _gui_input(event):
+# 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
+# 		var current = ProjectSettings.get_setting("display/window/stretch/mode");
+# 		ProjectSettings.set_setting("display/window/stretch/mode", "disabled" if current != "disabled" else "canvas_items");
+# 		ProjectSettings.save();
+# 		print(current, "=>", ProjectSettings.get_setting("display/window/stretch/mode"))

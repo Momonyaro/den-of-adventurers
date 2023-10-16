@@ -5,13 +5,13 @@ static func get_menu_data():
 	'WIZ_ICON': {
 		'Save Game': {
 			'type': 'action',
-			'icon': 'res://Textures/Icons/wizard.png',
+			'icon': 'res://Textures/Icons/save.png',
 			'msg': 'GAME_SAVE',
 			'exclude_for': ['web']
 		},
 		'Load Game': {
 			'type': 'action',
-			'icon': 'res://Textures/Icons/timer.png',
+			'icon': 'res://Textures/Icons/load.png',
 			'msg': 'GAME_LOAD',
 			'exclude_for': ['web']
 		},
@@ -22,6 +22,7 @@ static func get_menu_data():
 		},
 		'Quit...': {
 			'type': 'folder',
+			'icon': 'res://Textures/Icons/exit.png',
 			'items': {
 				'Exit to Main Menu': {
 					'type': 'big_action',
@@ -60,6 +61,7 @@ static func get_menu_data():
 	'Programs': {
 		'Distractions': {
 			'type': 'folder',
+			'icon': 'res://Textures/Icons/folder.png',
 			'items': {
 				'Breakout': {
 					'type': 'action',
@@ -67,6 +69,7 @@ static func get_menu_data():
 				},
 				'Solitaire': {
 					'type': 'action',
+					'icon': 'res://Textures/Icons/solitaire.png',
 					'msg': 'WINDOW_SOLITAIRE_START'
 				}
 			}

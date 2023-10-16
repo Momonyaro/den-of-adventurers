@@ -31,6 +31,7 @@ func _prompt_on_fail():
 func _on_set_prompt(prompt_obj):
 	if prompt_obj == null:
 		visible = false;
+		get_tree().paused = false;
 		return;
 	visible = true;
 	
@@ -45,6 +46,7 @@ func _on_set_prompt(prompt_obj):
 	var has_ok = data.has('ok_option');
 	_ok_option.visible = has_ok;
 	_ok_option.text = data['ok_option'] if has_ok else "";
+	get_tree().paused = true;
 		
 	pass # Replace with function body.
 
