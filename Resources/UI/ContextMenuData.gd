@@ -15,7 +15,27 @@ static func get_menu_data():
 			'msg': 'GAME_LOAD',
 			'exclude_for': ['web']
 		},
-		'Quit Game': {
+		'settings_divider': {
+			'type': 'divider',
+			'label_visible': false
+		},
+		'Settings...': {
+			'type': 'folder',
+			'icon': 'res://Textures/Icons/options.png',
+			'items': {
+				'Video Settings': {
+					'type': 'action',
+					'icon': 'res://Textures/Icons/pc.png',
+					'msg': 'WINDOW_VIDEO_SETTINGS_START'
+				},
+				'Audio Settings': {
+					'type': 'action',
+					'icon': 'res://Textures/Icons/speaker.png',
+					'msg': 'WINDOW_VIDEO_SETTINGS_START'
+				}
+			}
+		},
+		'quit_divider': {
 			'type': 'divider',
 			'label_visible': false,
 			'exclude_for': ['web']
@@ -29,6 +49,7 @@ static func get_menu_data():
 					'msg': 'GOTO_MAIN',
 					'prompt_title': 'Quit to Main Menu',
 					'prompt_warning': 'Are you sure? (Unsaved data will be lost.)',
+					'prompt_icon': 'res://Textures/Icons/exit.png',
 					'ok_option': 'Yes, I\'m sure',
 					'no_option': 'No'
 				},
@@ -38,6 +59,7 @@ static func get_menu_data():
 					'exclude_for': ['web'],
 					'prompt_title': 'Quit to Desktop',
 					'prompt_warning': 'Are you sure? (Unsaved data will be lost.)',
+					'prompt_icon': 'res://Textures/Icons/exit.png',
 					'ok_option': 'Yes, I\'m sure',
 					'no_option': 'No',
 				}

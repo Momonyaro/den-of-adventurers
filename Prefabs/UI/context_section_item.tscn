@@ -24,13 +24,13 @@ script = ExtResource("1_sjngl")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 4
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("1_1sben")
-expand_mode = 3
+expand_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2

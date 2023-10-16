@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/Prompt.gd" id="2_mopsr"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="3_x0kmh"]
 [ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="4_pxrr2"]
-[ext_resource type="Texture2D" uid="uid://dvti77d2jrpcr" path="res://Textures/Icons/exit.png" id="5_1gc3k"]
+[ext_resource type="Texture2D" uid="uid://crwjfghkywraa" path="res://Textures/Icons/pc_sad.png" id="5_dnrv5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tcbmh"]
 texture = ExtResource("1_nc5ir")
@@ -30,7 +30,7 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
-[node name="PromptContainer" type="Panel" node_paths=PackedStringArray("_prompt_title", "_prompt_warning", "_ok_option", "_no_option")]
+[node name="PromptContainer" type="Panel" node_paths=PackedStringArray("_prompt_title", "_prompt_warning", "_prompt_icon", "_ok_option", "_no_option")]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,6 +41,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_tcbmh")
 script = ExtResource("2_mopsr")
 _prompt_title = NodePath("Panel/MarginContainer/Panel/Label")
 _prompt_warning = NodePath("Panel/MarginContainer/Panel/Label2")
+_prompt_icon = NodePath("Panel/MarginContainer/Panel/Panel/TextureRect")
 _ok_option = NodePath("Panel/MarginContainer/Panel/HBoxContainer/positive")
 _no_option = NodePath("Panel/MarginContainer/Panel/HBoxContainer/negative")
 
@@ -161,7 +162,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_1gc3k")
+texture = ExtResource("5_dnrv5")
 expand_mode = 2
 stretch_mode = 4
 

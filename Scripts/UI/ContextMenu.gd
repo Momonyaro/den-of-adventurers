@@ -125,10 +125,15 @@ func chk_tag(obj):
 	
 
 func _on_command_msg(obj):
-	if obj.has('type') and obj['type'] == 'big_action':
-		prompt.set_prompt.emit(obj);
-		set_context("");
-		return;
+
+	if obj.has('type'):
+		match (obj['type']):
+			'big_action': 
+				prompt.set_prompt.emit(obj);
+				set_context("");
+				return;
+			'folder':
+				return;
 	
 	match obj['msg']:
 		"GAME_QUIT": set_context(""); get_tree().quit();
