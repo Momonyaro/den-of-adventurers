@@ -59,7 +59,7 @@ static func get_menu_data():
 					'exclude_for': ['web'],
 					'prompt_title': 'Quit to Desktop',
 					'prompt_warning': 'Are you sure? (Unsaved data will be lost.)',
-					'prompt_icon': 'res://Textures/Icons/exit.png',
+					'prompt_icon': 'res://Textures/Icons/pc_sad.png',
 					'ok_option': 'Yes, I\'m sure',
 					'no_option': 'No',
 				}
