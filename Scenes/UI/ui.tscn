@@ -116,12 +116,12 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_3u3fg")
 text = "ADV_NAME"
 
 [node name="TextureRect" type="TextureRect" parent="ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer/HBoxContainer2"]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
 texture = ExtResource("3_r7bh2")
-expand_mode = 3
-stretch_mode = 5
+stretch_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ADV_SELECT/VBoxContainer2/MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -17,7 +17,8 @@ static func get_menu_data():
 		},
 		'settings_divider': {
 			'type': 'divider',
-			'label_visible': false
+			'label_visible': false,
+			'exclude_for': ['web']
 		},
 		'Settings...': {
 			'type': 'folder',
@@ -37,8 +38,7 @@ static func get_menu_data():
 		},
 		'quit_divider': {
 			'type': 'divider',
-			'label_visible': false,
-			'exclude_for': ['web']
+			'label_visible': false
 		},
 		'Quit...': {
 			'type': 'folder',

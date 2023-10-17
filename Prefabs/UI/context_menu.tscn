@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bojaf0ukceod0"]
+[gd_scene load_steps=11 format=3 uid="uid://bojaf0ukceod0"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ContextMenu.gd" id="1_sxsst"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="4_2u38p"]
@@ -15,6 +15,8 @@ border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ym5hs"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w5yvd"]
 
 [node name="ContextMenu" type="Panel" node_paths=PackedStringArray("menu_parent")]
 anchors_preset = 10
@@ -107,6 +109,7 @@ offset_bottom = 18.0
 size_flags_horizontal = 10
 size_flags_vertical = 4
 theme = ExtResource("4_2u38p")
+theme_override_styles/background = SubResource("StyleBoxEmpty_w5yvd")
 value = 25.0
 show_percentage = false
 

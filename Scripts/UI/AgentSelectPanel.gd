@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Control
 
 @export var name_label : Label;
 @export var def_star : TextureRect;

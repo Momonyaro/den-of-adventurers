@@ -65,10 +65,9 @@ size_flags_vertical = 0
 theme_override_constants/separation = 0
 
 [node name="Icon2" type="TextureRect" parent="HBoxContainer"]
-self_modulate = Color(0, 0, 0, 1)
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("3_nm2t1")
-expand_mode = 2
+stretch_mode = 3
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
