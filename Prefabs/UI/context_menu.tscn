@@ -39,43 +39,32 @@ theme_override_constants/margin_right = 50
 [node name="OptionContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_constants/separation = 24
-alignment = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("4_2u38p")
 theme_override_constants/separation = -1
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 8
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer/MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "Guild Level"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(22, 18)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ym5hs")
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer/Panel"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer2/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,7 +84,7 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/HBoxContainer2"]
 texture_filter = 1
 texture_repeat = 1
 custom_minimum_size = Vector2(150, 18)
@@ -110,7 +99,7 @@ patch_margin_bottom = 2
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer/NinePatchRect"]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer2/NinePatchRect"]
 custom_minimum_size = Vector2(150, 18)
 layout_mode = 2
 offset_right = 150.0
@@ -121,6 +110,18 @@ theme = ExtResource("4_2u38p")
 value = 25.0
 show_percentage = false
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 24
+alignment = 2
+
 [node name="AdvCapacity" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
@@ -129,7 +130,7 @@ size_flags_vertical = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_u8tsb")
 theme_override_font_sizes/font_size = 15
-text = "0/10 Adventurers"
+text = "0/10 Adv."
 horizontal_alignment = 2
 vertical_alignment = 1
 script = ExtResource("8_w4rr8")

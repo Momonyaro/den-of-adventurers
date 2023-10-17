@@ -41,7 +41,7 @@ alignment = 2
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("2_v3umf")
-expand_mode = 2
+stretch_mode = 3
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
@@ -62,7 +62,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8u0ns")
 visibility_layer = 2
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/separation = -2
+theme_override_constants/separation = 0
 
 [node name="Icon2" type="TextureRect" parent="HBoxContainer"]
 self_modulate = Color(0, 0, 0, 1)

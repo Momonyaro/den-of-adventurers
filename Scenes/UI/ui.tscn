@@ -179,6 +179,7 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_m6e07")
 text = "RECRUIT"
 
 [node name="PromptContainer" parent="." node_paths=PackedStringArray("_ctx_menu") instance=ExtResource("4_26l7w")]
+visible = false
 _ctx_menu = NodePath("../ContextMenu")
 
 [node name="ContextMenu" parent="." node_paths=PackedStringArray("prompt") instance=ExtResource("9_nahab")]

@@ -30,7 +30,7 @@ theme_override_constants/separation = 4
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("1_1sben")
-expand_mode = 2
+stretch_mode = 3
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2

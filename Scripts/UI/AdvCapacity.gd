@@ -8,4 +8,4 @@ func _ready():
 	_adv_manager = get_node("/root/Root/Adventurers")
 
 func _process(delta):
-	self.text = str(_adv_manager.recruited().size(), "/", _game_manager._max_adventurers, " Adventurers");
+	self.text = str(_adv_manager.recruited().size(), "/", _game_manager._max_adventurers, " Adv.");
