@@ -187,9 +187,9 @@ _ctx_menu = NodePath("../ContextMenu")
 prompt = NodePath("../PromptContainer")
 
 [node name="sys_info" parent="." instance=ExtResource("6_243kj")]
-offset_left = 365.0
-offset_top = 272.0
-offset_right = 865.0
-offset_bottom = 500.0
+offset_left = 435.0
+offset_top = 259.0
+offset_right = 888.0
+offset_bottom = 459.0
 
 [connection signal="pressed" from="ADV_SELECT/VBoxContainer2/HBoxContainer/Button" to="ADV_SELECT" method="_on_button_pressed"]

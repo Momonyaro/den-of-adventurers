@@ -43,7 +43,8 @@ func reserve_name(given: String, family: String):
 		used_names.push_back(key);
 
 func parse_name_file(json_data: JSON, family_pool: Array[String], given_pool: Array[String]):
-	family_pool.append_array(json_data.data['family']);
-	given_pool.append_array(json_data.data['given_f']);
-	given_pool.append_array(json_data.data['given_m']);
+	var data = json_data.data;
+	family_pool.append_array(data['family']);
+	given_pool.append_array(data['given_f']);
+	given_pool.append_array(data['given_m']);
 	pass;

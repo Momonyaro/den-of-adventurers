@@ -8,7 +8,7 @@ func _ready():
 	_app_ver_label.text = str("[u]Build Version:[/u]  [i]", ProjectSettings.get("global/app_version"), "[/i]");
 
 func _process(_delta):
-	var mem_usage: String = "%0.2f" % (OS.get_static_memory_usage() / 1000000.0); #might break in production build :( Gonna see what I can do.
+	var mem_usage: String = "%0.2f" % (OS.get_static_memory_usage() / 1000000.0); #tagged as debug only, might not work in finished game :(
 	_mem_used_label.text = str("[u]Used Memory:[/u]  [i]", mem_usage, " MB[/i]");
 
 	var fps: int = roundi(Engine.get_frames_per_second());
