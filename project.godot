@@ -26,3 +26,7 @@ window/size/viewport_height=720
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/console/plugin.cfg")
+
+[global]
+
+app_version="Lilac Dream -- (v1.0a)"

@@ -1,0 +1,8 @@
+[gd_resource type="JSON" format=3 uid="uid://dit1s380iukx"]
+
+[resource]
+data = {
+"family": ["Remisse", "De Charde", "Hannon", "Adonné", "Donné", "Van Zóen", "Moern"],
+"given_f": ["Keira", "Lorna", "Fleur", "Miram", "Vera", "Selia"],
+"given_m": ["Brann", "Varanth", "Lucas", "Ulam", "Staton"]
+}

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://daoo1s5dlp1si"]
+[gd_scene load_steps=16 format=3 uid="uid://daoo1s5dlp1si"]
 
 [ext_resource type="Script" path="res://Scripts/Test/DebugTimerDisplay.gd" id="1_13eng"]
 [ext_resource type="Script" path="res://Scripts/UI/AgentSelectPanel.gd" id="2_rdgvw"]
 [ext_resource type="Texture2D" uid="uid://btxj61otcm2qj" path="res://Textures/Icons/star.png" id="3_r7bh2"]
 [ext_resource type="PackedScene" uid="uid://bpfgekowinx86" path="res://Prefabs/UI/prompt_container.tscn" id="4_26l7w"]
+[ext_resource type="PackedScene" uid="uid://w1kss04m7mfn" path="res://Prefabs/UI/windows/sys_info.tscn" id="6_243kj"]
 [ext_resource type="PackedScene" uid="uid://bojaf0ukceod0" path="res://Prefabs/UI/context_menu.tscn" id="9_nahab"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81qn1"]
@@ -184,5 +185,11 @@ _ctx_menu = NodePath("../ContextMenu")
 
 [node name="ContextMenu" parent="." node_paths=PackedStringArray("prompt") instance=ExtResource("9_nahab")]
 prompt = NodePath("../PromptContainer")
+
+[node name="sys_info" parent="." instance=ExtResource("6_243kj")]
+offset_left = 365.0
+offset_top = 272.0
+offset_right = 865.0
+offset_bottom = 500.0
 
 [connection signal="pressed" from="ADV_SELECT/VBoxContainer2/HBoxContainer/Button" to="ADV_SELECT" method="_on_button_pressed"]
