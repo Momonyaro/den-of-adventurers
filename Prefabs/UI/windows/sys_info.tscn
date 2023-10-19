@@ -35,19 +35,28 @@ _fps_count_label = NodePath("fps_count")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 96.0
-offset_bottom = 182.0
+offset_right = 120.0
+offset_bottom = 200.0
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+[node name="TextureRect" type="NinePatchRect" parent="MarginContainer"]
 texture_filter = 1
-custom_minimum_size = Vector2(96, 0)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
+size_flags_vertical = 0
 texture = ExtResource("1_dggus")
-stretch_mode = 4
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 48, 48)
+
+[node name="TextureRect2" type="NinePatchRect" parent="MarginContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("1_dggus")
+region_rect = Rect2(2.08165e-12, 48, 48, 16)
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(2, 0)
@@ -100,9 +109,9 @@ autowrap_mode = 0
 texture_filter = 1
 layout_mode = 0
 offset_left = 159.0
-offset_top = 87.0
+offset_top = 77.0
 offset_right = 450.0
-offset_bottom = 103.0
+offset_bottom = 93.0
 theme = ExtResource("2_ythhb")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_h2vn0")
@@ -118,9 +127,9 @@ autowrap_mode = 0
 texture_filter = 1
 layout_mode = 0
 offset_left = 191.0
-offset_top = 103.0
+offset_top = 93.0
 offset_right = 449.0
-offset_bottom = 119.0
+offset_bottom = 109.0
 theme = ExtResource("2_ythhb")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_h2vn0")
@@ -136,9 +145,9 @@ autowrap_mode = 0
 texture_filter = 1
 layout_mode = 0
 offset_left = 194.0
-offset_top = 135.0
+offset_top = 125.0
 offset_right = 450.0
-offset_bottom = 151.0
+offset_bottom = 141.0
 theme = ExtResource("2_ythhb")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_h2vn0")
@@ -157,10 +166,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -319.0
-offset_top = -34.0
-offset_right = -12.0
-offset_bottom = -12.0
+offset_left = -318.0
+offset_top = -40.0
+offset_right = -13.0
+offset_bottom = -18.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("2_ythhb")
