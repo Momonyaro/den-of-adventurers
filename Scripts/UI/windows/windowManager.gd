@@ -40,7 +40,7 @@ func _process(delta):
 	if Input.is_action_just_released("click") && impostor != null:
 		_move_window_to(impostor_ref, impostor.global_position);
 	elif impostor != null:
-		impostor.global_position = get_global_mouse_position() + impostor_offset;
+		impostor.global_position = _clamp_impostor_pos(get_global_mouse_position() + impostor_offset, impostor.get_global_rect().size);
 		
 	pass;
 
@@ -121,6 +121,16 @@ func _move_window_to(ref: String, global_pos: Vector2):
 	impostor = null;
 	impostor_offset = Vector2.ZERO;
 	impostor_ref = "";
+
+func _clamp_impostor_pos(_pos: Vector2, _size: Vector2) -> Vector2:
+	var glo_pos = self.global_position;
+	var glo_size = self.get_global_rect().size;
+	if _pos.x < glo_pos.x: _pos.x = glo_pos.x;
+	if _pos.y < glo_pos.y: _pos.y = glo_pos.y;
+
+	if _pos.x + _size.x >= glo_pos.x + glo_size.x: _pos.x = glo_pos.x + glo_size.x - _size.x;
+	if _pos.y + _size.y >= glo_pos.y + glo_size.y: _pos.y = glo_pos.y + glo_size.y - _size.y;
+	return _pos;
 
 func _on_grab_header(ref: String, inital_pos: Vector2):
 	var _instance: Array = _get_instance(ref);
