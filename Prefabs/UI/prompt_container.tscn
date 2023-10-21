@@ -131,12 +131,14 @@ alignment = 2
 [node name="positive" type="Button" parent="Panel/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("3_x0kmh")
 text = "Ignore"
 
 [node name="negative" type="Button" parent="Panel/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("3_x0kmh")
 text = "Continue"
 

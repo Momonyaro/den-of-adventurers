@@ -48,6 +48,7 @@ func _gui_input(ev):
 		_send_msg();
 
 func _send_msg():
+	_obj['pos'] = _section_parent.global_position;
 	_msg_event.emit(_obj);
 
 func _on_new_item(id: String):

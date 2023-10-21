@@ -27,6 +27,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
 [node name="ContextSectionItem" type="PanelContainer"]
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_qna3a")
 theme_override_styles/panel = SubResource("StyleBoxFlat_kkyvq")
 script = ExtResource("1_2mil7")

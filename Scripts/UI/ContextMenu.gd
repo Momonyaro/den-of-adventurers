@@ -6,6 +6,7 @@ var section_dropdown_prefab = preload("res://Prefabs/UI/context_section_dropdown
 var section_divider_prefab = preload("res://Prefabs/UI/context_section_divider.tscn");
 @export var menu_parent: Node = null;
 @export var prompt: Node = null;
+@export var window_manager: Node = null;
 var _current_context: String = "";
 
 signal new_context(id: String);
@@ -135,11 +136,14 @@ func _on_command_msg(obj):
 			'folder':
 				return;
 	
+	if obj['msg'].begins_with("WINDOW:"):
+		window_manager.process_command(obj['msg'], obj['pos']);
+		set_context("");
+		return;
+
 	match obj['msg']:
-		"GAME_QUIT": set_context(""); get_tree().quit();
-		'GOTO_MAIN': set_context("");
-		
-	pass
+		"GAME_QUIT": get_tree().quit();
+		'GOTO_MAIN': return;
 
 
 # func _gui_input(event):

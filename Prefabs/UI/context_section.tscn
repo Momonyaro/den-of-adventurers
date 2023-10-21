@@ -21,6 +21,7 @@ border_color = Color(0, 0, 0, 1)
 offset_right = 41.0
 offset_bottom = 28.0
 size_flags_vertical = 3
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_tfmha")
 theme_override_styles/panel = SubResource("StyleBoxFlat_l5yxd")
 script = ExtResource("2_dl811")

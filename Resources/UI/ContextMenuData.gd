@@ -3,6 +3,16 @@ class_name ContextMenuData;
 static func get_menu_data():
 	return {
 	'WIZ_ICON': {
+		'System Information': {
+			'type': 'action',
+			'icon': 'res://Textures/Icons/pc.png',
+			'msg': 'WINDOW:OPEN:SYS_INFO'
+		},
+		'save_divider': {
+			'type': 'divider',
+			'label_visible': false,
+			'exclude_for': ['web']
+		},
 		'Save Game': {
 			'type': 'action',
 			'icon': 'res://Textures/Icons/save.png',
@@ -27,12 +37,12 @@ static func get_menu_data():
 				'Video Settings': {
 					'type': 'action',
 					'icon': 'res://Textures/Icons/pc.png',
-					'msg': 'WINDOW_VIDEO_SETTINGS_START'
+					'msg': 'WINDOW:OPEN:VIDEO_SETTINGS'
 				},
 				'Audio Settings': {
 					'type': 'action',
 					'icon': 'res://Textures/Icons/speaker.png',
-					'msg': 'WINDOW_VIDEO_SETTINGS_START'
+					'msg': 'WINDOW:OPEN:AUDIO_SETTINGS'
 				}
 			}
 		},

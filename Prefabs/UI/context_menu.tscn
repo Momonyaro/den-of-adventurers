@@ -110,7 +110,6 @@ size_flags_horizontal = 10
 size_flags_vertical = 4
 theme = ExtResource("4_2u38p")
 theme_override_styles/background = SubResource("StyleBoxEmpty_w5yvd")
-value = 25.0
 show_percentage = false
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]

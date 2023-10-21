@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://chpj5pad4my1x"]
+
+[ext_resource type="Texture2D" uid="uid://dh2bq5xlgec87" path="res://Textures/Icons/border_dotted.png" id="1_cs1rl"]
+
+[node name="PREVIEW_RECT" type="NinePatchRect"]
+texture_filter = 1
+texture_repeat = 1
+offset_left = 406.0
+offset_top = 174.0
+offset_right = 582.0
+offset_bottom = 343.0
+texture = ExtResource("1_cs1rl")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

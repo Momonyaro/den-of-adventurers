@@ -1,0 +1,16 @@
+class_name WindowData;
+
+static func get_window_data(key: String):
+    if window_data.has(key):
+        return [key, window_data[key]];
+    else:
+        return [null, null];
+
+const window_data = {
+    'SYS_INFO': {
+        'title': 'About this PC...',
+        'content_ref': 'res://Prefabs/UI/windows/sys_info.tscn',
+        'has_close_btn': false
+    },
+}
+

@@ -1,0 +1,156 @@
+[gd_scene load_steps=18 format=3 uid="uid://cpdahww0cd6"]
+
+[ext_resource type="Texture2D" uid="uid://divld3paipclp" path="res://Textures/Icons/border.png" id="1_0wr3x"]
+[ext_resource type="Texture2D" uid="uid://dwi3jagk4w06q" path="res://Textures/Icons/window_header.png" id="1_2eocx"]
+[ext_resource type="Script" path="res://Scripts/UI/windows/window_base.gd" id="1_lrq5l"]
+[ext_resource type="PackedScene" uid="uid://w1kss04m7mfn" path="res://Prefabs/UI/windows/sys_info.tscn" id="3_kkqrd"]
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="4_44iwk"]
+[ext_resource type="Texture2D" uid="uid://8g07f88ja60y" path="res://Textures/Icons/close.png" id="5_amu60"]
+[ext_resource type="Texture2D" uid="uid://ckhuq6baeauif" path="res://Textures/Icons/close_hover.png" id="6_7kudg"]
+[ext_resource type="Texture2D" uid="uid://x7wr70cj3uky" path="res://Textures/Icons/minimize.png" id="7_nrg3f"]
+[ext_resource type="Texture2D" uid="uid://pkko7vy820ij" path="res://Textures/Icons/minimize_hover.png" id="8_nxm3m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66tfh"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.734375, 0.773438, 0.84375, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dbswa"]
+texture = ExtResource("5_amu60")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ovid5"]
+texture = ExtResource("6_7kudg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kasbg"]
+texture = ExtResource("6_7kudg")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8jlqy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o4ol8"]
+texture = ExtResource("7_nrg3f")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yimel"]
+texture = ExtResource("8_nxm3m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_voir1"]
+texture = ExtResource("8_nxm3m")
+
+[node name="window_base" type="Control" node_paths=PackedStringArray("window_base", "content_parent", "win_header_title", "win_header_close", "win_header_minimize")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lrq5l")
+content = ExtResource("3_kkqrd")
+window_base = NodePath("win_base")
+content_parent = NodePath("win_base/win_layout/win_body/win_body_container")
+win_header_title = NodePath("win_base/win_layout/win_header/win_header_title")
+win_header_close = NodePath("win_base/win_layout/win_header/win_header_close")
+win_header_minimize = NodePath("win_base/win_layout/win_header/win_header_minimize")
+
+[node name="win_base" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 80.0
+
+[node name="win_layout" type="VBoxContainer" parent="win_base"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="win_header" type="NinePatchRect" parent="win_base/win_layout"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 0
+mouse_default_cursor_shape = 13
+texture = ExtResource("1_2eocx")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="win_header_title" type="Label" parent="win_base/win_layout/win_header"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -10.0
+offset_right = 21.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_44iwk")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_66tfh")
+text = "LABEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="win_header_close" type="Button" parent="win_base/win_layout/win_header"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.0
+offset_right = -4.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+tooltip_text = "Press to close this window."
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_dbswa")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ovid5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kasbg")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8jlqy")
+
+[node name="win_header_minimize" type="Button" parent="win_base/win_layout/win_header"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_vertical = 2
+tooltip_text = "Press to minimize this window."
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_o4ol8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yimel")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_voir1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8jlqy")
+
+[node name="win_body" type="NinePatchRect" parent="win_base/win_layout"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_0wr3x")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="win_body_container" type="MarginContainer" parent="win_base/win_layout/win_body"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[connection signal="gui_input" from="win_base/win_layout/win_header" to="." method="_on_win_header_gui_input"]
