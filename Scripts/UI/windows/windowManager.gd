@@ -40,7 +40,7 @@ func _process(delta):
 	if Input.is_action_just_released("click") && impostor != null:
 		_move_window_to(impostor_ref, impostor.global_position);
 	elif impostor != null:
-		impostor.set_position(get_global_mouse_position() + impostor_offset);
+		impostor.global_position = get_global_mouse_position() + impostor_offset;
 		
 	pass;
 
@@ -126,9 +126,9 @@ func _on_grab_header(ref: String, inital_pos: Vector2):
 	var _instance: Array = _get_instance(ref);
 	impostor = preview_rect.instantiate();
 	self.add_child(impostor);
+	impostor_offset = _instance[1].global_position - inital_pos;
 
 	impostor.set_size(_instance[1].get_child(0).get_global_rect().size);
-	impostor_offset = _instance[1].global_position - Vector2(0, 24) - inital_pos;
 	impostor_ref = ref;
 
 	#when clicking a window header, spawn an impostor that follows the mouse.
