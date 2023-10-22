@@ -7,7 +7,6 @@ const OPEN_ANIM_LENGTH = 0.24;
 var preview_rect: PackedScene = preload("res://Prefabs/UI/windows/preview_rect.tscn");
 
 var windows = []; # store id and ref to node.
-var window_order = []; #store id's here
 
 var tweens = [];
 var impostor: Node = null;
@@ -67,12 +66,11 @@ func open_window(ref: String, start_pos: Vector2):
 
 	instance.populate(window_data[0], window_data[1]);
 	instance._manager = self;
-	windows.push_back([ref, instance]);
+	windows.push_front([ref, instance]);
 	_animate_opening(start_pos, instance);
+	_sort_windows();
 
 func close_window(ref: String):
-	#remove item in windows array,
-	#destroy instance of window
 	var window = _get_instance(ref) if _has_instance(ref) else null;
 	if window == null: 
 		return;
@@ -113,6 +111,7 @@ func _del_instance(ref: String):
 	for i in windows.size():
 		if windows[i][0] == ref:
 			windows.remove_at(i);
+			return;
 
 func _move_window_to(ref: String, global_pos: Vector2):
 	var window: Array = _get_instance(ref);
@@ -121,6 +120,26 @@ func _move_window_to(ref: String, global_pos: Vector2):
 	impostor = null;
 	impostor_offset = Vector2.ZERO;
 	impostor_ref = "";
+	windows = windows.filter(func (w): return w[0] != ref);
+	windows.push_front(window);
+	_sort_windows();
+
+func _sort_windows():
+	var _max = windows.size();
+
+	for i in _max:
+		var reverse_i = _max - 1 - i;
+		windows[reverse_i][1].move_to_front();
+	
+	for i in tweens.size():
+		if tweens[i][5]:
+			return;
+		else:
+			tweens[i][3].move_to_front();
+
+	if impostor != null:
+		impostor.move_to_front();
+
 
 func _clamp_impostor_pos(_pos: Vector2, _size: Vector2) -> Vector2:
 	var glo_pos = self.global_position;

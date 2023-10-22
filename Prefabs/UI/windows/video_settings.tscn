@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv8110usj61hf"]
+
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_11kd4"]
+[ext_resource type="Script" path="res://Scripts/UI/settings/video/scaling_dropdown.gd" id="2_ulpcs"]
+[ext_resource type="PackedScene" uid="uid://dlggxv5xajmh4" path="res://Prefabs/UI/components/dropdown.tscn" id="3_xvup6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[node name="video_settings" type="Panel"]
+clip_contents = true
+offset_right = 309.0
+offset_bottom = 349.0
+theme = ExtResource("1_11kd4")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+script = ExtResource("2_ulpcs")
+
+[node name="scaling_option" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Interface Scaling:"
+
+[node name="dropdown" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_xvup6")]
+layout_mode = 2

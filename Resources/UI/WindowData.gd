@@ -12,5 +12,11 @@ const window_data = {
         'content_ref': 'res://Prefabs/UI/windows/sys_info.tscn',
         'has_close_btn': false
     },
+    'VIDEO_SETTINGS': {
+        'title': 'Video Settings',
+        'content_ref': 'res://Prefabs/UI/windows/video_settings.tscn',
+        'has_close_btn': true,
+        'has_minimize_btn': true
+    },
 }
 
