@@ -45,6 +45,17 @@ bg_color = Color(0.309804, 0.192157, 0.290196, 1)
 
 [node name="UI" type="Node"]
 
+[node name="WindowManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("4_arrft")
+
 [node name="DISPLAY_TIMERS" type="PanelContainer" parent="."]
 visible = false
 anchors_preset = 1
@@ -178,17 +189,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_saadl")
 theme_override_styles/hover = SubResource("StyleBoxFlat_mogpt")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_m6e07")
 text = "RECRUIT"
-
-[node name="WindowManager" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("4_arrft")
 
 [node name="PromptContainer" parent="." node_paths=PackedStringArray("_ctx_menu") instance=ExtResource("4_26l7w")]
 visible = false

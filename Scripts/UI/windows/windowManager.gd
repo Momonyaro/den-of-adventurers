@@ -14,7 +14,11 @@ var impostor_offset: Vector2 = Vector2.ZERO;
 var impostor_ref: String;
 
 func _process(delta):
-
+	for window in windows:
+		var win = window[1];
+		var win_box = win.get_child(0);
+		var clamped_pos = _clamp_impostor_pos(win.global_position, win_box.get_global_rect().size);
+		win.global_position = clamped_pos;
 
 	for tween in tweens:
 		var progress = tween[2] / OPEN_ANIM_LENGTH;

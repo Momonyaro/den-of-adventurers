@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv8110usj61hf"]
+[gd_scene load_steps=6 format=3 uid="uid://bfxnh8rfend8s"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_11kd4"]
 [ext_resource type="Script" path="res://Scripts/UI/settings/video/scaling_dropdown.gd" id="2_ulpcs"]
 [ext_resource type="PackedScene" uid="uid://dlggxv5xajmh4" path="res://Prefabs/UI/components/dropdown.tscn" id="3_xvup6"]
+[ext_resource type="Script" path="res://Scripts/UI/settings/video/resolution_dropdown.gd" id="4_0o8gg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
 content_margin_left = 24.0
@@ -30,16 +31,35 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="interface_scaling" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 24
 script = ExtResource("2_ulpcs")
 
-[node name="scaling_option" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="scaling_option" type="Label" parent="MarginContainer/VBoxContainer/interface_scaling"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 text = "Interface Scaling:"
 
-[node name="dropdown" parent="MarginContainer/HBoxContainer" instance=ExtResource("3_xvup6")]
+[node name="dropdown" parent="MarginContainer/VBoxContainer/interface_scaling" instance=ExtResource("3_xvup6")]
+layout_mode = 2
+
+[node name="resoultion" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+script = ExtResource("4_0o8gg")
+
+[node name="scaling_option" type="Label" parent="MarginContainer/VBoxContainer/resoultion"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Resolution:"
+
+[node name="dropdown" parent="MarginContainer/VBoxContainer/resoultion" instance=ExtResource("3_xvup6")]
 layout_mode = 2
