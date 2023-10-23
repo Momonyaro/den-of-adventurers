@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dm3vmjftx4ajh"]
 
-[ext_resource type="Texture2D" uid="uid://bt5w4u2lsh7df" path="res://Textures/Icons/wizard.png" id="1_1sben"]
 [ext_resource type="Script" path="res://Scripts/UI/ContextSectionItem.gd" id="1_sjngl"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_xx52t"]
+[ext_resource type="Texture2D" uid="uid://bxauae4whso3v" path="res://Textures/Icons/pc.png" id="3_ae1ey"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kkyvq"]
 content_margin_left = 4.0
@@ -30,8 +30,8 @@ theme_override_constants/separation = 4
 [node name="Icon" type="TextureRect" parent="HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("1_1sben")
-stretch_mode = 3
+texture = ExtResource("3_ae1ey")
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2

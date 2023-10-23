@@ -63,7 +63,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8u0ns")
 visibility_layer = 2
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/separation = 0
+theme_override_constants/separation = 2
 
 [node name="Icon2" type="TextureRect" parent="HBoxContainer"]
 texture_filter = 1

@@ -12,15 +12,13 @@ var _is_open = false;
 var _current_id: int = 0;
 var _items = [];
 
-func _ready():
-	self.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN if _disabled else Control.CURSOR_POINTING_HAND;
-
 func _process(delta):
+	self.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN if _disabled else Control.CURSOR_POINTING_HAND;
 	var mouse_pos = get_global_mouse_position();
 	for item in _items:
 		item._set_active(item._is_hovered(mouse_pos), item._id == _current_id);
 	
-	if Input.is_action_just_released("click"):
+	if Input.is_action_just_released("click") && _is_open:
 		for item in _items:
 			if item._hovered:
 				_set_active(item);
@@ -30,6 +28,7 @@ func add_item(label: String, id: int = -1):
 	var instance = _dropdown_item.instantiate();
 	_dropdown_content.add_child(instance);
 	_items.push_back(DropdownItem.new(instance, label, id));
+	self.self_modulate = Color("bac6da") if _is_open or _disabled else Color("#F5F5F5");
 	_sort_items();
 	pass;
 
@@ -48,9 +47,10 @@ func set_active_no_event(label: String, value: int):
 	_current_id = value;
 
 func _set_foldout(value: bool):
+	if _disabled: return;
 	_is_open = value;
 	_dropdown.visible = _is_open;
-	self.self_modulate = Color("#F5F5F5") if !_is_open else Color("bac6da");
+	self.self_modulate = Color("bac6da") if _is_open or _disabled else Color("#F5F5F5");
 	_current_items.get_child(1).flip_v = _is_open;
 
 func _on_dropdown_click(event:InputEvent):
