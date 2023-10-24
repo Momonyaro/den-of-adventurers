@@ -41,7 +41,7 @@ func _get_current() -> Array:
 
 func _get_options(screen_w: int, screen_h: int) -> Array: # only 16:9 support for the moment at least.
 	var resolutions = [];
-	if screen_w >= 960 && screen_h >= 540:   resolutions.push_back(["960x540",   540]); # web target?
+	#if screen_w >= 960 && screen_h >= 540:   resolutions.push_back(["960x540",   540]); # web target?
 	if screen_w >= 1280 && screen_h >= 720:  resolutions.push_back(["1280x720",  720]); # project baseline
 	if screen_w >= 1366 && screen_h >= 768:  resolutions.push_back(["1366x768",  768]);
 	if screen_w >= 1600 && screen_h >= 900:  resolutions.push_back(["1600x900",  900]);
