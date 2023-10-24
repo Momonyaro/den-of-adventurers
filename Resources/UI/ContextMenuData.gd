@@ -102,7 +102,7 @@ static func get_menu_data():
 				'Solitaire': {
 					'type': 'action',
 					'icon': 'res://Textures/Icons/solitaire.png',
-					'msg': 'WINDOW_SOLITAIRE_START'
+					'msg': 'WINDOW:OPEN:SOLITAIRE'
 				}
 			}
 		}

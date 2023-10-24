@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl6osiao28nsu"]
+
+[ext_resource type="Texture2D" uid="uid://dh2bq5xlgec87" path="res://Textures/Icons/border_dotted.png" id="1_jvakq"]
+[ext_resource type="Script" path="res://Scripts/UI/windows/solitaire.gd" id="1_ndxf7"]
+[ext_resource type="PackedScene" uid="uid://dhrglp6qg1oi7" path="res://Prefabs/UI/solitaire/card.tscn" id="1_ohard"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[node name="solitaire" type="Panel" node_paths=PackedStringArray("_drawn_hand")]
+clip_contents = true
+offset_right = 640.0
+offset_bottom = 400.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
+script = ExtResource("1_ndxf7")
+_drawn_hand = [NodePath("card2"), NodePath("card3"), NodePath("card4")]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 107.0
+offset_bottom = 137.0
+texture = ExtResource("1_jvakq")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="card" parent="." instance=ExtResource("1_ohard")]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 107.0
+offset_bottom = 137.0
+
+[node name="card2" parent="." instance=ExtResource("1_ohard")]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 25.0
+offset_right = 205.0
+offset_bottom = 137.0
+
+[node name="card3" parent="." instance=ExtResource("1_ohard")]
+layout_mode = 0
+offset_left = 147.0
+offset_top = 25.0
+offset_right = 229.0
+offset_bottom = 137.0
+
+[node name="card4" parent="." instance=ExtResource("1_ohard")]
+layout_mode = 0
+offset_left = 171.0
+offset_top = 25.0
+offset_right = 253.0
+offset_bottom = 137.0
+
+[connection signal="gui_input" from="card" to="." method="_on_deck_input"]
+[connection signal="gui_input" from="card2" to="." method="_on_deck_input"]
+[connection signal="gui_input" from="card3" to="." method="_on_deck_input"]
+[connection signal="gui_input" from="card4" to="." method="_on_deck_input"]

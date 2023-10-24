@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dh2bq5xlgec87" path="res://Textures/Icons/border_dotted.png" id="1_cs1rl"]
 
 [node name="PREVIEW_RECT" type="NinePatchRect"]
-texture_filter = 1
+texture_filter = 3
 texture_repeat = 1
 offset_left = 406.0
 offset_top = 174.0

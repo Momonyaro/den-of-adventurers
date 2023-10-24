@@ -18,4 +18,4 @@ func _weekday_to_string(value: int):
 		_: return "Sunday";
 
 func _format_minute(minute: int):
-	return str(minute, 0) if minute < 10 else str(minute);
+	return str(0, minute) if minute < 10 else str(minute);

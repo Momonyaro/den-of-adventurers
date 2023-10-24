@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhrglp6qg1oi7"]
+
+[ext_resource type="Texture2D" uid="uid://divld3paipclp" path="res://Textures/Icons/border.png" id="1_2qxda"]
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="2_1j3jl"]
+[ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="3_rb0hb"]
+[ext_resource type="Texture2D" uid="uid://c6obd2s8ug4mb" path="res://Textures/Icons/grid.png" id="4_kldru"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2gaug"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+
+[node name="card" type="NinePatchRect"]
+texture_filter = 1
+offset_right = 82.0
+offset_bottom = 112.0
+mouse_filter = 0
+texture = ExtResource("1_2qxda")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("2_1j3jl")
+theme_override_fonts/font = ExtResource("3_rb0hb")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2gaug")
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_1j3jl")
+theme_override_fonts/font = ExtResource("3_rb0hb")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2gaug")
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 7.0
+offset_right = 75.0
+offset_bottom = 31.0
+expand_mode = 3
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 81.0
+offset_right = 31.0
+offset_bottom = 105.0
+expand_mode = 3
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 76.0
+offset_bottom = 106.0
+texture = ExtResource("4_kldru")
+stretch_mode = 1
