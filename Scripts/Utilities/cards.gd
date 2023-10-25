@@ -7,19 +7,33 @@ enum LEADERS {
 	DIAMONDS = 4
 }
 
+enum FACING {
+	FRONT,
+	BACK
+}
+
 const _deck = [
-	'sA', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 'sJ', 'sQ', 'sK', # SPADE
-	'hA', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8', 'h9', 'h10', 'hJ', 'hQ', 'hK', # HEART
-	'cA', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'c10', 'cJ', 'cQ', 'cK', # CLUB
-	'dA', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'dJ', 'dQ', 'dK', # DIAMOND
+	'sfA', 'sf2', 'sf3', 'sf4', 'sf5', 'sf6', 'sf7', 'sf8', 'sf9', 'sf10', 'sfJ', 'sfQ', 'sfK', # SPADE
+	'hfA', 'hf2', 'hf3', 'hf4', 'hf5', 'hf6', 'hf7', 'hf8', 'hf9', 'hf10', 'hfJ', 'hfQ', 'hfK', # HEART
+	'cfA', 'cf2', 'cf3', 'cf4', 'cf5', 'cf6', 'cf7', 'cf8', 'cf9', 'cf10', 'cfJ', 'cfQ', 'cfK', # CLUB
+	'dfA', 'df2', 'df3', 'df4', 'df5', 'df6', 'df7', 'df8', 'df9', 'df10', 'dfJ', 'dfQ', 'dfK', # DIAMOND
 ];
 
 static func get_deck() -> Array:
 	return _deck.duplicate();
 
 static func get_partial_deck(deck: Array, exclude: Array) -> Array:
-	var copy = deck.duplicate();
-	return copy.filter(func (c): !exclude.has(c));
+	if exclude.size() == 0: 
+		return deck.duplicate();
+	
+	var stripped_exclude = exclude.map(func (e): return _ignore_facing(e));
+	var copy = [];
+	for card in deck:
+		var no_facing = _ignore_facing(card);
+		if stripped_exclude.has(no_facing) == false:
+			copy.push_back(card);
+		
+	return copy;
 
 static func draw_card(deck: Array) -> Array:
 	var card = deck.pop_front();
@@ -57,5 +71,20 @@ static func get_leader(id: String) -> int:
 		'd': return LEADERS.DIAMONDS;
 	return -1;
 
+static func get_facing(id: String) -> int:
+	var facing = id[1];
+	match(facing):
+		'f': return FACING.FRONT
+		_:   return FACING.BACK
+
+static func flip_card(id: String) -> String:
+	var facing = get_facing(id);
+	var stripped = _ignore_facing(id);
+	var rev_facing = 'f' if facing == FACING.BACK else 'b';
+	return stripped.insert(1, rev_facing);
+
+static func _ignore_facing(id: String) -> String:
+	return str(id[0], id.substr(2))
+
 static func get_identifier(id: String) -> String:
-	return id.substr(1);
+	return id.substr(2);

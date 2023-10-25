@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cl6osiao28nsu"]
+[gd_scene load_steps=5 format=3 uid="uid://cl6osiao28nsu"]
 
 [ext_resource type="Texture2D" uid="uid://dh2bq5xlgec87" path="res://Textures/Icons/border_dotted.png" id="1_jvakq"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/solitaire.gd" id="1_ndxf7"]
 [ext_resource type="PackedScene" uid="uid://dhrglp6qg1oi7" path="res://Prefabs/UI/solitaire/card.tscn" id="1_ohard"]
-[ext_resource type="Texture2D" uid="uid://divld3paipclp" path="res://Textures/Icons/border.png" id="4_ddjdr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
 content_margin_left = 24.0
@@ -12,13 +11,14 @@ content_margin_right = 24.0
 content_margin_bottom = 24.0
 bg_color = Color(0.960784, 0.960784, 0.960784, 1)
 
-[node name="solitaire" type="Panel" node_paths=PackedStringArray("_drawn_hand")]
+[node name="solitaire" type="Panel" node_paths=PackedStringArray("_drawn_hand", "_tableau_area")]
 clip_contents = true
 offset_right = 653.0
 offset_bottom = 550.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
 script = ExtResource("1_ndxf7")
 _drawn_hand = [NodePath("card2"), NodePath("card3"), NodePath("card4")]
+_tableau_area = NodePath("tableau_area")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1
@@ -124,390 +124,18 @@ patch_margin_bottom = 2
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="tableau_area" type="NinePatchRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(82, 112)
 layout_mode = 0
 offset_left = 25.0
-offset_top = 161.0
-offset_right = 616.0
-offset_bottom = 273.0
-theme_override_constants/separation = 5
-alignment = 1
-
-[node name="NinePatchRect5" type="NinePatchRect" parent="HBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-layout_mode = 2
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect6" type="NinePatchRect" parent="HBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-layout_mode = 2
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect6" type="NinePatchRect" parent="HBoxContainer/NinePatchRect6"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect7" type="NinePatchRect" parent="HBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-layout_mode = 2
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect7" type="NinePatchRect" parent="HBoxContainer/NinePatchRect7"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect7" type="NinePatchRect" parent="HBoxContainer/NinePatchRect7/NinePatchRect7"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-layout_mode = 2
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect8/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect9" type="NinePatchRect" parent="HBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-layout_mode = 2
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect9"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect9/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect9/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect9/NinePatchRect8/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect10" type="NinePatchRect" parent="HBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-layout_mode = 2
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect10"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect10/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect10/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect10/NinePatchRect8/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect10/NinePatchRect8/NinePatchRect8/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect11" type="NinePatchRect" parent="HBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-layout_mode = 2
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect11"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect11/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect11/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect11/NinePatchRect8/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect11/NinePatchRect8/NinePatchRect8/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect8" type="NinePatchRect" parent="HBoxContainer/NinePatchRect11/NinePatchRect8/NinePatchRect8/NinePatchRect8/NinePatchRect8/NinePatchRect8"]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-offset_top = 8.0
-offset_right = 82.0
-offset_bottom = 120.0
-texture = ExtResource("4_ddjdr")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
+offset_top = 164.0
+offset_right = 629.0
+offset_bottom = 523.0
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
