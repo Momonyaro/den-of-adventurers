@@ -1,6 +1,7 @@
 extends Panel
 
 var card_prefab = preload('res://Prefabs/UI/solitaire/card.tscn');
+var preview_prefab = preload('res://Prefabs/UI/windows/preview_rect.tscn');
 var _spade_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/diskette.png");
 var _heart_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/pc.png");
 var _club_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/folder.png");
@@ -13,6 +14,7 @@ var _diamond_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Ico
 @export var _col_offset = 82 + 5;
 
 var _board = BoardState.new();
+var _drop_zones: Array = []; # structure [rect: Rect2, card_stack: Array]
 var _redo = 0;
 
 func _ready():
@@ -41,8 +43,11 @@ func _populate_card(card: String, node: Control):
 	node.get_child(2).texture = _get_icon(Cards.get_leader(card)) if _visible else null;
 	node.get_child(3).texture = _get_icon(Cards.get_leader(card)) if _visible else null;
 	node.get_child(4).visible = !_visible;
+	if _visible:
+		node.tooltip_text = Cards.card_name(card);
 
 func _on_board_update():
+	_drop_zones = [];
 	get_child(1).show_behind_parent = _board._deck.size() == 0;
 	_draw_hand();
 	_draw_tableau();
@@ -61,14 +66,19 @@ func _draw_tableau():
 	
 	for i in _board._tableau.size():
 		var col = _board._tableau[i];
+		var x_pos = origo.x + (_col_offset * i);
+		var _drop_instance = Rect2();
+		_drop_instance.position = Vector2(x_pos - 2, origo.y - 2);
+		var h = self.get_global_rect().size.y - basis.position.y;
+		_drop_instance.size = Vector2(86, h + 2);
+		_drop_zones.push_back([_drop_instance, col]);
 		
 		var _last_instance: Node = null;
 		for j in col.size():
 			var card = col[j];
-			var x_pos = origo.x + (_col_offset * i);
 			if _last_instance == null:
 				_last_instance = card_prefab.instantiate();
-				_tableau_area.add_child(_last_instance);
+				basis.add_child(_last_instance);
 				_last_instance.global_position = Vector2(x_pos, origo.y);
 				_populate_card(card, _last_instance);
 			else:

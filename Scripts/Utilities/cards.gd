@@ -7,16 +7,21 @@ enum LEADERS {
 	DIAMONDS = 4
 }
 
+enum COLOR {
+	RED,
+	BLACK
+}
+
 enum FACING {
 	FRONT,
 	BACK
 }
 
 const _deck = [
-	'sfA', 'sf2', 'sf3', 'sf4', 'sf5', 'sf6', 'sf7', 'sf8', 'sf9', 'sf10', 'sfJ', 'sfQ', 'sfK', # SPADE
-	'hfA', 'hf2', 'hf3', 'hf4', 'hf5', 'hf6', 'hf7', 'hf8', 'hf9', 'hf10', 'hfJ', 'hfQ', 'hfK', # HEART
-	'cfA', 'cf2', 'cf3', 'cf4', 'cf5', 'cf6', 'cf7', 'cf8', 'cf9', 'cf10', 'cfJ', 'cfQ', 'cfK', # CLUB
-	'dfA', 'df2', 'df3', 'df4', 'df5', 'df6', 'df7', 'df8', 'df9', 'df10', 'dfJ', 'dfQ', 'dfK', # DIAMOND
+	'sf1', 'sf2', 'sf3', 'sf4', 'sf5', 'sf6', 'sf7', 'sf8', 'sf9', 'sf10', 'sf11', 'sf12', 'sf13', # SPADE
+	'hf1', 'hf2', 'hf3', 'hf4', 'hf5', 'hf6', 'hf7', 'hf8', 'hf9', 'hf10', 'hf11', 'hf12', 'hf13', # HEART
+	'cf1', 'cf2', 'cf3', 'cf4', 'cf5', 'cf6', 'cf7', 'cf8', 'cf9', 'cf10', 'cf11', 'cf12', 'cf13', # CLUB
+	'df1', 'df2', 'df3', 'df4', 'df5', 'df6', 'df7', 'df8', 'df9', 'df10', 'df11', 'df12', 'df13', # DIAMOND
 ];
 
 static func get_deck() -> Array:
@@ -45,7 +50,8 @@ static func shuffle_deck(deck: Array) -> Array:
 
 static func card_name(id: String) -> String:
 	var leader = id[0];
-	var card_name = id.substr(1);
+	var _id = get_identifier_as_num(id);
+	var card_name = "";
 	
 	match(leader):
 		's': leader = "Spades";
@@ -53,12 +59,12 @@ static func card_name(id: String) -> String:
 		'c': leader = "Clubs";
 		'd': leader = "Diamonds";
 	
-	match (card_name):
-		'A': card_name = 'Ace';
-		'J': card_name = 'Jack';
-		'Q': card_name = 'Queen';
-		'K': card_name = 'King';
-		_: card_name = card_name;
+	match (_id):
+		1: card_name = 'Ace';
+		11: card_name = 'Jack';
+		12: card_name = 'Queen';
+		13: card_name = 'King';
+		_: card_name = str(_id);
 	
 	return str(card_name, " of ", leader);
 
@@ -77,6 +83,17 @@ static func get_facing(id: String) -> int:
 		'f': return FACING.FRONT
 		_:   return FACING.BACK
 
+static func get_color(id: String) -> int:
+	var leader = get_leader(id);
+	match(leader):
+		LEADERS.SPADES or LEADERS.CLUBS: return COLOR.BLACK;
+		_: return COLOR.RED;
+
+static func is_same_color(a: String, b: String) -> bool:
+	var a_col = get_color(a);
+	var b_col = get_color(b);
+	return a_col == b_col;
+
 static func flip_card(id: String) -> String:
 	var facing = get_facing(id);
 	var stripped = _ignore_facing(id);
@@ -84,7 +101,17 @@ static func flip_card(id: String) -> String:
 	return stripped.insert(1, rev_facing);
 
 static func _ignore_facing(id: String) -> String:
-	return str(id[0], id.substr(2))
+	return str(id[0], get_identifier_as_num(id))
 
 static func get_identifier(id: String) -> String:
-	return id.substr(2);
+	var _id = get_identifier_as_num(id);
+	match (_id):
+		1: return 'A';
+		11: return 'J';
+		12: return 'Q';
+		13: return 'K';
+		_: return str(_id);
+
+static func get_identifier_as_num(id: String) -> int:
+	var _id = id.substr(2);
+	return int(_id);
