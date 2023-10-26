@@ -94,6 +94,9 @@ static func is_same_color(a: String, b: String) -> bool:
 	var b_col = get_color(b);
 	return a_col == b_col;
 
+static func is_same_card(a: String, b: String) -> bool:
+	return _ignore_facing(a) == _ignore_facing(b);
+
 static func flip_card(id: String) -> String:
 	var facing = get_facing(id);
 	var stripped = _ignore_facing(id);
