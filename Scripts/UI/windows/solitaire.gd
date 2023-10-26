@@ -2,10 +2,10 @@ extends Panel
 
 var card_prefab = preload('res://Prefabs/UI/solitaire/card.tscn');
 var preview_prefab = preload('res://Prefabs/UI/windows/preview_rect.tscn');
-var _spade_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/diskette.png");
-var _heart_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/pc.png");
-var _club_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/folder.png");
-var _diamond_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/exit.png");
+var _spade_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/cards_spade.png");
+var _heart_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/cards_heart.png");
+var _club_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/cards_club.png");
+var _diamond_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/cards_diamond.png");
 
 @export var _drawn_hand: Array[Control] = [];
 @export var _tableau_area: Control = null;
@@ -35,7 +35,7 @@ func _get_icon(leader: int) -> CompressedTexture2D:
 		_:
 			return _diamond_icon;
 
-func _populate_card(card: String, node: Control):
+func _populate_card(card: String, node: Control, card_ref: String):
 	node.visible = true;
 	var _visible = Cards.get_facing(card) == Cards.FACING.FRONT;
 	node.get_child(0).text = Cards.get_identifier(card) if _visible else "";
@@ -45,6 +45,13 @@ func _populate_card(card: String, node: Control):
 	node.get_child(4).visible = !_visible;
 	if _visible:
 		node.tooltip_text = Cards.card_name(card);
+		if not node.get('_card_ref') == null:
+			node._card_ref = card_ref;
+			node._on_click = _on_card_input_callback;
+	else:
+		if not node.get('_card_ref') == null:
+			node._card_ref = card_ref;
+			node._on_click = _on_flip_input_callback;
 
 func _on_board_update():
 	_drop_zones = [];
@@ -58,11 +65,13 @@ func _draw_hand():
 			_drawn_hand[i].visible = false;
 		else:
 			_drawn_hand[i].visible = true;
-			_populate_card(_board._stock[i], _drawn_hand[i]);
+			_populate_card(_board._stock[i], _drawn_hand[i], str('stock:', i));
 
 func _draw_tableau():
 	var basis = _tableau_area;
 	var origo = _tableau_area.global_position;
+	for child in basis.get_children():
+		child.queue_free();
 	
 	for i in _board._tableau.size():
 		var col = _board._tableau[i];
@@ -80,7 +89,7 @@ func _draw_tableau():
 				_last_instance = card_prefab.instantiate();
 				basis.add_child(_last_instance);
 				_last_instance.global_position = Vector2(x_pos, origo.y);
-				_populate_card(card, _last_instance);
+				_populate_card(card, _last_instance, str('tableau:', i, ":", j));
 			else:
 				var last_card = col[j - 1];
 				var _instance = card_prefab.instantiate();
@@ -88,13 +97,53 @@ func _draw_tableau():
 				var _last_pos = _last_instance.global_position;
 				var _y_offset = _y_offset_hidden if Cards.get_facing(last_card) == Cards.FACING.BACK else _y_offset_visible;
 				_instance.global_position = Vector2(x_pos, _last_pos.y + _y_offset);
-				_populate_card(card, _instance);
+				_populate_card(card, _instance, str('tableau:', i, ":", j));
 				_last_instance = _instance;
 
 func _on_deck_input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
 		_board.draw_to_stock(3);
 
+func _on_card_input_callback(_card_ref: String):
+	var split = Array(_card_ref.split(":"));
+
+	var _only_top = false;
+	var _grabs_following = false;
+	var collection = [];
+	match (split.pop_front()):
+		'stock':
+			_only_top = true;
+			collection = _board._stock;
+		'tableau':
+			var col = int(split.pop_front());
+			_grabs_following = true;
+			collection = _board._tableau[col];
+	
+	var index = int(split.pop_front());
+	if _only_top && index != collection.size() - 1:
+		return;
+	elif _only_top:
+		collection.remove_at(index);
+	elif _grabs_following:
+		var temp = collection.slice(index);
+		for i in temp.size():
+			var injex = i + index;
+			collection.remove_at(injex);
+	
+	_on_board_update();
+
+func _on_flip_input_callback(_card_ref: String):
+	var split = Array(_card_ref.split(":"));
+	var _ref = split.pop_front();
+	var col = int(split.pop_front());
+	var collection = _board._tableau[col];
+	
+	var index = int(split.pop_front());
+	if index == (collection.size() - 1):
+		collection[index] = Cards.flip_card(collection[index]);
+		_on_board_update();
+	else:
+		print(index, " != ", collection.size() - 1, " ", collection);
 
 class BoardState:
 	var _base = []; # The actual tracker for card order during game.
