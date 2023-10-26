@@ -15,7 +15,7 @@ var _diamond_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Ico
 
 var _board = BoardState.new();
 var _drop_zones: Array = []; # structure [rect: Rect2, card_stack: Array]
-var _redo = 0;
+var _holding: Array = []; # structure [card_stack: Array, from: Array]
 
 func _ready():
 	get_child(1).get_child(4).visible = true;
@@ -23,6 +23,13 @@ func _ready():
 	_board.start_game();
 	for card in _drawn_hand:
 		card.visible = false;
+
+func _process(_delta):
+	if Input.is_action_just_released("click") && _holding.size() > 0:
+		if !_try_drop_in_zone():
+			_holding[1].append_array(_holding[0]);
+		_holding = [];
+		_on_board_update();
 
 func _get_icon(leader: int) -> CompressedTexture2D:
 	match(leader):
@@ -58,6 +65,20 @@ func _on_board_update():
 	get_child(1).show_behind_parent = _board._deck.size() == 0;
 	_draw_hand();
 	_draw_tableau();
+
+func _try_drop_in_zone() -> bool:
+	var cards = _holding[0];
+	var mouse_pos = get_global_mouse_position();
+
+	for zone in _drop_zones:
+		var rect = zone[0];
+		var col = zone[1];
+		var is_inside = rect.has_point(mouse_pos);
+		if is_inside:
+			col.append_array(cards);
+			return true;
+	
+	return false;
 
 func _draw_hand():
 	for i in _drawn_hand.size():
@@ -123,12 +144,14 @@ func _on_card_input_callback(_card_ref: String):
 	if _only_top && index != collection.size() - 1:
 		return;
 	elif _only_top:
+		_holding = [[collection[index]], collection];
 		collection.remove_at(index);
 	elif _grabs_following:
+		var slice = collection.slice(0, index);
 		var temp = collection.slice(index);
-		for i in temp.size():
-			var injex = i + index;
-			collection.remove_at(injex);
+		collection.clear();
+		collection.append_array(slice);
+		_holding = [temp, collection];
 	
 	_on_board_update();
 
@@ -142,8 +165,6 @@ func _on_flip_input_callback(_card_ref: String):
 	if index == (collection.size() - 1):
 		collection[index] = Cards.flip_card(collection[index]);
 		_on_board_update();
-	else:
-		print(index, " != ", collection.size() - 1, " ", collection);
 
 class BoardState:
 	var _base = []; # The actual tracker for card order during game.
