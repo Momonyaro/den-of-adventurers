@@ -1,10 +1,10 @@
 class_name Cards
 
 enum LEADERS {
-	SPADES = 1,
-	HEARTS = 2,
-	CLUBS = 3,
-	DIAMONDS = 4
+	SPADES,
+	HEARTS,
+	CLUBS,
+	DIAMONDS
 }
 
 enum COLOR {
@@ -86,7 +86,8 @@ static func get_facing(id: String) -> int:
 static func get_color(id: String) -> int:
 	var leader = get_leader(id);
 	match(leader):
-		LEADERS.SPADES or LEADERS.CLUBS: return COLOR.BLACK;
+		LEADERS.SPADES: return COLOR.BLACK;
+		LEADERS.CLUBS: return COLOR.BLACK;
 		_: return COLOR.RED;
 
 static func is_same_color(a: String, b: String) -> bool:
@@ -114,6 +115,9 @@ static func get_identifier(id: String) -> String:
 		12: return 'Q';
 		13: return 'K';
 		_: return str(_id);
+
+static func get_identifier_delta(a: String, b: String): # e.g.: 8-7 = 1; delta of 1
+	return get_identifier_as_num(b) - get_identifier_as_num(a);
 
 static func get_identifier_as_num(id: String) -> int:
 	var _id = id.substr(2);

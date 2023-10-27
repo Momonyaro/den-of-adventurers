@@ -9,12 +9,13 @@ var _diamond_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Ico
 
 @export var _drawn_hand: Array[Control] = [];
 @export var _tableau_area: Control = null;
+@export var _foundation_area: Control = null;
 @export var _y_offset_hidden = 8;
 @export var _y_offset_visible = 24;
 @export var _col_offset = 82 + 5;
 
 var _board = BoardState.new();
-var _drop_zones: Array = []; # structure [rect: Rect2, card_stack: Array]
+var _drop_zones: Array = []; # structure [rect: Rect2, card_stack: Array, col_ref: String]
 var _holding: Array = []; # structure [card_stack: Array, from: Array]
 
 func _ready():
@@ -64,6 +65,7 @@ func _on_board_update():
 	_drop_zones = [];
 	get_child(1).show_behind_parent = _board._deck.size() == 0;
 	_draw_hand();
+	_draw_foundation();
 	_draw_tableau();
 
 func _try_drop_in_zone() -> bool:
@@ -73,8 +75,17 @@ func _try_drop_in_zone() -> bool:
 	for zone in _drop_zones:
 		var rect = zone[0];
 		var col = zone[1];
+		var col_ref = zone[2];
 		var is_inside = rect.has_point(mouse_pos);
 		if is_inside:
+			match (col_ref):
+				'foundation':
+					if !_board.validate_foundation_insert(cards, col):
+						return false;
+				'tableau':
+					if !_board.validate_tableau_insert(cards, col):
+						return false;
+
 			col.append_array(cards);
 			return true;
 	
@@ -87,6 +98,27 @@ func _draw_hand():
 		else:
 			_drawn_hand[i].visible = true;
 			_populate_card(_board._stock[i], _drawn_hand[i], str('stock:', i));
+
+func _draw_foundation():
+	var basis = _foundation_area;
+	var piles = basis.get_children();
+	if piles.size() != 4: return;
+
+	for i in piles.size():
+		var pile = piles[i];
+		for child in pile.get_children():
+			child.queue_free();
+
+		var foundation_pile = _board._foundation[i];
+		_drop_zones.push_back([pile.get_global_rect(), foundation_pile, 'foundation']);
+		for j in foundation_pile.size():
+			var card = foundation_pile[j];
+			var instance = card_prefab.instantiate();
+			pile.add_child(instance);
+			instance.global_position = pile.global_position;
+			_populate_card(card, instance, str('foundation:', i, ':', j));
+
+
 
 func _draw_tableau():
 	var basis = _tableau_area;
@@ -101,7 +133,7 @@ func _draw_tableau():
 		_drop_instance.position = Vector2(x_pos - 2, origo.y - 2);
 		var h = self.get_global_rect().size.y - basis.position.y;
 		_drop_instance.size = Vector2(86, h + 2);
-		_drop_zones.push_back([_drop_instance, col]);
+		_drop_zones.push_back([_drop_instance, col, 'tableau']);
 		
 		var _last_instance: Node = null;
 		for j in col.size():
@@ -139,6 +171,10 @@ func _on_card_input_callback(_card_ref: String):
 			var col = int(split.pop_front());
 			_grabs_following = true;
 			collection = _board._tableau[col];
+		'foundation':
+			var col = int(split.pop_front());
+			_only_top = true;
+			collection = _board._foundation[col];
 	
 	var index = int(split.pop_front());
 	if _only_top && index != collection.size() - 1:
@@ -193,6 +229,32 @@ class BoardState:
 				break;
 			_stock.push_back(_draw_card());
 		board_update.emit()
+
+	func validate_foundation_insert(cards: Array, col: Array) -> bool:
+		if cards.size() > 1: return false;
+		var leader = Cards.get_leader(cards[0]);
+		print(Cards.LEADERS.keys()[leader]);
+
+		#check color exists in other stack
+		for stack in _foundation:
+			if stack.size() > 0 && Cards.get_leader(stack[0]) == leader:
+				if col.size() != stack.size() || col[0] != stack[0]: 
+					return false;
+		
+		#check delta for card numbers
+		if col.size() > 0 && Cards.get_leader(col[0]) == leader && Cards.get_identifier_delta(col[-1], cards[0]) == 1:
+			return true;
+		
+		# else we create a new pile, just check that it's id is 1;
+		return Cards.get_identifier_as_num(cards[0]) == 1;
+
+	func validate_tableau_insert(cards: Array, col: Array) -> bool:
+		if col.size() == 0: return Cards.get_identifier(cards[0]) == 'K';
+
+		if Cards.is_same_color(col[-1], cards[0]): return false;
+		if (!Cards.get_identifier_delta(col[-1], cards[0]) == -1): return false;
+
+		return true;
 
 	func fill_tableau():
 		_tableau = [[], [], [], [], [], [], []];

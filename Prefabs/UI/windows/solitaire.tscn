@@ -22,14 +22,15 @@ content_margin_top = 8.0
 content_margin_right = 10.0
 content_margin_bottom = 8.0
 
-[node name="solitaire" type="Panel" node_paths=PackedStringArray("_drawn_hand", "_tableau_area")]
+[node name="solitaire" type="Panel" node_paths=PackedStringArray("_drawn_hand", "_tableau_area", "_foundation_area")]
 clip_contents = true
-offset_right = 653.0
+offset_right = 654.0
 offset_bottom = 550.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
 script = ExtResource("1_ndxf7")
 _drawn_hand = [NodePath("card2"), NodePath("card3"), NodePath("card4")]
 _tableau_area = NodePath("tableau_area")
+_foundation_area = NodePath("foundation_area")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1
@@ -140,67 +141,6 @@ offset_top = 25.0
 offset_right = 242.0
 offset_bottom = 137.0
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 286.0
-offset_top = 25.0
-offset_right = 368.0
-offset_bottom = 137.0
-texture = ExtResource("1_jvakq")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect3" type="NinePatchRect" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 373.0
-offset_top = 25.0
-offset_right = 455.0
-offset_bottom = 137.0
-texture = ExtResource("1_jvakq")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect4" type="NinePatchRect" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 460.0
-offset_top = 25.0
-offset_right = 542.0
-offset_bottom = 137.0
-texture = ExtResource("1_jvakq")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="NinePatchRect5" type="NinePatchRect" parent="."]
-texture_filter = 1
-custom_minimum_size = Vector2(82, 112)
-layout_mode = 0
-offset_left = 547.0
-offset_top = 25.0
-offset_right = 629.0
-offset_bottom = 137.0
-texture = ExtResource("1_jvakq")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
 [node name="tableau_area" type="NinePatchRect" parent="."]
 texture_filter = 1
 custom_minimum_size = Vector2(82, 112)
@@ -209,6 +149,76 @@ offset_left = 25.0
 offset_top = 164.0
 offset_right = 629.0
 offset_bottom = 523.0
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="foundation_area" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="foundation_area"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -329.0
+offset_top = 25.0
+offset_right = -247.0
+offset_bottom = 137.0
+texture = ExtResource("1_jvakq")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="foundation_area"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -242.0
+offset_top = 25.0
+offset_right = -160.0
+offset_bottom = 137.0
+texture = ExtResource("1_jvakq")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="NinePatchRect4" type="NinePatchRect" parent="foundation_area"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -155.0
+offset_top = 25.0
+offset_right = -73.0
+offset_bottom = 137.0
+texture = ExtResource("1_jvakq")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="NinePatchRect5" type="NinePatchRect" parent="foundation_area"]
+texture_filter = 1
+custom_minimum_size = Vector2(82, 112)
+layout_mode = 0
+offset_left = -68.0
+offset_top = 25.0
+offset_right = 14.0
+offset_bottom = 137.0
+texture = ExtResource("1_jvakq")
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
