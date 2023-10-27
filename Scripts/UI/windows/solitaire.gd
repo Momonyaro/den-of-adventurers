@@ -10,6 +10,7 @@ var _diamond_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Ico
 @export var _drawn_hand: Array[Control] = [];
 @export var _tableau_area: Control = null;
 @export var _foundation_area: Control = null;
+@export var _hand_label: Label = null;
 @export var _y_offset_hidden = 8;
 @export var _y_offset_visible = 24;
 @export var _col_offset = 82 + 5;
@@ -30,6 +31,7 @@ func _process(_delta):
 		if !_try_drop_in_zone():
 			_holding[1].append_array(_holding[0]);
 		_holding = [];
+		_hand_label.text = str(": ");
 		_on_board_update();
 
 func _get_icon(leader: int) -> CompressedTexture2D:
@@ -181,6 +183,7 @@ func _on_card_input_callback(_card_ref: String):
 		return;
 	elif _only_top:
 		_holding = [[collection[index]], collection];
+		_hand_label.text = str(": ", Cards.print_hand(_holding[0]));
 		collection.remove_at(index);
 	elif _grabs_following:
 		var slice = collection.slice(0, index);
@@ -188,6 +191,7 @@ func _on_card_input_callback(_card_ref: String):
 		collection.clear();
 		collection.append_array(slice);
 		_holding = [temp, collection];
+		_hand_label.text = str(": ", Cards.print_hand(_holding[0]));
 	
 	_on_board_update();
 

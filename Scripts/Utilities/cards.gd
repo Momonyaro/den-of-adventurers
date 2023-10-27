@@ -68,6 +68,17 @@ static func card_name(id: String) -> String:
 	
 	return str(card_name, " of ", leader);
 
+static func print_hand(ids: Array) -> String:
+	var val = "";
+	if ids.size() == 0:
+		return val;
+	elif ids.size() < 3:
+		val = str(", ".join(ids.map(func (id): return card_name(id))));
+	else:
+		val = str(card_name(ids[0]), " [...] ", card_name(ids[-1]));
+	
+	return val;
+
 static func get_leader(id: String) -> int:
 	var leader = id[0];
 	match(leader):
