@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cl6osiao28nsu"]
+[gd_scene load_steps=17 format=3 uid="uid://cl6osiao28nsu"]
 
 [ext_resource type="Texture2D" uid="uid://dh2bq5xlgec87" path="res://Textures/Icons/border_dotted.png" id="1_jvakq"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/solitaire.gd" id="1_ndxf7"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="6_iqe8i"]
 [ext_resource type="Texture2D" uid="uid://c6obd2s8ug4mb" path="res://Textures/Icons/grid.png" id="7_l7h7x"]
 [ext_resource type="Texture2D" uid="uid://xhiir4lsh1mk" path="res://Textures/Icons/hand.png" id="9_wq042"]
+[ext_resource type="Texture2D" uid="uid://ccu1pc22qqicw" path="res://Textures/Icons/radio_on.png" id="10_elx0m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
 content_margin_left = 24.0
@@ -25,10 +26,30 @@ content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gmtc"]
 bg_color = Color(0.960784, 0.960784, 0.960784, 1)
-border_width_top = 2
+border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
-[node name="solitaire" type="Panel" node_paths=PackedStringArray("_drawn_hand", "_tableau_area", "_foundation_area", "_hand_label")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3oon0"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ab0xm"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ugo8f"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="solitaire" type="Panel" node_paths=PackedStringArray("_drawn_hand", "_tableau_area", "_foundation_area", "_hand_label", "_deal_btn", "_draw_three_btn", "_draw_one_btn")]
 clip_contents = true
 offset_right = 654.0
 offset_bottom = 550.0
@@ -38,14 +59,17 @@ _drawn_hand = [NodePath("card2"), NodePath("card3"), NodePath("card4")]
 _tableau_area = NodePath("tableau_area")
 _foundation_area = NodePath("foundation_area")
 _hand_label = NodePath("Panel/Label")
+_deal_btn = NodePath("Panel/Button")
+_draw_three_btn = NodePath("Panel/Button2")
+_draw_one_btn = NodePath("Panel/Button3")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 texture_filter = 1
 layout_mode = 0
 offset_left = 25.0
-offset_top = 25.0
+offset_top = 45.0
 offset_right = 107.0
-offset_bottom = 137.0
+offset_bottom = 157.0
 texture = ExtResource("1_jvakq")
 patch_margin_left = 2
 patch_margin_top = 2
@@ -58,9 +82,9 @@ axis_stretch_vertical = 1
 texture_filter = 1
 layout_mode = 0
 offset_left = 25.0
-offset_top = 25.0
+offset_top = 45.0
 offset_right = 107.0
-offset_bottom = 137.0
+offset_bottom = 157.0
 mouse_filter = 0
 texture = ExtResource("3_452i6")
 patch_margin_left = 6
@@ -130,32 +154,32 @@ stretch_mode = 1
 [node name="card2" parent="." instance=ExtResource("1_ohard")]
 layout_mode = 0
 offset_left = 112.0
-offset_top = 25.0
+offset_top = 45.0
 offset_right = 194.0
-offset_bottom = 137.0
+offset_bottom = 157.0
 
 [node name="card3" parent="." instance=ExtResource("1_ohard")]
 layout_mode = 0
 offset_left = 136.0
-offset_top = 25.0
+offset_top = 45.0
 offset_right = 218.0
-offset_bottom = 137.0
+offset_bottom = 157.0
 
 [node name="card4" parent="." instance=ExtResource("1_ohard")]
 layout_mode = 0
 offset_left = 160.0
-offset_top = 25.0
+offset_top = 45.0
 offset_right = 242.0
-offset_bottom = 137.0
+offset_bottom = 157.0
 
 [node name="tableau_area" type="NinePatchRect" parent="."]
 texture_filter = 1
 custom_minimum_size = Vector2(82, 112)
 layout_mode = 0
 offset_left = 25.0
-offset_top = 164.0
+offset_top = 184.0
 offset_right = 629.0
-offset_bottom = 523.0
+offset_bottom = 543.0
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -169,7 +193,8 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -40.0
-offset_bottom = 40.0
+offset_top = 20.0
+offset_bottom = 60.0
 grow_horizontal = 0
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="foundation_area"]
@@ -235,35 +260,82 @@ axis_stretch_vertical = 1
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -20.0
+offset_bottom = 20.0
 grow_horizontal = 2
-grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4gmtc")
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
 texture_filter = 1
-layout_mode = 0
-offset_left = 4.0
-offset_top = 2.0
-offset_right = 22.0
-offset_bottom = 20.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_right = -4.0
+offset_bottom = 18.0
+grow_horizontal = 0
 texture = ExtResource("9_wq042")
 stretch_mode = 2
 
 [node name="Label" type="Label" parent="Panel"]
 texture_filter = 1
-layout_mode = 0
-offset_left = 24.0
-offset_top = 1.0
-offset_right = 370.0
-offset_bottom = 22.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -370.0
+offset_top = -1.0
+offset_right = -24.0
+offset_bottom = 20.0
+grow_horizontal = 0
 theme = ExtResource("5_ivw8c")
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 12
 text = ":"
+horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = -2.0
+offset_right = 40.0
+offset_bottom = 20.0
+focus_mode = 0
+theme = ExtResource("5_ivw8c")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_3oon0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ab0xm")
+text = "Deal"
+
+[node name="Button2" type="Button" parent="Panel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 40.0
+offset_right = 108.0
+offset_bottom = 20.0
+focus_mode = 0
+theme = ExtResource("5_ivw8c")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_ugo8f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ab0xm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ab0xm")
+text = "3-Cards"
+icon = ExtResource("10_elx0m")
+
+[node name="Button3" type="Button" parent="Panel"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 108.0
+offset_right = 176.0
+offset_bottom = 20.0
+focus_mode = 0
+theme = ExtResource("5_ivw8c")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_ugo8f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ab0xm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ab0xm")
+text = "1-Card"
+icon = ExtResource("10_elx0m")
 
 [connection signal="gui_input" from="card" to="." method="_on_deck_input"]

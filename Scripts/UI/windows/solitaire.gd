@@ -6,11 +6,16 @@ var _spade_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons
 var _heart_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/cards_heart.png");
 var _club_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/cards_club.png");
 var _diamond_icon: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/cards_diamond.png");
+var _radio_off: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/radio_off.png");
+var _radio_on: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/radio_on.png");
 
 @export var _drawn_hand: Array[Control] = [];
 @export var _tableau_area: Control = null;
 @export var _foundation_area: Control = null;
 @export var _hand_label: Label = null;
+@export var _deal_btn: Button = null;
+@export var _draw_three_btn: Button = null;
+@export var _draw_one_btn: Button = null;
 @export var _y_offset_hidden = 8;
 @export var _y_offset_visible = 24;
 @export var _col_offset = 82 + 5;
@@ -22,7 +27,10 @@ var _holding: Array = []; # structure [card_stack: Array, from: Array]
 func _ready():
 	get_child(1).get_child(4).visible = true;
 	_board.board_update.connect(_on_board_update);
-	_board.start_game();
+	_board.start_game(_board._draw_count);
+	_deal_btn.pressed.connect(func (): _board.start_game(_board._draw_count));
+	_draw_one_btn.pressed.connect(func (): set_radio(1));
+	_draw_three_btn.pressed.connect(func (): set_radio(3));
 	for card in _drawn_hand:
 		card.visible = false;
 
@@ -45,6 +53,14 @@ func _get_icon(leader: int) -> CompressedTexture2D:
 		_:
 			return _diamond_icon;
 
+func set_radio(count: int):
+	_board.start_game(count);
+
+func _update_radio():
+	var count = _board._draw_count;
+	_draw_three_btn.icon = _radio_on if count == 3 else _radio_off;
+	_draw_one_btn.icon = _radio_on if count == 1 else _radio_off;
+
 func _populate_card(card: String, node: Control, card_ref: String):
 	node.visible = true;
 	var _visible = Cards.get_facing(card) == Cards.FACING.FRONT;
@@ -66,6 +82,7 @@ func _populate_card(card: String, node: Control, card_ref: String):
 func _on_board_update():
 	_drop_zones = [];
 	get_child(1).show_behind_parent = _board._deck.size() == 0;
+	_update_radio();
 	_draw_hand();
 	_draw_foundation();
 	_draw_tableau();
@@ -157,7 +174,7 @@ func _draw_tableau():
 
 func _on_deck_input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
-		_board.draw_to_stock(3);
+		_board.draw_to_stock(_board._draw_count);
 
 func _on_card_input_callback(_card_ref: String):
 	var split = Array(_card_ref.split(":"));
@@ -183,7 +200,7 @@ func _on_card_input_callback(_card_ref: String):
 		return;
 	elif _only_top:
 		_holding = [[collection[index]], collection];
-		_hand_label.text = str(": ", Cards.print_hand(_holding[0]));
+		_hand_label.text = str(Cards.print_hand(_holding[0]), " :");
 		collection.remove_at(index);
 	elif _grabs_following:
 		var slice = collection.slice(0, index);
@@ -191,7 +208,7 @@ func _on_card_input_callback(_card_ref: String):
 		collection.clear();
 		collection.append_array(slice);
 		_holding = [temp, collection];
-		_hand_label.text = str(": ", Cards.print_hand(_holding[0]));
+		_hand_label.text = str( Cards.print_hand(_holding[0]), " :");
 	
 	_on_board_update();
 
@@ -212,10 +229,12 @@ class BoardState:
 	var _stock = []; # the player's hand of cards
 	var _tableau = [[], [], [], [], [], [], []]; # the cards on the field (represented by an array of 7 arrays of cards)
 	var _foundation = [[], [], [], []]; # The end location of the cards, if the 4 arrays reach size() 13, the game is over.
+	var _draw_count = 3;
 
 	signal board_update();
 
-	func start_game():
+	func start_game(draw_count: int):
+		_draw_count = draw_count;
 		_base = Cards.shuffle_deck(Cards.get_deck());
 		_deck = _base.duplicate();
 		_stock = [];
