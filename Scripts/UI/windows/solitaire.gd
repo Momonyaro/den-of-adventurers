@@ -39,8 +39,59 @@ func _process(_delta):
 		if !_try_drop_in_zone():
 			_holding[1].append_array(_holding[0]);
 		_holding = [];
-		_hand_label.text = str(": ");
+		_hand_label.text = str(":");
 		_on_board_update();
+	
+	elif Input.is_action_just_released("r_click"):
+		_auto_resolve(); 
+
+func _auto_resolve():
+	var changes = 0;
+	while (_try_auto_resolve() && changes < 99):
+		changes += 1;
+	
+	if changes > 0:
+		print("[SOLI...] -> Auto created ", changes, " board change(s)");
+		_on_board_update();
+
+func _try_auto_resolve() -> bool:
+	var cards_to_attempt = [];
+	if _board._stock.size() > 0:
+		cards_to_attempt.push_back([[_board._stock[-1]], _board._stock, "HAND"]);
+	
+	for col in _board._tableau:
+		#if col.size() == 1 && Cards.get_identifier(col[0]) == "K": continue;
+		for i in col.size():
+			var card = col[i];
+			if Cards.get_facing(card) == Cards.FACING.FRONT:
+				var collection = [];
+				var pre = col[i - 1] if i > 0 else null;
+				for j in col.size() - i:
+					collection.push_back(col[i + j]);
+				cards_to_attempt.push_back([collection, col, pre]);
+	
+	for tuple in cards_to_attempt:
+		var cards = tuple[0];
+		var pre = tuple[2];
+		for col in _board._foundation:
+			if _board.validate_foundation_insert(cards, col):
+				tuple[1].erase(cards[0]);
+				col.push_back(cards[0]);
+				return true;
+		
+		for i in _board._tableau.size():
+			var col = _board._tableau[-i];
+			if col.size() > 0 && pre != null && pre != 'HAND' && (Cards.get_identifier(pre) == Cards.get_identifier(col[-1])) && Cards.get_facing(pre) != Cards.FACING.BACK:
+				continue;
+			elif col.size() == 0 && pre == null:
+				continue;
+			elif _board.validate_tableau_insert(cards, col):
+				for card in cards: 
+					tuple[1].erase(card);
+					col.push_back(card);
+				return true;
+	return false;
+
 
 func _get_icon(leader: int) -> CompressedTexture2D:
 	match(leader):
@@ -256,7 +307,6 @@ class BoardState:
 	func validate_foundation_insert(cards: Array, col: Array) -> bool:
 		if cards.size() > 1: return false;
 		var leader = Cards.get_leader(cards[0]);
-		print(Cards.LEADERS.keys()[leader]);
 
 		#check color exists in other stack
 		for stack in _foundation:
@@ -268,12 +318,18 @@ class BoardState:
 		if col.size() > 0 && Cards.get_leader(col[0]) == leader && Cards.get_identifier_delta(col[-1], cards[0]) == 1:
 			return true;
 		
-		# else we create a new pile, just check that it's id is 1;
-		return Cards.get_identifier_as_num(cards[0]) == 1;
+		if col.size() == 0:
+				return Cards.get_identifier_as_num(cards[0]) == 1;
+		return false;
 
 	func validate_tableau_insert(cards: Array, col: Array) -> bool:
-		if col.size() == 0: return Cards.get_identifier(cards[0]) == 'K';
+		if col.size() == 0: 
+			var is_king =  Cards.get_identifier(cards[0]) == 'K';
+			if is_king:
+				print("me me (", cards, ") want go here -> ", col);
+			return is_king;
 
+		if Cards.get_facing(col[-1]) == Cards.FACING.BACK: return false;
 		if Cards.is_same_color(col[-1], cards[0]): return false;
 		if (!Cards.get_identifier_delta(col[-1], cards[0]) == -1): return false;
 
