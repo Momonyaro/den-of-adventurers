@@ -74,6 +74,7 @@ func open_window(ref: String, start_pos: Vector2, window_pos):
 	instance._manager = self;
 	windows.push_front([ref, instance]);
 	_animate_opening(start_pos, instance);
+	self.get_parent().get_child(0).play("res://Audio/SFX/UI/maximize_006.ogg");
 	_sort_windows();
 
 func reset_window(ref: String, start_pos: Vector2):
@@ -91,6 +92,7 @@ func close_window(ref: String):
 	if window == null: 
 		return;
 
+	self.get_parent().get_child(0).play("res://Audio/SFX/UI/minimize_008.ogg");
 	window[1].queue_free();
 	_del_instance(ref);
 	pass;

@@ -19,11 +19,13 @@ var _manager: Node = null;
 
 func populate(key, content_obj, window_pos):
 	_key = key;
-	var instance = ResourceLoader.load(content_obj.content_ref).instantiate();
+	var instance: Panel = ResourceLoader.load(content_obj.content_ref).instantiate();
 	content_parent.add_child(instance);
 	var window_size = _calc_window_size(instance.get_global_rect());
 	self.set_position(window_pos if window_pos != null else _calc_window_offset(position, window_size));
 	window_base.set_size(window_size);
+	if instance.get_property_list().map(func (x): return x.name).has('_window_base'):
+		instance._window_base = self;
 
 	win_header_title.text = content_obj.title;
 	win_header_close.visible = content_obj.has_close_btn if content_obj.has('has_close_btn') else true;
@@ -38,8 +40,11 @@ func _calc_window_offset(pos: Vector2, win_size: Vector2) -> Vector2:
 	return pos - Vector2(win_size.x / 2, win_size.y / 2);
 
 func _on_win_close():
+	play_audio("res://Audio/SFX/UI/click_004.ogg");
 	_manager.close_window(_key);
 
+func play_audio(stream_path: String):
+	_manager.get_parent().get_child(0).play(stream_path);
 
 func _on_win_header_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:

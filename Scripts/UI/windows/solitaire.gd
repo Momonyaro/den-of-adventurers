@@ -20,6 +20,7 @@ var _radio_on: CompressedTexture2D = ResourceLoader.load("res://Textures/Icons/r
 @export var _y_offset_visible = 24;
 @export var _col_offset = 82 + 5;
 
+var _window_base: Node = null;
 var _board = BoardState.new();
 var _drop_zones: Array = []; # structure [rect: Rect2, card_stack: Array, col_ref: String]
 var _holding: Array = []; # structure [card_stack: Array, from: Array]
@@ -40,6 +41,7 @@ func _process(_delta):
 			_holding[1].append_array(_holding[0]);
 		_holding = [];
 		_hand_label.text = str(":");
+		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
 		_on_board_update();
 	
 	elif Input.is_action_just_released("r_click"):
@@ -52,6 +54,7 @@ func _auto_resolve():
 	
 	if changes > 0:
 		print("[SOLI...] -> Auto created ", changes, " board change(s)");
+		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
 		_on_board_update();
 
 func _try_auto_resolve() -> bool:
@@ -225,6 +228,7 @@ func _draw_tableau():
 
 func _on_deck_input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
+		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
 		_board.draw_to_stock(_board._draw_count);
 
 func _on_card_input_callback(_card_ref: String):
@@ -261,6 +265,7 @@ func _on_card_input_callback(_card_ref: String):
 		_holding = [temp, collection];
 		_hand_label.text = str( Cards.print_hand(_holding[0]), " :");
 	
+	_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
 	_on_board_update();
 
 func _on_flip_input_callback(_card_ref: String):
@@ -272,6 +277,7 @@ func _on_flip_input_callback(_card_ref: String):
 	var index = int(split.pop_front());
 	if index == (collection.size() - 1):
 		collection[index] = Cards.flip_card(collection[index]);
+		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
 		_on_board_update();
 
 class BoardState:
