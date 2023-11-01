@@ -37,7 +37,7 @@ static func get_menu_data():
 				'Video Settings': {
 					'type': 'action',
 					'icon': 'res://Textures/Icons/pc.png',
-					'msg': 'WINDOW:OPEN:VIDEO_SETTINGS'
+					'msg': 'WINDOW:RESET:VIDEO_SETTINGS'
 				},
 				'Audio Settings': {
 					'type': 'action',
@@ -102,7 +102,7 @@ static func get_menu_data():
 				'Solitaire': {
 					'type': 'action',
 					'icon': 'res://Textures/Icons/solitaire.png',
-					'msg': 'WINDOW:OPEN:SOLITAIRE'
+					'msg': 'WINDOW:RESET:SOLITAIRE'
 				}
 			}
 		}

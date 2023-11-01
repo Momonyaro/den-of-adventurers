@@ -52,10 +52,11 @@ func process_command(command: String, start_pos: Vector2):
 	if split[0] != "WINDOW": return;
 
 	match (split[1]):
-		"OPEN": open_window(split[2], start_pos);
+		"OPEN": open_window(split[2], start_pos, null);
+		"RESET": reset_window(split[2], start_pos);
 
 
-func open_window(ref: String, start_pos: Vector2):
+func open_window(ref: String, start_pos: Vector2, window_pos):
 	if _has_instance(ref): return;
 	var window_data = WindowData.get_window_data(ref);
 	if window_data[0] == null || window_data[1] == null: 
@@ -67,12 +68,23 @@ func open_window(ref: String, start_pos: Vector2):
 	var instance = window_base.instantiate();
 	self.add_child(instance);
 	instance.set_position(center);
+	print(instance.global_position)
 
-	instance.populate(window_data[0], window_data[1]);
+	instance.populate(window_data[0], window_data[1], window_pos);
 	instance._manager = self;
 	windows.push_front([ref, instance]);
 	_animate_opening(start_pos, instance);
 	_sort_windows();
+
+func reset_window(ref: String, start_pos: Vector2):
+	var window = _get_instance(ref) if _has_instance(ref) else null;
+	var window_pos = null;
+	if window != null:
+		window_pos = window[1].position;
+		print(window_pos);
+	
+	close_window(ref);
+	open_window(ref, start_pos, window_pos);
 
 func close_window(ref: String):
 	var window = _get_instance(ref) if _has_instance(ref) else null;

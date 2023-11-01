@@ -17,12 +17,12 @@ var _manager: Node = null;
 # 	print('populting window with ', data[0]);
 # 	populate(data[1]);
 
-func populate(key, content_obj):
+func populate(key, content_obj, window_pos):
 	_key = key;
 	var instance = ResourceLoader.load(content_obj.content_ref).instantiate();
 	content_parent.add_child(instance);
 	var window_size = _calc_window_size(instance.get_global_rect());
-	self.set_position(_calc_window_offset(position, window_size));
+	self.set_position(window_pos if window_pos != null else _calc_window_offset(position, window_size));
 	window_base.set_size(window_size);
 
 	win_header_title.text = content_obj.title;
