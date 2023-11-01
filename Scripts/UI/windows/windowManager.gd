@@ -1,7 +1,7 @@
 extends Control
 
 #id should be 'WINDOW:[INSTRUCTION]:[ID]' e.g.: 'WINDOW:OPEN:SYS_INFO'
-const OPEN_ANIM_LENGTH = 0.24;
+const OPEN_ANIM_LENGTH = 0.23;
 
 @export var window_base: PackedScene = preload("res://Prefabs/UI/windows/window_base.tscn");
 var preview_rect: PackedScene = preload("res://Prefabs/UI/windows/preview_rect.tscn");
@@ -21,19 +21,24 @@ func _process(delta):
 		win.global_position = clamped_pos;
 
 	for tween in tweens:
-		var progress = tween[2] / OPEN_ANIM_LENGTH;
-		var start_rect = Rect2(tween[1], Vector2(0, 0));
-		var end_rect = tween[4].get_child(0).get_global_rect();
-
-		var lerped_rect = _lerp_rect(start_rect, end_rect, progress);
-		tween[3].set_position(lerped_rect.position);
-		tween[3].set_size(lerped_rect.size);
-
-		tween[2] = min(tween[2] + delta, OPEN_ANIM_LENGTH);
-		if tween[2] == OPEN_ANIM_LENGTH:
-			tween[3].queue_free();
-			tween[4].visible = true;
+		if tween[4] == null:
+			print("window ", tween[6], " was forced close during tween, exiting!");
 			tween[5] = true;
+			tween[3].queue_free();
+		else:
+			var progress = tween[2] / OPEN_ANIM_LENGTH;
+			var start_rect = Rect2(tween[1], Vector2(0, 0));
+			var end_rect = tween[4].get_child(0).get_global_rect();
+
+			var lerped_rect = _lerp_rect(start_rect, end_rect, progress);
+			tween[3].set_position(lerped_rect.position);
+			tween[3].set_size(lerped_rect.size);
+
+			tween[2] = min(tween[2] + delta, OPEN_ANIM_LENGTH);
+			if tween[2] == OPEN_ANIM_LENGTH:
+				tween[3].queue_free();
+				tween[4].visible = true;
+				tween[5] = true;
 
 	for i in tweens.size():
 		if tweens[i][5] == true:
@@ -53,7 +58,9 @@ func process_command(command: String, start_pos: Vector2):
 
 	match (split[1]):
 		"OPEN": open_window(split[2], start_pos, null);
-		"RESET": reset_window(split[2], start_pos);
+		"RESET": reset_window(split[2], start_pos, Vector2(int(split[3]), int(split[4])) if split.size() > 2 else null);
+		"CLOSE": close_window(split[2]);
+		"FORCE_CLOSE": close_window(split[2], true);
 
 
 func open_window(ref: String, start_pos: Vector2, window_pos):
@@ -73,23 +80,28 @@ func open_window(ref: String, start_pos: Vector2, window_pos):
 	instance.populate(window_data[0], window_data[1], window_pos);
 	instance._manager = self;
 	windows.push_front([ref, instance]);
-	_animate_opening(start_pos, instance);
+	_animate_opening(start_pos, instance, ref);
 	self.get_parent().get_child(0).play("res://Audio/SFX/UI/maximize_006.ogg");
 	_sort_windows();
 
-func reset_window(ref: String, start_pos: Vector2):
+func reset_window(ref: String, start_pos: Vector2, window_pos: Vector2):
 	var window = _get_instance(ref) if _has_instance(ref) else null;
-	var window_pos = null;
+	var _window_pos = window_pos;
 	if window != null:
-		window_pos = window[1].position;
-		print(window_pos);
+		_window_pos = window[1].position;
+		print(_window_pos);
 	
 	close_window(ref);
 	open_window(ref, start_pos, window_pos);
 
-func close_window(ref: String):
+func close_window(ref: String, force: bool = false):
 	var window = _get_instance(ref) if _has_instance(ref) else null;
 	if window == null: 
+		return;
+
+	#check if it's tweening
+	var active_tweens = tweens.map(func (t): return t[6]);
+	if active_tweens.has(ref) && !force:
 		return;
 
 	self.get_parent().get_child(0).play("res://Audio/SFX/UI/minimize_008.ogg");
@@ -97,12 +109,12 @@ func close_window(ref: String):
 	_del_instance(ref);
 	pass;
 
-func _animate_opening(start_pos: Vector2, window_ref: Control):
+func _animate_opening(start_pos: Vector2, window_ref: Control, ref: String):
 	window_ref.visible = false;
 	var instance = preview_rect.instantiate();
 	self.add_child(instance);
 	var _timer = 0;
-	tweens.push_back(["OPEN", start_pos, _timer, instance, window_ref, false]);
+	tweens.push_back(["OPEN", start_pos, _timer, instance, window_ref, false, ref]);
 
 	pass;
 

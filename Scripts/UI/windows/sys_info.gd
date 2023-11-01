@@ -19,3 +19,4 @@ func _process(_delta):
 
 func _on_close():
 	_window_base._on_win_close()
+	#get_tree().root.get_child(1).get_child(0).select_agent.emit(null);

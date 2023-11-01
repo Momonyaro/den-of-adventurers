@@ -41,7 +41,7 @@ func _physics_process(_delta):
 
 func _on_input_event(_camera, event, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			game_manager.select_agent.emit(self);
 	pass;
 

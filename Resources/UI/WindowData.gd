@@ -19,6 +19,10 @@ const window_data = {
 	'SOLITAIRE': {
 		'title': 'Solitaire',
 		'content_ref': 'res://Prefabs/UI/windows/solitaire.tscn'
+	},
+	'ADV_PREVIEW': {
+		'title': 'Adventurer',
+		'content_ref': ''
 	}
 }
 
