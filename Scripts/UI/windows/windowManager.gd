@@ -1,7 +1,7 @@
 extends Control
 
 #id should be 'WINDOW:[INSTRUCTION]:[ID]' e.g.: 'WINDOW:OPEN:SYS_INFO'
-const OPEN_ANIM_LENGTH = 0.23;
+const OPEN_ANIM_LENGTH = 0.26;
 
 @export var window_base: PackedScene = preload("res://Prefabs/UI/windows/window_base.tscn");
 var preview_rect: PackedScene = preload("res://Prefabs/UI/windows/preview_rect.tscn");
@@ -31,7 +31,7 @@ func _process(delta):
 			var end_rect = tween[4].get_child(0).get_global_rect();
 
 			var lerped_rect = _lerp_rect(start_rect, end_rect, progress);
-			tween[3].set_position(lerped_rect.position);
+			tween[3].set_position(lerped_rect.position + Vector2(0, -24));
 			tween[3].set_size(lerped_rect.size);
 
 			tween[2] = min(tween[2] + delta, OPEN_ANIM_LENGTH);
@@ -55,10 +55,13 @@ func _process(delta):
 func process_command(command: String, start_pos: Vector2):
 	var split = command.split(':');
 	if split[0] != "WINDOW": return;
+	var set_size = null;
+	if split.size() > 3:
+		set_size = Vector2(int(split[3]), int(split[4]))
 
 	match (split[1]):
 		"OPEN": open_window(split[2], start_pos, null);
-		"RESET": reset_window(split[2], start_pos, Vector2(int(split[3]), int(split[4])) if split.size() > 2 else null);
+		"RESET": reset_window(split[2], start_pos, set_size);
 		"CLOSE": close_window(split[2]);
 		"FORCE_CLOSE": close_window(split[2], true);
 
@@ -75,7 +78,6 @@ func open_window(ref: String, start_pos: Vector2, window_pos):
 	var instance = window_base.instantiate();
 	self.add_child(instance);
 	instance.set_position(center);
-	print(instance.global_position)
 
 	instance.populate(window_data[0], window_data[1], window_pos);
 	instance._manager = self;
@@ -84,15 +86,14 @@ func open_window(ref: String, start_pos: Vector2, window_pos):
 	self.get_parent().get_child(0).play("res://Audio/SFX/UI/maximize_006.ogg");
 	_sort_windows();
 
-func reset_window(ref: String, start_pos: Vector2, window_pos: Vector2):
+func reset_window(ref: String, start_pos: Vector2, window_pos):
 	var window = _get_instance(ref) if _has_instance(ref) else null;
 	var _window_pos = window_pos;
 	if window != null:
 		_window_pos = window[1].position;
-		print(_window_pos);
 	
 	close_window(ref);
-	open_window(ref, start_pos, window_pos);
+	open_window(ref, start_pos, _window_pos);
 
 func close_window(ref: String, force: bool = false):
 	var window = _get_instance(ref) if _has_instance(ref) else null;

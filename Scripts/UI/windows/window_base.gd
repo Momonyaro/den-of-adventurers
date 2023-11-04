@@ -12,11 +12,6 @@ const MARGINS_TOP = 4;
 var _key = "";
 var _manager: Node = null;
 
-# func _ready():
-# 	var data = WindowData.get_window_data("SYS_INFO");
-# 	print('populting window with ', data[0]);
-# 	populate(data[1]);
-
 func populate(key, content_obj, window_pos):
 	_key = key;
 	var instance: Panel = ResourceLoader.load(content_obj.content_ref).instantiate();
@@ -24,13 +19,17 @@ func populate(key, content_obj, window_pos):
 	var window_size = _calc_window_size(instance.get_global_rect());
 	self.set_position(window_pos if window_pos != null else _calc_window_offset(position, window_size));
 	window_base.set_size(window_size);
-	if instance.get_property_list().map(func (x): return x.name).has('_window_base'):
-		instance._window_base = self;
-
 	win_header_title.text = content_obj.title;
 	win_header_close.visible = content_obj.has_close_btn if content_obj.has('has_close_btn') else true;
 	win_header_close.pressed.connect(_on_win_close);
 	win_header_minimize.visible = content_obj.has_minimize_btn if content_obj.has('has_minimize_btn') else false;
+	
+	var app_properties = instance.get_property_list().map(func (x): return x.name);
+	if app_properties.has('_window_base'):
+		instance._window_base = self;
+	if app_properties.has('_on_close_action'):
+		win_header_close.pressed.connect(instance._on_close_action);
+
 	pass;
 
 func _calc_window_size(content_rect: Rect2) -> Vector2:

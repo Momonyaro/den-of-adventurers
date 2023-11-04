@@ -13,9 +13,9 @@ func _ready():
 	select_agent.connect(
 		func (a): 
 			if a != null: 
-				window_manager.process_command("WINDOW:RESET:SYS_INFO:24:24", camera.unproject_position(a.get_child(0).global_position) + Vector2(0, -24))
+				window_manager.process_command("WINDOW:RESET:ADV_PREVIEW:16:16", camera.unproject_position(a.get_child(0).global_position) + Vector2(0, -24))
 			else: 
-				window_manager.process_command("WINDOW:FORCE_CLOSE:SYS_INFO", Vector2()));
+				window_manager.process_command("WINDOW:FORCE_CLOSE:ADV_PREVIEW", Vector2()));
 	pass;
 
 func _input(_ev):
