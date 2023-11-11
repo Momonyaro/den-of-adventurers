@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://f64ofd2jr8sn"]
+[gd_scene load_steps=14 format=3 uid="uid://f64ofd2jr8sn"]
 
 [ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_8246l"]
 [ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="2_dls8v"]
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.gd" id="2_tfev1"]
 [ext_resource type="Script" path="res://Scripts/Managers/AdventurerManager.gd" id="3_q8kab"]
+[ext_resource type="Script" path="res://Scripts/Managers/ActivityManager.gd" id="3_ue1fi"]
 [ext_resource type="Script" path="res://Scripts/Managers/AgentManager.gd" id="4_uo78h"]
 [ext_resource type="PackedScene" uid="uid://daoo1s5dlp1si" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
 
@@ -37,6 +38,10 @@ script = ExtResource("1_8246l")
 
 [node name="Game" type="Node" parent="."]
 script = ExtResource("2_tfev1")
+
+[node name="Activities" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_ue1fi")
 
 [node name="Timers" type="Node" parent="."]
 unique_name_in_owner = true
