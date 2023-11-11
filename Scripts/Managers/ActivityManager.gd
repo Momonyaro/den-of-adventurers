@@ -4,10 +4,9 @@ extends Node
 var _activities: Array[Activity] = [];
 
 func _ready():
-	register("test1", "bed", self);
-	register("test2", "chair", self);
+	register("test1", "bed", self, func (agent): return agent != null);
+	register("test2", "chair", self, null);
 
-	reserve("test1", "me");
 	assert(try_get_activity("bed", null) == null);
 	assert(try_get_activity("chair", null).activity_id == "test2");
 	reserve("test2", "me");
@@ -16,20 +15,22 @@ func _ready():
 func try_get_activity(type: String, agent: Agent) -> Activity:
 	var activities_of_type = _activities.filter(func (x): return x.type_key == type);
 	for activity in activities_of_type:
-		if activity.occupied_by == "":
-			return activity;
-		elif agent != null && activity.occupied_by == agent.adventurer._unique_id:
-			return activity;
+		if activity.is_available.call(agent):
+			if activity.occupied_by == "":
+				return activity;
+			elif agent != null && activity.occupied_by == agent.adventurer._unique_id:
+				return activity;
 	
 	return null;
 
-func register(id: String, type: String, node: Node):
+func register(id: String, type: String, node: Node, is_available_callback):
 	var new_activity = Activity.new();
 	
 	new_activity.activity_id = id;
 	new_activity.type_key = type;
 	new_activity.occupied_by = "";
 	new_activity.activity_node = node;
+	new_activity.is_available = is_available_callback if is_available_callback != null else func (_agent): return true;
 
 	_activities.push_back(new_activity);
 
@@ -46,3 +47,4 @@ class Activity:
 	var type_key: String;
 	var occupied_by: String;
 	var activity_node: Node;
+	var is_available: Callable = func (_agent): return true;

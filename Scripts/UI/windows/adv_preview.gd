@@ -15,9 +15,9 @@ func _ready():
 	pass;
 
 func _process(_delta):
-	update_menu();
+	update_menu(null);
 
-func update_menu():
+func update_menu(_agent):
 	if _selected_agent == null || _selected_agent.adventurer == null:
 		return;
 	
@@ -53,6 +53,7 @@ func _draw_health_info():
 	get_node("%AdvHealthRect/health/bar").value = adventurer._health.x / float(adventurer._health.y);
 	get_node("%AdvHealthRect/fatigue").text = str("Fatigue: (", "%0.0f" % (adventurer._fatigue / 1.0 * 100), "%)");
 	get_node("%AdvHealthRect/fatigue/bar").value = adventurer._fatigue / 1.0;
+	get_node("%AdvHealthRect/fatigue/bar/rest_btn").disabled = adventurer._fatigue < 0.1 || adventurer.adv_status() != "IDLE";
 
 
 func _check_capacity():
