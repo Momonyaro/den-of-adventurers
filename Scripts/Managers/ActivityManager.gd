@@ -9,8 +9,9 @@ func _ready():
 
 	assert(try_get_activity("bed", null) == null);
 	assert(try_get_activity("chair", null).activity_id == "test2");
-	reserve("test2", "me");
-	assert(try_get_activity("chair", null) == null);
+	reserve("test2", null); #fail reserve, basically reserving for noone, should reflect that with reservation
+	set_free("test2"); #will in this case just remove the error code that was set as the occupier.
+	assert(try_get_activity("chair", null).activity_id == "test2");
 
 func try_get_activity(type: String, agent: Agent) -> Activity:
 	var activities_of_type = _activities.filter(func (x): return x.type_key == type);
@@ -34,12 +35,17 @@ func register(id: String, type: String, node: Node, is_available_callback):
 
 	_activities.push_back(new_activity);
 
-func reserve(id: String, reservee: String):
+func reserve(id: String, reservee: Agent):
 	for activity in _activities:
-		if activity.activity_id == id:
-			activity.occupied_by = reservee;
+		if activity.activity_id == id && activity.is_available.call(reservee):
+			activity.occupied_by = reservee.adventurer._unique_id if reservee != null else "ERR::RERSERVE_FOR_NULL?";
 			return;
 	print("Failed to find event for ID: ", id);
+
+func set_free(id: String):
+	for activity in _activities:
+		if activity.activity_id == id:
+			activity.occupied_by = "";
 
 
 class Activity:
