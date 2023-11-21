@@ -12,7 +12,7 @@ func start(animator: AnimationPlayer):
 	_animator.play(CHEER_ANIME_REF, 0.1);
 	_state_enter_count += 1;
 
-func evaluate(curr_state: StateReference, adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool) -> bool:
 	return false;
 
 func update(delta: float, agent: Node, camera: Node):

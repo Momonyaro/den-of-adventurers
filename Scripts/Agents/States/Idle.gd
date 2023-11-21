@@ -15,7 +15,7 @@ func start(animator: AnimationPlayer):
 	_state_enter_count += 1;
 
 
-func evaluate(_curr_state: StateReference, _adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, _adv_state: Adventurer.Status, has_destination: bool) -> bool:
 	if !has_destination:
 		return true;
 	return false;
@@ -34,4 +34,5 @@ func state_transition_allowed(state_ref: StateReference) -> bool:
 		StateReference.START_WANDER: return (_timer >= _idle_time);
 		StateReference.CHEER: return true;
 		StateReference.DELETE_DISMISSED: return true;
+		StateReference.REST: return true;
 		_: return false;

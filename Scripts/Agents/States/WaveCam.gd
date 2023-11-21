@@ -12,7 +12,7 @@ func start(animator: AnimationPlayer):
 	_state_enter_count += 1;
 
 
-func evaluate(_curr_state: StateReference, _adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, _adv_state: Adventurer.Status, has_destination: bool) -> bool:
 	if _adv_state == Adventurer.Status.RECRUIT && _state_enter_count == 0:
 		return true;
 	return false;

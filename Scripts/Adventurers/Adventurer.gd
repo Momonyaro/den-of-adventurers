@@ -58,9 +58,11 @@ func heal_damage(amount: int) -> void:
 	if _status == Status.DEAD: return;
 	_health.x = clampi(_health.x - amount, 0, _health.y);
 
-func tick_fatigue(build_amount: float, falloff_amount: float) -> void:
-	if _status == Status.AWAY: _fatigue = clampf(_fatigue + build_amount, 0, 1);
-	elif _status == Status.EXHAUSTED: _fatigue = clampf(_fatigue - falloff_amount, 0, 1);
+func tick_fatigue(delta: float) -> void:
+	var delta_amount = delta * (1.0 / 120.0);
+	if _status == Status.AWAY: _fatigue = clampf(_fatigue + delta_amount, 0, 1);
+	elif _status == Status.EXHAUSTED: _fatigue = clampf(_fatigue - (delta_amount * 0.75), 0, 1);
+	elif _status == Status.RESTING: _fatigue = clampf(_fatigue - delta_amount, 0, 1);
 	
 	update_status();
 
@@ -76,6 +78,9 @@ func update_status() -> void:
 			return;
 		Status.RECRUIT: # Controlled externally via set_state()
 			return;
+		Status.RESTING:
+			if _fatigue == 0:
+				_status = Status.IDLE;
 		Status.EXHAUSTED:
 			if _fatigue == 0:
 				_status = Status.IDLE;

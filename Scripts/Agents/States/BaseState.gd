@@ -16,7 +16,7 @@ func start(animator: AnimationPlayer):
 func update(delta: float, agent: Node, camera: Node):
 	return true;
 
-func evaluate(curr_state: StateReference, adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool) -> bool:
 	return false;
 
 func end() -> StateReference:
@@ -26,4 +26,4 @@ func end() -> StateReference:
 func state_transition_allowed(state_ref: StateReference) -> bool:
 	return true;
 
-enum StateReference { NIL, IDLE, WALK, DEAD, CHEER, START_WANDER, WAVE_AT_CAM, DELETE_DISMISSED };
+enum StateReference { NIL, IDLE, WALK, DEAD, CHEER, START_WANDER, WAVE_AT_CAM, DELETE_DISMISSED, REST, START_ACTIVITY, BED_ACTIVITY };

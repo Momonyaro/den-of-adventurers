@@ -1,12 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://f64ofd2jr8sn"]
+[gd_scene load_steps=17 format=3 uid="uid://f64ofd2jr8sn"]
 
 [ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_8246l"]
 [ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="2_dls8v"]
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.gd" id="2_tfev1"]
 [ext_resource type="Script" path="res://Scripts/Managers/AdventurerManager.gd" id="3_q8kab"]
 [ext_resource type="Script" path="res://Scripts/Managers/ActivityManager.gd" id="3_ue1fi"]
+[ext_resource type="Script" path="res://Scripts/Activities/BedActivity.gd" id="4_a3onc"]
 [ext_resource type="Script" path="res://Scripts/Managers/AgentManager.gd" id="4_uo78h"]
 [ext_resource type="PackedScene" uid="uid://daoo1s5dlp1si" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nxyx"]
+albedo_color = Color(0.670588, 0.301961, 0.901961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6y5rr"]
 
 [sub_resource type="Environment" id="Environment_wun1a"]
 background_mode = 1
@@ -42,6 +48,54 @@ script = ExtResource("2_tfev1")
 [node name="Activities" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_ue1fi")
+
+[node name="BedActivity" type="MeshInstance3D" parent="Activities"]
+transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, 2.611, 0.1, -1.828)
+material_override = SubResource("StandardMaterial3D_4nxyx")
+mesh = SubResource("BoxMesh_6y5rr")
+script = ExtResource("4_a3onc")
+
+[node name="START_POINT" type="Node3D" parent="Activities/BedActivity"]
+transform = Transform3D(0.999999, 0, -3.57628e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, -1.5805, -0.5, 0.325)
+
+[node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity"]
+transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, 4.76837e-07, 0.5, 0.166481)
+
+[node name="BedActivity2" type="MeshInstance3D" parent="Activities"]
+transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, -2.20243, 0.0999995, -0.0888628)
+material_override = SubResource("StandardMaterial3D_4nxyx")
+mesh = SubResource("BoxMesh_6y5rr")
+script = ExtResource("4_a3onc")
+
+[node name="START_POINT" type="Node3D" parent="Activities/BedActivity2"]
+transform = Transform3D(0.999999, 0, -3.57628e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, -1.5805, -0.5, 0.325)
+
+[node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity2"]
+transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, 4.76837e-07, 0.5, 0.166481)
+
+[node name="BedActivity3" type="MeshInstance3D" parent="Activities"]
+transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, 1.13254, 0.1, 2.02774)
+material_override = SubResource("StandardMaterial3D_4nxyx")
+mesh = SubResource("BoxMesh_6y5rr")
+script = ExtResource("4_a3onc")
+
+[node name="START_POINT" type="Node3D" parent="Activities/BedActivity3"]
+transform = Transform3D(0.999999, 0, -3.57628e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, -1.5805, -0.5, 0.325)
+
+[node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity3"]
+transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, 4.76837e-07, 0.5, 0.166481)
+
+[node name="BedActivity4" type="MeshInstance3D" parent="Activities"]
+transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, 1.26129, 0.1, -1.70129)
+material_override = SubResource("StandardMaterial3D_4nxyx")
+mesh = SubResource("BoxMesh_6y5rr")
+script = ExtResource("4_a3onc")
+
+[node name="START_POINT" type="Node3D" parent="Activities/BedActivity4"]
+transform = Transform3D(0.999999, 0, -3.57628e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, -1.5805, -0.5, 0.325)
+
+[node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity4"]
+transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, 4.76837e-07, 0.5, 0.166481)
 
 [node name="Timers" type="Node" parent="."]
 unique_name_in_owner = true

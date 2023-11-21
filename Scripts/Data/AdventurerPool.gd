@@ -1,6 +1,6 @@
 class_name AdventurerPool;
 
-const POOL_SIZE : int = 64;
+const POOL_SIZE : int = 32;
 
 var _adv_pool : Dictionary = {};
 var _name_pool : NamePool = null;
@@ -52,6 +52,9 @@ func get_defined_adv_pool() -> Array:
 		func(adv: Adventurer): return adv._defined;
 	);
 
+func remove_adventurer(name_key: String):
+	_name_pool.delete_reserved_name(name_key);
+
 func get_rand_adventurer(guarantee_defined: bool = false) -> Adventurer:
 	var defined_pool = get_defined_adv_pool();
 	var pool = defined_pool if (guarantee_defined and defined_pool.size() > 0) else _adv_pool.values();
@@ -61,6 +64,7 @@ func get_rand_adventurer(guarantee_defined: bool = false) -> Adventurer:
 	var adv = pool[rand_index];
 	
 	_adv_pool.erase(adv._unique_id);
-	generate_adventurer(); # fill the pool back up
+	if _adv_pool.size() < POOL_SIZE:
+		generate_adventurer(); # fill the pool back up
 	
 	return adv;

@@ -42,6 +42,11 @@ func reserve_name(given: String, family: String):
 	else:
 		used_names.push_back(key);
 
+func delete_reserved_name(key: String):
+	if used_names.has(key):
+		used_names.erase(key);
+		print("[NAME_P!] -> UNREGISTERED NAME FROM POOL -> ", key);
+
 func parse_name_file(json_data: JSON, family_pool: Array[String], given_pool: Array[String]):
 	var data = json_data.data;
 	family_pool.append_array(data['family']);

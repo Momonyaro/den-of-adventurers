@@ -26,11 +26,16 @@ func update_target_pos(target_pos):
 	_nav_agent.target_position = target_pos;
 	is_moving = true;
 
+func cancel_nav():
+	_nav_agent.target_position = _nav_agent.get_parent().global_position;
+	is_moving = false;
+
 func tick_movement(node: Node):
 	var origin = node.global_transform.origin;
 	var next_pos = _nav_agent.get_next_path_position();
+	var flat_pos = Vector3(next_pos.x, origin.y, next_pos.z);
 	if (_nav_agent.distance_to_target() > .1 and next_pos != origin):
-		node.look_at(next_pos, Vector3.UP);
+		node.look_at(flat_pos, Vector3.UP);
 		node.rotate_object_local(Vector3.UP, PI);
 	var new_velocity: Vector3 = (next_pos - origin).normalized() * _move_speed;
 	

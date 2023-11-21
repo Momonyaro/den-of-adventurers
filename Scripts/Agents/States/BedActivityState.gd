@@ -1,20 +1,22 @@
 extends BaseState;
-class_name StartWanderState;
+class_name BedActivityState;
+
+var is_fatigued: bool = true;
 
 func _init():
-	_start_wander = true;
-	_state_ref = StateReference.START_WANDER;
+	_state_ref = StateReference.BED_ACTIVITY;
 	_state_enter_count += 1;
 
 func start(animator: AnimationPlayer):
 	_animator = animator;
+	_animator.play("SLEEP", 0);
 
 func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool) -> bool:
-	if adv_state == Adventurer.Status.IDLE && agent.state_manager._current_state._state_ref == StateReference.IDLE && !has_destination:
-		return true;
-	return false;
+	return true;
 
 func update(delta: float, agent: Node, camera: Node):
+	agent.adventurer.tick_fatigue(delta);
+	is_fatigued = (agent.adventurer._status == Adventurer.Status.RESTING || agent.adventurer._status == Adventurer.Status.EXHAUSTED);
 	pass;
 
 func end() -> StateReference:
@@ -22,7 +24,4 @@ func end() -> StateReference:
 	return StateReference.NIL;
 
 func state_transition_allowed(state_ref: StateReference) -> bool:
-	match(state_ref):
-		StateReference.WALK: return true;
-		StateReference.CHEER: return true;
-		_: return false;
+	return !is_fatigued;

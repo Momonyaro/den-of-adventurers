@@ -16,7 +16,7 @@ func update(delta: float, agent: Node, camera: Node):
 	agent.adventurer = null;
 	return true;
 
-func evaluate(curr_state: StateReference, adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool) -> bool:
 	if adv_state == Adventurer.Status.DISMISSED:
 		return true;
 		

@@ -14,6 +14,7 @@ class_name Agent
 var adventurer : Adventurer;
 var state_manager : AgentStateManager;
 var navigation : AgentNavigation;
+var current_activity: ActivityManager.Activity = null;
 
 func _ready():
 	state_manager = AgentStateManager.new(_model.find_child("AnimationPlayer") as AnimationPlayer);

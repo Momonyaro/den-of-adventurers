@@ -12,10 +12,11 @@ func _ready():
 	_adv_manager = get_node("/root/Root/Adventurers");
 	_selected_agent = _game_manager._selected_agent;
 	_game_manager.select_agent.connect(update_menu);
+	get_node("%AdvHealthRect/fatigue/bar/rest_btn").pressed.connect(func(): _selected_agent.adventurer.set_status(Adventurer.Status.RESTING));
 	pass;
 
 func _process(_delta):
-	update_menu(null);
+	update_menu(null); # Null because the event it's attached to sends an agent but we don't use it.
 
 func update_menu(_agent):
 	if _selected_agent == null || _selected_agent.adventurer == null:

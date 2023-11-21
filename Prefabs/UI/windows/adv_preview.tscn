@@ -121,10 +121,10 @@ texture_filter = 1
 layout_mode = 0
 offset_left = 10.0
 offset_top = 14.0
-offset_right = 105.0
+offset_right = 267.0
 offset_bottom = 38.0
 theme_override_font_sizes/font_size = 15
-text = "Fatigue: (16%)"
+text = "Health: 15/15"
 
 [node name="bar" type="ProgressBar" parent="VBoxContainer/AdvHealthRect/health"]
 layout_mode = 0

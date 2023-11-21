@@ -41,6 +41,8 @@ func recruited() -> Array:
 
 func _remove_adventurer(adv_id: String):
 	if _adventurers.has(adv_id):
+		var adv = _adventurers[adv_id];
+		data.adv_pool.remove_adventurer(str(adv._family_name, "_", adv._given_name).to_lower());
 		_adventurers.erase(adv_id);
 
 func _on_timer_done(id: String):
