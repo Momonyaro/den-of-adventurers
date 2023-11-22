@@ -14,7 +14,3 @@ func _ready():
 	
 	initialized = true;
 	pass;
-
-func _process(delta):
-	timers._process(delta);
-	pass;

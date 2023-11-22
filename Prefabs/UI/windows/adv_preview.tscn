@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddcfeq62x7vl5"]
+[gd_scene load_steps=10 format=3 uid="uid://ddcfeq62x7vl5"]
 
 [ext_resource type="Texture2D" uid="uid://dyx6v70at8syt" path="res://Textures/Icons/unknown.png" id="1_b1eb3"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/adv_preview.gd" id="2_cr237"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="3_mt308"]
 [ext_resource type="Texture2D" uid="uid://dllcbu7i28aiw" path="res://Textures/Icons/small_heart.png" id="4_dtyc1"]
+[ext_resource type="Texture2D" uid="uid://btxj61otcm2qj" path="res://Textures/Icons/star.png" id="4_g3uuj"]
 [ext_resource type="Texture2D" uid="uid://b17jgov1xht4n" path="res://Textures/Icons/snooze.png" id="5_8blsd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
@@ -109,6 +110,16 @@ grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource("3_mt308")
 text = "Recruit"
+
+[node name="star" type="TextureRect" parent="VBoxContainer/BaseInfoRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 288.0
+offset_top = 3.0
+offset_right = 312.0
+offset_bottom = 27.0
+texture = ExtResource("4_g3uuj")
+stretch_mode = 3
 
 [node name="AdvHealthRect" type="Panel" parent="VBoxContainer"]
 unique_name_in_owner = true

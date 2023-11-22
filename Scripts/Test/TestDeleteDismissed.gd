@@ -11,7 +11,8 @@ func start(animator: AnimationPlayer):
 	
 func update(delta: float, agent: Node, camera: Node):
 	var game_manager : GameManager = agent.get_node("/root/Root/Game");
-	if game_manager._selected_agent.adventurer._unique_id == agent.adventurer._unique_id:
+	
+	if game_manager._selected_agent != null && game_manager._selected_agent.adventurer._unique_id == agent.adventurer._unique_id:
 		game_manager.select_agent.emit(null);
 	agent.adv_manager._remove_adventurer(agent.adventurer._unique_id);
 	agent.adventurer = null;

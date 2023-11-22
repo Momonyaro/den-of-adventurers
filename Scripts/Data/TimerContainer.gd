@@ -7,7 +7,7 @@ signal timer_done(id: String);
 var _timers : Dictionary = {};
 var _timerIndex : int = 0;
 
-func _process(delta):
+func _physics_process(delta):
 	var to_delete : Array[String] = [];
 	
 	for key in _timers:

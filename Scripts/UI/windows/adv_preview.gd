@@ -43,6 +43,7 @@ func _draw_basic_info():
 	get_node("%BaseInfoRect/xp_bar").value = xp_ratio;
 	get_node("%BaseInfoRect/recruit_btn").visible = current_status == 'RECRUIT';
 	get_node("%BaseInfoRect/recruit_btn").disabled = !_check_capacity();
+	get_node("%BaseInfoRect/star").visible = adventurer._defined;
 	#get_node("%BaseInfoRect/recruit_btn").tooltip_text = "You guild can't house any more recruits!" if !_check_capacity() else "Recruit a new adventurer to your guild";
 
 func _draw_health_info():
@@ -82,8 +83,8 @@ func get_timer_text(_fatigue: float, _fatigue_total_time: float) -> String:
 	if minutes_floored > 0:
 		return_val += str(" ", "%02d" % minutes_floored, "m")
 	var seconds : float = (minutes - minutes_floored) * 60;
-	var seconds_rounded = roundi(seconds);
-	if seconds_rounded == 60:
+	var seconds_rounded = ceili(seconds);
+	if seconds_rounded == 60 && minutes_floored > 0:
 		seconds_rounded = 0;
 	return_val += str(" ", seconds_rounded, "s")
 	
