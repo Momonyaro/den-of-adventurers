@@ -48,19 +48,46 @@ func _draw_basic_info():
 func _draw_health_info():
 	var adventurer = _selected_agent.adventurer;
 	var current_status = adventurer.adv_status();
+	var resting = current_status == "RESTING" || current_status == "EXHAUSTED"
 
 	get_node("%AdvHealthRect").visible = current_status != "RECRUIT";
 	get_node("%AdvHealthRect/health").text = str("Health: (", adventurer._health.x, "/", adventurer._health.y, ")");
 	get_node("%AdvHealthRect/health/bar").value = adventurer._health.x / float(adventurer._health.y);
-	get_node("%AdvHealthRect/fatigue").text = str("Fatigue: (", "%0.0f" % (adventurer._fatigue / 1.0 * 100), "%)");
+	get_node("%AdvHealthRect/fatigue").text = _get_fatigue_text(adventurer._fatigue);
 	get_node("%AdvHealthRect/fatigue/bar").value = adventurer._fatigue / 1.0;
 	get_node("%AdvHealthRect/fatigue/bar/rest_btn").disabled = adventurer._fatigue < 0.1 || adventurer.adv_status() != "IDLE";
+	if resting:
+		get_node("%AdvHealthRect/fatigue/bar/rest_btn").text = get_timer_text(adventurer._fatigue, adventurer.FATIGUE_REST_TIME);
+	else:
+		get_node("%AdvHealthRect/fatigue/bar/rest_btn").text = "Rest";
 
 
 func _check_capacity():
 	var max = _game_manager._max_adventurers;
 	var current = _adv_manager.recruited().size();
 	return current < max;
+
+func _get_fatigue_text(_fatigue: float):
+	return str("Fatigue: (", "%0.0f" % (_fatigue / 1.0 * 100), "%)");
+
+func get_timer_text(_fatigue: float, _fatigue_total_time: float) -> String:
+	var return_val = "";
+	var inv_value : float = (_fatigue_total_time * _fatigue);
+	var hours : float = inv_value / 3600;
+	var hours_floored = floori(hours);
+	if hours_floored > 0:
+		return_val += str("%02d" % hours_floored, "h")
+	var minutes : float = (hours - hours_floored) * 60;
+	var minutes_floored = floori(minutes);
+	if minutes_floored > 0:
+		return_val += str(" ", "%02d" % minutes_floored, "m")
+	var seconds : float = (minutes - minutes_floored) * 60;
+	var seconds_rounded = roundi(seconds);
+	if seconds_rounded == 60:
+		seconds_rounded = 0;
+	return_val += str(" ", seconds_rounded, "s")
+	
+	return return_val;
 
 func _on_recruit_btn_pressed():
 	_selected_agent._recruit();

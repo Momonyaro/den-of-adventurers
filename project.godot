@@ -31,7 +31,7 @@ enabled=PackedStringArray("res://addons/console/plugin.cfg")
 
 [global]
 
-app_version="Open Windows -- (v1.1a)"
+app_version="Sound Sleep -- (v1.2a)"
 
 [input]
 

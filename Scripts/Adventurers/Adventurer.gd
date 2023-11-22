@@ -20,6 +20,7 @@ var _status : Status = Status.RECRUIT;
 
 var _health : Vector2i = Vector2i(10, 10);
 var _fatigue : float = 0; # When it reaches 1, the character needs 
+const FATIGUE_REST_TIME : float = 10 * 60;
 # to rest and enters it's tired state if idle.
 
 var _level : int = 1;
@@ -59,7 +60,7 @@ func heal_damage(amount: int) -> void:
 	_health.x = clampi(_health.x - amount, 0, _health.y);
 
 func tick_fatigue(delta: float) -> void:
-	var delta_amount = delta * (1.0 / 120.0);
+	var delta_amount = delta * (1.0 / FATIGUE_REST_TIME);
 	if _status == Status.AWAY: _fatigue = clampf(_fatigue + delta_amount, 0, 1);
 	elif _status == Status.EXHAUSTED: _fatigue = clampf(_fatigue - (delta_amount * 0.75), 0, 1);
 	elif _status == Status.RESTING: _fatigue = clampf(_fatigue - delta_amount, 0, 1);
