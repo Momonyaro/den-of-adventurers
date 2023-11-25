@@ -23,6 +23,10 @@ const window_data = {
 	'ADV_PREVIEW': {
 		'title': 'Adventurer',
 		'content_ref': 'res://Prefabs/UI/windows/adv_preview.tscn'
+	},
+	'ADV_LIST': {
+		'title': 'Adventurers',
+		'content_ref': 'res://Prefabs/UI/windows/adventurers.tscn'
 	}
 }
 

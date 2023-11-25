@@ -8,18 +8,19 @@ var _name_pool : NamePool = null;
 func _init(name_pool: NamePool):
 	_name_pool = name_pool;
 	
-	define_adventurer("Aerithus", "Sól", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2);
-	define_adventurer("Monrose", "Faertag", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2);
-	define_adventurer("Atou", "Graeli", Adventurer.Race.HUMAN, Adventurer.Nationality.Blacholer, 21, 10, 3);
+	define_adventurer("Aerithus", "Sól", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "Tri-Aspect Magician");
+	define_adventurer("Monrose", "Faertag", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "Swordsman");
+	define_adventurer("Atou", "Graeli", Adventurer.Race.HUMAN, Adventurer.Nationality.Blacholer, 21, 10, 3, "Ranger");
 	
 	for i in POOL_SIZE - _adv_pool.keys().size():
 		generate_adventurer();
 	pass;
 
-func define_adventurer(given_name: String, family_name: String, race: Adventurer.Race, nationality: Adventurer.Nationality, age: int, health: int, level: int):
+func define_adventurer(given_name: String, family_name: String, race: Adventurer.Race, nationality: Adventurer.Nationality, age: int, health: int, level: int, adv_class: String):
 	_name_pool.reserve_name(given_name, family_name);
 	var adv_index = _adv_pool.keys().size();
 	var adv = Adventurer.new(given_name, family_name, age, health, level, race, nationality, adv_index);
+	adv._class = adv_class;
 	adv._defined = true;
 	
 	_adv_pool[adv._unique_id] = adv;

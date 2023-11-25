@@ -12,7 +12,10 @@ func _ready():
 	_adv_manager = get_node("/root/Root/Adventurers");
 	_selected_agent = _game_manager._selected_agent;
 	_game_manager.select_agent.connect(update_menu);
-	get_node("%AdvHealthRect/fatigue/bar/rest_btn").pressed.connect(func(): _selected_agent.adventurer.set_status(Adventurer.Status.RESTING));
+	get_node("%AdvHealthRect/fatigue/bar/rest_btn").pressed.connect( func(): 
+		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg"); 
+		_selected_agent.adventurer.set_status(Adventurer.Status.RESTING)
+	);
 	pass;
 
 func _process(_delta):
@@ -34,10 +37,12 @@ func update_menu(_agent):
 func _draw_basic_info():
 	var adventurer = _selected_agent.adventurer;
 	var current_status = adventurer.adv_status();
+	var is_human = adventurer._race == Adventurer.Race.HUMAN;
 	var xp_ratio = adventurer.xp_percentage();
 	
-	get_node("%BaseInfoRect/name").text = adventurer.adv_name();
-	get_node("%BaseInfoRect/level_race").text = str("Level ", adventurer._level, " ", adventurer.adv_race());
+	get_node("%BaseInfoRect/name").text = str("(H)" if is_human else "(DH)", " ", adventurer.adv_name());
+	get_node("%BaseInfoRect/level_race").text = str("Level ", adventurer._level, " ", adventurer._class);
+	get_node("%BaseInfoRect/state").visible = current_status != "RECRUIT";
 	get_node("%BaseInfoRect/state").text = current_status;
 	get_node("%BaseInfoRect/xp_bar").visible = current_status != "RECRUIT";
 	get_node("%BaseInfoRect/xp_bar").value = xp_ratio;
@@ -91,4 +96,5 @@ func get_timer_text(_fatigue: float, _fatigue_total_time: float) -> String:
 	return return_val;
 
 func _on_recruit_btn_pressed():
+	_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
 	_selected_agent._recruit();

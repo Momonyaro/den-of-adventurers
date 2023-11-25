@@ -79,7 +79,7 @@ static func get_menu_data():
 	'View': {
 		'Adventurers': {
 			'type': 'action',
-			'msg': 'WINDOW_ADVENTURERS_START'
+			'msg': 'WINDOW:RESET:ADV_LIST'
 		},
 		'Hunting Parties': {
 			'type': 'action',

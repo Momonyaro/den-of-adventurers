@@ -17,6 +17,7 @@ var _age : int = 0;
 var _race : Race = Race.HUMAN; 
 var _nationality : Nationality = Nationality.Blacholer;
 var _status : Status = Status.RECRUIT;
+var _class : String = "Adventurer";
 
 var _health : Vector2i = Vector2i(10, 10);
 var _fatigue : float = 0; # When it reaches 1, the character needs 
