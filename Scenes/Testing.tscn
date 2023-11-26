@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://f64ofd2jr8sn"]
+[gd_scene load_steps=25 format=3 uid="uid://f64ofd2jr8sn"]
 
 [ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_8246l"]
 [ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="2_dls8v"]
@@ -7,12 +7,56 @@
 [ext_resource type="Script" path="res://Scripts/Managers/ActivityManager.gd" id="3_ue1fi"]
 [ext_resource type="Script" path="res://Scripts/Activities/BedActivity.gd" id="4_a3onc"]
 [ext_resource type="Script" path="res://Scripts/Managers/AgentManager.gd" id="4_uo78h"]
+[ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="5_lyn1g"]
 [ext_resource type="PackedScene" uid="uid://daoo1s5dlp1si" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nxyx"]
 albedo_color = Color(0.670588, 0.301961, 0.901961, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6y5rr"]
+
+[sub_resource type="Gradient" id="Gradient_6sds3"]
+offsets = PackedFloat32Array(0, 0.569288, 1)
+colors = PackedColorArray(0.180392, 0.223529, 0.298039, 1, 0.469994, 0.54512, 0.701762, 0.976471, 1, 1, 1, 0.54902)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ovn72"]
+gradient = SubResource("Gradient_6sds3")
+
+[sub_resource type="Curve" id="Curve_gyyo7"]
+max_value = 1.2
+_data = [Vector2(0, 0), 0.0, -0.0337155, 0, 0, Vector2(0.846607, 1.2), -0.445042, -0.445042, 0, 0, Vector2(1, 0), -22.1941, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6wmik"]
+curve = SubResource("Curve_gyyo7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v047h"]
+lifetime_randomness = 0.13
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+direction = Vector3(1.25, 2.08165e-12, 2.08165e-12)
+spread = 70.38
+gravity = Vector3(2.08165e-12, 1, 2.08165e-12)
+initial_velocity_min = 0.06
+initial_velocity_max = 0.1
+angle_min = -17.9
+angle_max = 26.8
+scale_curve = SubResource("CurveTexture_6wmik")
+color = Color(0.180392, 0.223529, 0.298039, 1)
+color_ramp = SubResource("GradientTexture1D_ovn72")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hj15a"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.729412, 0.776471, 0.854902, 0.831373)
+
+[sub_resource type="TextMesh" id="TextMesh_5yyk0"]
+material = SubResource("StandardMaterial3D_hj15a")
+uv2_padding = 1.46
+text = "Z"
+font = ExtResource("5_lyn1g")
+font_size = 24
+depth = 0.02
 
 [sub_resource type="Environment" id="Environment_wun1a"]
 background_mode = 1
@@ -61,6 +105,17 @@ transform = Transform3D(0.999999, 0, -3.57628e-07, 0, 0.999999, 0, 8.9407e-08, 0
 [node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity"]
 transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, 4.76837e-07, 0.5, 0.166481)
 
+[node name="ZZZParticles" type="GPUParticles3D" parent="Activities/BedActivity"]
+transform = Transform3D(0.999999, 0, 9.60277e-10, 0, 0.999999, 0, 1.6403e-07, 0, 1, -0.0305171, 3.04784, -0.231517)
+emitting = false
+amount = 4
+lifetime = 1.2
+visibility_aabb = AABB(-4, -7.01151, -2.45807, 8, 14.023, 4.91615)
+transform_align = 3
+trail_lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_v047h")
+draw_pass_1 = SubResource("TextMesh_5yyk0")
+
 [node name="BedActivity2" type="MeshInstance3D" parent="Activities"]
 transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, -2.20243, 0.0999995, -0.0888628)
 material_override = SubResource("StandardMaterial3D_4nxyx")
@@ -72,6 +127,17 @@ transform = Transform3D(0.999999, 0, -3.57628e-07, 0, 0.999999, 0, 8.9407e-08, 0
 
 [node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity2"]
 transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, 4.76837e-07, 0.5, 0.166481)
+
+[node name="ZZZParticles" type="GPUParticles3D" parent="Activities/BedActivity2"]
+transform = Transform3D(0.999999, 0, -2.46907e-07, 0, 0.999999, 0, 2.30405e-07, 0, 1, -0.0305166, 3.54784, -0.0650353)
+emitting = false
+amount = 4
+lifetime = 1.2
+visibility_aabb = AABB(-4, -7.01151, -2.45807, 8, 14.023, 4.91615)
+transform_align = 3
+trail_lifetime = 0.75
+process_material = SubResource("ParticleProcessMaterial_v047h")
+draw_pass_1 = SubResource("TextMesh_5yyk0")
 
 [node name="BedActivity3" type="MeshInstance3D" parent="Activities"]
 transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, 1.13254, 0.1, 2.02774)
@@ -85,6 +151,17 @@ transform = Transform3D(0.999999, 0, -3.57628e-07, 0, 0.999999, 0, 8.9407e-08, 0
 [node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity3"]
 transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, 4.76837e-07, 0.5, 0.166481)
 
+[node name="ZZZParticles" type="GPUParticles3D" parent="Activities/BedActivity3"]
+transform = Transform3D(0.999999, 0, -2.46907e-07, 0, 0.999999, 0, 2.30405e-07, 0, 1, -0.0305165, 3.54784, -0.0650356)
+emitting = false
+amount = 4
+lifetime = 1.2
+visibility_aabb = AABB(-4, -7.01151, -2.45807, 8, 14.023, 4.91615)
+transform_align = 3
+trail_lifetime = 0.75
+process_material = SubResource("ParticleProcessMaterial_v047h")
+draw_pass_1 = SubResource("TextMesh_5yyk0")
+
 [node name="BedActivity4" type="MeshInstance3D" parent="Activities"]
 transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, 1.26129, 0.1, -1.70129)
 material_override = SubResource("StandardMaterial3D_4nxyx")
@@ -96,6 +173,17 @@ transform = Transform3D(0.999999, 0, -3.57628e-07, 0, 0.999999, 0, 8.9407e-08, 0
 
 [node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity4"]
 transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, 4.76837e-07, 0.5, 0.166481)
+
+[node name="ZZZParticles" type="GPUParticles3D" parent="Activities/BedActivity4"]
+transform = Transform3D(0.999999, 0, -2.46907e-07, 0, 0.999999, 0, 2.30405e-07, 0, 1, -0.0305166, 3.54784, -0.0650356)
+emitting = false
+amount = 4
+lifetime = 1.2
+visibility_aabb = AABB(-4, -7.01151, -2.45807, 8, 14.023, 4.91615)
+transform_align = 3
+trail_lifetime = 0.75
+process_material = SubResource("ParticleProcessMaterial_v047h")
+draw_pass_1 = SubResource("TextMesh_5yyk0")
 
 [node name="Timers" type="Node" parent="."]
 unique_name_in_owner = true

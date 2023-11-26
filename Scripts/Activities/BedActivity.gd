@@ -2,13 +2,17 @@ extends Node3D
 
 @onready var start_point = self.get_child(0);
 @onready var activity_point = self.get_child(1);
+@onready var zzz_particles = self.get_child(2) if self.get_child_count() > 2 else null;
 
 var activity_manager: ActivityManager = null;
 var adventurer = "";
 
 func _ready():
 	activity_manager = get_parent();
-	activity_manager.register(_get_id(), 'bed', self, is_available)
+	activity_manager.register(_get_id(), 'bed', self, is_available);
+
+func update(state: bool):
+	zzz_particles.emitting = state;
 
 func is_available(agent: Agent) -> bool:
 	if adventurer == "" || adventurer == agent.adventurer._unique_id:
