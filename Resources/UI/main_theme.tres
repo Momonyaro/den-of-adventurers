@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://m7mvoj5x6lb5"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://m7mvoj5x6lb5"]
 
 [ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="1_6bd6u"]
 [ext_resource type="Texture2D" uid="uid://dh2bq5xlgec87" path="res://Textures/Icons/border_dotted.png" id="1_8117p"]
@@ -82,6 +82,19 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_70r50"]
+content_margin_left = 8.0
+content_margin_top = 2.0
+content_margin_right = 8.0
+content_margin_bottom = 2.0
+bg_color = Color(0.729412, 0.776471, 0.854902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_detail = 5
+
 [resource]
 default_font = ExtResource("1_6bd6u")
 default_font_size = 20
@@ -125,3 +138,12 @@ ProgressBar/font_sizes/font_size = 12
 ProgressBar/fonts/font = ExtResource("1_6bd6u")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_hekfq")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_p2ihx")
+TooltipLabel/colors/font_color = Color(0, 0, 0, 1)
+TooltipLabel/colors/font_outline_color = Color(0, 0, 0, 0)
+TooltipLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+TooltipLabel/constants/outline_size = 0
+TooltipLabel/constants/shadow_offset_x = 1
+TooltipLabel/constants/shadow_offset_y = 1
+TooltipLabel/font_sizes/font_size = 16
+TooltipLabel/fonts/font = ExtResource("1_6bd6u")
+TooltipPanel/styles/panel = SubResource("StyleBoxFlat_70r50")

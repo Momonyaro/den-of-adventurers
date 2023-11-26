@@ -68,6 +68,7 @@ layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 0
 mouse_default_cursor_shape = 13
+theme = ExtResource("4_44iwk")
 texture = ExtResource("1_2eocx")
 patch_margin_left = 2
 patch_margin_top = 2

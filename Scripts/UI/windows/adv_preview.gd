@@ -49,7 +49,7 @@ func _draw_basic_info():
 	get_node("%BaseInfoRect/recruit_btn").visible = current_status == 'RECRUIT';
 	get_node("%BaseInfoRect/recruit_btn").disabled = !_check_capacity();
 	get_node("%BaseInfoRect/star").visible = adventurer._defined;
-	#get_node("%BaseInfoRect/recruit_btn").tooltip_text = "You guild can't house any more recruits!" if !_check_capacity() else "Recruit a new adventurer to your guild";
+	get_node("%BaseInfoRect/recruit_btn").tooltip_text = "Your guild can't house any more recruits!" if !_check_capacity() else "Recruit a new adventurer to your guild";
 
 func _draw_health_info():
 	var adventurer = _selected_agent.adventurer;
@@ -61,7 +61,9 @@ func _draw_health_info():
 	get_node("%AdvHealthRect/health/bar").value = adventurer._health.x / float(adventurer._health.y);
 	get_node("%AdvHealthRect/fatigue").text = _get_fatigue_text(adventurer._fatigue);
 	get_node("%AdvHealthRect/fatigue/bar").value = adventurer._fatigue / 1.0;
-	get_node("%AdvHealthRect/fatigue/bar/rest_btn").disabled = adventurer._fatigue < 0.1 || adventurer.adv_status() != "IDLE";
+	var is_enabled = adventurer._fatigue >= 0.1 && adventurer.adv_status() == "IDLE";
+	get_node("%AdvHealthRect/fatigue/bar/rest_btn").disabled = !is_enabled;
+	get_node("%AdvHealthRect/fatigue/bar/rest_btn").tooltip_text = "Tell the adventurer to go rest." if is_enabled else "";
 	if resting:
 		get_node("%AdvHealthRect/fatigue/bar/rest_btn").text = get_timer_text(adventurer._fatigue, adventurer.FATIGUE_REST_TIME);
 	else:

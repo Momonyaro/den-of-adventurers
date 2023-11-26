@@ -60,6 +60,7 @@ texture = ExtResource("2_wjbmk")
 stretch_mode = 3
 
 [node name="LIST_VIEW" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
