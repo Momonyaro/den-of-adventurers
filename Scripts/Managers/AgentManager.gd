@@ -2,6 +2,7 @@ extends Node;
 class_name AgentManager;
 const D_T = "[AGENT_M]";
 
+var agents = {};
 var prefab_agent = preload("res://Prefabs/agent.tscn");
 @onready var adv_manager : AdventurerManager = get_node("%Adventurers");
 
@@ -13,6 +14,7 @@ func _ready():
 func _on_new_recruit(id: String):
 	var instance = prefab_agent.instantiate();
 	var adv = adv_manager._adventurers[id];
+	agents[adv._unique_id] = instance;
 	instance.name = adv.adv_name();
 	instance.adventurer = adv;
 	AgentWardrobe.dress_up(adv, instance);

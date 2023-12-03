@@ -2,10 +2,11 @@ extends Panel
 
 var _game_manager : GameManager = null;
 var _adv_manager : AdventurerManager = null;
+@onready var agent_manager: AgentManager = get_node("/root/Root/Agents");
 
-var _selected_agent : Agent = null;
+var _selected_agent : String = "";
 var _window_base: Node = null;
-var _on_close_action: Callable = func (): get_tree().root.get_child(1).get_child(0).select_agent.emit(null);
+var _on_close_action: Callable = func (): get_tree().root.get_child(1).get_child(0).select_agent.emit("");
 
 @onready var human_icon = ResourceLoader.load("res://Textures/Icons/human.png");
 @onready var demihuman_icon = ResourceLoader.load("res://Textures/Icons/demi-human.png");
@@ -15,9 +16,11 @@ func _ready():
 	_adv_manager = get_node("/root/Root/Adventurers");
 	_selected_agent = _game_manager._selected_agent;
 	_game_manager.select_agent.connect(update_menu);
+
 	get_node("%AdvHealthRect/fatigue/bar/rest_btn").pressed.connect( func(): 
+		var agent = agent_manager.agents[_selected_agent];
 		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg"); 
-		_selected_agent.adventurer.set_status(Adventurer.Status.RESTING)
+		agent.adventurer.set_status(Adventurer.Status.RESTING)
 	);
 	pass;
 
@@ -25,7 +28,7 @@ func _process(_delta):
 	update_menu(null); # Null because the event it's attached to sends an agent but we don't use it.
 
 func update_menu(_agent):
-	if _selected_agent == null || _selected_agent.adventurer == null:
+	if _selected_agent == "":
 		return;
 	
 	_draw_basic_info();
@@ -38,7 +41,8 @@ func update_menu(_agent):
 		_window_base.resize_app();
 
 func _draw_basic_info():
-	var adventurer = _selected_agent.adventurer;
+	var agent = agent_manager.agents[_selected_agent];
+	var adventurer = agent.adventurer;
 	var current_status = adventurer.adv_status();
 	var is_human = adventurer._race == Adventurer.Race.HUMAN;
 	var xp_ratio = adventurer.xp_percentage();
@@ -57,7 +61,8 @@ func _draw_basic_info():
 	get_node("%BaseInfoRect/recruit_btn").tooltip_text = "Your guild can't house any more recruits!" if !_check_capacity() else "Recruit a new adventurer to your guild";
 
 func _draw_health_info():
-	var adventurer = _selected_agent.adventurer;
+	var agent = agent_manager.agents[_selected_agent];
+	var adventurer = agent.adventurer;
 	var current_status = adventurer.adv_status();
 	var resting = current_status == "RESTING" || current_status == "EXHAUSTED"
 
@@ -104,4 +109,5 @@ func get_timer_text(_fatigue: float, _fatigue_total_time: float) -> String:
 
 func _on_recruit_btn_pressed():
 	_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
-	_selected_agent._recruit();
+	var agent = agent_manager.agents[_selected_agent];
+	agent._recruit();

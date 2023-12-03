@@ -4,6 +4,7 @@ class_name Agent
 @onready var _model = $little_guy;
 
 @onready var adv_manager : AdventurerManager = get_node("/root/Root/Adventurers");
+@onready var agent_manager : AgentManager = get_node("/root/Root/Agents");
 @onready var game_manager : GameManager = get_node("/root/Root/Game");
 @onready var timers : TimerContainer = get_node("/root/Root/Timers");
 
@@ -12,6 +13,7 @@ class_name Agent
 @export var move_speed = 2.0;
 @export var idle_time = 2.5;
 var adventurer : Adventurer;
+var last_id = "";
 var state_manager : AgentStateManager;
 var navigation : AgentNavigation;
 var current_activity: ActivityManager.Activity = null;
@@ -20,6 +22,7 @@ func _ready():
 	state_manager = AgentStateManager.new(_model.find_child("AnimationPlayer") as AnimationPlayer);
 	navigation = AgentNavigation.new(global_transform.origin, $NavigationAgent3D, move_speed);
 	game_manager.select_agent.connect(_on_select_agent);
+	last_id = adventurer._unique_id;
 	$CHAR_NAME.visible = false;
 	pass;
 
@@ -27,6 +30,7 @@ func _process(delta):
 	state_manager.update(delta, adventurer._status, navigation.is_moving, self, get_node("/root/Root/SCENE_CAM"));
 
 	if adventurer == null:
+		agent_manager.agents.erase(last_id);
 		self.queue_free();
 
 	if state_manager.pick_new_wander() && navigation.nav_finished():
@@ -43,7 +47,7 @@ func _physics_process(_delta):
 func _on_input_event(_camera, event, _position, _normal, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
-			game_manager.select_agent.emit(self);
+			game_manager.select_agent.emit(adventurer._unique_id);
 	pass;
 
 func _recruit():
@@ -70,8 +74,8 @@ func _on_mouse_exited():
 	$CHAR_NAME.visible = false;
 	pass # Replace with function body.
 
-func _on_select_agent(agent: Agent):
-	if agent == self:
+func _on_select_agent(unique_id: String):
+	if unique_id == adventurer._unique_id:
 		$SELECTED.visible = true;
 		$SELECTED.get_child(0).play("spin", 0);
 	else:
