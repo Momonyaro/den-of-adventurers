@@ -13,7 +13,7 @@ func try_get_activity(type: String, agent: Agent) -> Activity:
 		if activity.is_available.call(agent):
 			if activity.occupied_by == "":
 				return activity;
-			elif agent != null && activity.occupied_by == agent.adventurer._unique_id:
+			elif agent != null && activity.occupied_by == agent.adv_id:
 				return activity;
 	
 	return null;

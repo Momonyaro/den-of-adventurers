@@ -17,6 +17,7 @@ func _on_new_recruit(id: String):
 	agents[adv._unique_id] = instance;
 	instance.name = adv.adv_name();
 	instance.adventurer = adv;
+	instance.adv_id = adv._unique_id;
 	AgentWardrobe.dress_up(adv, instance);
 	add_child(instance);
 	instance.set_position(Vector3(0, 0, 0));

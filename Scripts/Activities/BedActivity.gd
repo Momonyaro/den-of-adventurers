@@ -15,8 +15,8 @@ func update(state: bool):
 	zzz_particles.emitting = state;
 
 func is_available(agent: Agent) -> bool:
-	if adventurer == "" || adventurer == agent.adventurer._unique_id:
-		adventurer = agent.adventurer._unique_id;
+	if adventurer == "" || adventurer == agent.adv_id:
+		adventurer = agent.adv_id;
 		return true;
 	return false;
 

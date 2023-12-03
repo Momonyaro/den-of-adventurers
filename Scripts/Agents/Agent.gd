@@ -13,7 +13,7 @@ class_name Agent
 @export var move_speed = 2.0;
 @export var idle_time = 2.5;
 var adventurer : Adventurer;
-var last_id = "";
+var adv_id = "";
 var state_manager : AgentStateManager;
 var navigation : AgentNavigation;
 var current_activity: ActivityManager.Activity = null;
@@ -22,7 +22,6 @@ func _ready():
 	state_manager = AgentStateManager.new(_model.find_child("AnimationPlayer") as AnimationPlayer);
 	navigation = AgentNavigation.new(global_transform.origin, $NavigationAgent3D, move_speed);
 	game_manager.select_agent.connect(_on_select_agent);
-	last_id = adventurer._unique_id;
 	$CHAR_NAME.visible = false;
 	pass;
 
@@ -30,7 +29,7 @@ func _process(delta):
 	state_manager.update(delta, adventurer._status, navigation.is_moving, self, get_node("/root/Root/SCENE_CAM"));
 
 	if adventurer == null:
-		agent_manager.agents.erase(last_id);
+		agent_manager.agents.erase(adv_id);
 		self.queue_free();
 
 	if state_manager.pick_new_wander() && navigation.nav_finished():

@@ -5,6 +5,7 @@ var _adv_manager : AdventurerManager = null;
 @onready var agent_manager: AgentManager = get_node("/root/Root/Agents");
 
 var _selected_agent : String = "";
+var _last_agent: Agent = null;
 var _window_base: Node = null;
 var _on_close_action: Callable = func (): get_tree().root.get_child(1).get_child(0).select_agent.emit("");
 
@@ -30,7 +31,11 @@ func _process(_delta):
 func update_menu(_agent):
 	if _selected_agent == "":
 		return;
-	
+	elif _last_agent == null:
+		_last_agent = agent_manager.agents[_selected_agent];
+	elif _selected_agent != _last_agent.adv_id:
+		_last_agent = agent_manager.agents[_selected_agent];
+
 	_draw_basic_info();
 	_draw_health_info();
 
@@ -41,8 +46,7 @@ func update_menu(_agent):
 		_window_base.resize_app();
 
 func _draw_basic_info():
-	var agent = agent_manager.agents[_selected_agent];
-	var adventurer = agent.adventurer;
+	var adventurer = _last_agent.adventurer;
 	var current_status = adventurer.adv_status();
 	var is_human = adventurer._race == Adventurer.Race.HUMAN;
 	var xp_ratio = adventurer.xp_percentage();
@@ -61,8 +65,7 @@ func _draw_basic_info():
 	get_node("%BaseInfoRect/recruit_btn").tooltip_text = "Your guild can't house any more recruits!" if !_check_capacity() else "Recruit a new adventurer to your guild";
 
 func _draw_health_info():
-	var agent = agent_manager.agents[_selected_agent];
-	var adventurer = agent.adventurer;
+	var adventurer = _last_agent.adventurer;
 	var current_status = adventurer.adv_status();
 	var resting = current_status == "RESTING" || current_status == "EXHAUSTED"
 
@@ -109,5 +112,4 @@ func get_timer_text(_fatigue: float, _fatigue_total_time: float) -> String:
 
 func _on_recruit_btn_pressed():
 	_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
-	var agent = agent_manager.agents[_selected_agent];
-	agent._recruit();
+	_last_agent._recruit();

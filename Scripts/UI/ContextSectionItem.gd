@@ -23,6 +23,8 @@ func _set_active(active: bool, secondary: bool):
 		dropdown.visible = active or secondary;
 
 func is_pos_inside(pos: Vector2) -> bool:
+	if get_global_rect().has_point(get_global_mouse_position()):
+		return true;
 	var rects = _deep_search_type();
 	for rect in rects:
 		if rect.get_global_rect().has_point(get_global_mouse_position()):

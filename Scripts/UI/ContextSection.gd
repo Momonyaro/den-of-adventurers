@@ -18,8 +18,8 @@ func _process(_delta):
 	var mouse_pos = get_global_mouse_position();
 	var items = _dropdown_content_parent.get_children();
 	var inside_panel = _dropdown_content_parent.get_global_rect().has_point(mouse_pos)
-	var nouse_inside = items.any(func(i): return i.is_pos_inside(mouse_pos));
-	if !nouse_inside && !inside_panel && _current_item != "":
+	var mouse_inside = items.any(func(i): return i.is_pos_inside(mouse_pos));
+	if !mouse_inside && !inside_panel && _current_item != "":
 		set_item("");
 
 func set_item(id: String):

@@ -13,10 +13,11 @@ func _ready():
 	var camera = get_viewport().get_camera_3d();
 	select_agent.connect(
 		func (a): 
-			var agent = agent_manager.agents[a] if agent_manager.agents.has(a) else null;
-			if agent != null: 
+			var agent = null;
+			if agent_manager.agents.has(a):
+				agent = agent_manager.agents[a];
 				window_manager.process_command("WINDOW:RESET:ADV_PREVIEW:16:16", camera.unproject_position(agent.get_child(0).global_position) + Vector2(0, -24))
-			else: 
+			else:
 				window_manager.process_command("WINDOW:FORCE_CLOSE:ADV_PREVIEW", Vector2()));
 	pass;
 
