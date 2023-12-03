@@ -39,6 +39,9 @@ func recruited() -> Array:
 		func(adv: Adventurer): return adv._unique_id
 	);
 
+func recruited_adv() -> Array:
+	return _adventurers.values().filter(func(adv: Adventurer): return adv._status != Adventurer.Status.RECRUIT);
+
 func _remove_adventurer(adv_id: String):
 	if _adventurers.has(adv_id):
 		var adv = _adventurers[adv_id];

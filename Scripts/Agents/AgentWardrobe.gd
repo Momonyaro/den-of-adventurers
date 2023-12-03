@@ -4,6 +4,10 @@ static func dress_up(adv: Adventurer, model: Node):
 	hide_all_children(model.find_child("Skeleton3D"));
 	enable_body(model);
 	
+	var race = find_child_node(model, adv.LOOK_race);
+	if race != null:
+		race.show();
+
 	var hat = find_child_node(model, adv.LOOK_hat);
 	if hat != null:
 		hat.show();
@@ -20,7 +24,7 @@ static func hide_all_children(parent: Node):
 
 static func enable_body(parent: Node):
 	find_child_node(parent, "BODY").show();
-	find_child_node(parent, "EYES").show();
+	#find_child_node(parent, "EYES").show();
 	find_child_node(parent, "FEET").show();
 	find_child_node(parent, "HEAD").show();
 	find_child_node(parent, "L_HAND").show();

@@ -95,10 +95,6 @@ static func get_menu_data():
 			'type': 'folder',
 			'icon': 'res://Textures/Icons/folder.png',
 			'items': {
-				'Breakout': {
-					'type': 'action',
-					'msg': 'WINDOW_BREAKOUT_START'
-				},
 				'Solitaire': {
 					'type': 'action',
 					'icon': 'res://Textures/Icons/solitaire.png',

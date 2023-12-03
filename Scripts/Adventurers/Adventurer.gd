@@ -28,6 +28,7 @@ var _level : int = 1;
 var _xp : Vector2i = Vector2i.ZERO;
 
 #Wardrobe
+var LOOK_race : String;
 var LOOK_hat : String;
 var LOOK_hair : String;
 

@@ -331,8 +331,6 @@ class BoardState:
 	func validate_tableau_insert(cards: Array, col: Array) -> bool:
 		if col.size() == 0: 
 			var is_king =  Cards.get_identifier(cards[0]) == 'K';
-			if is_king:
-				print("me me (", cards, ") want go here -> ", col);
 			return is_king;
 
 		if Cards.get_facing(col[-1]) == Cards.FACING.BACK: return false;

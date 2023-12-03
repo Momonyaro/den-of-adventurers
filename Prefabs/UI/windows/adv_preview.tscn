@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddcfeq62x7vl5"]
+[gd_scene load_steps=11 format=3 uid="uid://ddcfeq62x7vl5"]
 
 [ext_resource type="Texture2D" uid="uid://dyx6v70at8syt" path="res://Textures/Icons/unknown.png" id="1_b1eb3"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/adv_preview.gd" id="2_cr237"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dllcbu7i28aiw" path="res://Textures/Icons/small_heart.png" id="4_dtyc1"]
 [ext_resource type="Texture2D" uid="uid://btxj61otcm2qj" path="res://Textures/Icons/star.png" id="4_g3uuj"]
 [ext_resource type="Texture2D" uid="uid://b17jgov1xht4n" path="res://Textures/Icons/snooze.png" id="5_8blsd"]
+[ext_resource type="Texture2D" uid="uid://d1fqd8npldynv" path="res://Textures/Icons/demi-human.png" id="5_h3oi5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
 content_margin_left = 24.0
@@ -55,9 +56,9 @@ texture = ExtResource("1_b1eb3")
 [node name="name" type="Label" parent="VBoxContainer/BaseInfoRect"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 88.0
+offset_left = 106.0
 offset_top = 6.0
-offset_right = 306.0
+offset_right = 303.0
 offset_bottom = 27.0
 theme_override_font_sizes/font_size = 15
 text = "CHARACTER  NAME"
@@ -120,6 +121,16 @@ offset_right = 312.0
 offset_bottom = 27.0
 texture = ExtResource("4_g3uuj")
 stretch_mode = 3
+
+[node name="race" type="TextureRect" parent="VBoxContainer/BaseInfoRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 87.0
+offset_top = 8.0
+offset_right = 103.0
+offset_bottom = 24.0
+texture = ExtResource("5_h3oi5")
+stretch_mode = 2
 
 [node name="AdvHealthRect" type="Panel" parent="VBoxContainer"]
 unique_name_in_owner = true

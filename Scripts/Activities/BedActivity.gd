@@ -27,7 +27,9 @@ func get_activity_point() -> Node3D:
 	return activity_point;
 
 func get_activity_state() -> BaseState:
-	return BedActivityState.new();
+	var activity_state = BedActivityState.new();
+	activity_state._activity = self;
+	return activity_state;
 
 func _get_id():
 	var pos = self.global_position;

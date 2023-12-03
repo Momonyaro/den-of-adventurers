@@ -26,6 +26,7 @@ func update(delta: float, agent: Node, camera: Node):
 		var activity_point = activity.get_activity_point();
 		_agent.global_position = activity_point.global_position;
 		_agent.global_rotation = activity_point.global_rotation;
+		_agent.current_activity = null;
 		_agent.state_manager.force_insert_state(activity.get_activity_state());
 
 	pass;

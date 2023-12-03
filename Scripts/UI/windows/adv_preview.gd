@@ -7,6 +7,9 @@ var _selected_agent : Agent = null;
 var _window_base: Node = null;
 var _on_close_action: Callable = func (): get_tree().root.get_child(1).get_child(0).select_agent.emit(null);
 
+@onready var human_icon = ResourceLoader.load("res://Textures/Icons/human.png");
+@onready var demihuman_icon = ResourceLoader.load("res://Textures/Icons/demi-human.png");
+
 func _ready():
 	_game_manager = get_node("/root/Root/Game");
 	_adv_manager = get_node("/root/Root/Adventurers");
@@ -40,7 +43,9 @@ func _draw_basic_info():
 	var is_human = adventurer._race == Adventurer.Race.HUMAN;
 	var xp_ratio = adventurer.xp_percentage();
 	
-	get_node("%BaseInfoRect/name").text = str("(H)" if is_human else "(DH)", " ", adventurer.adv_name());
+	get_node("%BaseInfoRect/name").text = str(adventurer.adv_name());
+	get_node("%BaseInfoRect/race").texture = human_icon if is_human else demihuman_icon;
+	get_node("%BaseInfoRect/race").tooltip_text = "Human" if is_human else "Demi-Human";
 	get_node("%BaseInfoRect/level_race").text = str("Level ", adventurer._level, " ", adventurer._class);
 	get_node("%BaseInfoRect/state").visible = current_status != "RECRUIT";
 	get_node("%BaseInfoRect/state").text = current_status;

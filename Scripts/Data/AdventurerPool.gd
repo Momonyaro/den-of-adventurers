@@ -8,20 +8,25 @@ var _name_pool : NamePool = null;
 func _init(name_pool: NamePool):
 	_name_pool = name_pool;
 	
-	define_adventurer("Aerithus", "Sól", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "Tri-Aspect Magician");
-	define_adventurer("Monrose", "Faertag", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "Swordsman");
-	define_adventurer("Atou", "Graeli", Adventurer.Race.HUMAN, Adventurer.Nationality.Blacholer, 21, 10, 3, "Ranger");
+	define_adventurer("Aerithus", "Sól", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "Tri-Aspect Magician", "M_HAIR_0", "HAT_MAGICIAN");
+	define_adventurer("Monrose", "Faertag", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "Swordsman", "M_HAIR_0");
+	define_adventurer("Atou", "Graeli", Adventurer.Race.HUMAN, Adventurer.Nationality.Blacholer, 21, 10, 3, "Ranger", "F_HAIR_0");
 	
 	for i in POOL_SIZE - _adv_pool.keys().size():
 		generate_adventurer();
 	pass;
 
-func define_adventurer(given_name: String, family_name: String, race: Adventurer.Race, nationality: Adventurer.Nationality, age: int, health: int, level: int, adv_class: String):
+func define_adventurer(given_name: String, family_name: String, race: Adventurer.Race, nationality: Adventurer.Nationality, age: int, health: int, level: int, adv_class: String, hair_option: String = "", hat_option: String = ""):
 	_name_pool.reserve_name(given_name, family_name);
 	var adv_index = _adv_pool.keys().size();
 	var adv = Adventurer.new(given_name, family_name, age, health, level, race, nationality, adv_index);
 	adv._class = adv_class;
 	adv._defined = true;
+	adv.LOOK_hair = hair_option;
+	adv.LOOK_hat = hat_option;
+
+	if adv._race == Adventurer.Race.DEMI_HUMAN:
+		adv.LOOK_race = "DH_HORNS";
 	
 	_adv_pool[adv._unique_id] = adv;
 	pass;
@@ -38,8 +43,16 @@ func generate_adventurer():
 	adv._fatigue = randf_range(0, 0.9);
 	adv._xp = Vector2i(randi_range(0, 100), 200);
 
+	if adv._race == Adventurer.Race.DEMI_HUMAN:
+		adv.LOOK_race = "DH_HORNS";
+
 	if bool(randi_range(0, 1)):
 		adv.LOOK_hat = "HAT_MAGICIAN";
+		
+	if bool(randi_range(0, 1)):
+		adv.LOOK_hair = "F_HAIR_0";
+	else:
+		adv.LOOK_hair = "M_HAIR_0";
 	_adv_pool[adv._unique_id] = adv;
 	pass;
 
