@@ -95,6 +95,11 @@ static func get_menu_data():
 			'type': 'folder',
 			'icon': 'res://Textures/Icons/folder.png',
 			'items': {
+				'Minesweeper': {
+					'type': 'action',
+					'icon': 'res://Textures/Icons/minesweeper.png',
+					'msg': 'WINDOW:RESET:MINESWEEPER'
+				},
 				'Solitaire': {
 					'type': 'action',
 					'icon': 'res://Textures/Icons/solitaire.png',

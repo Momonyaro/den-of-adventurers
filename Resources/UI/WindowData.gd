@@ -20,6 +20,10 @@ const window_data = {
 		'title': 'Solitaire',
 		'content_ref': 'res://Prefabs/UI/windows/solitaire.tscn'
 	},
+	'MINESWEEPER': {
+		'title': 'Minesweeper',
+		'content_ref': 'res://Prefabs/UI/windows/minesweeper.tscn'
+	},
 	'ADV_PREVIEW': {
 		'title': 'Adventurer',
 		'content_ref': 'res://Prefabs/UI/windows/adv_preview.tscn'

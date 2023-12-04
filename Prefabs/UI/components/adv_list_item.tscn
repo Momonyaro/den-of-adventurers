@@ -25,8 +25,11 @@ border_color = Color(0, 0, 0, 1)
 
 [node name="adv_list_item" type="NinePatchRect"]
 texture_filter = 1
+offset_right = 224.0
+offset_bottom = 92.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("4_q2wmj")
 texture = ExtResource("1_866nk")
 patch_margin_left = 2
 patch_margin_top = 2
@@ -132,8 +135,18 @@ icon_alignment = 1
 texture_filter = 1
 layout_mode = 0
 offset_left = 59.0
-offset_top = 21.0
+offset_top = 23.0
 offset_right = 196.0
-offset_bottom = 42.0
+offset_bottom = 44.0
 theme_override_font_sizes/font_size = 12
 text = "Level X, Human"
+
+[node name="party_status" type="Label" parent="content"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 59.0
+offset_top = 39.0
+offset_right = 196.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 12
+text = "Party: None"

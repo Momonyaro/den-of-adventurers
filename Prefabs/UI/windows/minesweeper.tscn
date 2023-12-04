@@ -1,0 +1,115 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwbakkblsq7qd"]
+
+[ext_resource type="Script" path="res://Scripts/UI/windows/minesweeper.gd" id="1_qsxcc"]
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="5_11i0h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[node name="minesweeper" type="Panel" node_paths=PackedStringArray("_menu", "_board")]
+clip_contents = true
+offset_right = 142.0
+offset_bottom = 160.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
+script = ExtResource("1_qsxcc")
+_menu = NodePath("main_menu")
+_board = NodePath("board")
+
+[node name="main_menu" type="Panel" parent="."]
+layout_mode = 1
+offset_right = 142.0
+offset_bottom = 160.0
+theme = ExtResource("5_11i0h")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
+
+[node name="title" type="Label" parent="main_menu"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 16
+text = "Minesweeper"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="game_size" type="Label" parent="main_menu"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 18.0
+offset_top = 52.0
+offset_right = 125.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 12
+text = "Select game size:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="small_btn" type="Button" parent="main_menu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -89.0
+offset_right = -17.0
+offset_bottom = -67.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_11i0h")
+text = "Small"
+
+[node name="medium_btn" type="Button" parent="main_menu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -65.0
+offset_right = -17.0
+offset_bottom = -43.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_11i0h")
+disabled = true
+text = "Medium"
+
+[node name="large_btn" type="Button" parent="main_menu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -41.0
+offset_right = -17.0
+offset_bottom = -19.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_11i0h")
+disabled = true
+text = "Large"
+
+[node name="board" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+offset_right = 240.0
+offset_bottom = 240.0
+theme = ExtResource("5_11i0h")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
+
+[connection signal="pressed" from="main_menu/small_btn" to="." method="_on_small_btn_pressed"]
