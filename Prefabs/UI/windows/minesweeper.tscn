@@ -106,16 +106,16 @@ text = "Large"
 [node name="board" type="Panel" parent="."]
 layout_mode = 1
 offset_right = 248.0
-offset_bottom = 272.0
+offset_bottom = 277.0
 theme = ExtResource("5_11i0h")
 theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
 
 [node name="GridContainer" type="GridContainer" parent="board"]
 layout_mode = 0
 offset_left = 5.0
-offset_top = 28.0
+offset_top = 32.0
 offset_right = 243.0
-offset_bottom = 266.0
+offset_bottom = 270.0
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 2
 columns = 8
@@ -123,17 +123,14 @@ columns = 8
 [node name="restart_btn" type="Button" parent="board"]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
 offset_left = -83.0
-offset_top = -268.0
+offset_top = 4.0
 offset_right = -4.0
-offset_bottom = -246.0
+offset_bottom = 26.0
 grow_horizontal = 0
-grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource("5_11i0h")
 text = "Restart"

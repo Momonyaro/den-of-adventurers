@@ -1,6 +1,6 @@
 extends Panel
 
-const _small_size: Vector2i = Vector2i(248, 272);
+const _small_size: Vector2i = Vector2i(248, 276);
 
 const _small_board: Vector2i = Vector2i(8, 8);
 const _medium_board: Vector2i = Vector2i(16, 16);
