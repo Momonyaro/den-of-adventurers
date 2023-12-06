@@ -1,6 +1,7 @@
 extends Panel
 
 const _small_size: Vector2i = Vector2i(248, 276);
+const _medium_size: Vector2i = Vector2i(488, 514);
 
 const _small_board: Vector2i = Vector2i(8, 8);
 const _medium_board: Vector2i = Vector2i(16, 16);
@@ -31,9 +32,21 @@ func _on_small_btn_pressed():
 	_window_base.resize_app();
 	game_board_size = _small_board;
 	game_bomb_amt = _small_bomb_amt;
+	var grid = _board.get_child(0);
+	grid.columns = _small_board.x;
 	create_board(_small_board, _small_bomb_amt);
-	pass;
 
+func _on_medium_btn_pressed():
+	_menu.visible = false;
+	_board.visible = true;
+	_board.set_size(_medium_size);
+	self.set_size(_medium_size);
+	_window_base.resize_app();
+	game_board_size = _medium_board;
+	game_bomb_amt = _medium_bomb_amt;
+	var grid = _board.get_child(0);
+	grid.columns = _medium_board.x;
+	create_board(_medium_board, _medium_bomb_amt);
 
 func _on_restart_btn_pressed():
 	create_board(game_board_size, game_bomb_amt);
@@ -134,4 +147,3 @@ func _flip_all():
 		var neighbors = _calc_neighbors(child.piece_pos);
 		var has_mine = bool(tile_data);
 		child.flip(bool(tile_data), neighbors);
-

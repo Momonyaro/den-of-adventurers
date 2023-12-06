@@ -81,7 +81,6 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource("5_11i0h")
-disabled = true
 text = "Medium"
 
 [node name="large_btn" type="Button" parent="main_menu"]
@@ -106,7 +105,7 @@ text = "Large"
 [node name="board" type="Panel" parent="."]
 layout_mode = 1
 offset_right = 248.0
-offset_bottom = 277.0
+offset_bottom = 276.0
 theme = ExtResource("5_11i0h")
 theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
 
@@ -136,4 +135,5 @@ theme = ExtResource("5_11i0h")
 text = "Restart"
 
 [connection signal="pressed" from="main_menu/small_btn" to="." method="_on_small_btn_pressed"]
+[connection signal="pressed" from="main_menu/medium_btn" to="." method="_on_medium_btn_pressed"]
 [connection signal="pressed" from="board/restart_btn" to="." method="_on_restart_btn_pressed"]
