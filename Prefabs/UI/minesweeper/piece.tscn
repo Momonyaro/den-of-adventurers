@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://firwxscbuehr"]
+
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_0yglw"]
+[ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="1_sdu0e"]
+[ext_resource type="Script" path="res://Scripts/UI/components/ms_piece.gd" id="1_w0ut3"]
+[ext_resource type="Texture2D" uid="uid://cm87bifraqjs3" path="res://Textures/Icons/minesweeper.png" id="2_o3dwj"]
+[ext_resource type="Texture2D" uid="uid://c6obd2s8ug4mb" path="res://Textures/Icons/grid.png" id="4_6uvsh"]
+[ext_resource type="Texture2D" uid="uid://tx668e8ug160" path="res://Textures/Icons/minesweeper_flag.png" id="5_geoa1"]
+
+[node name="piece" type="Panel"]
+custom_minimum_size = Vector2(28, 28)
+offset_right = 28.0
+offset_bottom = 28.0
+theme = ExtResource("1_0yglw")
+script = ExtResource("1_w0ut3")
+
+[node name="vicinity" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 29.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("1_sdu0e")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="mine" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+texture = ExtResource("2_o3dwj")
+stretch_mode = 2
+
+[node name="untouched" type="NinePatchRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+texture = ExtResource("4_6uvsh")
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="flag" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+texture = ExtResource("5_geoa1")
+stretch_mode = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

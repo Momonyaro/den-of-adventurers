@@ -11,7 +11,6 @@ content_margin_bottom = 24.0
 bg_color = Color(0.960784, 0.960784, 0.960784, 1)
 
 [node name="minesweeper" type="Panel" node_paths=PackedStringArray("_menu", "_board")]
-clip_contents = true
 offset_right = 142.0
 offset_bottom = 160.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
@@ -105,11 +104,39 @@ disabled = true
 text = "Large"
 
 [node name="board" type="Panel" parent="."]
-visible = false
 layout_mode = 1
-offset_right = 240.0
-offset_bottom = 240.0
+offset_right = 248.0
+offset_bottom = 272.0
 theme = ExtResource("5_11i0h")
 theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
 
+[node name="GridContainer" type="GridContainer" parent="board"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 243.0
+offset_bottom = 266.0
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 8
+
+[node name="restart_btn" type="Button" parent="board"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -268.0
+offset_right = -4.0
+offset_bottom = -246.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_11i0h")
+text = "Restart"
+
 [connection signal="pressed" from="main_menu/small_btn" to="." method="_on_small_btn_pressed"]
+[connection signal="pressed" from="board/restart_btn" to="." method="_on_restart_btn_pressed"]
