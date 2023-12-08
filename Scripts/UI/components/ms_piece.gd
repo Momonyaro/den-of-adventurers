@@ -5,6 +5,7 @@ extends Panel
 @onready var flag_spr: TextureRect = $flag;
 @onready var back_spr: NinePatchRect = $untouched;
 
+var flipped: bool = false;
 var piece_pos: Vector2i = Vector2i();
 var click_callback: Callable = func (_piece, _vec: Vector2i): pass;
 
@@ -22,6 +23,7 @@ func _on_gui_input(event:InputEvent):
 	pass;
 	
 func flip(is_bomb: bool, proximity_num: int):
+	flipped = true;
 	if is_bomb:
 		mine_spr.visible = true;
 		self.self_modulate = Color.from_string("#bac6da", Color.RED);

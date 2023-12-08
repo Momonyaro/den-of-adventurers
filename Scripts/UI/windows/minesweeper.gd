@@ -20,6 +20,8 @@ var game_board: Array = [];
 var game_board_size: Vector2i = Vector2i();
 var game_bomb_amt: int = 0;
 var game_over = false;
+var first_click = true;
+var start_msg = "";
 
 func _ready():
 	_board.visible = false;
@@ -27,6 +29,7 @@ func _ready():
 func _on_small_btn_pressed():
 	_menu.visible = false;
 	_board.visible = true;
+	start_msg = "Small Board";
 	_board.set_size(_small_size);
 	self.set_size(_small_size);
 	_window_base.resize_app();
@@ -39,6 +42,7 @@ func _on_small_btn_pressed():
 func _on_medium_btn_pressed():
 	_menu.visible = false;
 	_board.visible = true;
+	start_msg = "Medium Board";
 	_board.set_size(_medium_size);
 	self.set_size(_medium_size);
 	_window_base.resize_app();
@@ -51,6 +55,14 @@ func _on_medium_btn_pressed():
 func _on_restart_btn_pressed():
 	create_board(game_board_size, game_bomb_amt);
 
+func _on_quit_to_menu_btn_pressed():
+	_menu.visible = true;
+	_board.visible = false;
+	self.set_size(_menu.get_global_rect().size);
+	_window_base.resize_app();
+	pass # Replace with function body.
+	
+
 func create_board(_size: Vector2i, _bomb_amount: int):
 	var grid = _board.get_child(0);
 	game_over = false;
@@ -58,6 +70,9 @@ func create_board(_size: Vector2i, _bomb_amount: int):
 	game_board.resize(_size.x * _size.y);
 	game_board.fill(0);
 	game_board = _place_mines(game_board, _bomb_amount);
+	first_click = true;
+	get_node("board/status").text = start_msg;
+
 	for child in grid.get_children():
 		child.queue_free();
 
@@ -67,6 +82,19 @@ func create_board(_size: Vector2i, _bomb_amount: int):
 			grid.add_child(_piece);
 			_piece.piece_pos = Vector2i(x, y);
 			_piece.click_callback = _piece_callback;
+
+func _check_win_condition():
+	var _unflipped: int = 0;
+	var _mines: int = 0;
+
+	var grid = _board.get_child(0);
+	for child in grid.get_children():
+		if child.flipped == false:
+			_unflipped += 1;
+			_mines += 1 if _has_mine(child.piece_pos) else 0;
+	
+	return _unflipped == _mines;
+
 
 func _place_mines(board: Array, bomb_count: int) -> Array:
 	for bomb in bomb_count:
@@ -78,6 +106,15 @@ func _place_mines(board: Array, bomb_count: int) -> Array:
 
 	return board;
 
+func _move_mine(pos: Vector2i):
+	var linear_pos = (pos.x + game_board_size.y * pos.y);
+	while true:
+		var rand_index = randi_range(0, game_board.size() - 1);
+		if game_board[rand_index] == 0 && rand_index != linear_pos:
+			game_board[rand_index] = 1;
+			game_board[linear_pos] = 0;
+			break;
+
 func _piece_callback(_piece, _pos: Vector2i):
 	if game_over:
 		return;
@@ -86,15 +123,31 @@ func _piece_callback(_piece, _pos: Vector2i):
 	var tile_data = game_board[_pos.x + game_board_size.y * _pos.y];
 	var has_mine = bool(tile_data);
 
+	if first_click:
+		first_click = false;
+		if has_mine:
+			#move the mine
+			_move_mine(_pos);
+			has_mine = false;
+			tile_data = game_board[_pos.x + game_board_size.y * _pos.y];
+
 	if has_mine:
 		game_over = true;
+		get_node("board/status").text = "Game Over";
 		_flip_all();
+		return;
 	print(_pos, " board value: ", tile_data);
 	var neighbors = _calc_neighbors(_pos);
 	if neighbors == 0:
 		_cascade_zero_tiles_from(_pos);
 
 	_piece.flip(bool(tile_data), neighbors);
+	if game_over == false:
+		if _check_win_condition():
+			game_over = true;
+			get_node("board/status").text = "You Win!";
+
+
 
 func _calc_neighbors(_pos: Vector2i) -> int:
 	var result = 0;
@@ -145,5 +198,4 @@ func _flip_all():
 	for child in grid.get_children():
 		var tile_data = game_board[child.piece_pos.x + game_board_size.y * child.piece_pos.y];
 		var neighbors = _calc_neighbors(child.piece_pos);
-		var has_mine = bool(tile_data);
 		child.flip(bool(tile_data), neighbors);
