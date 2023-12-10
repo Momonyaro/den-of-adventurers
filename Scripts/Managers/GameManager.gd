@@ -2,11 +2,16 @@ extends Node
 class_name GameManager
 
 var _selected_agent : String = "";
-@export var _max_adventurers: int = 4;
+var _max_adventurers: int = 4;
+var guild_data: GuildData = GuildData.new();
+var start_date: Dictionary = Time.get_datetime_dict_from_system();
+var guild_info: Node = null;
 
 signal select_agent(unique_id: String);
 
 func _ready():
+	guild_info = get_parent().find_child("UI").get_child(-1).get_child(0).get_child(1);
+	guild_info.populate(guild_data);
 	select_agent.connect(_on_select_agent);
 	var window_manager = get_parent().find_child("UI").get_child(1);
 	var agent_manager: AgentManager = get_node("/root/Root/Agents");
