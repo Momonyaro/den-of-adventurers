@@ -77,6 +77,10 @@ static func get_menu_data():
 		}
 	},
 	'View': {
+		'Guild': {
+			'type': 'action',
+			'msg': 'WINDOW:RESET:GUILD_INFO'
+		},
 		'Adventurers': {
 			'type': 'action',
 			'msg': 'WINDOW:RESET:ADV_LIST'

@@ -31,6 +31,10 @@ const window_data = {
 	'ADV_LIST': {
 		'title': 'Adventurers',
 		'content_ref': 'res://Prefabs/UI/windows/adventurers.tscn'
+	},
+	'GUILD_INFO': {
+		'title': 'Guild Info',
+		'content_ref': 'res://Prefabs/UI/windows/guild_info.tscn'
 	}
 }
 
