@@ -42,13 +42,12 @@ theme_override_constants/margin_right = 50
 [node name="OptionContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer" node_paths=PackedStringArray("name_text", "level_text", "xp_bar")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer" node_paths=PackedStringArray("level_text", "xp_bar")]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_2u38p")
 theme_override_constants/separation = -1
 script = ExtResource("3_suiky")
-name_text = NodePath("MarginContainer/Label")
 level_text = NodePath("Panel/Label")
 xp_bar = NodePath("NinePatchRect/ProgressBar")
 
