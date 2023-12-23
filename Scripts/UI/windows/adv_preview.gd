@@ -84,7 +84,7 @@ func _draw_health_info():
 
 
 func _check_capacity():
-	var max = _game_manager._max_adventurers;
+	var max = _game_manager.guild_data.guildhall_adv_cap;
 	var current = _adv_manager.recruited().size();
 	return current < max;
 

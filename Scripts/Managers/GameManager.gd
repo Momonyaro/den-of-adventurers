@@ -2,7 +2,6 @@ extends Node
 class_name GameManager
 
 var _selected_agent : String = "";
-var _max_adventurers: int = 4;
 var guild_data: GuildData = GuildData.new();
 var start_date: Dictionary = Time.get_datetime_dict_from_system();
 var guild_info: Node = null;

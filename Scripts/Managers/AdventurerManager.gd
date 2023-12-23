@@ -42,6 +42,18 @@ func recruited() -> Array:
 func recruited_adv() -> Array:
 	return _adventurers.values().filter(func(adv: Adventurer): return adv._status != Adventurer.Status.RECRUIT);
 
+func avg_level() -> float:
+	var _adv = recruited_adv();
+	var avg = 0;
+	
+	for adv in _adv:
+		avg += adv._level;
+	
+	if _adv.size() > 0:
+		avg = avg / _adv.size();
+	
+	return avg;
+
 func _remove_adventurer(adv_id: String):
 	if _adventurers.has(adv_id):
 		var adv = _adventurers[adv_id];
