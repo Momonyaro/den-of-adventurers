@@ -29,7 +29,7 @@ func _ready():
 	get_child(1).get_child(4).visible = true;
 	_board.board_update.connect(_on_board_update);
 	_board.start_game(_board._draw_count);
-	_deal_btn.pressed.connect(func (): _board.start_game(_board._draw_count));
+	_deal_btn.pressed.connect(func (): _board.start_game(_board._draw_count); _window_base.play_audio("res://Audio/SFX/Kort_1.ogg"));
 	_draw_one_btn.pressed.connect(func (): set_radio(1));
 	_draw_three_btn.pressed.connect(func (): set_radio(3));
 	for card in _drawn_hand:
@@ -41,7 +41,7 @@ func _process(_delta):
 			_holding[1].append_array(_holding[0]);
 		_holding = [];
 		_hand_label.text = str(":");
-		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
+		_window_base.play_audio("res://Audio/SFX/Kort_3.ogg")
 		_on_board_update();
 	
 	elif Input.is_action_just_released("r_click"):
@@ -54,7 +54,7 @@ func _auto_resolve():
 	
 	if changes > 0:
 		print("[SOLI...] -> Auto created ", changes, " board change(s)");
-		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
+		_window_base.play_audio("res://Audio/SFX/Kort_2.ogg");
 		_on_board_update();
 
 func _try_auto_resolve() -> bool:
