@@ -35,6 +35,10 @@ const window_data = {
 	'GUILD_INFO': {
 		'title': 'Guild Info',
 		'content_ref': 'res://Prefabs/UI/windows/guild_info.tscn'
+	},
+	'PARTIES': {
+		'title': 'Hunting Parties',
+		'content_ref': 'res://Prefabs/UI/windows/parties.tscn'
 	}
 }
 

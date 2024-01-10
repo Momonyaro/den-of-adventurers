@@ -9,7 +9,8 @@ func _full_time(dateDict) -> String:
 	var time = "";
 	time += str(_format_time(dateDict.hour), ":", _format_time(dateDict.minute));
 	time += str(", ", _title_case(_weekday_to_string(dateDict.weekday)));
-	time += str(" the ", dateDict.day, "st" if dateDict.day == 1 else "nd" if dateDict.day == 2 else "rd" if dateDict.day == 3 else "th");
+	var day = str(dateDict.day);
+	time += str(" the ", dateDict.day, "st" if day[-1] == '1' else "nd" if day[-1] == '2' else "rd" if day[-1] == '3' else "th");
 	time += str(" of ", _month_to_string(dateDict.month));
 	time += str(" - ", dateDict.year);
 

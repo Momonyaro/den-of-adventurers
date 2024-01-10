@@ -4,8 +4,13 @@ class_name Party
 enum PartyStatus {IDLE, GOING_TO_MISSION, ON_MISSION, RETURNING_FROM_MISSION, RETURNED}
 
 var _title : String = "";
-var _members : Array[Adventurer] = []
+var _members : Array = []
 var _status : PartyStatus = PartyStatus.IDLE;
+
+func _init(title: String, members: Array, status: PartyStatus = PartyStatus.IDLE):
+	_title = title;
+	_members = members;
+	_status = status;
 
 func get_atk_score() -> int:
 	var score : int = 0;

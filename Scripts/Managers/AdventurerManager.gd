@@ -50,7 +50,7 @@ func avg_level() -> float:
 		avg += adv._level;
 	
 	if _adv.size() > 0:
-		avg = avg / _adv.size();
+		avg = avg / float(_adv.size());
 	
 	return avg;
 

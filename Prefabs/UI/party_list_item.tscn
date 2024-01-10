@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2neajds6dpta"]
+
+[ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="1_ppxjy"]
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="2_cf71s"]
+[ext_resource type="Texture2D" uid="uid://b17jgov1xht4n" path="res://Textures/Icons/snooze.png" id="2_x2qvb"]
+
+[node name="PARTY_LIST_ITEM" type="Panel"]
+custom_minimum_size = Vector2(0, 53)
+
+[node name="Label" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 6.0
+offset_right = 161.0
+offset_bottom = 30.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_ppxjy")
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "Alpha"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 3.0
+offset_right = 255.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 12
+text = "2/3"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 30.0
+offset_right = 83.0
+offset_bottom = 48.0
+theme_override_constants/separation = 6
+
+[node name="Label3" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "[ATK_PTS]"
+
+[node name="Label4" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "[SUP_PTS]"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 26.0
+offset_right = 256.0
+offset_bottom = 45.0
+theme = ExtResource("2_cf71s")
+theme_override_font_sizes/font_size = 12
+text = "Edit..."
+
+[node name="STATUS_ICON" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 27.0
+offset_bottom = 26.0
+tooltip_text = "Party is lounging around the guildhall."
+texture = ExtResource("2_x2qvb")
+stretch_mode = 2

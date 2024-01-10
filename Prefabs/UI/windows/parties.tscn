@@ -1,0 +1,164 @@
+[gd_scene load_steps=10 format=3 uid="uid://chatrilhtmb4y"]
+
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_4wybq"]
+[ext_resource type="PackedScene" uid="uid://c2neajds6dpta" path="res://Prefabs/UI/party_list_item.tscn" id="2_lvroo"]
+[ext_resource type="Script" path="res://Scripts/UI/windows/party_list.gd" id="2_s4n73"]
+[ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="4_1ddud"]
+[ext_resource type="Texture2D" uid="uid://c21i62rrwtnw7" path="res://Textures/Icons/arrow_right.png" id="4_p576x"]
+[ext_resource type="Texture2D" uid="uid://p6dd54egscgq" path="res://Textures/Icons/border_dotted_light.png" id="6_bjr1f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1t4f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpjdq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="PARTY_LIST" type="Panel"]
+texture_filter = 1
+clip_contents = true
+offset_right = 468.0
+offset_bottom = 350.0
+theme = ExtResource("1_4wybq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
+script = ExtResource("2_s4n73")
+
+[node name="LIST" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 468.0
+offset_bottom = 350.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l1t4f")
+
+[node name="NO_CONTENT_MSG" type="Label" parent="LIST"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 37.0
+offset_right = 187.0
+offset_bottom = 61.0
+theme_override_colors/font_color = Color(0.729412, 0.776471, 0.854902, 1)
+theme_override_font_sizes/font_size = 12
+text = "No parties found."
+
+[node name="Panel" type="Panel" parent="LIST"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 11.0
+offset_right = 274.0
+offset_bottom = 319.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rpjdq")
+
+[node name="CONTENT_PARENT" type="VBoxContainer" parent="LIST/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -2
+
+[node name="PARTY_LIST_ITEM" parent="LIST/Panel/CONTENT_PARENT" instance=ExtResource("2_lvroo")]
+layout_mode = 2
+
+[node name="PARTY_LIST_ITEM2" parent="LIST/Panel/CONTENT_PARENT" instance=ExtResource("2_lvroo")]
+layout_mode = 2
+
+[node name="PARTY_LIST_ITEM3" parent="LIST/Panel/CONTENT_PARENT" instance=ExtResource("2_lvroo")]
+layout_mode = 2
+
+[node name="PARTY_LIST_ITEM4" parent="LIST/Panel/CONTENT_PARENT" instance=ExtResource("2_lvroo")]
+layout_mode = 2
+
+[node name="PARTY_LIST_ITEM5" parent="LIST/Panel/CONTENT_PARENT" instance=ExtResource("2_lvroo")]
+layout_mode = 2
+
+[node name="PARTY_LIST_ITEM6" parent="LIST/Panel/CONTENT_PARENT" instance=ExtResource("2_lvroo")]
+layout_mode = 2
+
+[node name="Panel2" type="NinePatchRect" parent="LIST"]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 57.0
+offset_right = 458.0
+offset_bottom = 319.0
+texture = ExtResource("6_bjr1f")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LIST/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="LIST/Panel2/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Hunting parties are used to send adventurers out to fulfill requests. 
+
+Requests may have requirements that force you to swap out members in order to participate.
+
+Experiment to find what suits your needs.
+
+Happy Hunting."
+autowrap_mode = 3
+
+[node name="CREATE_PARTY" type="Button" parent="LIST"]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 11.0
+offset_right = 458.0
+offset_bottom = 46.0
+text = "Create new party"
+
+[node name="PAGINATION" type="HBoxContainer" parent="LIST"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 105.0
+offset_top = 321.0
+offset_right = 166.0
+offset_bottom = 348.0
+alignment = 1
+
+[node name="ARROW_LEFT" type="TextureButton" parent="LIST/PAGINATION"]
+layout_mode = 2
+texture_normal = ExtResource("4_p576x")
+stretch_mode = 3
+flip_h = true
+
+[node name="PAGE_NUM" type="Label" parent="LIST/PAGINATION"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_1ddud")
+theme_override_font_sizes/font_size = 16
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ARROW_RIGHT" type="TextureButton" parent="LIST/PAGINATION"]
+layout_mode = 2
+texture_normal = ExtResource("4_p576x")
+stretch_mode = 3
+
+[connection signal="pressed" from="LIST/PAGINATION/ARROW_LEFT" to="." method="_on_pagination_minus_pressed"]
+[connection signal="pressed" from="LIST/PAGINATION/ARROW_RIGHT" to="." method="_on_pagination_plus_pressed"]

@@ -87,7 +87,7 @@ static func get_menu_data():
 		},
 		'Hunting Parties': {
 			'type': 'action',
-			'msg': 'WINDOW_PARTIES_START'
+			'msg': 'WINDOW:RESET:PARTIES'
 		},
 		'Requests': {
 			'type': 'action',

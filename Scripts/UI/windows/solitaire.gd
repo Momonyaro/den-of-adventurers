@@ -30,8 +30,8 @@ func _ready():
 	_board.board_update.connect(_on_board_update);
 	_board.start_game(_board._draw_count);
 	_deal_btn.pressed.connect(func (): _board.start_game(_board._draw_count); _window_base.play_audio("res://Audio/SFX/Kort_1.ogg"));
-	_draw_one_btn.pressed.connect(func (): set_radio(1));
-	_draw_three_btn.pressed.connect(func (): set_radio(3));
+	_draw_one_btn.pressed.connect(func (): set_radio(1); _window_base.play_audio("res://Audio/SFX/Kort_1.ogg"));
+	_draw_three_btn.pressed.connect(func (): set_radio(3); _window_base.play_audio("res://Audio/SFX/Kort_1.ogg"));
 	for card in _drawn_hand:
 		card.visible = false;
 
@@ -53,7 +53,7 @@ func _auto_resolve():
 		changes += 1;
 	
 	if changes > 0:
-		print("[SOLI...] -> Auto created ", changes, " board change(s)");
+		print("[iCardly] -> Auto created ", changes, " board change(s)");
 		_window_base.play_audio("res://Audio/SFX/Kort_2.ogg");
 		_on_board_update();
 
