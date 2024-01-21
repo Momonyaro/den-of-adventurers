@@ -1,8 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2neajds6dpta"]
+[gd_scene load_steps=7 format=3 uid="uid://c2neajds6dpta"]
 
 [ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="1_ppxjy"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="2_cf71s"]
 [ext_resource type="Texture2D" uid="uid://b17jgov1xht4n" path="res://Textures/Icons/snooze.png" id="2_x2qvb"]
+[ext_resource type="Texture2D" uid="uid://bnxb4jg6dbifq" path="res://Textures/Icons/trashcan.png" id="3_qjvxv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ixml"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e7ts1"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 
 [node name="PARTY_LIST_ITEM" type="Panel"]
 custom_minimum_size = Vector2(0, 53)
@@ -21,9 +38,9 @@ text = "Alpha"
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 167.0
+offset_left = 168.0
 offset_top = 3.0
-offset_right = 255.0
+offset_right = 256.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 12
 text = "2/3"
@@ -48,12 +65,31 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "[SUP_PTS]"
 
-[node name="Button2" type="Button" parent="."]
-layout_mode = 0
-offset_left = 201.0
+[node name="delete_btn" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 1
+offset_left = 237.0
 offset_top = 26.0
 offset_right = 256.0
 offset_bottom = 45.0
+tooltip_text = "Delete party."
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_cf71s")
+theme_override_constants/h_separation = 1
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_5ixml")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e7ts1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_e7ts1")
+icon = ExtResource("3_qjvxv")
+icon_alignment = 1
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 26.0
+offset_right = 233.0
+offset_bottom = 45.0
+mouse_default_cursor_shape = 2
 theme = ExtResource("2_cf71s")
 theme_override_font_sizes/font_size = 12
 text = "Edit..."

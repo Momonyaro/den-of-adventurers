@@ -18,4 +18,4 @@ func _process(_delta):
 	_fps_count_label.text = str("[u]Frames per Second:[/u]  [i]", "%0.0f" % fps, " FPS (", "%0.0f" % ((1.0 / fps) * 1000), " ms)[/i]");
 
 func _on_close():
-	_window_base._on_win_close()
+	_window_base._on_win_close();

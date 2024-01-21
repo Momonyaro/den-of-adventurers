@@ -39,6 +39,11 @@ const window_data = {
 	'PARTIES': {
 		'title': 'Hunting Parties',
 		'content_ref': 'res://Prefabs/UI/windows/parties.tscn'
+	},
+	'EDIT_PARTY': {
+		'title': 'Edit Party',
+		'content_ref': 'res://Prefabs/UI/windows/party_edit.tscn',
+		'has_close_btn': false
 	}
 }
 

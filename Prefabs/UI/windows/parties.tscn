@@ -130,6 +130,7 @@ offset_left = 284.0
 offset_top = 11.0
 offset_right = 458.0
 offset_bottom = 46.0
+mouse_default_cursor_shape = 2
 text = "Create new party"
 
 [node name="PAGINATION" type="HBoxContainer" parent="LIST"]
@@ -160,5 +161,6 @@ layout_mode = 2
 texture_normal = ExtResource("4_p576x")
 stretch_mode = 3
 
+[connection signal="pressed" from="LIST/CREATE_PARTY" to="." method="_on_create_party_pressed"]
 [connection signal="pressed" from="LIST/PAGINATION/ARROW_LEFT" to="." method="_on_pagination_minus_pressed"]
 [connection signal="pressed" from="LIST/PAGINATION/ARROW_RIGHT" to="." method="_on_pagination_plus_pressed"]

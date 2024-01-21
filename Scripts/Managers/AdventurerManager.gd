@@ -4,7 +4,16 @@ const D_T = "[ADV_MAN]";
 
 signal new_recruit(id: String);
 
+const _party_names = [
+	'Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta',
+	'Eta', 'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu',
+	'Nu', 'Xi', 'Omicron', 'Pi', 'Rho', 'Sigma',
+	'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega'
+];
+
 var _adventurers : Dictionary = {};
+var _parties : Array = [];
+var party_edited: Party = null;
 
 # Timers
 var TIMER_recruit_refresh : String;
@@ -60,6 +69,13 @@ func _remove_adventurer(adv_id: String):
 		data.adv_pool.remove_adventurer(str(adv._family_name, "_", adv._given_name).to_lower());
 		_adventurers.erase(adv_id);
 
+func create_party():
+	var current_party_names = _parties.map(func(p): return p._title);
+	var available_names = _party_names.filter(func(pn): return !current_party_names.has(pn));
+	var first_available = available_names[0] if available_names.size() > 0 else "New Party";
+
+	party_edited = Party.new(first_available, [], Party.PartyStatus.IDLE);
+
 func _on_timer_done(id: String):
 	match id:
 		TIMER_recruit_refresh:
@@ -71,4 +87,4 @@ func _on_timer_done(id: String):
 
 func _on_new_recruit(id: String):
 	var adv = _adventurers[id];
-	print(str(D_T, " -> New ", adv.adv_race(), " Recruit \"", adv.adv_name(), "\" [", adv._unique_id, "] Created! "));
+	print(str(D_T, " -> New ", adv.adv_race(), " Recruit <", adv.adv_name(), ", [ID: ", adv._unique_id, "]> Created! "));

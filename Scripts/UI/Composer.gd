@@ -8,7 +8,7 @@ func play(stream_path: String):
 		sfx = _audio_cache[stream_path];
 	else:
 		sfx = ResourceLoader.load(stream_path);
-		print("[UI__SFX] -> Loaded new audio into buffer :: '", stream_path, "'");
+		print(" [UI_SFX] -> Loaded new audio into buffer :: '", stream_path, "'");
 		_audio_cache[stream_path] = sfx;
 	
 	var player: AudioStreamPlayer2D = _create_player();

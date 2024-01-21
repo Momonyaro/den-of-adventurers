@@ -29,7 +29,7 @@ content_margin_top = 6.0
 [node name="Composer" type="Node" parent="."]
 script = ExtResource("7_7f1nh")
 
-[node name="WindowManager" type="Control" parent="."]
+[node name="WindowManager" type="Control" parent="." node_paths=PackedStringArray("prompt")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,6 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("4_arrft")
+prompt = NodePath("../PromptContainer")
 
 [node name="DISPLAY_TIMERS" type="PanelContainer" parent="."]
 visible = false

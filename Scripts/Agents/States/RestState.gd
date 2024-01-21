@@ -23,7 +23,7 @@ func update(delta: float, agent: Node, camera: Node):
 		activity_manager.reserve(activity_instance.activity_id, agent);
 		agent.current_activity = activity_instance;
 		agent.navigation.cancel_nav();
-		print("Got Activity -> ", activity_instance.activity_id);
+		print(" [A_REST] -> <", agent.adventurer.adv_name(), "> Got Activity :: '", activity_instance.activity_id, "'");
 	pass;
 
 func end() -> StateReference:

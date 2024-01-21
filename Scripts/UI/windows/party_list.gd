@@ -6,33 +6,16 @@ const EDIT_IDLE_TOOLTIP = "Edit party.";
 const EDIT_ACTIVE_TOOLTIP = "Cannot edit party when it's out on a mission.";
 const PAGE_SIZE = 6;
 var _page: int = 0;
+var _window_base: Node = null;
+var _adv_manager : AdventurerManager = null;
+var _on_close_action: Callable = func (): _window_base._manager.process_command("WINDOW:FORCE_CLOSE:EDIT_PARTY");
 
 var idle_icon = ResourceLoader.load('res://Textures/Icons/snooze.png');
 var active_icon = ResourceLoader.load('res://Textures/Icons/flag.png');
 
 
-var test_parties = [
-	Party.new("Alpha", [1, 2]), 
-	Party.new("Beta", [1], Party.PartyStatus.ON_MISSION),
-	Party.new("Gamma", [1]),
-	Party.new("Delta", [1]),
-	Party.new("Epsilon", [1]),
-	Party.new("Zeta", [1]),
-	Party.new("Eta", [1]),
-	Party.new("Theta", [1]),
-	Party.new("Iota", [1]),
-	Party.new("Kappa", [1], Party.PartyStatus.ON_MISSION),
-	Party.new("Mu", [1], Party.PartyStatus.ON_MISSION),
-	Party.new("Delta", [1]),
-	Party.new("Epsilon", [1]),
-	Party.new("Zeta", [1]),
-	Party.new("Eta", [1]),
-	Party.new("Theta", [1], Party.PartyStatus.ON_MISSION)
-];
-
-
-
 func _ready():
+	_adv_manager = get_node("/root/Root/Adventurers");
 	_draw_list();
 
 func _draw_list():
@@ -40,17 +23,18 @@ func _draw_list():
 	get_node("LIST/PAGINATION/PAGE_NUM").text = str(_page + 1);
 	get_node("LIST/CREATE_PARTY").tooltip_text = "Form a new party from scratch.";
 	for i in content_parent.get_children().size():
-		var has_item = test_parties.size() > i + (_page * PAGE_SIZE);
-		populate_item(content_parent.get_child(i), test_parties[i + (_page * PAGE_SIZE)] if has_item else null);
+		var has_item = _adv_manager._parties.size() > i + (_page * PAGE_SIZE);
+		populate_item(content_parent.get_child(i), _adv_manager._parties[i + (_page * PAGE_SIZE)] if has_item else null, i);
 
 
 func change_page(delta: int):
-	var zero_offset = 1 if test_parties.size() % PAGE_SIZE == 0 else 0;
-	var page_max = floori(float(test_parties.size()) / float(PAGE_SIZE));
+	var zero_offset = 1 if _adv_manager._parties.size() % PAGE_SIZE == 0 else 0;
+	var page_max = floori(float(_adv_manager._parties.size()) / float(PAGE_SIZE));
 	_page = clampi(_page + delta, 0, page_max - zero_offset);
+	_page = maxi(0, _page);
 	_draw_list();
 
-func populate_item(list_item: Node, party: Party):
+func populate_item(list_item: Node, party: Party, index: int):
 	list_item.visible = party != null;
 	if list_item.visible != true: return;
 	list_item.get_child(0).text = party._title;
@@ -59,6 +43,8 @@ func populate_item(list_item: Node, party: Party):
 	list_item.get_child(-1).tooltip_text = IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else ACTIVE_TOOLTIP;
 	list_item.get_child(-2).disabled = party._status != Party.PartyStatus.IDLE;
 	list_item.get_child(-2).tooltip_text = EDIT_IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else EDIT_ACTIVE_TOOLTIP;
+	list_item.get_child(-2).pressed.connect(func(): _adv_manager.party_edited = party); # Here we also will need to call for the party edit window to be reset to show new data.
+	list_item.get_child(-3).pressed.connect(func(): _on_delete_btn(party._title, index));
 	pass;
 
 
@@ -68,3 +54,23 @@ func _on_pagination_minus_pressed():
 
 func _on_pagination_plus_pressed():
 	change_page(1);
+
+func _on_create_party_pressed():
+	_adv_manager.create_party();
+	_window_base._manager.process_command("WINDOW:RESET:EDIT_PARTY", get_global_mouse_position());
+	# Open window for editing party.
+	pass # Replace with function body.
+
+func _on_delete_btn(party_title, index):
+	_window_base.create_prompt(
+		'Delete Party', 
+		str('Are you sure you want to delete party "', party_title, '"?'),
+		'res://Textures/Icons/options.png',
+		'Yes, Delete Party',
+		'No',
+		func(): 
+			_adv_manager._parties.remove_at(index); 
+			_draw_list();
+	);
+
+

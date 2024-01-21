@@ -40,17 +40,17 @@ func _on_set_prompt(prompt_obj):
 	var data = _verify_prompt(prompt_obj);
 	_obj = data.duplicate(true);
 	_obj['type'] = 'action';
-	_prompt_title.text = str(data['prompt_title']);
-	_prompt_warning.text = str("[i]", data['prompt_warning'], "[/i]");
-	var has_icon = data.has('prompt_icon');
+	_prompt_title.text = str(_obj['prompt_title']);
+	_prompt_warning.text = str("[i]", _obj['prompt_warning'], "[/i]");
+	var has_icon = _obj.has('prompt_icon');
 	_prompt_icon.visible = has_icon;
-	_prompt_icon.texture = ResourceLoader.load(data['prompt_icon']);
-	var has_no = data.has('no_option');
+	_prompt_icon.texture = ResourceLoader.load(_obj['prompt_icon']);
+	var has_no = _obj.has('no_option');
 	_no_option.visible = has_no;
-	_no_option.text = data['no_option'] if has_no else "";
-	var has_ok = data.has('ok_option');
+	_no_option.text = _obj['no_option'] if has_no else "";
+	var has_ok = _obj.has('ok_option');
 	_ok_option.visible = has_ok;
-	_ok_option.text = data['ok_option'] if has_ok else "";
+	_ok_option.text = _obj['ok_option'] if has_ok else "";
 	get_tree().paused = true;
 		
 	pass # Replace with function body.
@@ -59,5 +59,8 @@ func _on_no_pressed():
 	set_prompt.emit(null);
 
 func _on_ok_pressed():
-	_ctx_menu.command_msg.emit(_obj);
+	if _obj.has('ok_callback'):
+		_obj['ok_callback'].call();
+	else:
+		_ctx_menu.command_msg.emit(_obj);
 	set_prompt.emit(null);

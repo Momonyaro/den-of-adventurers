@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgiunjcdocb1x"]
+
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_r12uq"]
+[ext_resource type="Script" path="res://Scripts/UI/windows/edit_party.gd" id="2_4pgr4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[node name="EDIT_PARTY" type="Panel"]
+texture_filter = 1
+clip_contents = true
+offset_right = 360.0
+offset_bottom = 448.0
+theme = ExtResource("1_r12uq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
+script = ExtResource("2_4pgr4")
+
+[node name="CLOSE_BTN" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -25.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+text = "Close"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 29.0
+offset_right = -10.0
+offset_bottom = 55.0
+grow_horizontal = 2
+theme = ExtResource("1_r12uq")
+placeholder_text = "Enter Text..."
+max_length = 30
+
+[node name="Label" type="Label" parent="LineEdit"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -19.0
+offset_bottom = 2.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 15
+text = "Title (19/30)"
+horizontal_alignment = 3
+
+[connection signal="pressed" from="CLOSE_BTN" to="." method="_on_close_btn_pressed"]
+[connection signal="text_changed" from="LineEdit" to="." method="_on_title_text_changed"]

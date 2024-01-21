@@ -51,6 +51,9 @@ func _on_win_close():
 func play_audio(stream_path: String):
 	_manager.get_parent().get_child(0).play(stream_path);
 
+func create_prompt(title: String, warning: String, icon: String, ok_option: String, no_option: String, ok_callback: Callable):
+	_manager.create_prompt(title, warning, icon, ok_option, no_option, ok_callback);
+
 func _on_win_header_gui_input(event):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
 		_manager._on_grab_header(_key, get_global_mouse_position());

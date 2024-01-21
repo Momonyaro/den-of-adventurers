@@ -3,6 +3,7 @@ extends Control
 #id should be 'WINDOW:[INSTRUCTION]:[ID]' e.g.: 'WINDOW:OPEN:SYS_INFO'
 const OPEN_ANIM_LENGTH = 0.26;
 
+@export var prompt: Node = null;
 @export var window_base: PackedScene = preload("res://Prefabs/UI/windows/window_base.tscn");
 var preview_rect: PackedScene = preload("res://Prefabs/UI/windows/preview_rect.tscn");
 
@@ -52,7 +53,7 @@ func _process(delta):
 		
 	pass;
 
-func process_command(command: String, start_pos: Vector2):
+func process_command(command: String, start_pos: Vector2 = Vector2()):
 	var split = command.split(':');
 	if split[0] != "WINDOW": return;
 	var set_size = null;
@@ -181,6 +182,19 @@ func _clamp_impostor_pos(_pos: Vector2, _size: Vector2) -> Vector2:
 	if _pos.x + _size.x >= glo_pos.x + glo_size.x: _pos.x = glo_pos.x + glo_size.x - _size.x;
 	if _pos.y + _size.y >= glo_pos.y + glo_size.y: _pos.y = glo_pos.y + glo_size.y - _size.y;
 	return _pos;
+
+func create_prompt(title: String, warning: String, icon: String, ok_option: String, no_option: String, ok_callback: Callable):
+	
+	var item = {
+		'prompt_title': title,
+		'prompt_warning': warning,
+		'prompt_icon': icon,
+		'ok_option': ok_option,
+		'ok_callback': ok_callback,
+		'no_option': no_option,
+	};
+	
+	prompt.set_prompt.emit(item);
 
 func _on_grab_header(ref: String, inital_pos: Vector2):
 	var _instance: Array = _get_instance(ref);
