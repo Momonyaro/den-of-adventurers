@@ -24,6 +24,7 @@ func populate_fields():
 	var member_cap = get_node("MEMBER_LIST/CAP") as Label;
 
 	var party = _adv_manager.party_edited;
+	print(party._title);
 	var members = party._members;
 	title_label.text = str("Title");
 	title_cap.text = str("(", party._title.length(), "/", title_edit.max_length, ")");
@@ -53,6 +54,7 @@ func populate_item(list_item: Node, adventurer: Adventurer, in_party: bool):
 
 func _on_close_btn_pressed():
 	_adv_manager.upsert_party(_adv_manager.party_edited);
+	_adv_manager.party_edited = null;
 	_window_base._on_win_close();
 	pass # Replace with function body.
 
@@ -62,6 +64,7 @@ func _on_title_text_changed(new_text:String):
 	var title_cap = get_node("LineEdit/CAP") as Label;
 	
 	_adv_manager.party_edited._title = new_text;
+	#title_edit.text = new_text;
 	title_cap.text = str("(", new_text.length(), "/", title_edit.max_length, ")");
 
 	pass # Replace with function body.
