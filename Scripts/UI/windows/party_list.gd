@@ -16,6 +16,8 @@ var active_icon = ResourceLoader.load('res://Textures/Icons/flag.png');
 
 func _ready():
 	_adv_manager = get_node("/root/Root/Adventurers");
+
+func _process(delta):
 	_draw_list();
 
 func _draw_list():
@@ -43,8 +45,10 @@ func populate_item(list_item: Node, party: Party, index: int):
 	list_item.get_child(-1).tooltip_text = IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else ACTIVE_TOOLTIP;
 	list_item.get_child(-2).disabled = party._status != Party.PartyStatus.IDLE;
 	list_item.get_child(-2).tooltip_text = EDIT_IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else EDIT_ACTIVE_TOOLTIP;
-	list_item.get_child(-2).pressed.connect(func(): _adv_manager.party_edited = party); # Here we also will need to call for the party edit window to be reset to show new data.
-	list_item.get_child(-3).pressed.connect(func(): _on_delete_btn(party._title, index));
+	if (list_item.get_child(-2) as Button).pressed.get_connections().size() == 0:
+		list_item.get_child(-2).pressed.connect(func(): _adv_manager.party_edited = Party.copy(party); _window_base._manager.process_command("WINDOW:RESET:EDIT_PARTY", get_global_mouse_position()), CONNECT_ONE_SHOT);
+	if (list_item.get_child(-3) as Button).pressed.get_connections().size() == 0:
+		list_item.get_child(-3).pressed.connect(func(): _on_delete_btn(party._title, index), CONNECT_ONE_SHOT);
 	pass;
 
 
@@ -70,7 +74,7 @@ func _on_delete_btn(party_title, index):
 		'No',
 		func(): 
 			_adv_manager._parties.remove_at(index); 
-			_draw_list();
+			change_page(0);
 	);
 
 

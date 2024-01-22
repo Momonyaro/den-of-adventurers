@@ -10,16 +10,16 @@ func _ready():
 	_game_manager = get_node("/root/Root/Game");
 	get_node("%content/select_btn").pressed.connect(_on_select_btn);
 
-func populate(adventurer: Adventurer):
+func populate(adventurer: Adventurer, party: Party):
 	content.visible = adventurer != null;
 	if !content.visible:
 		return;
 	
 	_id = adventurer._unique_id;
-	_draw_info(adventurer);
+	_draw_info(adventurer, party);
 	pass;
 		
-func _draw_info(adventurer: Adventurer):
+func _draw_info(adventurer: Adventurer, party: Party):
 	var is_human = adventurer._race == Adventurer.Race.HUMAN;	
 	
 	get_node("%content/name").text = adventurer.adv_name();
@@ -27,6 +27,7 @@ func _draw_info(adventurer: Adventurer):
 	get_node("%content/race").tooltip_text = "Human" if is_human else "Demi-Human";
 	get_node("%content/level_race").text = str("Level ", adventurer._level, " ", adventurer._class);
 	get_node("%content/current/text").text = str("Currently: ", adventurer.adv_status());
+	get_node("content/party_status").text = str("Party: ", "NONE" if party == null else str("'", party._title, "'"));
 
 func _on_select_btn():
 	_game_manager.select_agent.emit(_id);

@@ -42,8 +42,7 @@ const window_data = {
 	},
 	'EDIT_PARTY': {
 		'title': 'Edit Party',
-		'content_ref': 'res://Prefabs/UI/windows/party_edit.tscn',
-		'has_close_btn': false
+		'content_ref': 'res://Prefabs/UI/windows/party_edit.tscn'
 	}
 }
 

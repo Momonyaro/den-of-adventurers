@@ -24,16 +24,15 @@ border_color = Color(0, 0, 0, 1)
 [node name="PARTY_LIST_ITEM" type="Panel"]
 custom_minimum_size = Vector2(0, 53)
 
-[node name="Label" type="RichTextLabel" parent="."]
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
 layout_mode = 0
 offset_left = 30.0
 offset_top = 6.0
-offset_right = 161.0
+offset_right = 222.0
 offset_bottom = 30.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("1_ppxjy")
-theme_override_font_sizes/normal_font_size = 15
-bbcode_enabled = true
+theme_override_fonts/font = ExtResource("1_ppxjy")
+theme_override_font_sizes/font_size = 15
 text = "Alpha"
 
 [node name="Label2" type="Label" parent="."]
@@ -83,7 +82,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_e7ts1")
 icon = ExtResource("3_qjvxv")
 icon_alignment = 1
 
-[node name="Button2" type="Button" parent="."]
+[node name="edit_btn" type="Button" parent="."]
 layout_mode = 0
 offset_left = 178.0
 offset_top = 26.0

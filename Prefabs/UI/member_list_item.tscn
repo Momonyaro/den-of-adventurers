@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7xjekru3jo65"]
+
+[ext_resource type="Texture2D" uid="uid://c0t18nhd2xsyy" path="res://Textures/Icons/cross.png" id="1_6inxp"]
+[ext_resource type="Texture2D" uid="uid://cpk4ra55sxwf5" path="res://Textures/Icons/plus.png" id="2_dm4gj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhjdn"]
+content_margin_left = 3.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="MEMBER_LIST_ITEM" type="Panel"]
+custom_minimum_size = Vector2(0, 45)
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 27.0
+offset_bottom = 27.0
+theme_override_constants/check_v_offset = 1
+theme_override_icons/checked = ExtResource("1_6inxp")
+theme_override_icons/unchecked = ExtResource("2_dm4gj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jhjdn")
+icon_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 6.0
+offset_right = 177.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 15
+text = "Adventurer Name"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 23.0
+offset_right = 177.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 12
+text = "Level 5 Warrior"

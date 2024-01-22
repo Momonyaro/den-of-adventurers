@@ -76,6 +76,23 @@ func create_party():
 
 	party_edited = Party.new(first_available, [], Party.PartyStatus.IDLE);
 
+func upsert_party(party: Party):
+	for i in _parties.size():
+		if _parties[i]._created_timestamp == party._created_timestamp:
+			_parties[i] = party;
+			return;
+	_parties.push_back(party);
+
+func get_party_adventurers(party: Party): 
+	var adventurers = party._members.map(func(m): return _adventurers[m]);
+	return adventurers;
+
+func get_adventurer_party(adventurer: Adventurer):
+	for party in _parties:
+		if (party._members.has(adventurer._unique_id)):
+			return party;
+	return null;
+
 func _on_timer_done(id: String):
 	match id:
 		TIMER_recruit_refresh:

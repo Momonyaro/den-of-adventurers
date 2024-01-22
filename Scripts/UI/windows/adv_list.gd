@@ -27,8 +27,10 @@ func _populate_list(adventurers: Array):
 	for i in 6:
 		var index = i + _start_index;
 		var item = null;
+		var party = null;
 		if adventurers.size() > index:
 			item = adventurers[index];
-		content_parent.get_child(i).populate(item);
+			party = _adv_manager.get_adventurer_party(item);
+		content_parent.get_child(i).populate(item, party);
 
 	pass;

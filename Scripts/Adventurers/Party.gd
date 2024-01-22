@@ -4,13 +4,20 @@ class_name Party
 enum PartyStatus {IDLE, GOING_TO_MISSION, ON_MISSION, RETURNING_FROM_MISSION, RETURNED}
 
 var _title : String = "";
+var _created_timestamp : String = "";
 var _members : Array = []
 var _status : PartyStatus = PartyStatus.IDLE;
 
 func _init(title: String, members: Array, status: PartyStatus = PartyStatus.IDLE):
 	_title = title;
+	_created_timestamp = Time.get_time_string_from_unix_time(floori(Time.get_unix_time_from_system()));
 	_members = members;
 	_status = status;
+
+static func copy(party: Party):
+	var new_party = Party.new(party._title, party._members, party._status);
+	new_party._created_timestamp = party._created_timestamp;
+	return new_party;
 
 func get_atk_score() -> int:
 	var score : int = 0;
