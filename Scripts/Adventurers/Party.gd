@@ -10,7 +10,7 @@ var _status : PartyStatus = PartyStatus.IDLE;
 
 func _init(title: String, members: Array, status: PartyStatus = PartyStatus.IDLE):
 	_title = title;
-	_created_timestamp = Time.get_time_string_from_unix_time(floori(Time.get_unix_time_from_system()));
+	_created_timestamp = Time.get_datetime_string_from_unix_time(floori(Time.get_unix_time_from_system()));
 	_members = members;
 	_status = status;
 

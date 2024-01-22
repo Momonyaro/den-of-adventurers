@@ -24,7 +24,6 @@ func populate_fields():
 	var member_cap = get_node("MEMBER_LIST/CAP") as Label;
 
 	var party = _adv_manager.party_edited;
-	print(party._title);
 	var members = party._members;
 	title_label.text = str("Title");
 	title_cap.text = str("(", party._title.length(), "/", title_edit.max_length, ")");

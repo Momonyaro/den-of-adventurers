@@ -76,6 +76,12 @@ func create_party():
 
 	party_edited = Party.new(first_available, [], Party.PartyStatus.IDLE);
 
+func get_party(created: String):
+	for party in _parties:
+		if party._created_timestamp == created:
+			return party;
+	return null;
+
 func upsert_party(party: Party):
 	for i in _parties.size():
 		if _parties[i]._created_timestamp == party._created_timestamp:
