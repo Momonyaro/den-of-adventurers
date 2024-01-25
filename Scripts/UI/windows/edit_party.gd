@@ -72,6 +72,7 @@ func _on_edit_members(party: Party, changed: String):
 	if party._members.has(changed):
 		party._members = party._members.filter(func (m): return m != changed);
 	else:
+		# Here we should check if the adventurer is in another party.
 		party._members.push_back(changed);
 		if party._members.size() > 3:
 			party._members.resize(3);
