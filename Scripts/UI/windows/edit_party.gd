@@ -32,6 +32,7 @@ func populate_fields():
 	member_cap.text = str('(', party._members.size(), '/3)');
 	var content_parent = get_node("MEMBER_LIST/CONTENT_PARENT");
 	var recruited = _adv_manager.recruited_adv();
+	recruited.sort_custom(func (a,b): return a.adv_name()[0] < b.adv_name()[0]);
 	get_node("PAGINATION/PAGE_NUM").text = str(_page + 1);
 	for i in content_parent.get_children().size():
 		var has_item = recruited.size() > i + (_page * PAGE_SIZE);
@@ -72,7 +73,42 @@ func _on_edit_members(party: Party, changed: String):
 	if party._members.has(changed):
 		party._members = party._members.filter(func (m): return m != changed);
 	else:
-		# Here we should check if the adventurer is in another party.
-		party._members.push_back(changed);
-		if party._members.size() > 3:
+		if (party._members.size() + 1) > 3:
 			party._members.resize(3);
+			return;
+
+		var existing_party = _adv_manager.get_adventurer_party(changed);
+		# Here we should check if the adventurer is in another party.
+
+		if existing_party:
+			var adv = _adv_manager._adventurers[changed];
+			if existing_party._members.size() == 1:
+				_window_base.create_prompt(
+					'Move Adventurer', 
+					str('Are you sure you want to move ', adv.adv_name(), '? This action will delete party "', party._title, '" since it has no remaining members!'),
+					'res://Textures/Icons/options.png',
+					str('Move ', adv.adv_name(), ' anyway'),
+					'Cancel',
+					func(): 
+						_adv_manager.remove_party_member(changed);
+						_adv_manager.remove_empty_parties();
+						party._members.push_back(changed);
+						populate_fields();
+				);
+			else:
+				_window_base.create_prompt(
+					'Move Adventurer', 
+					str('Are you sure you want to move ', adv.adv_name(), '?'),
+					'res://Textures/Icons/options.png',
+					str('Move ', adv.adv_name()),
+					'Cancel',
+					func(): 
+						_adv_manager.remove_party_member(changed);
+						_adv_manager.remove_empty_parties();
+						party._members.push_back(changed);
+						populate_fields();
+				);
+			pass;
+		else:
+			party._members.push_back(changed);
+

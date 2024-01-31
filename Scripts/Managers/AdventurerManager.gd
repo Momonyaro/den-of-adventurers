@@ -89,13 +89,22 @@ func upsert_party(party: Party):
 			return;
 	_parties.push_back(party);
 
+func remove_party_member(unique_id: String):
+	for i in _parties.size():
+		if (_parties[i]._members.has(unique_id)):
+			_parties[i]._members.erase(unique_id);
+			break;
+
+func remove_empty_parties():
+	_parties = _parties.filter(func (p): return p._members.size() > 0);
+
 func get_party_adventurers(party: Party): 
 	var adventurers = party._members.map(func(m): return _adventurers[m]);
 	return adventurers;
 
-func get_adventurer_party(adventurer: Adventurer):
+func get_adventurer_party(adventurer_id: String):
 	for party in _parties:
-		if (party._members.has(adventurer._unique_id)):
+		if (party._members.has(adventurer_id)):
 			return party;
 	return null;
 

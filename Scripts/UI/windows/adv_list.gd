@@ -29,8 +29,8 @@ func _populate_list(adventurers: Array):
 		var item = null;
 		var party = null;
 		if adventurers.size() > index:
-			item = adventurers[index];
-			party = _adv_manager.get_adventurer_party(item);
+			item = adventurers[index] as Adventurer;
+			party = _adv_manager.get_adventurer_party(item._unique_id);
 		content_parent.get_child(i).populate(item, party);
 
 	pass;
