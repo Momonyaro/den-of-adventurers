@@ -45,10 +45,17 @@ func populate_item(list_item: Node, party: Party, index: int):
 	list_item.get_child(-1).tooltip_text = IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else ACTIVE_TOOLTIP;
 	list_item.get_child(-2).disabled = party._status != Party.PartyStatus.IDLE;
 	list_item.get_child(-2).tooltip_text = EDIT_IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else EDIT_ACTIVE_TOOLTIP;
-	if (list_item.get_child(-2) as Button).pressed.get_connections().size() == 0: # I'm thinking that this line is acting a little sus... I think it's giving an old version of the party instead of the newest one...
-		list_item.get_child(-2).pressed.connect(func(): _adv_manager.party_edited = Party.copy(_adv_manager.get_party(party._created_timestamp)); _window_base._manager.process_command("WINDOW:RESET:EDIT_PARTY", get_global_mouse_position()), CONNECT_ONE_SHOT);
-	if (list_item.get_child(-3) as Button).pressed.get_connections().size() == 0:
-		list_item.get_child(-3).pressed.connect(func(): _on_delete_btn(party._title, index), CONNECT_ONE_SHOT);
+	var _edit_func = func(): _adv_manager.party_edited = Party.copy(_adv_manager.get_party(party._created_timestamp)); _window_base._manager.process_command("WINDOW:RESET:EDIT_PARTY", get_global_mouse_position());
+	var _del_func = func(): _on_delete_btn(party._title, index);
+	var edit_btn = list_item.get_child(-2) as Button;
+	var del_btn = list_item.get_child(-3) as Button;
+
+	if edit_btn.pressed.is_connected(_edit_func):
+		edit_btn.pressed.disconnect(_edit_func);
+	edit_btn.pressed.connect(_edit_func);
+	if del_btn.pressed.is_connected(_del_func):
+		del_btn.pressed.disconnect(_del_func);
+	del_btn.pressed.connect(_del_func);
 	pass;
 
 
