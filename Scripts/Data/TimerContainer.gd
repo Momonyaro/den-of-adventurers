@@ -23,11 +23,17 @@ func _physics_process(delta):
 	to_delete.clear();
 	pass;
 
-func create_timer(length: float, description: String = "") -> String:
+func create_timer(length: float, description: String = "", startOnCreate: bool = true) -> String:
 	var id = _create_id();
-	_timers[id] = InternalTimer.new(id, length, description);
-	print(str(D_T, " -> <", id, "> :: [", _timers[id].get_timer_text(),"] Created."));
+	_timers[id] = InternalTimer.new(id, length, description, startOnCreate);
+	print(str(D_T, " -> <", id, "> :: ", "(PAUSED) " if !startOnCreate else "", "[", _timers[id].get_timer_text(),"] Created."));
 	return id;
+
+func start_timer(id: String):
+	_timers[id]._started = true;
+
+func pause_timer(id: String):
+	_timers[id]._started = false;
 
 func delete_timer(id: String):
 	_timers.erase(id);
@@ -47,16 +53,20 @@ class InternalTimer:
 	var _value : float;
 	var _description : String;
 	var _mark_delete : bool;
+	var _started : bool;
 	
-	func _init(id: String, length: float, description: String = ""):
+	func _init(id: String, length: float, description: String = "", startOnCreate: bool = true):
 		_id = id;
 		_length = length;
 		_value = 0;
 		_mark_delete = false;
 		_description = description;
+		_started = startOnCreate;
 		pass;
 	
 	func tick(delta: float) -> bool:
+		if !_started:
+			return false;
 		_value = clampf(_value + delta, 0, _length);
 		_mark_delete = (_value == _length);
 		return _mark_delete;

@@ -1,0 +1,25 @@
+[gd_resource type="JSON" format=3 uid="uid://dit1s380ixxk"]
+
+[resource]
+data = [{
+"Body": "Recently, there has been a surprisingly agressive wolf pack harassing the south-east end of Ogryll. We ask for the Guild's help in taking care of this pack.",
+"Duration": 110,
+"GuildTierRange": [1, 5],
+"ID": "ogryll_lorna_wolf_pack",
+"Location": "Ogryll",
+"PrevRequests": [],
+"Requestor": "Lorna Faertag, Herbalist",
+"Requirements": [],
+"Rewards": ["gold$60"],
+"Title": "Wolf Pack Harassing Ogryll"
+}, {
+"Body": "A shipment of ore is being taken to Lyre, the capital. We request aid in ensuring the contents make it without incident.",
+"GuildTierRange": [1, 0],
+"ID": "lyre_tradehall_ore_escort",
+"Location": "Lyre",
+"PrevRequests": ["ogryll_lorna_wolf_pack"],
+"Requestor": "Lyre Tradehall",
+"Requirements": ["PartyMembersAbove$1"],
+"Rewards": ["gold$200"],
+"Title": "Escort Shipment to Lyre"
+}]

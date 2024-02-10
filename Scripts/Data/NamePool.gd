@@ -13,6 +13,7 @@ var used_names : Array[String] = [];
 func _init():
 	parse_name_file(blachol_txt, blachol_family, blachol_given);
 	#parse_name_file(vignarran_txt, vignarran_family, vignarran_given);
+
 	pass;
 
 func get_new_name(nationality: Adventurer.Nationality) -> Array[String]:

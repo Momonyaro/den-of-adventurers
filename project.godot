@@ -34,7 +34,7 @@ enabled=PackedStringArray("res://addons/console/plugin.cfg", "res://addons/scrip
 
 [global]
 
-app_version="Sound Sleep -- (v1.2a)"
+app_version="Gathering Crowds -- (v1.3a)"
 
 [input]
 

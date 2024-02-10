@@ -91,7 +91,7 @@ static func get_menu_data():
 		},
 		'Requests': {
 			'type': 'action',
-			'msg': 'WINDOW_REQUESTS_START'
+			'msg': 'WINDOW:RESET:REQUESTS'
 		}
 	},
 	'Programs': {

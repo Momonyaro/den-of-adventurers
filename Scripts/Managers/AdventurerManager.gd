@@ -82,6 +82,10 @@ func get_party(created: String):
 			return party;
 	return null;
 
+func get_party_by_index(index: int):
+	return _parties[index];
+	return null;
+
 func upsert_party(party: Party):
 	for i in _parties.size():
 		if _parties[i]._created_timestamp == party._created_timestamp:

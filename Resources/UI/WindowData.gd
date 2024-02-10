@@ -43,6 +43,10 @@ const window_data = {
 	'EDIT_PARTY': {
 		'title': 'Edit Party',
 		'content_ref': 'res://Prefabs/UI/windows/party_edit.tscn'
+	},
+	'REQUESTS': {
+		'title': 'Requests',
+		'content_ref': 'res://Prefabs/UI/windows/requests.tscn'
 	}
 }
 
