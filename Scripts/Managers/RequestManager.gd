@@ -3,7 +3,9 @@ class_name RequestManager;
 
 @onready var request_data: Array = ResourceLoader.load("res://Resources/Requests/RequestData.tres").data;
 
-var _active_requests: Dictionary = {}; 
+var _active_requests: Dictionary = {
+	'ogryll_herbalist_wolf_pack': {}
+}; 
 var _completed_requests: Array[String] = []; 
 
 func _ready():
@@ -44,7 +46,13 @@ func get_requests() -> Dictionary:
 func _try_get_request(id: String) -> Array: # return (success, result)
 	var items = request_data.filter(func (i): return i['ID'] == id)
 	if items.size() > 0:
-		return [true, RequestItem.new(items[0])];
+		var item = RequestItem.new(items[0]);
+		var is_active = _active_requests.keys().has(item._id);
+		var is_complete = _completed_requests.has(item._id);
+		item._is_active = is_active;
+		item._is_completed = is_complete;
+
+		return [true, item];
 	else:
 		return [false, null]
 

@@ -22,6 +22,10 @@ func _open_request(detail_container, request_container):
 		return;
 	
 	var request = result[1] as RequestManager.RequestItem;
+
+	var bottom_section = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER");
+	bottom_section.visible = (!request._is_active && !request._is_completed);
+
 	title.text = request._title;
 	requestor.text = request._requestor;
 	body.text = request._body;

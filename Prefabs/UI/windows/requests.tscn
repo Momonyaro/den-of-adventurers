@@ -87,6 +87,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_evbc6")
 
 [node name="REQUEST_LIST" type="Panel" parent="HBoxContainer/REQUEST_HOLDER"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -181,7 +182,6 @@ texture_normal = ExtResource("2_ql2ty")
 stretch_mode = 3
 
 [node name="REQUEST_DETAILS" type="Panel" parent="HBoxContainer/REQUEST_HOLDER"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -312,7 +312,10 @@ patch_margin_bottom = 2
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="TITLE5" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
+[node name="BTM_CONTAINER" type="VBoxContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
+layout_mode = 2
+
+[node name="TITLE5" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 12
@@ -320,10 +323,10 @@ text = "Available Parties"
 vertical_alignment = 2
 autowrap_mode = 3
 
-[node name="dropdown" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer" instance=ExtResource("11_rb8df")]
+[node name="dropdown" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER" instance=ExtResource("11_rb8df")]
 layout_mode = 2
 
-[node name="edit_btn" type="Button" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
+[node name="edit_btn" type="Button" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 mouse_default_cursor_shape = 2
