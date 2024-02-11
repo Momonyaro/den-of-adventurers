@@ -16,13 +16,13 @@ func _ready():
 	var options = _get_options(screen_size.x, screen_size.y);
 	
 	for option in options:
-		_dropdown.add_item(option[0], option[1]);
+		_dropdown.add_item(option[0], "", option[1]);
 	
 	var default = _get_current();
 	_dropdown.set_active_no_event(default[0], default[1])
 
-func _on_new_value(label: String, value: int):
-	match value:
+func _on_new_value(label: String, value: String, id: int):
+	match id:
 		540: _set_res(960, 540);
 		720: _set_res(1280, 720);
 		768: _set_res(1366, 768);

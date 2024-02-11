@@ -6,7 +6,7 @@ extends Panel
 @export var _disabled = false;
 var _dropdown_item = preload("res://Prefabs/UI/components/dropdown_item.tscn");
 
-signal new_current(label: String, value: int);
+signal new_current(label: String, value: String, id: int);
 
 var _is_open = false;
 var _current_id: int = 0;
@@ -24,10 +24,10 @@ func _process(delta):
 				_set_active(item);
 				break;
 
-func add_item(label: String, id: int = -1):
+func add_item(label: String, value: String, id: int = -1):
 	var instance = _dropdown_item.instantiate();
 	_dropdown_content.add_child(instance);
-	_items.push_back(DropdownItem.new(instance, label, id));
+	_items.push_back(DropdownItem.new(instance, label, value, id));
 	self.self_modulate = Color("bac6da") if _is_open or _disabled else Color("#F5F5F5");
 	_sort_items();
 	pass;
@@ -39,7 +39,7 @@ func _sort_items():
 func _set_active(item: DropdownItem):
 	_current_id = item._id;
 	_current_items.get_child(0).text = item._label.text;
-	new_current.emit(item._label.text, item._id);
+	new_current.emit(item._label.text, item._value, item._id);
 	_set_foldout(false);
 
 func set_active_no_event(label: String, value: int):
@@ -62,13 +62,15 @@ func _on_dropdown_click(event:InputEvent):
 class DropdownItem:
 	var _instance: Node = null;
 	var _label: Label = null;
+	var _value: String = "";
 	var _id: int = -1;
 	var _hovered: bool = false;
 	
-	func _init(instance: Node, label: String, id: int):
+	func _init(instance: Node, label: String, value: String, id: int):
 		_instance = instance;
 		_label = instance.get_child(0);
 		_label.text = label;
+		_value = value;
 		_id = id;
 	
 	func _set_active(active: bool, secondary: bool):

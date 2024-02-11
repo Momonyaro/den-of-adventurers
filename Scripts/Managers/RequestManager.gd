@@ -31,8 +31,10 @@ func get_requests() -> Dictionary:
 
 	for request in requests:
 		if _active_ids.has(request._id):
+			request._is_active = true;
 			to_return['Active'].push_back(request);
 		elif _completed_ids.has(request._id):
+			request._is_completed = true;
 			to_return['Completed'].push_back(request);
 		else:
 			to_return['Available'].push_back(request);
@@ -42,7 +44,7 @@ func get_requests() -> Dictionary:
 func _try_get_request(id: String) -> Array: # return (success, result)
 	var items = request_data.filter(func (i): return i['ID'] == id)
 	if items.size() > 0:
-		return [true, items[0]];
+		return [true, RequestItem.new(items[0])];
 	else:
 		return [false, null]
 
@@ -70,6 +72,8 @@ class RequestItem:
 	var _previous_requests: Array = [];
 	var _requirements: Array = [];
 	var _rewards: Array = [];
+	var _is_active: bool = false;
+	var _is_completed: bool = false;
 
 	func _init(dict: Dictionary):
 		_title = dict['Title'] if dict.has('Title') else '';

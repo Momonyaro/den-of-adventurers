@@ -187,6 +187,7 @@ process_material = SubResource("ParticleProcessMaterial_v047h")
 draw_pass_1 = SubResource("TextMesh_5yyk0")
 
 [node name="Requests" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("6_abixe")
 
 [node name="Timers" type="Node" parent="."]
