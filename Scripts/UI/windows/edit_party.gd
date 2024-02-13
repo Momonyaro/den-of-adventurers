@@ -49,7 +49,7 @@ func populate_item(list_item: Node, adventurer: Adventurer, in_party: bool):
 		populate_fields();, CONNECT_ONE_SHOT
 	);
 	(list_item.get_child(1) as Label).text = adventurer.adv_name();
-	(list_item.get_child(2) as Label).text = str("Level ", adventurer._level, " ", adventurer._class);
+	(list_item.get_child(2) as Label).text = str("Level ", adventurer.adv_level(), " ", adventurer._class);
 	pass;
 
 func _on_close_btn_pressed():

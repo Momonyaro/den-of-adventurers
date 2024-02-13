@@ -1,7 +1,8 @@
 extends Panel
+class_name Dropdown
 
-@onready var _dropdown: Node = get_child(1);
-@onready var _dropdown_content: Node = get_child(1).get_child(0);
+@onready var _dropdown: Node = get_child(2);
+@onready var _dropdown_content: Node = get_child(2).get_child(0);
 @onready var _current_items: Node = get_child(0).get_child(0);
 @export var _disabled = false;
 var _dropdown_item = preload("res://Prefabs/UI/components/dropdown_item.tscn");
@@ -12,9 +13,11 @@ var _is_open = false;
 var _current_id: int = 0;
 var _items = [];
 
-func _process(delta):
-	self.mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN if _disabled else Control.CURSOR_POINTING_HAND;
+func _process(_delta):
 	var mouse_pos = get_global_mouse_position();
+	
+	$DISABLE_RECT.visible = _disabled;
+
 	for item in _items:
 		item._set_active(item._is_hovered(mouse_pos), item._id == _current_id);
 	
@@ -32,14 +35,27 @@ func add_item(label: String, value: String, id: int = -1):
 	_sort_items();
 	pass;
 
+func clear_items():
+	var children = _dropdown_content.get_children();
+	for child in children:
+		child.queue_free();
+
+	_items = [];
+
+func _get_current_item():
+	for item in _items:
+		if item._id == _current_id:
+			return item;
+	return null;
+
 func _sort_items():
 	_items.sort_custom(func(a, b): return a._id < b._id);
 	_current_items.get_child(0).text = _items[0]._label.text;
 
 func _set_active(item: DropdownItem):
 	_current_id = item._id;
-	_current_items.get_child(0).text = item._label.text;
 	new_current.emit(item._label.text, item._value, item._id);
+	set_active_no_event(item._label.text, item._id);
 	_set_foldout(false);
 
 func set_active_no_event(label: String, value: int):

@@ -70,6 +70,12 @@ func _validate_request(request: RequestItem, completed: Array, guildTier: int) -
 
 	return true;
 
+func get_requirement(type: String, value: int) -> Requirement:
+	match (type):
+		"PartyMembersAbove": return PartyMembersAbove.new(value);
+		"NoDemiHumans": return NoDemiHumans.new();
+		_: return null;
+
 class RequestItem:
 	var _title: String = "";
 	var _id: String = "";

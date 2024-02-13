@@ -54,7 +54,7 @@ func _draw_basic_info():
 	get_node("%BaseInfoRect/name").text = str(adventurer.adv_name());
 	get_node("%BaseInfoRect/race").texture = human_icon if is_human else demihuman_icon;
 	get_node("%BaseInfoRect/race").tooltip_text = "Human" if is_human else "Demi-Human";
-	get_node("%BaseInfoRect/level_race").text = str("Level ", adventurer._level, " ", adventurer._class);
+	get_node("%BaseInfoRect/level_race").text = str("Level ", adventurer.adv_level(), " ", adventurer._class);
 	get_node("%BaseInfoRect/state").visible = current_status != "RECRUIT";
 	get_node("%BaseInfoRect/state").text = current_status;
 	get_node("%BaseInfoRect/xp_bar").visible = current_status != "RECRUIT";

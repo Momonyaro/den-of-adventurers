@@ -1,6 +1,7 @@
 extends Node
 
 var _dropdown: Node = null;
+var _last_mode = -1;
 
 func _ready():
 	
@@ -20,6 +21,17 @@ func _ready():
 	
 	var default = _get_current();
 	_dropdown.set_active_no_event(default[0], default[1])
+
+func _process(_delta):
+	var _mode = get_window().mode;
+	var is_fullscreen = _mode == Window.Mode.MODE_EXCLUSIVE_FULLSCREEN;
+	_dropdown._disabled = is_fullscreen;
+	if _mode != _last_mode:
+		var default = _get_current();
+		_dropdown.set_active_no_event(default[0], default[1]);
+	
+	_last_mode = _mode;
+
 
 func _on_new_value(label: String, value: String, id: int):
 	match id:

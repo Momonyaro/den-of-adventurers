@@ -7,12 +7,14 @@ var _title : String = "";
 var _created_timestamp : String = "";
 var _members : Array = []
 var _status : PartyStatus = PartyStatus.IDLE;
+var _current_request_id : String = "";
 
-func _init(title: String, members: Array, status: PartyStatus = PartyStatus.IDLE):
+func _init(title: String, members: Array, status: PartyStatus = PartyStatus.IDLE, current_request_id: String = ""):
 	_title = title;
 	_created_timestamp = Time.get_datetime_string_from_unix_time(floori(Time.get_unix_time_from_system()));
 	_members = members;
 	_status = status;
+	_current_request_id = current_request_id;
 
 static func copy(party: Party):
 	var new_party = Party.new(party._title, party._members, party._status);

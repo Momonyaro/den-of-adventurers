@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfxnh8rfend8s"]
+[gd_scene load_steps=14 format=3 uid="uid://bfxnh8rfend8s"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_11kd4"]
 [ext_resource type="Script" path="res://Scripts/UI/settings/video/scaling_dropdown.gd" id="2_ulpcs"]
 [ext_resource type="PackedScene" uid="uid://dlggxv5xajmh4" path="res://Prefabs/UI/components/dropdown.tscn" id="3_xvup6"]
 [ext_resource type="Script" path="res://Scripts/UI/settings/video/resolution_dropdown.gd" id="4_0o8gg"]
 [ext_resource type="Texture2D" uid="uid://dcefs5w3baws" path="res://Textures/Icons/options.png" id="4_k0nu8"]
+[ext_resource type="Script" path="res://Scripts/UI/settings/video/fullscreen_toggle.gd" id="6_dt5wn"]
+[ext_resource type="Texture2D" uid="uid://c0t18nhd2xsyy" path="res://Textures/Icons/cross.png" id="7_e8fip"]
+[ext_resource type="Texture2D" uid="uid://cpk4ra55sxwf5" path="res://Textures/Icons/plus.png" id="8_sbe3h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
 content_margin_left = 24.0
@@ -30,7 +33,26 @@ bg_color = Color(0, 0, 0, 1)
 border_width_top = 2
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ck7en"]
+content_margin_left = 3.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxiua"]
+content_margin_left = 3.0
+bg_color = Color(0.729412, 0.776471, 0.854902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
 [node name="video_settings" type="Panel"]
+texture_filter = 1
 clip_contents = true
 offset_right = 309.0
 offset_bottom = 349.0
@@ -107,3 +129,25 @@ text = "Resolution:"
 
 [node name="dropdown" parent="MarginContainer/VBoxContainer/resoultion" instance=ExtResource("3_xvup6")]
 layout_mode = 2
+
+[node name="fullscreen" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+script = ExtResource("6_dt5wn")
+
+[node name="scaling_option" type="Label" parent="MarginContainer/VBoxContainer/fullscreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_11kd4")
+theme_override_font_sizes/font_size = 12
+text = "Fullscreen:"
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/fullscreen"]
+layout_mode = 2
+theme_override_constants/check_v_offset = 1
+theme_override_icons/checked = ExtResource("7_e8fip")
+theme_override_icons/unchecked = ExtResource("8_sbe3h")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ck7en")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nxiua")
+icon_alignment = 1

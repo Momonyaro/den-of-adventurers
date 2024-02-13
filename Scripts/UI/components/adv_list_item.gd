@@ -25,7 +25,7 @@ func _draw_info(adventurer: Adventurer, party: Party):
 	get_node("%content/name").text = adventurer.adv_name();
 	get_node("%content/race").texture = human_icon if is_human else demihuman_icon;
 	get_node("%content/race").tooltip_text = "Human" if is_human else "Demi-Human";
-	get_node("%content/level_race").text = str("Level ", adventurer._level, " ", adventurer._class);
+	get_node("%content/level_race").text = str("Level ", adventurer.adv_level(), " ", adventurer._class);
 	get_node("%content/current/text").text = str("Currently: ", adventurer.adv_status());
 	get_node("content/party_status").text = str("Party: ", "NONE" if party == null else str("'", party._title, "'"));
 

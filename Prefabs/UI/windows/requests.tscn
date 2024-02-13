@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dnogswpgpr5a1"]
+[gd_scene load_steps=31 format=3 uid="uid://dnogswpgpr5a1"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_g2oe8"]
 [ext_resource type="PackedScene" uid="uid://dn60vyjh4fpbd" path="res://Prefabs/UI/components/request_list_item.tscn" id="2_1f5uo"]
@@ -15,6 +15,7 @@
 [ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="7_2g0t1"]
 [ext_resource type="Texture2D" uid="uid://b04rdgvb7g4d" path="res://Textures/Icons/back_hover.png" id="7_a6ak0"]
 [ext_resource type="Texture2D" uid="uid://dsejrvql81x6p" path="res://Textures/Icons/avatar.png" id="8_fly1e"]
+[ext_resource type="Texture2D" uid="uid://p6dd54egscgq" path="res://Textures/Icons/border_dotted_light.png" id="11_jlxok"]
 [ext_resource type="PackedScene" uid="uid://dlggxv5xajmh4" path="res://Prefabs/UI/components/dropdown.tscn" id="11_rb8df"]
 [ext_resource type="Texture2D" uid="uid://cudq8xoffd8rm" path="res://Textures/line.png" id="12_ep50f"]
 
@@ -62,6 +63,10 @@ border_color = Color(0, 0, 0, 1)
 corner_detail = 1
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ygm1e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t32pc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vq6kh"]
 
 [node name="REQUESTS" type="Panel"]
 texture_filter = 1
@@ -250,7 +255,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xei0r")
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 12
-text = "Request Title"
+text = "Request Body"
 vertical_alignment = 1
 autowrap_mode = 3
 
@@ -272,48 +277,38 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_ygm1e")
 layout_mode = 2
 alignment = 2
 
-[node name="TITLE2" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
+[node name="REWARDS" type="VBoxContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TITLE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/REWARDS"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 12
-text = "Rewards:  500 gold,  2 Items
+text = "Rewards:
 "
 autowrap_mode = 3
 
-[node name="TITLE4" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
+[node name="FLOW_CONTAINER" type="HFlowContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/REWARDS"]
 layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 12
-text = "Requirements:
-    ✓ - No Demi-Humans
-    ✗ - Party above level 5"
-autowrap_mode = 3
-
-[node name="DIVIDER" type="NinePatchRect" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
-layout_mode = 2
-patch_margin_left = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
-
-[node name="TITLE3" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 12
-text = "Estimated Duration:  1h 25m 3s"
-autowrap_mode = 3
-
-[node name="DIVIDER2" type="NinePatchRect" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
-layout_mode = 2
-patch_margin_left = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
 
 [node name="BTM_CONTAINER" type="VBoxContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
 layout_mode = 2
+
+[node name="TITLE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+text = "Requirements:"
+autowrap_mode = 3
+
+[node name="REQUIREMENTS" type="VBoxContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="DIVIDER3" type="HSeparator" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_t32pc")
 
 [node name="TITLE5" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER"]
 layout_mode = 2
@@ -326,6 +321,13 @@ autowrap_mode = 3
 [node name="dropdown" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER" instance=ExtResource("11_rb8df")]
 layout_mode = 2
 
+[node name="TITLE3" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+text = "Estimated Duration:  1h 25m 3s"
+autowrap_mode = 3
+
 [node name="edit_btn" type="Button" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -334,6 +336,49 @@ theme = ExtResource("1_g2oe8")
 theme_override_font_sizes/font_size = 15
 disabled = true
 text = "Accept Request"
+
+[node name="TIME_REMAINING" type="PanelContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vq6kh")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING"]
+layout_mode = 2
+texture = ExtResource("11_jlxok")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer"]
+layout_mode = 2
+
+[node name="TITLE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+text = "Time Remaining:"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VALUE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+text = "16h 21m 31s"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="WORLD_MAP" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
@@ -513,3 +558,4 @@ theme_override_font_sizes/font_size = 15
 text = "The Untamed Wilds"
 
 [connection signal="pressed" from="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/close_btn" to="." method="_on_close_btn_pressed"]
+[connection signal="new_current" from="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/dropdown" to="." method="_on_dropdown_new_current"]

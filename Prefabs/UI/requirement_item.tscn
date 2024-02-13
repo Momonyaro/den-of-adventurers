@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c48vas2spw4ra"]
+
+[ext_resource type="Texture2D" uid="uid://inrpm4pmod8u" path="res://Textures/Icons/check.png" id="1_h5v51"]
+[ext_resource type="Texture2D" uid="uid://c0t18nhd2xsyy" path="res://Textures/Icons/cross.png" id="2_xi5xj"]
+
+[node name="REQUIREMENT_ITEM" type="HBoxContainer"]
+
+[node name="PASS_ICON" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_h5v51")
+stretch_mode = 4
+
+[node name="FAIL_ICON" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_xi5xj")
+stretch_mode = 4
+
+[node name="VALUE" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+text = "16h 21m 31s"
+autowrap_mode = 3

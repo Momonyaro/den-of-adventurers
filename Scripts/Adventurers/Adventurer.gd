@@ -104,6 +104,12 @@ func adv_race() -> String:
 func adv_status() -> String:
 	return Status.keys()[_status];
 
+func adv_level() -> String:
+	if _level == 30:
+		return "MAX";
+	else:
+		return str(_level);
+
 func xp_percentage() -> float:
 	if _xp.y == 0:
 		return 0;
