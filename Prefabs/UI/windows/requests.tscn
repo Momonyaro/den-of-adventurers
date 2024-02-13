@@ -512,7 +512,7 @@ stretch_mode = 4
 script = ExtResource("4_gmfev")
 _neighbors = Array[NodePath]([NodePath("../Magie Centrie")])
 
-[node name="Alysse2" type="TextureRect" parent="HBoxContainer/WORLD_MAP"]
+[node name="FLAG" type="TextureRect" parent="HBoxContainer/WORLD_MAP"]
 layout_mode = 0
 offset_left = 209.0
 offset_top = 326.0
@@ -521,7 +521,7 @@ offset_bottom = 346.0
 texture = ExtResource("6_7tvhc")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="HBoxContainer/WORLD_MAP"]
+[node name="Blachol" type="Label" parent="HBoxContainer/WORLD_MAP"]
 layout_mode = 0
 offset_left = 482.0
 offset_top = 278.0
@@ -530,7 +530,7 @@ offset_bottom = 299.0
 theme_override_font_sizes/font_size = 15
 text = "Blachol"
 
-[node name="Label2" type="Label" parent="HBoxContainer/WORLD_MAP"]
+[node name="Vignarran Empire" type="Label" parent="HBoxContainer/WORLD_MAP"]
 layout_mode = 0
 offset_left = 84.0
 offset_top = 277.0
@@ -539,7 +539,7 @@ offset_bottom = 298.0
 theme_override_font_sizes/font_size = 15
 text = "Vignarran Empire"
 
-[node name="Label3" type="Label" parent="HBoxContainer/WORLD_MAP"]
+[node name="Montia" type="Label" parent="HBoxContainer/WORLD_MAP"]
 layout_mode = 0
 offset_left = 316.0
 offset_top = 40.0
@@ -548,7 +548,7 @@ offset_bottom = 61.0
 theme_override_font_sizes/font_size = 15
 text = "Montia"
 
-[node name="Label4" type="Label" parent="HBoxContainer/WORLD_MAP"]
+[node name="The Untamed Wilds" type="Label" parent="HBoxContainer/WORLD_MAP"]
 layout_mode = 0
 offset_left = 41.0
 offset_top = 43.0

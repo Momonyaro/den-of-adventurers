@@ -22,12 +22,14 @@ func populate_fields():
 	var title_label = get_node("LineEdit/Label") as Label;
 	var title_cap = get_node("LineEdit/CAP") as Label;
 	var member_cap = get_node("MEMBER_LIST/CAP") as Label;
+	var confirm_btn = get_node("CONFIRM_BTN") as Button;
 
 	var party = _adv_manager.party_edited;
 	var members = party._members;
 	title_label.text = str("Title");
 	title_cap.text = str("(", party._title.length(), "/", title_edit.max_length, ")");
 	title_edit.text = party._title;
+	confirm_btn.disabled = party._members.size() == 0;
 
 	member_cap.text = str('(', party._members.size(), '/3)');
 	var content_parent = get_node("MEMBER_LIST/CONTENT_PARENT");
@@ -44,13 +46,18 @@ func populate_item(list_item: Node, adventurer: Adventurer, in_party: bool):
 	list_item.visible = adventurer != null;
 	if list_item.visible != true: return;
 	(list_item.get_child(0) as CheckBox).button_pressed = in_party;
-	(list_item.get_child(0) as CheckBox).pressed.connect(func (): 
-		_on_edit_members(_adv_manager.party_edited, adventurer._unique_id); 
-		populate_fields();, CONNECT_ONE_SHOT
-	);
 	(list_item.get_child(1) as Label).text = adventurer.adv_name();
 	(list_item.get_child(2) as Label).text = str("Level ", adventurer.adv_level(), " ", adventurer._class);
-	pass;
+
+	var _edit_func = func (): _on_edit_members(_adv_manager.party_edited, adventurer._unique_id); populate_fields();
+	var check_box = list_item.get_child(0) as CheckBox;
+
+	for result in check_box.get_signal_connection_list('pressed'):
+		check_box.disconnect((result['signal'] as Signal).get_name(), result['callable']);
+	check_box.pressed.connect(_edit_func);
+
+	var has_party = _adv_manager.get_adventurer_party(adventurer._unique_id) != null;
+	(list_item.get_child(3) as Label).visible = has_party;
 
 func _on_close_btn_pressed():
 	_adv_manager.upsert_party(_adv_manager.party_edited);
@@ -80,7 +87,7 @@ func _on_edit_members(party: Party, changed: String):
 		var existing_party = _adv_manager.get_adventurer_party(changed);
 		# Here we should check if the adventurer is in another party.
 
-		if existing_party:
+		if existing_party && party._created_timestamp != existing_party._created_timestamp:
 			var adv = _adv_manager._adventurers[changed];
 			if existing_party._members.size() == 1:
 				_window_base.create_prompt(

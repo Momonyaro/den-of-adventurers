@@ -14,6 +14,8 @@ border_color = Color(0, 0, 0, 1)
 
 [node name="MEMBER_LIST_ITEM" type="Panel"]
 custom_minimum_size = Vector2(0, 45)
+offset_right = 285.0
+offset_bottom = 45.0
 
 [node name="CheckBox" type="CheckBox" parent="."]
 layout_mode = 0
@@ -44,3 +46,16 @@ offset_right = 177.0
 offset_bottom = 44.0
 theme_override_font_sizes/font_size = 12
 text = "Level 5 Warrior"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -23.0
+offset_top = 4.0
+offset_right = -9.0
+offset_bottom = 30.0
+grow_horizontal = 0
+text = "*"
+horizontal_alignment = 2
