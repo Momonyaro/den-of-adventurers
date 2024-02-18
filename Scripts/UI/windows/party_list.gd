@@ -49,12 +49,13 @@ func populate_item(list_item: Node, party: Party, index: int, full_update: bool 
 	list_item.get_child(1).text = str(party._members.size(), "/", 3);
 	list_item.get_child(-1).texture = idle_icon if party._status == Party.PartyStatus.IDLE else active_icon;
 	list_item.get_child(-1).tooltip_text = IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else ACTIVE_TOOLTIP;
-	list_item.get_child(-2).disabled = party._status != Party.PartyStatus.IDLE;
-	list_item.get_child(-2).tooltip_text = EDIT_IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else EDIT_ACTIVE_TOOLTIP;
 	var _edit_func = func(): _adv_manager.party_edited = Party.copy(_adv_manager.get_party_by_index(index)); _window_base._manager.process_command("WINDOW:RESET:EDIT_PARTY", get_global_mouse_position());
 	var _del_func = func(): _on_delete_btn(party._title, index);
 	var edit_btn = list_item.get_child(-2) as Button;
 	var del_btn = list_item.get_child(-3) as Button;
+
+	edit_btn.disabled = party._status != Party.PartyStatus.IDLE;
+	edit_btn.tooltip_text = EDIT_IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else EDIT_ACTIVE_TOOLTIP;
 
 	if full_update:
 		if edit_btn.pressed.is_connected(_edit_func):

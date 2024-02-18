@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c0t18nhd2xsyy" path="res://Textures/Icons/cross.png" id="2_xi5xj"]
 
 [node name="REQUIREMENT_ITEM" type="HBoxContainer"]
+offset_right = 278.0
+offset_bottom = 20.0
 
 [node name="PASS_ICON" type="TextureRect" parent="."]
 layout_mode = 2
@@ -11,7 +13,6 @@ texture = ExtResource("1_h5v51")
 stretch_mode = 4
 
 [node name="FAIL_ICON" type="TextureRect" parent="."]
-visible = false
 layout_mode = 2
 texture = ExtResource("2_xi5xj")
 stretch_mode = 4

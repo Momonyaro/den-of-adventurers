@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dnogswpgpr5a1"]
+[gd_scene load_steps=32 format=3 uid="uid://dnogswpgpr5a1"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_g2oe8"]
 [ext_resource type="PackedScene" uid="uid://dn60vyjh4fpbd" path="res://Prefabs/UI/components/request_list_item.tscn" id="2_1f5uo"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://p6dd54egscgq" path="res://Textures/Icons/border_dotted_light.png" id="11_jlxok"]
 [ext_resource type="PackedScene" uid="uid://dlggxv5xajmh4" path="res://Prefabs/UI/components/dropdown.tscn" id="11_rb8df"]
 [ext_resource type="Texture2D" uid="uid://cudq8xoffd8rm" path="res://Textures/line.png" id="12_ep50f"]
+[ext_resource type="Script" path="res://Scripts/UI/components/world_map.gd" id="13_njjn6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
 content_margin_left = 24.0
@@ -385,10 +386,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_slltm")
 stretch_mode = 2
+script = ExtResource("13_njjn6")
 
 [node name="Line2D" type="Line2D" parent="HBoxContainer/WORLD_MAP"]
 texture_repeat = 2
-points = PackedVector2Array(509, 251, 466, 328, 301, 294, 219, 352)
 width = 8.0
 texture = ExtResource("12_ep50f")
 texture_mode = 1

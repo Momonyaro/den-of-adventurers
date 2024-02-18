@@ -1,5 +1,6 @@
 extends Panel
 
+@onready var world_map = $HBoxContainer/WORLD_MAP;
 @onready var req_manager : RequestManager = get_node("/root/Root/Requests");
 @onready var reward_box = preload("res://Prefabs/UI/components/reward_box.tscn");
 @onready var requirement_item = preload("res://Prefabs/UI/requirement_item.tscn");
@@ -19,12 +20,17 @@ func _open_request(detail_container, request_container):
 	var title = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/TITLE") as Label;
 	var requestor = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUESTOR/Label") as Label;
 	var body = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/BODY/TITLE2") as Label;
+	var time_estimate = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/TITLE3") as Label;
 
 	var result = req_manager._try_get_request(current_request);
 	if !result[0]:
 		return;
 	
 	var request = result[1] as RequestManager.RequestItem;
+
+	var distance = world_map.calculate_path(request._location);
+	var fake_timer = TimerContainer.InternalTimer.new("fafa", distance + request._duration + (distance * 0.5), "throw-away", false);
+	time_estimate.text = str("Estimated Duration: " + fake_timer.get_timer_fancy_text());
 
 	var rewards = _get_rewards_dict(request._rewards);
 	var rewards_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/REWARDS/FLOW_CONTAINER");
@@ -60,11 +66,11 @@ func _open_request(detail_container, request_container):
 		dropdown.add_item(str(party._title, " - ", party._members.size(), " member(s)"), party._created_timestamp, i);
 
 	var requirement_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/REQUIREMENTS");
-	requirement_container.visible = request._requirements.size() > 0;
 	var existing_children2 = requirement_container.get_children();
 	for child in existing_children2:
 		child.queue_free();
 
+	var passed_requirements = true;
 	for requirement in request._requirements:
 		var item = requirement.split('$');
 		var req_match = req_manager.get_requirement(item[0], int(item[1]) if item.size() > 1 else 0) as Requirement;
@@ -74,10 +80,24 @@ func _open_request(detail_container, request_container):
 		instance.get_child(0).visible = req_validation;
 		instance.get_child(1).visible = !req_validation;
 		instance.get_child(-1).text = req_match.get_requirement();
+		if !req_validation:
+			passed_requirements = false;
+	
+	if request._requirements.size() == 0:
+		var instance2 = requirement_item.instantiate();
+		requirement_container.add_child(instance2);
+		instance2.get_child(0).visible = true;
+		instance2.get_child(1).visible = false;
+		instance2.get_child(-1).text = "No Requirements";
+	
+	var accept_btn = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/edit_btn") as Button;
+	accept_btn.disabled = !passed_requirements;
+
 
 func _open_list(detail_container, request_container):
 	request_container.get_parent().visible = true;
 	detail_container.visible = false;
+	world_map.clear_path();
 	var requests = req_manager.get_requests();
 	
 	var req_list = requests['Active'];

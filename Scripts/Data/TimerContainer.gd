@@ -88,5 +88,19 @@ class InternalTimer:
 		
 		return str("%02d" % hours_floored, ":", "%02d" % minutes_floored, ":", "%02d" % seconds_rounded);
 	
+	func get_timer_fancy_text() -> String:
+		var inv_value : float = _length - _value;
+		var hours : float = inv_value / 3600;
+		var hours_floored = floori(hours);
+		var minutes : float = (hours - hours_floored) * 60;
+		var minutes_floored = floori(minutes);
+		var seconds : float = (minutes - minutes_floored) * 60;
+		var seconds_rounded = roundi(seconds);
+		
+		return str(
+			str("%02d" % hours_floored, "h ") if hours_floored > 0 else "", 
+			str("%02d" % minutes_floored, "m ") if minutes_floored > 0 else "", 
+			"%02d" % seconds_rounded, "s");
+
 	func get_timer_seconds() -> float:
 		return floori(_length - _value);

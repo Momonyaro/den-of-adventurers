@@ -3,9 +3,7 @@ class_name RequestManager;
 
 @onready var request_data: Array = ResourceLoader.load("res://Resources/Requests/RequestData.tres").data;
 
-var _active_requests: Dictionary = {
-	'ogryll_herbalist_wolf_pack': {}
-}; 
+var _active_requests: Dictionary = {}; 
 var _completed_requests: Array[String] = []; 
 
 func _ready():
@@ -82,6 +80,7 @@ class RequestItem:
 	var _requestor: String = "";
 	var _body: String = "";
 	var _location: String = "";
+	var _duration: float = 0;
 	var _guild_tier_range: Array = [0, 0];
 	var _previous_requests: Array = [];
 	var _requirements: Array = [];
@@ -95,6 +94,7 @@ class RequestItem:
 		_requestor = dict['Requestor'] if dict.has('Requestor') else '';
 		_body = dict['Body'] if dict.has('Body') else '';
 		_location = dict['Location'] if dict.has('Location') else '';
+		_duration = dict['Duration'] if dict.has('Duration') else 0;
 		_guild_tier_range = dict['GuildTierRange'] if dict.has('GuildTierRange') else _guild_tier_range;
 		_previous_requests = dict['PrevRequests'] if dict.has('PrevRequests') else [];
 		_requirements = dict['Requirements'] if dict.has('Requirements') else [];
