@@ -86,6 +86,18 @@ func get_party_by_index(index: int):
 	return _parties[index];
 	return null;
 
+func get_available_parties():
+	return _parties.filter(func (p):
+		return p._status == Party.PartyStatus.IDLE
+	);
+
+func party_can_start_mission(party: Party):
+	for id in party._members:
+		var adventurer = _adventurers[id] as Adventurer;
+		if adventurer._status != Adventurer.Status.IDLE:
+			return false;
+	return true;
+
 func upsert_party(party: Party):
 	for i in _parties.size():
 		if _parties[i]._created_timestamp == party._created_timestamp:

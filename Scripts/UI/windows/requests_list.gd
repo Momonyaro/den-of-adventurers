@@ -21,40 +21,44 @@ func _open_request(detail_container, request_container):
 	var requestor = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUESTOR/Label") as Label;
 	var body = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/BODY/TITLE2") as Label;
 	var time_estimate = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/TITLE3") as Label;
+	var rewards_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/REWARDS/FLOW_CONTAINER");
+	var bottom_section = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER");
+	var remaining_section = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING");
+	var dropdown = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/dropdown") as Dropdown;
+	var requirement_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/REQUIREMENTS");
+	var accept_btn = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/edit_btn") as Button;
 
 	var result = req_manager._try_get_request(current_request);
 	if !result[0]:
 		return;
 	
 	var request = result[1] as RequestManager.RequestItem;
+	var rewards = _get_rewards_dict(request._rewards);
 
 	var distance = world_map.calculate_path(request._location);
 	var fake_timer = TimerContainer.InternalTimer.new("fafa", distance + request._duration + (distance * 0.5), "throw-away", false);
 	time_estimate.text = str("Estimated Duration: " + fake_timer.get_timer_fancy_text());
 
-	var rewards = _get_rewards_dict(request._rewards);
-	var rewards_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/REWARDS/FLOW_CONTAINER");
 	var existing_children = rewards_container.get_children();
 	for child in existing_children:
 		child.queue_free();
 
+	# Rewards
 	for key in rewards.keys():
 		var _reward_box = reward_box.instantiate();
 		rewards_container.add_child(_reward_box);
 		var title_key = key[0].to_upper() + key.substr(1,-1);
 		_reward_box.populate(_get_reward_icon(key), title_key, str(rewards[key]));
 
-	var bottom_section = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER");
 	bottom_section.visible = (!request._is_active && !request._is_completed);
-	var remaining_section = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING");
 	remaining_section.visible = request._is_active;
 
 	title.text = request._title;
 	requestor.text = request._requestor;
 	body.text = request._body;
 
-	var dropdown = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/dropdown") as Dropdown;
-	var parties = adv_manager._parties;
+	# Party Dropdown
+	var parties = adv_manager.get_available_parties();
 	dropdown.clear_items();
 	parties.sort_custom(func (a, b): return a._title < b._title);
 	dropdown._disabled = parties.size() == 0;
@@ -65,11 +69,11 @@ func _open_request(detail_container, request_container):
 		var party = parties[i];
 		dropdown.add_item(str(party._title, " - ", party._members.size(), " member(s)"), party._created_timestamp, i);
 
-	var requirement_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/REQUIREMENTS");
 	var existing_children2 = requirement_container.get_children();
 	for child in existing_children2:
 		child.queue_free();
 
+	# Requirements
 	var passed_requirements = true;
 	for requirement in request._requirements:
 		var item = requirement.split('$');
@@ -90,8 +94,8 @@ func _open_request(detail_container, request_container):
 		instance2.get_child(1).visible = false;
 		instance2.get_child(-1).text = "No Requirements";
 	
-	var accept_btn = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/edit_btn") as Button;
-	accept_btn.disabled = !passed_requirements;
+	# Submit button
+	accept_btn.disabled = !passed_requirements || parties.size() == 0 || dropdown._get_current_item() != null;
 
 
 func _open_list(detail_container, request_container):
