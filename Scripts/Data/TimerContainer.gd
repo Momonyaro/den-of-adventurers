@@ -31,9 +31,11 @@ func create_timer(length: float, description: String = "", startOnCreate: bool =
 
 func start_timer(id: String):
 	_timers[id]._started = true;
+	print(str(D_T, " -> <", id, "> :: ", "[", _timers[id].get_timer_text(),"] Started."));
 
 func pause_timer(id: String):
 	_timers[id]._started = false;
+	print(str(D_T, " -> <", id, "> :: ", "[", _timers[id].get_timer_text(),"] Paused."));
 
 func delete_timer(id: String):
 	_timers.erase(id);

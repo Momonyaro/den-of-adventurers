@@ -2,6 +2,8 @@ extends Node;
 class_name RequestManager;
 
 @onready var request_data: Array = ResourceLoader.load("res://Resources/Requests/RequestData.tres").data;
+@onready var adv_manager : AdventurerManager = get_node("/root/Root/Adventurers");
+@onready var timers: TimerContainer = get_node("%Timers");
 
 var _active_requests: Dictionary = {}; 
 var _completed_requests: Array[String] = []; 
@@ -16,6 +18,14 @@ func _ready():
 		print("Requirements: [", ', '.join(item._requirements), "]");
 		print("Rewards: ", ', '.join(item._rewards));
 		print();
+
+func _process(delta):
+	var queued_parties = adv_manager.get_queued_parties() as Array[Party];
+	for party in queued_parties:
+		if adv_manager.party_can_start_mission(party):
+			var _request = _active_requests[party._current_request_id];
+			timers.start_timer(_request.TIMER_go_to);
+			party._status = Party.PartyStatus.GOING_TO_MISSION;
 
 func get_requests() -> Dictionary:
 	var to_return: Dictionary = {
@@ -68,6 +78,11 @@ func _validate_request(request: RequestItem, completed: Array, guildTier: int) -
 
 	return true;
 
+func accept_request(request: RequestItem, party: Party, go_to_time: float, duration: float, go_home_time: float):
+	_active_requests[request._id] = ActiveRequestItem.new(request._id, go_to_time, duration, go_home_time, timers);
+	party._current_request_id = request._id;
+	party._status = Party.PartyStatus.QUEUED_FOR_MISSION;
+
 func get_requirement(type: String, value: int) -> Requirement:
 	match (type):
 		"PartyMembersAbove": return PartyMembersAbove.new(value);
@@ -108,6 +123,6 @@ class ActiveRequestItem:
 
 	func _init(id: String, go_to_time: float, duration_time: float, go_home_time: float, timers: TimerContainer):
 		_id = id;
-		TIMER_go_to = timers.create_timer(go_to_time);
+		TIMER_go_to = timers.create_timer(go_to_time, '', false);
 		TIMER_duration = timers.create_timer(duration_time, '', false);
 		TIMER_go_home = timers.create_timer(go_home_time, '', false);

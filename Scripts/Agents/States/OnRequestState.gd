@@ -1,10 +1,10 @@
 extends BaseState;
-class_name WaveCameraState;
+class_name OnRequestState;
 
 const WAVE_ANIM_REF = "WAVE";
 
 func _init():
-	_state_ref = StateReference.WAVE_AT_CAM;
+	_state_ref = StateReference.ON_REQUEST_START;
 
 func start(animator: AnimationPlayer):
 	_animator = animator;
@@ -13,7 +13,9 @@ func start(animator: AnimationPlayer):
 
 
 func evaluate(agent: Agent, _adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
-	if _adv_state == Adventurer.Status.RECRUIT && _state_enter_count == 0:
+	var party_valid = party._status == Party.PartyStatus.GOING_TO_MISSION if party != null else false;
+	if _state_enter_count == 0 && party_valid:
+		print("bruh");
 		return true;
 	return false;
 
@@ -31,8 +33,4 @@ func end() -> StateReference:
 func state_transition_allowed(state_ref: StateReference) -> bool:
 	if _animator.is_playing():
 		return false;
-	match(state_ref):
-		StateReference.IDLE: return true;
-		StateReference.WALK: return true;
-		StateReference.CHEER: return true;
-		_: return false;
+	return true;

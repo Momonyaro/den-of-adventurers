@@ -6,14 +6,16 @@ extends Panel
 @onready var requirement_item = preload("res://Prefabs/UI/requirement_item.tscn");
 @onready var adv_manager : AdventurerManager = get_node("/root/Root/Adventurers");
 
+@onready var request_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_LIST");
+@onready var detail_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS");
+
 var current_request = "";
 
 func _ready():
-	var request_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_LIST/LIST_CONTAINER");
-	var detail_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS");
-	_open_list(detail_container, request_container);
+	
+	_open_list();
 
-func _open_request(detail_container, request_container):
+func _open_request():
 	request_container.visible = false;
 	detail_container.visible = true;
 	
@@ -95,38 +97,43 @@ func _open_request(detail_container, request_container):
 		instance2.get_child(-1).text = "No Requirements";
 	
 	# Submit button
-	accept_btn.disabled = !passed_requirements || parties.size() == 0 || dropdown._get_current_item() != null;
+	var submit_func = func():
+		req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), distance, request._duration, (distance * 0.5));
+		_open_list();
+
+	accept_btn.disabled = !passed_requirements || parties.size() == 0 || dropdown._get_current_item() == null;
+	for sig in accept_btn.get_signal_connection_list('pressed'):
+		accept_btn.disconnect((sig['signal'] as Signal).get_name(), sig['callable']);
+	accept_btn.pressed.connect(submit_func);
 
 
-func _open_list(detail_container, request_container):
-	request_container.get_parent().visible = true;
+
+
+func _open_list():
+	request_container.visible = true;
 	detail_container.visible = false;
 	world_map.clear_path();
 	var requests = req_manager.get_requests();
 	
+	var req_container = request_container.get_child(1);
 	var req_list = requests['Active'];
 	req_list.append_array(requests['Available']);
 	req_list.append_array(requests['Completed'])
 
-	for i in request_container.get_child_count():
+	for i in req_container.get_child_count():
 		var item = req_list[i] if req_list.size() > i else null;
-		var child = request_container.get_child(i);
+		var child = req_container.get_child(i);
 
 		child.populate_item(item, item._is_active if item != null else false, item._is_completed if item != null else false, _on_click_open_btn);
 
 func _on_click_open_btn(id: String):
-	var request_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_LIST");
-	var detail_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS");
 
 	current_request = id;
-	_open_request(detail_container, request_container);
+	_open_request();
 
 func _on_close_btn_pressed():
-	var request_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_LIST/LIST_CONTAINER");
-	var detail_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS");
-	
 	current_request = "";
-	_open_list(detail_container, request_container);
+	_open_list();
 	pass # Replace with function body.
 
 func _get_rewards_dict(rewards: Array):
@@ -146,8 +153,7 @@ func _get_reward_icon(reward_key: String) -> Texture2D:
 
 
 func _on_dropdown_new_current(_label, _value, _id):
-	var request_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_LIST");
-	var detail_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS");
 
-	_open_request(detail_container, request_container);
+	_open_request();
 	pass # Replace with function body.
+

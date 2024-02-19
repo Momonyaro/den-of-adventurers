@@ -13,7 +13,7 @@ func start(animator: AnimationPlayer):
 	_animator = animator;
 	_animator.play("SLEEP", 0);
 
-func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
 	return true;
 
 func update(delta: float, agent: Node, camera: Node):

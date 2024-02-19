@@ -12,7 +12,7 @@ func start(animator: AnimationPlayer):
 	_animator.play(WALK_ANIME_REF, 0.3);
 	_state_enter_count += 1;
 
-func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
 	if has_destination:
 		return true;
 	return false;
@@ -29,4 +29,5 @@ func state_transition_allowed(state_ref: StateReference) -> bool:
 		StateReference.IDLE: return true;
 		StateReference.CHEER: return true;
 		StateReference.REST: return true;
+		StateReference.ON_REQUEST_START: return true;
 		_: return false;

@@ -9,7 +9,7 @@ func _init():
 func start(animator: AnimationPlayer):
 	_animator = animator;
 
-func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
 	if adv_state == Adventurer.Status.IDLE && agent.state_manager._current_state._state_ref == StateReference.IDLE && !has_destination:
 		return true;
 	return false;

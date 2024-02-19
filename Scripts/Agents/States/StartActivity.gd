@@ -9,7 +9,7 @@ func _init():
 func start(animator: AnimationPlayer):
 	_animator = animator;
 
-func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
 	return agent.current_activity != null;
 
 func update(delta: float, agent: Node, camera: Node):

@@ -84,11 +84,15 @@ func get_party(created: String):
 
 func get_party_by_index(index: int):
 	return _parties[index];
-	return null;
 
 func get_available_parties():
 	return _parties.filter(func (p):
 		return p._status == Party.PartyStatus.IDLE
+	);
+
+func get_queued_parties():
+	return _parties.filter(func (p):
+		return p._status == Party.PartyStatus.QUEUED_FOR_MISSION
 	);
 
 func party_can_start_mission(party: Party):

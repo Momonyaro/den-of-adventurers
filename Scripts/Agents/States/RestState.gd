@@ -8,7 +8,7 @@ func _init():
 func start(animator: AnimationPlayer):
 	_animator = animator;
 
-func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool) -> bool:
+func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
 	if (adv_state == Adventurer.Status.RESTING || adv_state == Adventurer.Status.EXHAUSTED) && agent.current_activity == null:
 		return true;
 	return false;
