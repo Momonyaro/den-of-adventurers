@@ -85,6 +85,11 @@ func get_party(created: String):
 func get_party_by_index(index: int):
 	return _parties[index];
 
+func try_get_party_with_request(req_id: String) -> Array:
+	return _parties.filter(func (p):
+		return p._current_request_id == req_id
+	);
+
 func get_available_parties():
 	return _parties.filter(func (p):
 		return p._status == Party.PartyStatus.IDLE

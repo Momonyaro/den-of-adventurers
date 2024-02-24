@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://f64ofd2jr8sn"]
+[gd_scene load_steps=27 format=3 uid="uid://f64ofd2jr8sn"]
 
 [ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_8246l"]
 [ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="2_dls8v"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Managers/AgentManager.gd" id="4_uo78h"]
 [ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="5_lyn1g"]
 [ext_resource type="Script" path="res://Scripts/Managers/RequestManager.gd" id="6_abixe"]
+[ext_resource type="Script" path="res://Scripts/Activities/LeaveActivity.gd" id="6_pdokr"]
 [ext_resource type="PackedScene" uid="uid://daoo1s5dlp1si" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nxyx"]
@@ -185,6 +186,15 @@ transform_align = 3
 trail_lifetime = 0.75
 process_material = SubResource("ParticleProcessMaterial_v047h")
 draw_pass_1 = SubResource("TextMesh_5yyk0")
+
+[node name="LeavePoint" type="MeshInstance3D" parent="Activities"]
+transform = Transform3D(0.613582, 0, 0.789631, 0, 1, 0, -0.789631, 0, 0.613582, -0.459597, 0, -2.88418)
+script = ExtResource("6_pdokr")
+
+[node name="START_POINT" type="Node3D" parent="Activities/LeavePoint"]
+
+[node name="ACTIVITY_POINT" type="Node3D" parent="Activities/LeavePoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
 
 [node name="Requests" type="Node" parent="."]
 unique_name_in_owner = true

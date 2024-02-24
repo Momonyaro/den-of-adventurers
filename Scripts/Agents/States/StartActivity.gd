@@ -1,6 +1,8 @@
 extends BaseState;
 class_name StartActivityState;
 
+var _party: Party = null;
+
 func _init():
 	_allow_movement = true;
 	_state_ref = StateReference.START_ACTIVITY;
@@ -10,6 +12,7 @@ func start(animator: AnimationPlayer):
 	_animator = animator;
 
 func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
+	_party = party;
 	return agent.current_activity != null;
 
 func update(delta: float, agent: Node, camera: Node):
@@ -27,7 +30,10 @@ func update(delta: float, agent: Node, camera: Node):
 		_agent.global_position = activity_point.global_position;
 		_agent.global_rotation = activity_point.global_rotation;
 		_agent.current_activity = null;
-		_agent.state_manager.force_insert_state(activity.get_activity_state());
+		var activity_state = activity.get_activity_state();
+		activity_state._party = _party;
+		activity_state._agent = agent;
+		_agent.state_manager.force_insert_state(activity_state);
 
 	pass;
 

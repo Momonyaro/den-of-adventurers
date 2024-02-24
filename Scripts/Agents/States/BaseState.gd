@@ -26,4 +26,4 @@ func end() -> StateReference:
 func state_transition_allowed(state_ref: StateReference) -> bool:
 	return true;
 
-enum StateReference { NIL, IDLE, WALK, DEAD, CHEER, START_WANDER, WAVE_AT_CAM, DELETE_DISMISSED, REST, START_ACTIVITY, BED_ACTIVITY, ON_REQUEST_START };
+enum StateReference { NIL, IDLE, WALK, DEAD, CHEER, START_WANDER, WAVE_AT_CAM, DELETE_DISMISSED, REST, START_ACTIVITY, BED_ACTIVITY, ON_REQUEST_START, ON_LEAVE_MAP };

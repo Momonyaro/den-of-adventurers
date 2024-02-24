@@ -75,6 +75,9 @@ func _on_mouse_exited():
 	pass # Replace with function body.
 
 func _on_select_agent(unique_id: String):
+	if adventurer == null:
+		return;
+
 	if unique_id == adventurer._unique_id:
 		$SELECTED.visible = true;
 		$SELECTED.get_child(0).play("spin", 0);

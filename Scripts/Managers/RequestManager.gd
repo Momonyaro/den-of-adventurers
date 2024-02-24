@@ -9,6 +9,7 @@ var _active_requests: Dictionary = {};
 var _completed_requests: Array[String] = []; 
 
 func _ready():
+	timers.timer_done.connect(_on_timer_done);
 	var items = get_requests()['Available'];
 
 	for item in items:
@@ -88,6 +89,31 @@ func get_requirement(type: String, value: int) -> Requirement:
 		"PartyMembersAbove": return PartyMembersAbove.new(value);
 		"NoDemiHumans": return NoDemiHumans.new();
 		_: return null;
+
+func _on_timer_done(id: String):
+	for key in _active_requests.keys():
+		var req = _active_requests[key];
+
+		match id:
+			req.TIMER_go_to:
+				var matches = adv_manager.try_get_party_with_request(key);
+				for p in matches:
+					p._status = Party.PartyStatus.ON_MISSION;
+				req.TIMER_go_to = "";
+				timers.start_timer(req.TIMER_duration);
+			req.TIMER_duration:
+				var matches = adv_manager.try_get_party_with_request(key);
+				for p in matches:
+					p._status = Party.PartyStatus.RETURNING_FROM_MISSION;
+				req.TIMER_duration = "";
+				timers.start_timer(req.TIMER_go_home);
+			req.TIMER_go_home:
+				var matches = adv_manager.try_get_party_with_request(key);
+				for p in matches:
+					p._status = Party.PartyStatus.RETURNED;
+				req.TIMER_go_home = "";
+
+	pass;
 
 class RequestItem:
 	var _title: String = "";

@@ -55,6 +55,7 @@ func populate_item(list_item: Node, party: Party, index: int, full_update: bool 
 	var del_btn = list_item.get_child(-3) as Button;
 
 	edit_btn.disabled = party._status != Party.PartyStatus.IDLE;
+	del_btn.disabled = party._status != Party.PartyStatus.IDLE;
 	edit_btn.tooltip_text = EDIT_IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else EDIT_ACTIVE_TOOLTIP;
 
 	if full_update:

@@ -8,12 +8,31 @@ extends Panel
 
 @onready var request_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_LIST");
 @onready var detail_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS");
+@onready var time_remaining = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/HBoxContainer/VALUE");
 
 var current_request = "";
 
 func _ready():
-	
 	_open_list();
+
+func _process(delta):
+	if current_request != "":
+		var result = req_manager._try_get_request(current_request);
+		if !result[0]:
+			return;
+
+		var request = result[1] as RequestManager.RequestItem;
+		
+		if request._is_active:
+			var active_request = req_manager._active_requests[request._id] as RequestManager.ActiveRequestItem;
+			var timers = req_manager.timers;
+
+			var go_to_time = 0 if active_request.TIMER_go_to == "" else timers._timers[active_request.TIMER_go_to].get_timer_seconds();
+			var duration_time = 0 if active_request.TIMER_duration == "" else timers._timers[active_request.TIMER_duration].get_timer_seconds();
+			var go_home_time = 0 if active_request.TIMER_go_home == "" else timers._timers[active_request.TIMER_go_home].get_timer_seconds();
+			var remainingTime = TimerContainer.InternalTimer.new("lala", go_to_time + duration_time + go_home_time, "throw-away", false);
+
+			time_remaining.text = remainingTime.get_timer_fancy_text();
 
 func _open_request():
 	request_container.visible = false;
@@ -75,6 +94,19 @@ func _open_request():
 	for child in existing_children2:
 		child.queue_free();
 
+	# Remaining Time
+	if request._is_active:
+		var active_request = req_manager._active_requests[request._id] as RequestManager.ActiveRequestItem;
+		var timers = req_manager.timers;
+
+		var go_to_time = 0 if active_request.TIMER_go_to == "" else timers._timers[active_request.TIMER_go_to].get_timer_seconds();
+		var duration_time = 0 if active_request.TIMER_duration == "" else timers._timers[active_request.TIMER_duration].get_timer_seconds();
+		var go_home_time = 0 if active_request.TIMER_go_home == "" else timers._timers[active_request.TIMER_go_home].get_timer_seconds();
+		var remainingTime = TimerContainer.InternalTimer.new("lala", go_to_time + duration_time + go_home_time, "throw-away", false);
+
+		time_remaining.text = remainingTime.get_timer_fancy_text();
+
+
 	# Requirements
 	var passed_requirements = true;
 	for requirement in request._requirements:
@@ -99,6 +131,7 @@ func _open_request():
 	# Submit button
 	var submit_func = func():
 		req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), distance, request._duration, (distance * 0.5));
+		#req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), 5, 5, 5);
 		_open_list();
 
 	accept_btn.disabled = !passed_requirements || parties.size() == 0 || dropdown._get_current_item() == null;

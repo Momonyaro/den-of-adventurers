@@ -3,6 +3,7 @@ class_name BedActivityState;
 
 var is_fatigued: bool = true;
 var _agent = null;
+var _party: Party = null;
 var _activity = null;
 
 func _init():
@@ -19,7 +20,6 @@ func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool,
 func update(delta: float, agent: Node, camera: Node):
 	agent.adventurer.tick_fatigue(delta);
 	is_fatigued = (agent.adventurer._status == Adventurer.Status.RESTING || agent.adventurer._status == Adventurer.Status.EXHAUSTED);
-	_agent = agent;
 	_activity.update(true);
 	pass;
 

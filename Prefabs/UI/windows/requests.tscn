@@ -93,6 +93,7 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_evbc6")
 
 [node name="REQUEST_LIST" type="Panel" parent="HBoxContainer/REQUEST_HOLDER"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -187,7 +188,6 @@ texture_normal = ExtResource("2_ql2ty")
 stretch_mode = 3
 
 [node name="REQUEST_DETAILS" type="Panel" parent="HBoxContainer/REQUEST_HOLDER"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

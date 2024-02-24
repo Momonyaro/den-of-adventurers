@@ -8,6 +8,7 @@ var _selected_agent : String = "";
 var _last_agent: Agent = null;
 var _window_base: Node = null;
 var _on_close_action: Callable = func (): get_tree().root.get_child(1).get_child(0).select_agent.emit("");
+var closing: bool = false;
 
 @onready var human_icon = ResourceLoader.load("res://Textures/Icons/human.png");
 @onready var demihuman_icon = ResourceLoader.load("res://Textures/Icons/demi-human.png");
@@ -29,12 +30,17 @@ func _process(_delta):
 	update_menu(null); # Null because the event it's attached to sends an agent but we don't use it.
 
 func update_menu(_agent):
-	if _selected_agent == "":
+	if _selected_agent == "" || _agent == "":
 		return;
 	elif _last_agent == null:
 		_last_agent = agent_manager.agents[_selected_agent];
 	elif _selected_agent != _last_agent.adv_id:
 		_last_agent = agent_manager.agents[_selected_agent];
+	
+	if _last_agent.adventurer == null && !closing:
+		_window_base.win_header_close.pressed.emit();
+		closing = true;
+		return;
 
 	_draw_basic_info();
 	_draw_health_info();
