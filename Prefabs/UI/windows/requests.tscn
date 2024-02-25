@@ -338,7 +338,18 @@ theme_override_font_sizes/font_size = 15
 disabled = true
 text = "Accept Request"
 
+[node name="complete_btn" type="Button" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_g2oe8")
+theme_override_font_sizes/font_size = 15
+disabled = true
+text = "Complete Request"
+
 [node name="TIME_REMAINING" type="PanelContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_vq6kh")
 
@@ -359,10 +370,13 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer"]
 layout_mode = 2
 
-[node name="TITLE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TITLE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -371,12 +385,34 @@ text = "Time Remaining:"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="VALUE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/HBoxContainer"]
+[node name="VALUE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 12
 text = "16h 21m 31s"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TITLE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+text = "Party"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="VALUE" type="Label" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("7_2g0t1")
+theme_override_font_sizes/font_size = 12
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -445,7 +481,17 @@ offset_bottom = 205.0
 texture = ExtResource("5_a7qmr")
 stretch_mode = 4
 script = ExtResource("4_gmfev")
-_neighbors = Array[NodePath]([NodePath("../Hearhal (HOME)")])
+_neighbors = Array[NodePath]([NodePath("../ogryll_hearhal"), NodePath("../Ponte Nóor")])
+
+[node name="ogryll_hearhal" type="TextureRect" parent="HBoxContainer/WORLD_MAP/MapNodes"]
+layout_mode = 0
+offset_left = 511.0
+offset_top = 201.0
+offset_right = 529.0
+offset_bottom = 219.0
+stretch_mode = 4
+script = ExtResource("4_gmfev")
+_neighbors = Array[NodePath]([NodePath("../Hearhal (HOME)"), NodePath("../Ogryll")])
 
 [node name="Ponte Nóor" type="TextureRect" parent="HBoxContainer/WORLD_MAP/MapNodes"]
 layout_mode = 0
@@ -478,7 +524,7 @@ offset_bottom = 258.0
 texture = ExtResource("5_8egg3")
 stretch_mode = 2
 script = ExtResource("4_gmfev")
-_neighbors = Array[NodePath]([NodePath("../Ogryll"), NodePath("../Lyre"), NodePath("../Oesterlag")])
+_neighbors = Array[NodePath]([NodePath("../ogryll_hearhal"), NodePath("../Lyre"), NodePath("../Oesterlag")])
 
 [node name="Lorehoeg" type="TextureRect" parent="HBoxContainer/WORLD_MAP/MapNodes"]
 layout_mode = 0

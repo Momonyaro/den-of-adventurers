@@ -15,7 +15,7 @@ func start(animator: AnimationPlayer):
 
 func evaluate(agent: Agent, _adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
 	var party_valid = party._status == Party.PartyStatus.GOING_TO_MISSION if party != null else false;
-	if _state_enter_count == 0 && party_valid:
+	if party_valid:
 		return true;
 	return false;
 

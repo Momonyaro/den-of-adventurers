@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dn60vyjh4fpbd"]
+[gd_scene load_steps=18 format=3 uid="uid://dn60vyjh4fpbd"]
 
 [ext_resource type="Texture2D" uid="uid://d081b071oeqiu" path="res://Textures/Icons/anim_0.png" id="1_dheow"]
 [ext_resource type="Script" path="res://Scripts/UI/components/request_list_item.gd" id="2_em3nu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cthkmsbwdwj8a" path="res://Textures/Icons/gold.png" id="5_ilow1"]
 [ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="6_dx606"]
 [ext_resource type="Texture2D" uid="uid://dsejrvql81x6p" path="res://Textures/Icons/avatar.png" id="7_7wt4c"]
+[ext_resource type="Texture2D" uid="uid://7bcoq6h35a7o" path="res://Textures/Icons/check2.png" id="7_8uxh0"]
 [ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="8_rs1ts"]
 [ext_resource type="Texture2D" uid="uid://rjt00bwx41uj" path="res://Textures/Icons/flag.png" id="9_145du"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="10_1orss"]
@@ -62,10 +63,23 @@ grow_vertical = 2
 theme_override_constants/separation = 0
 
 [node name="ACTIVE_STRIP" type="TextureRect" parent="HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = SubResource("AnimatedTexture_1f48w")
 expand_mode = 1
+stretch_mode = 2
+
+[node name="COMPLETED_STRIP" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+
+[node name="ACTIVE_STRIP2" type="TextureRect" parent="HBoxContainer/COMPLETED_STRIP"]
+texture_filter = 1
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+texture = ExtResource("7_8uxh0")
 stretch_mode = 2
 
 [node name="Control" type="Control" parent="HBoxContainer"]

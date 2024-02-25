@@ -17,22 +17,18 @@ var active_icon = ResourceLoader.load('res://Textures/Icons/flag.png');
 
 func _ready():
 	_adv_manager = get_node("/root/Root/Adventurers");
-	_draw_list(true);
+	_draw_list();
 
 func _process(_delta):
-	var _edited_is_null = _adv_manager.party_edited == null;
+	_draw_list();
 
-	if _edited_is_null != _edited_was_null:
-		_edited_was_null = _edited_is_null;
-		_draw_list(true);
-
-func _draw_list(full_update: bool = false):
+func _draw_list():
 	var content_parent = get_node("LIST/Panel/CONTENT_PARENT");
 	get_node("LIST/PAGINATION/PAGE_NUM").text = str(_page + 1);
 	get_node("LIST/CREATE_PARTY").tooltip_text = "Form a new party from scratch.";
 	for i in content_parent.get_children().size():
 		var has_item = _adv_manager._parties.size() > i + (_page * PAGE_SIZE);
-		populate_item(content_parent.get_child(i), _adv_manager._parties[i + (_page * PAGE_SIZE)] if has_item else null, i, full_update);
+		populate_item(content_parent.get_child(i), _adv_manager._parties[i + (_page * PAGE_SIZE)] if has_item else null, i);
 
 
 func change_page(delta: int):
@@ -40,9 +36,9 @@ func change_page(delta: int):
 	var page_max = floori(float(_adv_manager._parties.size()) / float(PAGE_SIZE));
 	_page = clampi(_page + delta, 0, page_max - zero_offset);
 	_page = maxi(0, _page);
-	_draw_list(true);
+	_draw_list();
 
-func populate_item(list_item: Node, party: Party, index: int, full_update: bool = false):
+func populate_item(list_item: Node, party: Party, index: int):
 	list_item.visible = party != null;
 	if list_item.visible != true: return;
 	list_item.get_child(0).text = party._title;
@@ -58,15 +54,14 @@ func populate_item(list_item: Node, party: Party, index: int, full_update: bool 
 	del_btn.disabled = party._status != Party.PartyStatus.IDLE;
 	edit_btn.tooltip_text = EDIT_IDLE_TOOLTIP if party._status == Party.PartyStatus.IDLE else EDIT_ACTIVE_TOOLTIP;
 
-	if full_update:
-		if edit_btn.pressed.is_connected(_edit_func):
-			edit_btn.pressed.disconnect(_edit_func);
-		edit_btn.pressed.connect(_edit_func);
-		if del_btn.pressed.is_connected(_del_func):
-			del_btn.pressed.disconnect(_del_func);
-		del_btn.pressed.connect(_del_func);
+	for sig in edit_btn.get_signal_connection_list('pressed'):
+		edit_btn.disconnect((sig['signal'] as Signal).get_name(), sig['callable']);
+	edit_btn.pressed.connect(_edit_func);
+	for sig in del_btn.get_signal_connection_list('pressed'):
+		del_btn.disconnect((sig['signal'] as Signal).get_name(), sig['callable']);
+	del_btn.pressed.connect(_del_func);
+	
 	pass;
-
 
 func _on_pagination_minus_pressed():
 	change_page(-1);

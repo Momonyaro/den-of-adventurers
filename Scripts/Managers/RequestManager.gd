@@ -24,9 +24,10 @@ func _process(delta):
 	var queued_parties = adv_manager.get_queued_parties() as Array[Party];
 	for party in queued_parties:
 		if adv_manager.party_can_start_mission(party):
-			var _request = _active_requests[party._current_request_id];
-			timers.start_timer(_request.TIMER_go_to);
-			party._status = Party.PartyStatus.GOING_TO_MISSION;
+			if _active_requests.has(party._current_request_id):
+				var _request = _active_requests[party._current_request_id];
+				timers.start_timer(_request.TIMER_go_to);
+				party._status = Party.PartyStatus.GOING_TO_MISSION;
 
 func get_requests() -> Dictionary:
 	var to_return: Dictionary = {
@@ -41,12 +42,12 @@ func get_requests() -> Dictionary:
 	requests = requests.filter(func (r): return _validate_request(r, _completed_requests, 1));
 
 	for request in requests:
-		if _active_ids.has(request._id):
-			request._is_active = true;
-			to_return['Active'].push_back(request);
-		elif _completed_ids.has(request._id):
+		if _completed_ids.has(request._id):
 			request._is_completed = true;
 			to_return['Completed'].push_back(request);
+		elif _active_ids.has(request._id):
+			request._is_active = true;
+			to_return['Active'].push_back(request);
 		else:
 			to_return['Available'].push_back(request);
 	
@@ -84,6 +85,12 @@ func accept_request(request: RequestItem, party: Party, go_to_time: float, durat
 	party._current_request_id = request._id;
 	party._status = Party.PartyStatus.QUEUED_FOR_MISSION;
 
+func complete_request(request: RequestItem, party: Party):
+	_active_requests[request._id] = null;
+	_completed_requests.push_back(request._id);
+	party._current_request_id = "";
+	party._status = Party.PartyStatus.IDLE;
+
 func get_requirement(type: String, value: int) -> Requirement:
 	match (type):
 		"PartyMembersAbove": return PartyMembersAbove.new(value);
@@ -93,6 +100,8 @@ func get_requirement(type: String, value: int) -> Requirement:
 func _on_timer_done(id: String):
 	for key in _active_requests.keys():
 		var req = _active_requests[key];
+		if req == null:
+			continue;
 
 		match id:
 			req.TIMER_go_to:

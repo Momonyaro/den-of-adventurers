@@ -8,7 +8,7 @@ extends Panel
 
 @onready var request_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_LIST");
 @onready var detail_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS");
-@onready var time_remaining = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/HBoxContainer/VALUE");
+@onready var time_remaining = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/VBoxContainer/HBoxContainer/VALUE");
 
 var current_request = "";
 
@@ -25,6 +25,8 @@ func _process(delta):
 		
 		if request._is_active:
 			var active_request = req_manager._active_requests[request._id] as RequestManager.ActiveRequestItem;
+			if active_request == null:
+				return;
 			var timers = req_manager.timers;
 
 			var go_to_time = 0 if active_request.TIMER_go_to == "" else timers._timers[active_request.TIMER_go_to].get_timer_seconds();
@@ -45,9 +47,11 @@ func _open_request():
 	var rewards_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/REWARDS/FLOW_CONTAINER");
 	var bottom_section = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER");
 	var remaining_section = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING");
+	var active_party = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/VBoxContainer/HBoxContainer2/VALUE");
 	var dropdown = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/dropdown") as Dropdown;
 	var requirement_container = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/REQUIREMENTS");
 	var accept_btn = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/edit_btn") as Button;
+	var complete_btn = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/complete_btn") as Button;
 
 	var result = req_manager._try_get_request(current_request);
 	if !result[0]:
@@ -95,7 +99,7 @@ func _open_request():
 		child.queue_free();
 
 	# Remaining Time
-	if request._is_active:
+	if request._is_active && !request._is_completed:
 		var active_request = req_manager._active_requests[request._id] as RequestManager.ActiveRequestItem;
 		var timers = req_manager.timers;
 
@@ -105,6 +109,8 @@ func _open_request():
 		var remainingTime = TimerContainer.InternalTimer.new("lala", go_to_time + duration_time + go_home_time, "throw-away", false);
 
 		time_remaining.text = remainingTime.get_timer_fancy_text();
+	
+	time_remaining.get_parent().visible = !request._is_completed;
 
 
 	# Requirements
@@ -128,16 +134,35 @@ func _open_request():
 		instance2.get_child(1).visible = false;
 		instance2.get_child(-1).text = "No Requirements";
 	
+	active_party.get_parent().visible = request._is_active;
+	var matches = adv_manager.try_get_party_with_request(request._id);
+	var request_completed = false;
+	if matches.size() > 0:
+		request_completed = matches[0]._status == Party.PartyStatus.RETURNED;
+		active_party.text = matches[0]._title;
+
+
 	# Submit button
 	var submit_func = func():
-		req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), distance, request._duration, (distance * 0.5));
-		#req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), 5, 5, 5);
+		#req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), distance, request._duration, (distance * 0.5));
+		req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), 5, 5, 5);
+		_open_request();
+	
+	# Complete button
+	var complete_func = func():
+		req_manager.complete_request(request, matches[0] if request_completed else null);
 		_open_list();
 
 	accept_btn.disabled = !passed_requirements || parties.size() == 0 || dropdown._get_current_item() == null;
 	for sig in accept_btn.get_signal_connection_list('pressed'):
 		accept_btn.disconnect((sig['signal'] as Signal).get_name(), sig['callable']);
 	accept_btn.pressed.connect(submit_func);
+
+	complete_btn.visible = request_completed;
+	complete_btn.disabled = !request_completed && matches.size() == 0;
+	for sig in complete_btn.get_signal_connection_list('pressed'):
+		complete_btn.disconnect((sig['signal'] as Signal).get_name(), sig['callable']);
+	complete_btn.pressed.connect(complete_func);
 
 
 
@@ -151,7 +176,7 @@ func _open_list():
 	var req_container = request_container.get_child(1);
 	var req_list = requests['Active'];
 	req_list.append_array(requests['Available']);
-	req_list.append_array(requests['Completed'])
+	req_list.append_array(requests['Completed']);
 
 	for i in req_container.get_child_count():
 		var item = req_list[i] if req_list.size() > i else null;

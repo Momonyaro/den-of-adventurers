@@ -101,6 +101,8 @@ func get_queued_parties():
 	);
 
 func party_can_start_mission(party: Party):
+	if party._current_request_id == "":
+		return false;
 	for id in party._members:
 		var adventurer = _adventurers[id] as Adventurer;
 		if adventurer._status != Adventurer.Status.IDLE:

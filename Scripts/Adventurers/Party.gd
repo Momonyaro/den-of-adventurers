@@ -19,6 +19,7 @@ func _init(title: String, members: Array, status: PartyStatus = PartyStatus.IDLE
 static func copy(party: Party):
 	var new_party = Party.new(party._title, party._members, party._status);
 	new_party._created_timestamp = party._created_timestamp;
+	new_party._current_request_id = party._current_request_id;
 	return new_party;
 
 func get_atk_score() -> int:
