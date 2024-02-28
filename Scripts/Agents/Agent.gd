@@ -61,6 +61,12 @@ func _recruit():
 		$CHAR_NAME.text = adventurer.adv_name();
 	pass;
 
+func _dismiss():
+	if adventurer._status == Adventurer.Status.RECRUIT && state_manager.allow_recruit():
+		timers.delete_timer(adventurer.TIMER_recruit);
+		adventurer.adv_dismiss();
+	pass;
+
 func _on_mouse_entered():
 	if adventurer == null:
 		pass;

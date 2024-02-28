@@ -37,6 +37,13 @@ func pause_timer(id: String):
 	_timers[id]._started = false;
 	print(str(D_T, " -> <", id, "> :: ", "[", _timers[id].get_timer_text(),"] Paused."));
 
+func halve_timer(id: String):
+	var timer = _timers[id];
+	print(timer.get_progress_text());
+	var diff = timer._length - timer._value;
+	timer.tick(diff * 0.5);
+	print(timer.get_progress_text());
+
 func delete_timer(id: String):
 	_timers.erase(id);
 	pass;

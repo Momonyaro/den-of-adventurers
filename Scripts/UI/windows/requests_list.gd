@@ -144,8 +144,8 @@ func _open_request():
 
 	# Submit button
 	var submit_func = func():
-		#req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), distance, request._duration, (distance * 0.5));
-		req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), 5, 5, 5);
+		req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), distance, request._duration, (distance * 0.5));
+		#req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), 5, 5, 5);
 		_open_request();
 	
 	# Complete button

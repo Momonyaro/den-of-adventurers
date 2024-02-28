@@ -116,9 +116,12 @@ func xp_percentage() -> float:
 	else: 
 		return _xp.x / float(_xp.y);
 
+func adv_dismiss():
+	set_status(Status.DISMISSED);
+	print(str(D_T, " -> ", adv_name(), " has been dismissed."));
+
 func _on_timer_done(id: String):
 	match id:
 		TIMER_recruit:
-			set_status(Status.DISMISSED);
-			print(str(D_T, " -> ", adv_name(), " has been dismissed."));
+			adv_dismiss();
 			TIMER_recruit = "";

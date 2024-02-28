@@ -3,6 +3,7 @@ extends Panel
 var _game_manager : GameManager = null;
 var _adv_manager : AdventurerManager = null;
 @onready var agent_manager: AgentManager = get_node("/root/Root/Agents");
+@onready var timers = get_node("/root/Root/Timers");
 
 var _selected_agent : String = "";
 var _last_agent: Agent = null;
@@ -119,3 +120,17 @@ func get_timer_text(_fatigue: float, _fatigue_total_time: float) -> String:
 func _on_recruit_btn_pressed():
 	_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
 	_last_agent._recruit();
+
+
+func _on_dismiss_btn_pressed():
+	_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
+	_window_base.create_prompt(
+		'Dismiss Recruit', 
+		str('Are you sure you want to dismiss "', _last_agent.adventurer.adv_name(), '"?'),
+		'res://Textures/Icons/exit.png',
+		"Yes, I'm sure.",
+		'No',
+		func(): 
+			_last_agent._dismiss();
+			timers.halve_timer(_adv_manager.TIMER_recruit_refresh);
+	);
