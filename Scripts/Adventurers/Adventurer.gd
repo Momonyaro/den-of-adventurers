@@ -38,7 +38,7 @@ var TIMER_resting : String;
 
 
 func _init(given_name: String, family_name: String, age: int, 
-health: int, level: int, race: Race, nationality: Nationality, adventurer_index: int):
+health: int, level: int, race: Race, nationality: Nationality, adventurer_index: int = -1):
 	_given_name = given_name;
 	_family_name = family_name;
 	_age = age;
@@ -145,5 +145,26 @@ func to_dict() -> Dictionary:
 		'LOOK_hat': LOOK_hat,
 		'LOOK_hair': LOOK_hair,
 		'TIMER_recruit': TIMER_recruit,
-		'TIMER_resting': TIMER_resting
+		'TIMER_resting': TIMER_resting,
 	};
+
+static func from_dict(dict: Dictionary) -> Adventurer:
+	var health = SettingsManager.string_to_vector2i(String(dict['_health'])) as Vector2i;
+	var race = dict['_race'] as Race;
+	var nationality = dict['_nationality'] as Nationality;
+	var status = dict['_status'] as Status;
+
+	var adv = Adventurer.new(dict['_given_name'], dict['_family_name'], dict['_age'], 0, dict['_level'], race, nationality);
+	adv._unique_id = dict['_unique_id'];
+	adv._status = dict['_status'];
+	adv._health = health;
+	adv._fatigue = dict['_fatigue'];
+	adv._defined = dict['_defined'];
+	adv._class = dict['_class'];
+	adv.LOOK_race = dict['LOOK_race'];
+	adv.LOOK_hat = dict['LOOK_hat'];
+	adv.LOOK_hair = dict['LOOK_hair'];
+	adv.TIMER_recruit = dict['TIMER_recruit'];
+	adv.TIMER_resting = dict['TIMER_resting'];
+
+	return adv;

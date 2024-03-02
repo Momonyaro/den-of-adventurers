@@ -14,6 +14,7 @@ const _party_names = [
 var _adventurers : Dictionary = {};
 var _parties : Array = [];
 var party_edited: Party = null;
+var initialzied = false;
 
 # Timers
 var TIMER_recruit_refresh : String;
@@ -27,6 +28,9 @@ func _ready():
 	new_recruit.connect(_on_new_recruit);
 
 func _process(_delta):
+	if !initialzied:
+		return;
+
 	if recruits().size() == 0 and TIMER_recruit_refresh == "":
 		TIMER_recruit_refresh = timers.create_timer(60, "When this timer runs out, we will create a new recruit."); #1200
 		var adv = data.adv_pool.get_rand_adventurer();
@@ -156,3 +160,14 @@ func _on_save_game(save_buffer: Dictionary):
 		adv_save_data.push_back(_adventurers[key].to_dict());
 	save_buffer['adventurers'] = adv_save_data;
 	save_buffer['parties'] = _parties.map(func (p): return p.to_dict());
+
+func _on_load_game(loaded_data: Dictionary):
+	var adv_data = loaded_data['adventurers'];
+	var adventurers = adv_data.map(func (ad): return Adventurer.from_dict(ad));
+	_adventurers.clear();
+
+	for adv in adventurers:
+		_adventurers[adv._unique_id] = adv;
+	
+	initialzied = true;
+	pass # Replace with function body.

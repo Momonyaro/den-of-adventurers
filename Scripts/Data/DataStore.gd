@@ -38,6 +38,9 @@ func _upgrade_save(save_data: Dictionary):
 			'v1': _to_v2(hot_drive.data);
 			_: _to_v1(hot_drive.data);
 
+
+# --- UPGRADE FUNCTIONS ------------------------------------------
+
 func _to_v1(raw_save: Dictionary):
 	if !raw_save.has('guild_data'):
 		var new_data = GuildData.new();

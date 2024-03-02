@@ -54,12 +54,18 @@ func _create_id() -> String:
 func _get_timers() -> Array:
 	return _timers.values();
 
-
 func _on_save_game(save_buffer: Dictionary):
 	var timer_save_data = [];
 	for key in _timers:
 		timer_save_data.push_back(_timers[key].to_dict());
 	save_buffer['timers'] = timer_save_data;
+
+func _on_load_game(loaded_data: Dictionary):
+	var loaded_arr = loaded_data['timers'] as Array;
+	for item in loaded_arr:
+		var timer_obj = InternalTimer.new( item['_id'], item['_length'], item['_description'], item['_started'] );
+		timer_obj._value = item['_value'];
+		_timers[item['_id']] = timer_obj;
 
 
 class InternalTimer:

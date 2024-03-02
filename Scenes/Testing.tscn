@@ -285,6 +285,8 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_8m8ew")
 
 [connection signal="load_game" from="DataStore" to="Game" method="_on_load_game"]
+[connection signal="load_game" from="DataStore" to="Timers" method="_on_load_game"]
+[connection signal="load_game" from="DataStore" to="Adventurers" method="_on_load_game"]
 [connection signal="save_game" from="DataStore" to="Game" method="_on_save_game"]
 [connection signal="save_game" from="DataStore" to="Activities" method="_on_save_game"]
 [connection signal="save_game" from="DataStore" to="Requests" method="_on_save_game"]
