@@ -2,6 +2,7 @@ extends BaseState;
 class_name StartActivityState;
 
 var _party: Party = null;
+var _agent: Agent = null;
 
 func _init():
 	_allow_movement = true;
@@ -18,7 +19,7 @@ func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool,
 func update(delta: float, agent: Node, camera: Node):
 	var pathing = agent.navigation;
 	var activity = agent.current_activity.activity_node;
-	var _agent = agent as Node3D;
+	_agent = agent as Node3D;
 
 	var start_pos = activity.get_start();
 	if _animator.assigned_animation != "WALK":
@@ -29,7 +30,6 @@ func update(delta: float, agent: Node, camera: Node):
 		var activity_point = activity.get_activity_point();
 		_agent.global_position = activity_point.global_position;
 		_agent.global_rotation = activity_point.global_rotation;
-		_agent.current_activity = null;
 		var activity_state = activity.get_activity_state();
 		activity_state._party = _party;
 		activity_state._agent = agent;
@@ -39,6 +39,7 @@ func update(delta: float, agent: Node, camera: Node):
 
 func end() -> StateReference:
 	_state_exit_count += 1;
+	_agent.current_activity = null;
 	return StateReference.NIL;
 
 func state_transition_allowed(state_ref: StateReference) -> bool:

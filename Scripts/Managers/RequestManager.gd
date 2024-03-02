@@ -10,17 +10,8 @@ var _completed_requests: Array[String] = [];
 
 func _ready():
 	timers.timer_done.connect(_on_timer_done);
-	var items = get_requests()['Available'];
 
-	for item in items:
-		print(item._title, " :: ", item._id);
-		print(item._requestor, " -> ", item._body);
-		print("Location: ", item._location);
-		print("Requirements: [", ', '.join(item._requirements), "]");
-		print("Rewards: ", ', '.join(item._rewards));
-		print();
-
-func _process(delta):
+func _process(_delta):
 	var queued_parties = adv_manager.get_queued_parties() as Array[Party];
 	for party in queued_parties:
 		if adv_manager.party_can_start_mission(party):
@@ -86,7 +77,7 @@ func accept_request(request: RequestItem, party: Party, go_to_time: float, durat
 	party._status = Party.PartyStatus.QUEUED_FOR_MISSION;
 
 func complete_request(request: RequestItem, party: Party):
-	_active_requests[request._id] = null;
+	_active_requests.erase(request._id);
 	_completed_requests.push_back(request._id);
 	party._current_request_id = "";
 	party._status = Party.PartyStatus.IDLE;
@@ -123,6 +114,14 @@ func _on_timer_done(id: String):
 				req.TIMER_go_home = "";
 
 	pass;
+
+
+
+func _on_save_game(save_buffer: Dictionary):
+	save_buffer['completed_requests'] = _completed_requests;
+	save_buffer['active_requests'] = _active_requests.values().map(func (ar): return ar.to_dict());
+	pass # Replace with function body.
+
 
 class RequestItem:
 	var _title: String = "";
@@ -161,3 +160,11 @@ class ActiveRequestItem:
 		TIMER_go_to = timers.create_timer(go_to_time, '', false);
 		TIMER_duration = timers.create_timer(duration_time, '', false);
 		TIMER_go_home = timers.create_timer(go_home_time, '', false);
+	
+	func to_dict() -> Dictionary:
+		return {
+			'_id': _id,
+			'TIMER_go_to': TIMER_go_to,
+			'TIMER_duration': TIMER_duration,
+			'TIMER_go_home': TIMER_go_home
+		};

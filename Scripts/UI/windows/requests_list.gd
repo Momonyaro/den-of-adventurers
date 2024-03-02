@@ -144,8 +144,8 @@ func _open_request():
 
 	# Submit button
 	var submit_func = func():
-		req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), distance, request._duration, (distance * 0.5));
-		#req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), 5, 5, 5);
+		#req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), distance, request._duration, (distance * 0.5));
+		req_manager.accept_request(request, adv_manager.get_party(dropdown._get_current_item()._value), 5, 5, 5);
 		_open_request();
 	
 	# Complete button
@@ -181,8 +181,12 @@ func _open_list():
 	for i in req_container.get_child_count():
 		var item = req_list[i] if req_list.size() > i else null;
 		var child = req_container.get_child(i);
+		var is_active = item._is_active if item != null else false;
+		var matches = adv_manager.try_get_party_with_request(item._id) if item != null else [];
+		var party = matches[0] if matches.size() > 0 else null;
+		var is_returned = party._status == Party.PartyStatus.RETURNED if party != null else false;
 
-		child.populate_item(item, item._is_active if item != null else false, item._is_completed if item != null else false, _on_click_open_btn);
+		child.populate_item(item, is_active, is_returned, item._is_completed if item != null else false, _on_click_open_btn);
 
 func _on_click_open_btn(id: String):
 

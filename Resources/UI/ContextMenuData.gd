@@ -19,12 +19,6 @@ static func get_menu_data():
 			'msg': 'GAME_SAVE',
 			'exclude_for': ['web']
 		},
-		'Load Game': {
-			'type': 'action',
-			'icon': 'res://Textures/Icons/load.png',
-			'msg': 'GAME_LOAD',
-			'exclude_for': ['web']
-		},
 		'settings_divider': {
 			'type': 'divider',
 			'label_visible': false,

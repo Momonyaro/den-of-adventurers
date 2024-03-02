@@ -6,8 +6,7 @@ var _party: Party = null;
 var _agent: Agent = null;
 var _exit_pos: Vector3 = Vector3();
 
-func _init(start_pos: Vector3):
-	_exit_pos = start_pos;
+func _init():
 	_state_ref = StateReference.ON_LEAVE_MAP;
 	_state_enter_count += 1;
 
@@ -15,7 +14,7 @@ func start(animator: AnimationPlayer):
 	_animator = animator;
 
 func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
-	return true;
+	return false;
 
 func update(delta: float, agent: Node, camera: Node):
 	# Check if party has returned.
@@ -26,9 +25,9 @@ func update(delta: float, agent: Node, camera: Node):
 	pass;
 
 func end() -> StateReference:
-	print("WAPIDOOOADOA, ", _exit_pos);
-	_agent.global_position = _exit_pos;
+	_agent.global_position = _agent.fallback_position;
 	_agent.adventurer._status = Adventurer.Status.IDLE;
+	_agent.current_activity = null;
 	_state_exit_count += 1;
 	return StateReference.NIL;
 

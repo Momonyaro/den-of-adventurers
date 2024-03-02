@@ -147,3 +147,12 @@ func _on_timer_done(id: String):
 func _on_new_recruit(id: String):
 	var adv = _adventurers[id];
 	print(str(D_T, " -> New ", adv.adv_race(), " Recruit <", adv.adv_name(), ", [ID: ", adv._unique_id, "]> Created! "));
+
+
+
+func _on_save_game(save_buffer: Dictionary):
+	var adv_save_data = [];
+	for key in _adventurers.keys():
+		adv_save_data.push_back(_adventurers[key].to_dict());
+	save_buffer['adventurers'] = adv_save_data;
+	save_buffer['parties'] = _parties.map(func (p): return p.to_dict());

@@ -17,7 +17,7 @@ func update(delta: float, agent: Node, camera: Node):
 	if agent.current_activity != null:
 		return;
 
-	var activity_manager: ActivityManager = agent.get_tree().root.get_child(1).get_child(1);
+	var activity_manager: ActivityManager = agent.get_node("/root/Root/Activities");
 	if activity_manager != null:
 		var activity_instance = activity_manager.try_get_activity("bed", agent);
 		activity_manager.reserve(activity_instance.activity_id, agent);

@@ -31,3 +31,8 @@ func _recruit_agent(adv_id: String):
 			Console.print_line(str("Recruited ", agent.adventurer.adv_name()));
 			return;
 	pass;
+
+
+func _on_save_game(save_buffer: Dictionary):
+	save_buffer['agents'] = agents.values().map(func (a): return a.to_dict());
+	pass # Replace with function body.

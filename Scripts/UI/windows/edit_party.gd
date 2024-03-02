@@ -66,7 +66,6 @@ func _on_close_btn_pressed():
 	pass # Replace with function body.
 
 func _on_title_text_changed(new_text:String):
-	print(new_text);
 	var title_edit = get_node("LineEdit") as LineEdit;
 	var title_cap = get_node("LineEdit/CAP") as Label;
 	

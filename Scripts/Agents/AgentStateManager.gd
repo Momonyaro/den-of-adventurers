@@ -12,7 +12,10 @@ var _states: Array[BaseState] = [
 	RestState.new(),
 	StartWanderState.new(),
 	IdleState.new(), 
-	WalkState.new()
+	WalkState.new(),
+
+	LeaveActivityState.new(),
+	BedActivityState.new()
 ];
 
 func _init(animator: AnimationPlayer):

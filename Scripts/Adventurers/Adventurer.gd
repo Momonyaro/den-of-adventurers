@@ -125,3 +125,25 @@ func _on_timer_done(id: String):
 		TIMER_recruit:
 			adv_dismiss();
 			TIMER_recruit = "";
+
+func to_dict() -> Dictionary:
+	return {
+		'_given_name': _given_name,
+		'_family_name': _family_name,
+		'_unique_id': _unique_id,
+		'_defined': _defined,
+		'_age': _age,
+		'_race': _race,
+		'_nationality': _nationality,
+		'_status': _status,
+		'_health': _health,
+		'_fatigue': _fatigue,
+		'_class': _class,
+		'_level': _level, 
+		'_xp': _xp,
+		'LOOK_race': LOOK_race,
+		'LOOK_hat': LOOK_hat,
+		'LOOK_hair': LOOK_hair,
+		'TIMER_recruit': TIMER_recruit,
+		'TIMER_resting': TIMER_resting
+	};

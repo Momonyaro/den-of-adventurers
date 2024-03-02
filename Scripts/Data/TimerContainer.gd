@@ -39,10 +39,8 @@ func pause_timer(id: String):
 
 func halve_timer(id: String):
 	var timer = _timers[id];
-	print(timer.get_progress_text());
 	var diff = timer._length - timer._value;
 	timer.tick(diff * 0.5);
-	print(timer.get_progress_text());
 
 func delete_timer(id: String):
 	_timers.erase(id);
@@ -55,6 +53,14 @@ func _create_id() -> String:
 
 func _get_timers() -> Array:
 	return _timers.values();
+
+
+func _on_save_game(save_buffer: Dictionary):
+	var timer_save_data = [];
+	for key in _timers:
+		timer_save_data.push_back(_timers[key].to_dict());
+	save_buffer['timers'] = timer_save_data;
+
 
 class InternalTimer:
 	var _id : String;
@@ -113,3 +119,12 @@ class InternalTimer:
 
 	func get_timer_seconds() -> float:
 		return floori(_length - _value);
+	
+	func to_dict() -> Dictionary:
+		return {
+			'_id': _id,
+			'_length': _length,
+			'_value': clampf(_value, 0, _length - 5), # This is to prevent weird behaviour if a timer ends the frame we load the game.
+			'_description': _description,
+			'_started': _started
+		};

@@ -9,7 +9,7 @@ var adventurer = "";
 
 func _ready():
 	activity_manager = get_parent();
-	activity_manager.register(_get_id(), 'bed', self, is_available);
+	activity_manager.register(_get_id(), 'bed', self);
 
 func update(state: bool):
 	zzz_particles.emitting = state;

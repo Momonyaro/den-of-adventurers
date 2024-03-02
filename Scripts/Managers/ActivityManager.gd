@@ -10,7 +10,7 @@ func _ready():
 func try_get_activity(type: String, agent: Agent) -> Activity:
 	var activities_of_type = _activities.filter(func (x): return x.type_key == type);
 	for activity in activities_of_type:
-		if activity.is_available.call(agent):
+		if activity.activity_node.is_available(agent):
 			if activity.occupied_by == "":
 				return activity;
 			elif agent != null && activity.occupied_by == agent.adv_id:
@@ -18,14 +18,13 @@ func try_get_activity(type: String, agent: Agent) -> Activity:
 	
 	return null;
 
-func register(id: String, type: String, node: Node, is_available_callback):
+func register(id: String, type: String, node: Node):
 	var new_activity = Activity.new();
 	
 	new_activity.activity_id = id;
 	new_activity.type_key = type;
 	new_activity.occupied_by = "";
 	new_activity.activity_node = node;
-	new_activity.is_available = is_available_callback if is_available_callback != null else func (_agent): return true;
 
 	_activities.push_back(new_activity);
 
@@ -41,10 +40,20 @@ func set_free(id: String):
 		if activity.activity_id == id:
 			activity.occupied_by = "";
 
+func _on_save_game(save_buffer: Dictionary):
+	save_buffer['activities'] = _activities.map(func (a): return a.to_dict());
+	pass # Replace with function body.
+
 
 class Activity:
 	var activity_id: String;
 	var type_key: String;
 	var occupied_by: String;
 	var activity_node: Node;
-	var is_available: Callable = func (_agent): return true;
+
+	func to_dict() -> Dictionary:
+		return {
+			'activity_id': activity_id,
+			'type_key': type_key,
+			'occupied_by': occupied_by
+		};

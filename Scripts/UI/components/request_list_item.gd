@@ -2,12 +2,13 @@ extends Panel
 
 var open_callback: Callable;
 
-func populate_item(request: RequestManager.RequestItem, is_active: bool, is_completed: bool, on_click_open: Callable):
+func populate_item(request: RequestManager.RequestItem, is_active: bool, is_returned: bool, is_completed: bool, on_click_open: Callable):
 	self.visible = request != null;
 	if !self.visible:
 		return;
 
 	var active_strip = get_node("HBoxContainer/ACTIVE_STRIP") as TextureRect;
+	var returned_strip = get_node("HBoxContainer/RETURNED_STRIP") as Control;
 	var completed_strip = get_node("HBoxContainer/COMPLETED_STRIP") as Control;
 	var request_title = get_node("HBoxContainer/Control/Label") as Label;
 	var gold_label = get_node("HBoxContainer/Control/SUB_VALUES/GOLD/Label") as Label;
@@ -17,6 +18,7 @@ func populate_item(request: RequestManager.RequestItem, is_active: bool, is_comp
 	var reward_dict = _get_rewards_dict(request._rewards);
 
 	active_strip.visible = is_active;
+	returned_strip.visible = !is_completed && is_returned;
 	completed_strip.visible = is_completed;
 	request_title.text = request._title;
 	gold_label.text = str(reward_dict['gold'] if reward_dict.has('gold') else 0);

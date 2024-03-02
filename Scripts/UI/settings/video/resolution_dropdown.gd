@@ -2,6 +2,7 @@ extends Node
 
 var _dropdown: Node = null;
 var _last_mode = -1;
+@onready var settings: Persistence = get_node("/root/Root/SettingsMngr/Settings");
 
 func _ready():
 	
@@ -26,7 +27,11 @@ func _process(_delta):
 	var _mode = get_window().mode;
 	var is_fullscreen = _mode == Window.Mode.MODE_EXCLUSIVE_FULLSCREEN;
 	_dropdown._disabled = is_fullscreen;
-	if _mode != _last_mode:
+	if is_fullscreen:
+		var screen_res = get_tree().root.size;
+		var screen_res_str = str(screen_res.x, 'x', screen_res.y);
+		_dropdown.set_active_no_event(screen_res_str, -1);
+	elif _mode != _last_mode:
 		var default = _get_current();
 		_dropdown.set_active_no_event(default[0], default[1]);
 	
@@ -43,17 +48,16 @@ func _on_new_value(label: String, value: String, id: int):
 		1440: _set_res(2560, 1440);
 		1800: _set_res(3200, 1800);
 		2160: _set_res(3840, 2160);
-	
-	#ProjectSettings.save();
 
 func _get_current() -> Array:
-	var current = get_tree().root.size;
+	var data = settings.data;
+	var current = SettingsManager.string_to_vector2i(data['resolution']) if data.has('resolution') else get_tree().root.size;
 	var current_str = str(current.x, "x", current.y)
 	return [current_str, current.y];
 
 func _get_options(screen_w: int, screen_h: int) -> Array: # only 16:9 support for the moment at least.
 	var resolutions = [];
-	#if screen_w >= 960 && screen_h >= 540:   resolutions.push_back(["960x540",   540]); # web target?
+	#if screen_w >= 960 && screen_h >= 540:   resolutions.push_back(["960x540",   540]); # web target? [DEPRECATED]
 	if screen_w >= 1280 && screen_h >= 720:  resolutions.push_back(["1280x720",  720]); # project baseline
 	if screen_w >= 1366 && screen_h >= 768:  resolutions.push_back(["1366x768",  768]);
 	if screen_w >= 1600 && screen_h >= 900:  resolutions.push_back(["1600x900",  900]);
@@ -68,5 +72,7 @@ func _set_res(w: int, h: int):
 	get_tree().root.size = Vector2(w, h);
 	get_window().size = Vector2(w, h);
 	
+	settings.data['resolution'] = Vector2i(w, h);
+	settings.save();
 	#ProjectSettings.set('display/window/size/viewport_width', w);
 	#ProjectSettings.set('display/window/size/viewport_height', h);

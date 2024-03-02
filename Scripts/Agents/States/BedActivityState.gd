@@ -15,7 +15,7 @@ func start(animator: AnimationPlayer):
 	_animator.play("SLEEP", 0);
 
 func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
-	return true;
+	return false;
 
 func update(delta: float, agent: Node, camera: Node):
 	agent.adventurer.tick_fatigue(delta);
@@ -26,6 +26,7 @@ func update(delta: float, agent: Node, camera: Node):
 func end() -> StateReference:
 	_state_exit_count += 1;
 	_activity.update(false);
+	_agent.current_activity = null;
 	return StateReference.NIL;
 
 func state_transition_allowed(state_ref: StateReference) -> bool:

@@ -1,16 +1,19 @@
-[gd_scene load_steps=27 format=3 uid="uid://f64ofd2jr8sn"]
+[gd_scene load_steps=30 format=3 uid="uid://f64ofd2jr8sn"]
 
 [ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_8246l"]
 [ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="2_dls8v"]
 [ext_resource type="Script" path="res://Scripts/Managers/GameManager.gd" id="2_tfev1"]
+[ext_resource type="Script" path="res://Scripts/Managers/SettingsManager.gd" id="3_pb3he"]
 [ext_resource type="Script" path="res://Scripts/Managers/AdventurerManager.gd" id="3_q8kab"]
 [ext_resource type="Script" path="res://Scripts/Managers/ActivityManager.gd" id="3_ue1fi"]
 [ext_resource type="Script" path="res://Scripts/Activities/BedActivity.gd" id="4_a3onc"]
+[ext_resource type="Script" path="res://Scripts/Data/DataStore.gd" id="4_fckrr"]
 [ext_resource type="Script" path="res://Scripts/Managers/AgentManager.gd" id="4_uo78h"]
 [ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="5_lyn1g"]
 [ext_resource type="Script" path="res://Scripts/Managers/RequestManager.gd" id="6_abixe"]
 [ext_resource type="Script" path="res://Scripts/Activities/LeaveActivity.gd" id="6_pdokr"]
 [ext_resource type="PackedScene" uid="uid://daoo1s5dlp1si" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
+[ext_resource type="Script" path="res://addons/persistence_node/persistence_node.gd" id="12_ebu0n"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nxyx"]
 albedo_color = Color(0.670588, 0.301961, 0.901961, 1)
@@ -87,6 +90,24 @@ albedo_color = Color(0.313726, 0.313726, 0.313726, 1)
 
 [node name="Root" type="Node3D"]
 script = ExtResource("1_8246l")
+
+[node name="SettingsMngr" type="Node" parent="."]
+script = ExtResource("3_pb3he")
+
+[node name="Settings" type="Node" parent="SettingsMngr"]
+script = ExtResource("12_ebu0n")
+folder_name = ""
+file_name = "settings"
+mode = 1
+
+[node name="DataStore" type="Node" parent="."]
+script = ExtResource("4_fckrr")
+
+[node name="HOT_DRIVE" type="Node" parent="DataStore"]
+script = ExtResource("12_ebu0n")
+file_name = "save"
+mode = 1
+store_objects = true
 
 [node name="Game" type="Node" parent="."]
 script = ExtResource("2_tfev1")
@@ -262,3 +283,11 @@ transform = Transform3D(0.609733, 0, -0.498952, 0, 1, 0, 0.4291, 0, 0.708989, 1.
 mesh = SubResource("BoxMesh_0jipx")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_8m8ew")
+
+[connection signal="load_game" from="DataStore" to="Game" method="_on_load_game"]
+[connection signal="save_game" from="DataStore" to="Game" method="_on_save_game"]
+[connection signal="save_game" from="DataStore" to="Activities" method="_on_save_game"]
+[connection signal="save_game" from="DataStore" to="Requests" method="_on_save_game"]
+[connection signal="save_game" from="DataStore" to="Timers" method="_on_save_game"]
+[connection signal="save_game" from="DataStore" to="Adventurers" method="_on_save_game"]
+[connection signal="save_game" from="DataStore" to="Agents" method="_on_save_game"]

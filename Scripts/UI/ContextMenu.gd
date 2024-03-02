@@ -142,13 +142,6 @@ func _on_command_msg(obj):
 		return;
 
 	match obj['msg']:
+		'GAME_SAVE': get_node("/root/Root/DataStore")._save_game(); set_context("");
 		"GAME_QUIT": get_tree().quit();
 		'GOTO_MAIN': return;
-
-
-# func _gui_input(event):
-# 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
-# 		var current = ProjectSettings.get_setting("display/window/stretch/mode");
-# 		ProjectSettings.set_setting("display/window/stretch/mode", "disabled" if current != "disabled" else "canvas_items");
-# 		ProjectSettings.save();
-# 		print(current, "=>", ProjectSettings.get_setting("display/window/stretch/mode"))

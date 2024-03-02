@@ -5,16 +5,18 @@ extends Node3D
 @onready var adv_manager : AdventurerManager = get_node("/root/Root/Adventurers");
 
 var activity_manager: ActivityManager = null;
+var _agent: Agent = null;
 var adventurer = "";
 
 func _ready():
 	activity_manager = get_parent();
-	activity_manager.register(_get_id(), 'leave_point', self, is_available);
+	activity_manager.register(_get_id(), 'leave_point', self);
 
 func update(state: bool):
 	pass;
 
 func is_available(agent: Agent) -> bool:
+	_agent = agent;
 	return true;
 
 func get_start() -> Vector3:
@@ -24,8 +26,8 @@ func get_activity_point() -> Node3D:
 	return activity_point;
 
 func get_activity_state() -> BaseState:
-	var activity_state = LeaveActivityState.new(start_point.global_position);
-	activity_state._agent
+	var activity_state = LeaveActivityState.new();
+	_agent.fallback_position = start_point.global_position;
 	return activity_state;
 
 func _get_id():

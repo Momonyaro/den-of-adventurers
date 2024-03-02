@@ -8,7 +8,7 @@ var _adv_manager : AdventurerManager = null;
 var _selected_agent : String = "";
 var _last_agent: Agent = null;
 var _window_base: Node = null;
-var _on_close_action: Callable = func (): get_tree().root.get_child(1).get_child(0).select_agent.emit("");
+var _on_close_action: Callable = func (): get_node("/root/Root/Game").select_agent.emit("");
 var closing: bool = false;
 
 @onready var human_icon = ResourceLoader.load("res://Textures/Icons/human.png");

@@ -8,12 +8,11 @@ class_name Agent
 @onready var game_manager : GameManager = get_node("/root/Root/Game");
 @onready var timers : TimerContainer = get_node("/root/Root/Timers");
 
-@onready var nav_target_pos = global_transform.origin;
-
 @export var move_speed = 2.0;
 @export var idle_time = 2.5;
 var adventurer : Adventurer;
 var adv_id = "";
+var fallback_position: Vector3 = Vector3.ZERO;
 var state_manager : AgentStateManager;
 var navigation : AgentNavigation;
 var current_activity: ActivityManager.Activity = null;
@@ -66,6 +65,16 @@ func _dismiss():
 		timers.delete_timer(adventurer.TIMER_recruit);
 		adventurer.adv_dismiss();
 	pass;
+
+func to_dict() -> Dictionary:
+	return {
+		'adv_id': adv_id,
+		'fallback_position': fallback_position,
+		'agent_state': state_manager._current_state._state_ref,
+		'position': self.global_transform.origin,
+		'nav_target': navigation._target_pos,
+		'current_activity': current_activity.activity_id if current_activity != null else ""
+	};
 
 func _on_mouse_entered():
 	if adventurer == null:

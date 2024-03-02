@@ -38,6 +38,15 @@ func get_sup_score() -> int:
 		
 	return score;
 
+func to_dict() -> Dictionary:
+	return {
+		'_title': _title,
+		'_created_timestamp': _created_timestamp,
+		'_members': _members,
+		'_status': _status,
+		'_current_request_id': _current_request_id
+	};
+
 # Party score calculation:
 # - It takes into account: level, stats(?) and items.
 # - It would probably just be easier to do something like score = (level * l_mod) + (stats_score + s_mod) + (item_score * i_mod)

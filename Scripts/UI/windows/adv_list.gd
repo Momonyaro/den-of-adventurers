@@ -23,7 +23,6 @@ func _process(delta):
 	_populate_list(adventurers);
 
 func _populate_list(adventurers: Array):
-	#print(adventurers.map(func (adv): return adv.adv_name()))
 	for i in 6:
 		var index = i + _start_index;
 		var item = null;

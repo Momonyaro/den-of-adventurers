@@ -25,7 +25,7 @@ func update(delta: float, agent: Node, camera: Node):
 	agent.look_at(cam_pos_flat, Vector3.UP);
 	agent.rotate_object_local(Vector3.UP, PI);
 
-	var activity_manager: ActivityManager = agent.get_tree().root.get_child(1).get_child(1);
+	var activity_manager: ActivityManager = agent.get_node("/root/Root/Activities");
 	if activity_manager != null && !assigned_activity:
 		var activity_instance = activity_manager.try_get_activity("leave_point", agent);
 		#activity_manager.reserve(activity_instance.activity_id, agent);
