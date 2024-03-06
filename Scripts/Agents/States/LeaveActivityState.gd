@@ -20,6 +20,9 @@ func update(delta: float, agent: Node, camera: Node):
 	# Check if party has returned.
 	if _party == null:
 		return;
+	
+	if _agent == null:
+		_agent = agent;
 
 	allow_state_transition = (_party._status == Party.PartyStatus.RETURNED);
 	pass;

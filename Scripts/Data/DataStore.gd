@@ -17,9 +17,8 @@ func _save_game():
 	hot_drive.save();
 
 func _load_game():
-	var drive_data = hot_drive.data;
-	_upgrade_save(drive_data);
-	load_game.emit(drive_data);
+	_upgrade_save(hot_drive.data);
+	load_game.emit(hot_drive.data);
 
 func _upgrade_save(save_data: Dictionary):
 	if save_data.size() == 0:
@@ -31,6 +30,7 @@ func _upgrade_save(save_data: Dictionary):
 
 	while (true):
 		version = hot_drive.data['version'];
+		print(version);
 
 		match version:
 			'v3': break;

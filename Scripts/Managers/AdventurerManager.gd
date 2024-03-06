@@ -32,7 +32,7 @@ func _process(_delta):
 		return;
 
 	if recruits().size() == 0 and TIMER_recruit_refresh == "":
-		TIMER_recruit_refresh = timers.create_timer(60, "When this timer runs out, we will create a new recruit."); #1200
+		TIMER_recruit_refresh = timers.create_timer(60, "$RECRUIT_TIMER"); #1200
 		var adv = data.adv_pool.get_rand_adventurer();
 		adv.TIMER_recruit = timers.create_timer(30, str(adv.adv_name(), " dismissal timer.")); #300
 		
@@ -162,12 +162,20 @@ func _on_save_game(save_buffer: Dictionary):
 	save_buffer['parties'] = _parties.map(func (p): return p.to_dict());
 
 func _on_load_game(loaded_data: Dictionary):
+	var timers = loaded_data['timers'];
+	for object in timers:
+		if object['_description'] == '$RECRUIT_TIMER':
+			TIMER_recruit_refresh = object['_id']
+
 	var adv_data = loaded_data['adventurers'];
+	var party_data = loaded_data['parties'];
 	var adventurers = adv_data.map(func (ad): return Adventurer.from_dict(ad));
 	_adventurers.clear();
 
 	for adv in adventurers:
 		_adventurers[adv._unique_id] = adv;
 	
+	_parties = party_data.map(func (pd): return Party.from_dict(pd));
+
 	initialzied = true;
 	pass # Replace with function body.

@@ -6,12 +6,16 @@ class_name RequestManager;
 @onready var timers: TimerContainer = get_node("%Timers");
 
 var _active_requests: Dictionary = {}; 
-var _completed_requests: Array[String] = []; 
+var _completed_requests: Array = []; 
+var _initialized = false;
 
 func _ready():
 	timers.timer_done.connect(_on_timer_done);
 
 func _process(_delta):
+	if !_initialized:
+		return;
+
 	var queued_parties = adv_manager.get_queued_parties() as Array[Party];
 	for party in queued_parties:
 		if adv_manager.party_can_start_mission(party):
@@ -97,10 +101,15 @@ func _on_timer_done(id: String):
 		match id:
 			req.TIMER_go_to:
 				var matches = adv_manager.try_get_party_with_request(key);
-				for p in matches:
-					p._status = Party.PartyStatus.ON_MISSION;
 				req.TIMER_go_to = "";
-				timers.start_timer(req.TIMER_duration);
+				if req.TIMER_duration != '':
+					timers.start_timer(req.TIMER_duration);
+					for p in matches:
+						p._status = Party.PartyStatus.ON_MISSION;
+				else:
+					timers.start_timer(req.TIMER_go_home);
+					for p in matches:
+						p._status = Party.PartyStatus.RETURNING_FROM_MISSION;
 			req.TIMER_duration:
 				var matches = adv_manager.try_get_party_with_request(key);
 				for p in matches:
@@ -115,11 +124,19 @@ func _on_timer_done(id: String):
 
 	pass;
 
-
-
 func _on_save_game(save_buffer: Dictionary):
 	save_buffer['completed_requests'] = _completed_requests;
 	save_buffer['active_requests'] = _active_requests.values().map(func (ar): return ar.to_dict());
+	pass # Replace with function body.
+
+func _on_load_game(loaded_data: Dictionary):
+	_completed_requests = loaded_data['completed_requests'] as Array[String];
+	_active_requests.clear();
+
+	for item in loaded_data['active_requests'].map(func (ard): return ActiveRequestItem.from_dict(ard)):
+		_active_requests[item._id] = item;
+
+	_initialized = true;
 	pass # Replace with function body.
 
 
@@ -155,11 +172,12 @@ class ActiveRequestItem:
 	var TIMER_duration: String;
 	var TIMER_go_home: String;
 
-	func _init(id: String, go_to_time: float, duration_time: float, go_home_time: float, timers: TimerContainer):
+	func _init(id: String, go_to_time: float = 0, duration_time: float = 0, go_home_time: float = 0, timers: TimerContainer = null):
 		_id = id;
-		TIMER_go_to = timers.create_timer(go_to_time, '', false);
-		TIMER_duration = timers.create_timer(duration_time, '', false);
-		TIMER_go_home = timers.create_timer(go_home_time, '', false);
+		if timers != null:
+			TIMER_go_to = timers.create_timer(go_to_time, str('travel to request: ', id), false);
+			TIMER_duration = timers.create_timer(duration_time, str('duration of request: ', id), false) if duration_time > 0 else "";
+			TIMER_go_home = timers.create_timer(go_home_time, str('returning from request: ', id), false);
 	
 	func to_dict() -> Dictionary:
 		return {
@@ -168,3 +186,10 @@ class ActiveRequestItem:
 			'TIMER_duration': TIMER_duration,
 			'TIMER_go_home': TIMER_go_home
 		};
+	
+	static func from_dict(dict: Dictionary) -> ActiveRequestItem:
+		var item = ActiveRequestItem.new(dict['_id']);
+		item.TIMER_go_to    = dict['TIMER_go_to'];
+		item.TIMER_duration = dict['TIMER_duration'];
+		item.TIMER_go_home  = dict['TIMER_go_home'];
+		return item;

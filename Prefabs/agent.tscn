@@ -23,12 +23,14 @@ _data = {
 [node name="Agent" type="CharacterBody3D"]
 collision_layer = 64
 script = ExtResource("1_56vq6")
+move_speed = null
+idle_time = null
+
+[node name="little_guy" parent="." instance=ExtResource("2_63leg")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.528857, 0)
 shape = SubResource("CapsuleShape3D_ki8gd")
-
-[node name="little_guy" parent="." instance=ExtResource("2_63leg")]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

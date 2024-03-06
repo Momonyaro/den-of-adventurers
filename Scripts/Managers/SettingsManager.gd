@@ -32,4 +32,15 @@ static func string_to_vector2i(string := "") -> Vector2i:
 		return Vector2i(int(array[0]), int(array[1]))
 
 	return Vector2i.ZERO
+
+static func string_to_vector3(string := "") -> Vector3:
+	if string:
+		var new_string: String = string
+		new_string = new_string.erase(0, 1)
+		new_string = new_string.erase(new_string.length() - 1, 1)
+		var array: Array = new_string.split(", ")
+
+		return Vector3(float(array[0]), float(array[1]), float(array[2]))
+
+	return Vector3.ZERO;
 	

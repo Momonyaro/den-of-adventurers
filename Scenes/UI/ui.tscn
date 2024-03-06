@@ -1,10 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://daoo1s5dlp1si"]
+[gd_scene load_steps=13 format=3 uid="uid://daoo1s5dlp1si"]
 
 [ext_resource type="Script" path="res://Scripts/Test/DebugTimerDisplay.gd" id="1_13eng"]
+[ext_resource type="Script" path="res://Scripts/UI/PixelFadeAccessor.gd" id="2_e8jcp"]
 [ext_resource type="PackedScene" uid="uid://bpfgekowinx86" path="res://Prefabs/UI/prompt_container.tscn" id="4_26l7w"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/windowManager.gd" id="4_arrft"]
+[ext_resource type="Shader" uid="uid://csv3x6tcw7wgq" path="res://Scripts/Shaders/PixelFade.tres" id="6_wxubf"]
 [ext_resource type="Script" path="res://Scripts/UI/Composer.gd" id="7_7f1nh"]
 [ext_resource type="PackedScene" uid="uid://bojaf0ukceod0" path="res://Prefabs/UI/context_menu.tscn" id="9_nahab"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m0ifr"]
+shader = ExtResource("6_wxubf")
+shader_parameter/color = null
+shader_parameter/resolution = Vector2(1920, 1080)
+shader_parameter/opacity = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_tl4hv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81qn1"]
 bg_color = Color(0.117647, 0.117647, 0.117647, 0.501961)
@@ -25,6 +35,17 @@ content_margin_left = 11.0
 content_margin_top = 6.0
 
 [node name="UI" type="Node"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = 5
+material = SubResource("ShaderMaterial_m0ifr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_tl4hv")
+script = ExtResource("2_e8jcp")
 
 [node name="Composer" type="Node" parent="."]
 script = ExtResource("7_7f1nh")

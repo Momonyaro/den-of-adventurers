@@ -13,13 +13,11 @@ class_name Agent
 var adventurer : Adventurer;
 var adv_id = "";
 var fallback_position: Vector3 = Vector3.ZERO;
-var state_manager : AgentStateManager;
-var navigation : AgentNavigation;
+var state_manager : AgentStateManager = AgentStateManager.new(self);
+var navigation : AgentNavigation = AgentNavigation.new(self, move_speed);
 var current_activity: ActivityManager.Activity = null;
 
 func _ready():
-	state_manager = AgentStateManager.new(_model.find_child("AnimationPlayer") as AnimationPlayer);
-	navigation = AgentNavigation.new(global_transform.origin, $NavigationAgent3D, move_speed);
 	game_manager.select_agent.connect(_on_select_agent);
 	$CHAR_NAME.visible = false;
 	pass;
@@ -72,6 +70,7 @@ func to_dict() -> Dictionary:
 		'fallback_position': fallback_position,
 		'agent_state': state_manager._current_state._state_ref,
 		'position': self.global_transform.origin,
+		'y_rot': self.rotation_degrees.y,
 		'nav_target': navigation._target_pos,
 		'current_activity': current_activity.activity_id if current_activity != null else ""
 	};

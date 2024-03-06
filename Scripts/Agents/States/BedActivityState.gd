@@ -18,14 +18,16 @@ func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool,
 	return false;
 
 func update(delta: float, agent: Node, camera: Node):
+	if _agent == null:
+		_agent = agent;
 	agent.adventurer.tick_fatigue(delta);
 	is_fatigued = (agent.adventurer._status == Adventurer.Status.RESTING || agent.adventurer._status == Adventurer.Status.EXHAUSTED);
-	_activity.update(true);
+	agent.current_activity.activity_node.update(true);
 	pass;
 
 func end() -> StateReference:
 	_state_exit_count += 1;
-	_activity.update(false);
+	_agent.current_activity.activity_node.update(false);
 	_agent.current_activity = null;
 	return StateReference.NIL;
 

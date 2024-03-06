@@ -22,6 +22,6 @@ static func from_dict(dict: Dictionary) -> GuildData:
 	new_result.guildhall_tier = dict['guildhall_tier'];
 	new_result.guildhall_adv_cap = dict['guildhall_adv_cap'];
 	new_result.guild_level = dict['guild_level'];
-	new_result.guild_xp = SettingsManager.string_to_vector2i(String(dict['guild_xp']));
+	new_result.guild_xp = SettingsManager.string_to_vector2i(str(dict['guild_xp']));
 
 	return new_result;

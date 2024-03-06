@@ -2,7 +2,7 @@ extends Node
 class_name ActivityManager
 
 # Here we should keep all of the activity nodes as a centralized "thing"
-var _activities: Array[Activity] = [];
+var _activities: Array = [];
 
 func _ready():
 	pass;
@@ -18,15 +18,30 @@ func try_get_activity(type: String, agent: Agent) -> Activity:
 	
 	return null;
 
+func get_activity_by_id(id: String) -> Activity:
+	for activity in _activities:
+		if activity.activity_id == id:
+			return activity;
+	
+	return null;
+
 func register(id: String, type: String, node: Node):
 	var new_activity = Activity.new();
 	
-	new_activity.activity_id = id;
-	new_activity.type_key = type;
-	new_activity.occupied_by = "";
-	new_activity.activity_node = node;
+	var found_existing = false;
+	for item in _activities:
+		if item.activity_id == id:
+			found_existing = true;
+			#print("Updated registered node for existing activity -> ", id);
+			item.activity_node = node;
 
-	_activities.push_back(new_activity);
+	if !found_existing:
+		new_activity.activity_id = id;
+		new_activity.type_key = type;
+		new_activity.occupied_by = "";
+		new_activity.activity_node = node;
+
+		_activities.push_back(new_activity);
 
 func reserve(id: String, reservee: Agent):
 	for activity in _activities:
@@ -42,6 +57,10 @@ func set_free(id: String):
 
 func _on_save_game(save_buffer: Dictionary):
 	save_buffer['activities'] = _activities.map(func (a): return a.to_dict());
+
+func _on_load_game(loaded_data: Dictionary):
+	_activities.clear();
+	_activities = loaded_data['activities'].map(func (ad): return Activity.from_dict(ad));
 	pass # Replace with function body.
 
 
@@ -57,3 +76,11 @@ class Activity:
 			'type_key': type_key,
 			'occupied_by': occupied_by
 		};
+	
+	static func from_dict(dict: Dictionary) -> Activity:
+		var a = Activity.new();
+		a.activity_id = dict['activity_id'];
+		a.type_key = dict['type_key'];
+		a.occupied_by = dict['occupied_by'];
+
+		return a; 

@@ -47,6 +47,17 @@ func to_dict() -> Dictionary:
 		'_current_request_id': _current_request_id
 	};
 
+static func from_dict(dict: Dictionary) -> Party:
+	var p = Party.new(
+		dict['_title'], 
+		dict['_members'], 
+		dict['_status'] as PartyStatus, 
+		dict['_current_request_id']
+	);
+
+	p._created_timestamp = dict['_created_timestamp'];
+	return p;
+
 # Party score calculation:
 # - It takes into account: level, stats(?) and items.
 # - It would probably just be easier to do something like score = (level * l_mod) + (stats_score + s_mod) + (item_score * i_mod)
