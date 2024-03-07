@@ -1,0 +1,122 @@
+[gd_scene load_steps=16 format=3 uid="uid://dwowqllx1cjyc"]
+
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_4gmcr"]
+[ext_resource type="Script" path="res://Scripts/UI/components/NotificationItem.gd" id="2_hj2id"]
+[ext_resource type="Texture2D" uid="uid://f4vhl5ihmmnx" path="res://Textures/Icons/save.png" id="3_lbg05"]
+[ext_resource type="Texture2D" uid="uid://8g07f88ja60y" path="res://Textures/Icons/close.png" id="4_6cb0d"]
+[ext_resource type="Texture2D" uid="uid://ckhuq6baeauif" path="res://Textures/Icons/close_hover.png" id="5_14imu"]
+[ext_resource type="Shader" uid="uid://csv3x6tcw7wgq" path="res://Scripts/Shaders/PixelFade.tres" id="6_rtu16"]
+[ext_resource type="Script" path="res://Scripts/UI/PixelFadeAccessor.gd" id="7_m5gh3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbgkd"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lswlm"]
+texture = ExtResource("4_6cb0d")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kuasg"]
+texture = ExtResource("5_14imu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ldeq"]
+texture = ExtResource("5_14imu")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvqed"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_44uaq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jhnw"]
+shader = ExtResource("6_rtu16")
+shader_parameter/color = null
+shader_parameter/resolution = Vector2(1920, 1080)
+shader_parameter/opacity = 0.2
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_lsxpy"]
+
+[node name="NotificationItem" type="PanelContainer"]
+offset_right = 286.0
+offset_bottom = 33.0
+theme = ExtResource("1_4gmcr")
+theme_override_styles/panel = SubResource("StyleBoxFlat_tbgkd")
+script = ExtResource("2_hj2id")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="IconMargins" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/IconMargins"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_lbg05")
+stretch_mode = 2
+
+[node name="LabelMargins2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/LabelMargins2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Saved the game."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ButtonMargins" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="win_header_close" type="Button" parent="VBoxContainer/HBoxContainer/ButtonMargins"]
+texture_filter = 1
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Press to close this window."
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_lswlm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_kuasg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6ldeq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_nvqed")
+
+[node name="TIMER_BAR" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxEmpty_44uaq")
+max_value = 1.0
+show_percentage = false
+
+[node name="COVER" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_2jhnw")
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_lsxpy")
+script = ExtResource("7_m5gh3")
+delay = 0
+dur = 0.5
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ButtonMargins/win_header_close" to="." method="_on_close_pressed"]

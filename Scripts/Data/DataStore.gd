@@ -1,6 +1,7 @@
 extends Node
 
 @onready var hot_drive: Persistence = self.get_child(0);
+@onready var notifications = self.get_node("/root/Root/UI/Notifications");
 
 signal save_game(save_buffer: Dictionary);
 signal load_game(loaded_data: SaveData);
@@ -15,6 +16,12 @@ func _save_game():
 	await get_tree().create_timer(0.2).timeout;
 	data_buffer['saved_at'] = Time.get_datetime_string_from_unix_time(floori(Time.get_unix_time_from_system()));
 	hot_drive.save();
+	notifications.create_notification(
+		ResourceLoader.load('res://Textures/Icons/save.png') as Texture2D,
+		'Saved the game.',
+		func (): pass,
+		20
+	);
 
 func _load_game():
 	_upgrade_save(hot_drive.data);

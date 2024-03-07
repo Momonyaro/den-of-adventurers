@@ -6,6 +6,7 @@ var section_dropdown_prefab = preload("res://Prefabs/UI/context_section_dropdown
 var section_divider_prefab = preload("res://Prefabs/UI/context_section_divider.tscn");
 @export var menu_parent: Node = null;
 @export var prompt: Node = null;
+@export var notifications: Node = null;
 @export var window_manager: Node = null;
 var _current_context: String = "";
 
@@ -124,6 +125,21 @@ func chk_tag(obj):
 			return true;
 	return false;
 	
+func create_notif(icon: Texture2D, content: String, callback: Callable, duration: float = 0):
+	notifications.create_notification(icon, content, callback, duration);
+
+func create_prompt(title: String, warning: String, icon: String, ok_option: String, no_option: String, ok_callback: Callable):
+	
+	var item = {
+		'prompt_title': title,
+		'prompt_warning': warning,
+		'prompt_icon': icon,
+		'ok_option': ok_option,
+		'ok_callback': ok_callback,
+		'no_option': no_option,
+	};
+	
+	prompt.set_prompt.emit(item);
 
 func _on_command_msg(obj):
 
