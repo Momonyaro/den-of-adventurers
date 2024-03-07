@@ -23,8 +23,6 @@ _data = {
 [node name="Agent" type="CharacterBody3D"]
 collision_layer = 64
 script = ExtResource("1_56vq6")
-move_speed = null
-idle_time = null
 
 [node name="little_guy" parent="." instance=ExtResource("2_63leg")]
 

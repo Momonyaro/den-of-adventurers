@@ -64,6 +64,9 @@ func _dismiss():
 		adventurer.adv_dismiss();
 	pass;
 
+func get_adv_party() -> Party:
+	return adv_manager.get_adventurer_party(adv_id);
+
 func to_dict() -> Dictionary:
 	return {
 		'adv_id': adv_id,

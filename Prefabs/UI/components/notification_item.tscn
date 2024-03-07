@@ -27,7 +27,8 @@ texture = ExtResource("5_14imu")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvqed"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_44uaq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_281cq"]
+bg_color = Color(0.729412, 0.776471, 0.854902, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2jhnw"]
 shader = ExtResource("6_rtu16")
@@ -62,8 +63,8 @@ theme_override_constants/margin_bottom = 2
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/IconMargins"]
 texture_filter = 1
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 0
+size_flags_vertical = 0
 texture = ExtResource("3_lbg05")
 stretch_mode = 2
 
@@ -79,7 +80,7 @@ theme_override_constants/margin_bottom = 4
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
-text = "Saved the game."
+text = "Saved the game. asd as dasdasd asd asdadaddad s dsdas"
 vertical_alignment = 1
 autowrap_mode = 2
 
@@ -106,7 +107,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_nvqed")
 [node name="TIMER_BAR" type="ProgressBar" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_styles/background = SubResource("StyleBoxEmpty_44uaq")
+theme_override_styles/background = SubResource("StyleBoxFlat_281cq")
 max_value = 1.0
 show_percentage = false
 

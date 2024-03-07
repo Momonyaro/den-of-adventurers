@@ -3,6 +3,7 @@ class_name RequestManager;
 
 @onready var request_data: Array = ResourceLoader.load("res://Resources/Requests/RequestData.tres").data;
 @onready var adv_manager : AdventurerManager = get_node("/root/Root/Adventurers");
+@onready var notifications = get_node("/root/Root/UI/Notifications");
 @onready var timers: TimerContainer = get_node("%Timers");
 
 var _active_requests: Dictionary = {}; 
@@ -23,6 +24,12 @@ func _process(_delta):
 				var _request = _active_requests[party._current_request_id];
 				timers.start_timer(_request.TIMER_go_to);
 				party._status = Party.PartyStatus.GOING_TO_MISSION;
+				notifications.create_notification(
+					null,
+					str("Party: '", party._title, "' are now setting off on their mission!"),
+					func(): pass,
+					0
+				);
 
 func get_requests() -> Dictionary:
 	var to_return: Dictionary = {

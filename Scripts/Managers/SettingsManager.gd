@@ -9,18 +9,24 @@ func _ready():
 func _load_data():
 	var settings_dict = settings.data as Dictionary;
 	
-	for key in settings_dict:
+	for key in settings_dict.keys():
 		match key:
 			'fullscreen':
 				get_window().mode = settings_dict[key] as Window.Mode;
-				break;
+				continue;
 			'resolution':
-				_set_res(SettingsManager.string_to_vector2i(settings_dict[key]));
-				break;
+				_set_res(SettingsManager.string_to_vector2i(str(settings_dict[key])));
+				continue;
+			'ui_scaling':
+				_set_ui_scaling((settings_dict[key]));
+				continue;
 
 func _set_res(size: Vector2i):
 	get_tree().root.size = size;
 	get_window().size = size;
+
+func _set_ui_scaling(value: int):
+	get_tree().root.content_scale_mode = value as Window.ContentScaleMode;
 
 static func string_to_vector2i(string := "") -> Vector2i:
 	if string:

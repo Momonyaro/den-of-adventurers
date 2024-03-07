@@ -19,6 +19,7 @@ func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool,
 func update(delta: float, agent: Node, camera: Node):
 	# Check if party has returned.
 	if _party == null:
+		_party = agent.get_adv_party();
 		return;
 	
 	if _agent == null:

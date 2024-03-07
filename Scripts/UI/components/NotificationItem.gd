@@ -14,8 +14,9 @@ func populate_item(tween: Tween, icon: Texture2D, content: String, callback: Cal
 	var has_duration = duration > 0;
 	timer_bar.visible = has_duration;
 
-	tween.tween_method(_set_bar_value, 1 as float, 0 as float, duration);
-	tween.connect("finished", func(): if duration > 0: _on_close_pressed());
+	if has_duration: 
+		tween.tween_method(_set_bar_value, 1 as float, 0 as float, duration);
+		tween.connect("finished", func(): if duration > 0: _on_close_pressed());
 
 	label_item.text = content;
 
