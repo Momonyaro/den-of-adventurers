@@ -10,7 +10,7 @@ data = [{
 "PrevRequests": [],
 "Requestor": "Town Herbalist",
 "Requirements": [],
-"Rewards": ["gold$60"],
+"Rewards": ["gold$60", "g_xp$15"],
 "Title": "Wolf Pack Harassing Ogryll"
 }, {
 "Body": "A shipment of ore is being taken to Lyre, the capital. We request aid in ensuring the contents make it without incident.",
@@ -20,6 +20,6 @@ data = [{
 "PrevRequests": [],
 "Requestor": "Lyre Tradehall",
 "Requirements": ["PartyMembersAbove$1"],
-"Rewards": ["gold$200"],
+"Rewards": ["gold$200", "g_xp$15"],
 "Title": "Escort Shipment to Lyre"
 }]

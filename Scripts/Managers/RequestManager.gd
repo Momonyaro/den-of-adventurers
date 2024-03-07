@@ -88,6 +88,7 @@ func accept_request(request: RequestItem, party: Party, go_to_time: float, durat
 	party._status = Party.PartyStatus.QUEUED_FOR_MISSION;
 
 func complete_request(request: RequestItem, party: Party):
+	# Add request guild xp to guild
 	_active_requests.erase(request._id);
 	_completed_requests.push_back(request._id);
 	party._current_request_id = "";

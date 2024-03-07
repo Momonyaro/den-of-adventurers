@@ -72,8 +72,7 @@ func _open_request():
 	for key in rewards.keys():
 		var _reward_box = reward_box.instantiate();
 		rewards_container.add_child(_reward_box);
-		var title_key = key[0].to_upper() + key.substr(1,-1);
-		_reward_box.populate(_get_reward_icon(key), title_key, str(rewards[key]));
+		_reward_box.populate(_get_reward_icon(key), _parse_reward_name(key), str(rewards[key]));
 
 	bottom_section.visible = (!request._is_active && !request._is_completed);
 	remaining_section.visible = request._is_active;
@@ -213,6 +212,11 @@ func _get_reward_icon(reward_key: String) -> Texture2D:
 		"gold": return ResourceLoader.load("res://Textures/Icons/gold.png") as Texture2D;
 		_: return Texture2D.new();
 
+func _parse_reward_name(reward_key: String) -> String:
+	match(reward_key.to_lower()):
+		"gold": return "Gold";
+		"g_xp": return "Guild Experience";
+		_: return "Item";
 
 func _on_dropdown_new_current(_label, _value, _id):
 
