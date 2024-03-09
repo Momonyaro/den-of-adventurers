@@ -2,9 +2,19 @@ extends Node
 class_name SettingsManager;
 
 @onready var settings: Persistence = $Settings;
+@onready var timers: TimerContainer = get_node("%Timers");
+
+var TIMER_autosave = "";
 
 func _ready():
 	_load_data();
+	timers.timer_done.connect(_on_timer_done);
+
+	var autosave_time = settings.data['autosave_time'] if settings.data.has('autosave_time') else 0;
+	if autosave_time > 0:
+		TIMER_autosave = timers.create_timer(autosave_time, "Autosave Timer");
+	else:
+		TIMER_autosave = "";
 
 func _load_data():
 	var settings_dict = settings.data as Dictionary;
@@ -27,6 +37,25 @@ func _set_res(size: Vector2i):
 
 func _set_ui_scaling(value: int):
 	get_tree().root.content_scale_mode = value as Window.ContentScaleMode;
+
+func reset_autosave_timer(new_time: int):
+	if TIMER_autosave != '':
+		timers.delete_timer(TIMER_autosave);
+
+	if new_time > 0:
+		TIMER_autosave = timers.create_timer(new_time, "Autosave Timer");
+	else:
+		TIMER_autosave = "";
+
+
+func _on_timer_done(id: String):
+	if id == TIMER_autosave:
+		var autosave_time = settings.data['autosave_time'] if settings.data.has('autosave_time') else 0;
+		if autosave_time > 0:
+			TIMER_autosave = timers.create_timer(autosave_time, "Autosave Timer");
+			get_node("/root/Root/DataStore")._save_game();
+		else:
+			TIMER_autosave = "";
 
 static func string_to_vector2i(string := "") -> Vector2i:
 	if string:

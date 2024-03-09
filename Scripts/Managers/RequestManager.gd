@@ -3,6 +3,7 @@ class_name RequestManager;
 
 @onready var request_data: Array = ResourceLoader.load("res://Resources/Requests/RequestData.tres").data;
 @onready var adv_manager : AdventurerManager = get_node("/root/Root/Adventurers");
+@onready var game_manager: GameManager = get_node("/root/Root/Game");
 @onready var notifications = get_node("/root/Root/UI/Notifications");
 @onready var timers: TimerContainer = get_node("%Timers");
 
@@ -25,10 +26,10 @@ func _process(_delta):
 				timers.start_timer(_request.TIMER_go_to);
 				party._status = Party.PartyStatus.GOING_TO_MISSION;
 				notifications.create_notification(
-					null,
+					ResourceLoader.load('res://Textures/Icons/exit.png') as Texture2D,
 					str("Party: '", party._title, "' are now setting off on their mission!"),
 					func(): pass,
-					0
+					30
 				);
 
 func get_requests() -> Dictionary:
@@ -89,6 +90,13 @@ func accept_request(request: RequestItem, party: Party, go_to_time: float, durat
 
 func complete_request(request: RequestItem, party: Party):
 	# Add request guild xp to guild
+	var guild_xp_reward = request._rewards.filter(func (r): return r.contains('g_xp'));
+	guild_xp_reward = guild_xp_reward[0] if guild_xp_reward.size() > 0 else 'g_xp$0';
+	var split = guild_xp_reward.split('$');
+	var guild_xp = int(split[1]);
+
+	game_manager.guild_data.add_xp(guild_xp);
+
 	_active_requests.erase(request._id);
 	_completed_requests.push_back(request._id);
 	party._current_request_id = "";

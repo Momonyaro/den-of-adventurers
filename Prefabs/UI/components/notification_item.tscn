@@ -34,7 +34,7 @@ bg_color = Color(0.729412, 0.776471, 0.854902, 1)
 shader = ExtResource("6_rtu16")
 shader_parameter/color = null
 shader_parameter/resolution = Vector2(1920, 1080)
-shader_parameter/opacity = 0.2
+shader_parameter/opacity = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lsxpy"]
 

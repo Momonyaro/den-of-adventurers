@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfxnh8rfend8s"]
+[gd_scene load_steps=19 format=3 uid="uid://bfxnh8rfend8s"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_11kd4"]
+[ext_resource type="Script" path="res://Scripts/UI/windows/VideoSettings.gd" id="1_ekxpx"]
 [ext_resource type="Script" path="res://Scripts/UI/settings/video/scaling_dropdown.gd" id="2_ulpcs"]
+[ext_resource type="Script" path="res://Scripts/UI/settings/game/autosave_dropdown.gd" id="3_0bi7w"]
 [ext_resource type="PackedScene" uid="uid://dlggxv5xajmh4" path="res://Prefabs/UI/components/dropdown.tscn" id="3_xvup6"]
 [ext_resource type="Script" path="res://Scripts/UI/settings/video/resolution_dropdown.gd" id="4_0o8gg"]
 [ext_resource type="Texture2D" uid="uid://dcefs5w3baws" path="res://Textures/Icons/options.png" id="4_k0nu8"]
@@ -51,18 +53,45 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdqlm"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgql8"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0.729412, 0.776471, 0.854902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82470"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 2.0
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0, 0, 0, 1)
+
 [node name="video_settings" type="Panel"]
 texture_filter = 1
 clip_contents = true
 offset_right = 309.0
 offset_bottom = 349.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hhn2u")
+script = ExtResource("1_ekxpx")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 12
@@ -70,80 +99,100 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="GAME_CONTAINER" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="interface_scaling" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="autosave_dropdown" type="HBoxContainer" parent="MarginContainer/GAME_CONTAINER"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("1_11kd4")
+theme_override_constants/separation = 24
+script = ExtResource("3_0bi7w")
+
+[node name="label" type="Label" parent="MarginContainer/GAME_CONTAINER/autosave_dropdown"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Autosave Frequency:"
+
+[node name="dropdown" parent="MarginContainer/GAME_CONTAINER/autosave_dropdown" instance=ExtResource("3_xvup6")]
+layout_mode = 2
+
+[node name="VIDEO_CONTAINER" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="interface_scaling" type="HBoxContainer" parent="MarginContainer/VIDEO_CONTAINER"]
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("1_11kd4")
 theme_override_constants/separation = 24
 script = ExtResource("2_ulpcs")
 
-[node name="scaling_option" type="Label" parent="MarginContainer/VBoxContainer/interface_scaling"]
+[node name="scaling_option" type="Label" parent="MarginContainer/VIDEO_CONTAINER/interface_scaling"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 text = "Interface Scaling:"
 
-[node name="dropdown" parent="MarginContainer/VBoxContainer/interface_scaling" instance=ExtResource("3_xvup6")]
+[node name="dropdown" parent="MarginContainer/VIDEO_CONTAINER/interface_scaling" instance=ExtResource("3_xvup6")]
 layout_mode = 2
 
-[node name="Panel" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Panel" type="PanelContainer" parent="MarginContainer/VIDEO_CONTAINER"]
 layout_mode = 2
 theme = ExtResource("1_11kd4")
 theme_override_styles/panel = SubResource("StyleBoxFlat_p2jwr")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VIDEO_CONTAINER/Panel"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Panel/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VIDEO_CONTAINER/Panel/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_k0nu8")
 stretch_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Panel/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VIDEO_CONTAINER/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 text = "NOTE: Pixel-perfect scaling is not recommended for resolutions higher than '2560 x 1440'."
 autowrap_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VIDEO_CONTAINER"]
 layout_mode = 2
 theme_override_constants/separation = 12
 theme_override_styles/separator = SubResource("StyleBoxFlat_wxkow")
 
-[node name="resoultion" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="resoultion" type="HBoxContainer" parent="MarginContainer/VIDEO_CONTAINER"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 24
 script = ExtResource("4_0o8gg")
 
-[node name="scaling_option" type="Label" parent="MarginContainer/VBoxContainer/resoultion"]
+[node name="scaling_option" type="Label" parent="MarginContainer/VIDEO_CONTAINER/resoultion"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_11kd4")
 theme_override_font_sizes/font_size = 12
 text = "Resolution:"
 
-[node name="dropdown" parent="MarginContainer/VBoxContainer/resoultion" instance=ExtResource("3_xvup6")]
+[node name="dropdown" parent="MarginContainer/VIDEO_CONTAINER/resoultion" instance=ExtResource("3_xvup6")]
 layout_mode = 2
 
-[node name="fullscreen" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="fullscreen" type="HBoxContainer" parent="MarginContainer/VIDEO_CONTAINER"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 24
 script = ExtResource("6_dt5wn")
 
-[node name="scaling_option" type="Label" parent="MarginContainer/VBoxContainer/fullscreen"]
+[node name="scaling_option" type="Label" parent="MarginContainer/VIDEO_CONTAINER/fullscreen"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_11kd4")
 theme_override_font_sizes/font_size = 12
 text = "Fullscreen:"
 
-[node name="CheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/fullscreen"]
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VIDEO_CONTAINER/fullscreen"]
 layout_mode = 2
 theme_override_constants/check_v_offset = 1
 theme_override_icons/checked = ExtResource("7_e8fip")
@@ -151,3 +200,41 @@ theme_override_icons/unchecked = ExtResource("8_sbe3h")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ck7en")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nxiua")
 icon_alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 29.0
+grow_horizontal = 2
+theme = ExtResource("1_11kd4")
+theme_override_styles/panel = SubResource("StyleBoxFlat_jdqlm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 7.0
+offset_right = 296.0
+offset_bottom = 29.0
+
+[node name="GAME_TAB" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_tgql8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_82470")
+toggle_mode = true
+button_pressed = true
+text = "Game"
+
+[node name="VIDEO_TAB" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_tgql8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_82470")
+toggle_mode = true
+text = "Video"
+
+[node name="SOUND_TAB" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_tgql8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_82470")
+toggle_mode = true
+text = "Sound"

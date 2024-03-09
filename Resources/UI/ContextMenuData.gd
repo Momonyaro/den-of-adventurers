@@ -24,21 +24,11 @@ static func get_menu_data():
 			'label_visible': false,
 			'exclude_for': ['web']
 		},
-		'Settings...': {
-			'type': 'folder',
+		'Settings': {
+			'type': 'action',
 			'icon': 'res://Textures/Icons/options.png',
-			'items': {
-				'Video Settings': {
-					'type': 'action',
-					'icon': 'res://Textures/Icons/pc.png',
-					'msg': 'WINDOW:RESET:VIDEO_SETTINGS'
-				},
-				'Audio Settings': {
-					'type': 'action',
-					'icon': 'res://Textures/Icons/speaker.png',
-					'msg': 'WINDOW:OPEN:AUDIO_SETTINGS'
-				}
-			}
+			'msg': 'WINDOW:RESET:VIDEO_SETTINGS',
+			'exclude_for': ['web']
 		},
 		'quit_divider': {
 			'type': 'divider',

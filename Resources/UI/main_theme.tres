@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://m7mvoj5x6lb5"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://m7mvoj5x6lb5"]
 
 [ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="1_6bd6u"]
 [ext_resource type="Texture2D" uid="uid://dh2bq5xlgec87" path="res://Textures/Icons/border_dotted.png" id="1_8117p"]
@@ -13,6 +13,8 @@ texture_margin_right = 2.0
 texture_margin_bottom = 2.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7oky"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jwfu"]
 content_margin_left = 12.0
@@ -121,6 +123,7 @@ Button/colors/icon_disabled_color = Color(1, 1, 1, 1)
 Button/constants/icon_max_width = 20
 Button/font_sizes/font_size = 15
 Button/styles/disabled = SubResource("StyleBoxTexture_ucswv")
+Button/styles/focus = SubResource("StyleBoxEmpty_c7oky")
 Button/styles/hover = SubResource("StyleBoxFlat_5jwfu")
 Button/styles/normal = SubResource("StyleBoxFlat_3uo43")
 Button/styles/pressed = SubResource("StyleBoxFlat_2xfdt")

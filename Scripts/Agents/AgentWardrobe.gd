@@ -11,6 +11,10 @@ static func dress_up(adv: Adventurer, model: Node):
 	var hat = find_child_node(model, adv.LOOK_hat);
 	if hat != null:
 		hat.show();
+
+	var weapon = find_child_node(model, adv.LOOK_weapon);
+	if weapon != null:
+		weapon.show();
 	
 	var hair = find_child_node(model, adv.LOOK_hair);
 	if hair != null:

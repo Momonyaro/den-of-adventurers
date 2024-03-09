@@ -1,0 +1,8 @@
+[gd_resource type="JSON" format=3 uid="uid://bi43geyvlebie"]
+
+[resource]
+data = {
+"Blachol": 0.92,
+"Montia": 0.73,
+"Vignarran Emprire": 0.67
+}

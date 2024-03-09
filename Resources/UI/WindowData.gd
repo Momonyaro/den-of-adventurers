@@ -13,7 +13,7 @@ const window_data = {
 		'has_close_btn': false
 	},
 	'VIDEO_SETTINGS': {
-		'title': 'Video Settings',
+		'title': 'Settings',
 		'content_ref': 'res://Prefabs/UI/windows/video_settings.tscn',
 	},
 	'SOLITAIRE': {

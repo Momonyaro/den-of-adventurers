@@ -32,27 +32,26 @@ func define_adventurer(given_name: String, family_name: String, race: Adventurer
 	pass;
 
 func generate_adventurer():
-	var rand_name = _name_pool.get_new_name(Adventurer.Nationality.Blacholer);
-	var rand_race = Adventurer.Race.HUMAN;
-	if randi() % 3 == 1:
-		rand_race = Adventurer.Race.DEMI_HUMAN;
+	var nationality = WorldDataContainer.get_rand_nationality_w();
+	var gender = WorldDataContainer.get_rand_gender_w(nationality);
+	var race = WorldDataContainer.get_rand_race_w(nationality);
+	var rand_class = ClassDataContainer.get_rand_class_w(nationality, race);
+
+	var rand_name = _name_pool.get_new_name(nationality, gender);
 	
 	var adv_index = _adv_pool.keys().size();
-	var adv = Adventurer.new(rand_name[0], rand_name[1], 20, 10, 1, rand_race, Adventurer.Nationality.Blacholer, adv_index);
+	var adv = Adventurer.new(rand_name[0], rand_name[1], 20, 10, 1, race, nationality, adv_index);
 	
+	var class_appearance = rand_class['appearance'];
+	adv.LOOK_race = get_race_customization(race, nationality);
+	adv.LOOK_hair = get_hair_customization(gender) if class_appearance['hairVisible'] else "";
+	adv.LOOK_hat = class_appearance['hat'];
+	adv.LOOK_weapon =  class_appearance['weapon'];
+
 	adv._fatigue = randf_range(0, 0.9);
-	adv._xp = Vector2i(randi_range(0, 100), 200);
-
-	if adv._race == Adventurer.Race.DEMI_HUMAN:
-		adv.LOOK_race = "DH_HORNS";
-
-	if bool(randi_range(0, 1)):
-		adv.LOOK_hat = "HAT_MAGICIAN";
-		
-	if bool(randi_range(0, 1)):
-		adv.LOOK_hair = "F_HAIR_0";
-	else:
-		adv.LOOK_hair = "M_HAIR_0";
+	adv._xp = Vector2i(randi_range(0, 80), 100);
+	adv._class = rand_class['id'];
+	
 	_adv_pool[adv._unique_id] = adv;
 	pass;
 
@@ -82,3 +81,17 @@ func get_rand_adventurer(guarantee_defined: bool = false) -> Adventurer:
 		generate_adventurer(); # fill the pool back up
 	
 	return adv;
+
+func get_race_customization(race: Adventurer.Race, nationality: Adventurer.Nationality) -> String:
+	if race == Adventurer.Race.HUMAN:
+		return "";
+
+	match nationality:
+		Adventurer.Nationality.Montian: return "DH_HORNS";
+		Adventurer.Nationality.Vignarran: return "DH_HORNS_V";
+		_: return "DH_HORNS";
+
+func get_hair_customization(gender: String) -> String:
+	match gender:
+		'FEMALE': return "F_HAIR_0";
+		_: return "M_HAIR_0";

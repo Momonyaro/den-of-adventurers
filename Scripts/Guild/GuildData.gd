@@ -6,6 +6,12 @@ var guildhall_adv_cap: int = 4;
 var guild_level: int = 1;
 var guild_xp: Vector2i = Vector2i(0, 100);
 
+func add_xp(xp: int):
+	guild_xp.x += xp;
+	if guild_xp.x >= guild_xp.y:
+		guild_xp.x = guild_xp.y - guild_xp.x;
+		guild_level += 1;
+
 func to_dict() -> Dictionary:
 	return {
 		'guild_name': guild_name,

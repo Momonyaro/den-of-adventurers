@@ -210,6 +210,7 @@ func _get_rewards_dict(rewards: Array):
 func _get_reward_icon(reward_key: String) -> Texture2D:
 	match(reward_key.to_lower()):
 		"gold": return ResourceLoader.load("res://Textures/Icons/gold.png") as Texture2D;
+		"g_xp": return ResourceLoader.load("res://Textures/Icons/guild_xp.png") as Texture2D;
 		_: return Texture2D.new();
 
 func _parse_reward_name(reward_key: String) -> String:

@@ -35,7 +35,7 @@ default_input_values = [0, Vector3(1, 1, 1), 1, -1.0, 2, 1.0]
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_b52la"]
 parameter_name = "opacity"
 default_value_enabled = true
-default_value = 0.2
+default_value = 0.3
 
 [sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_oy37t"]
 output_port_for_preview = 0
@@ -68,7 +68,7 @@ render_mode blend_mix;
 
 uniform vec4 color : source_color;
 uniform vec2 resolution = vec2(1920.000000, 1080.000000);
-uniform float opacity = 0.20000000298023;
+uniform float opacity = 0.30000001192093;
 
 
 // PixelateUV
@@ -170,7 +170,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-539.961, -454.179)
+graph_offset = Vector2(-352.646, -346.479)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(400, 320)

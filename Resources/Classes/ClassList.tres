@@ -1,0 +1,61 @@
+[gd_resource type="JSON" format=3 uid="uid://blkw1y0s4dmvo"]
+
+[resource]
+data = {
+"knight": {
+"appearance": {
+"hairVisible": false,
+"hat": "HAT_KNIGHT",
+"weapon": "W_KNIGHT"
+},
+"baseOffScore": 4,
+"baseSupScore": 2,
+"displayName": "Knight",
+"excludeForNationality": ["Montian", "Blacholer"],
+"id": "knight",
+"isMagic": false,
+"rarity": 0.2
+},
+"sourcerer": {
+"appearance": {
+"hairVisible": true,
+"hat": "HAT_SOURCERER",
+"weapon": "W_SOURCERER"
+},
+"baseOffScore": 4,
+"baseSupScore": 2,
+"displayName": "Sourcerer",
+"excludeForNationality": [],
+"id": "sourcerer",
+"isMagic": true,
+"rarity": 0.56
+},
+"spellsword": {
+"appearance": {
+"hairVisible": true,
+"hat": "",
+"weapon": "W_KNIGHT"
+},
+"baseOffScore": 4,
+"baseSupScore": 2,
+"displayName": "Spellsword",
+"excludeForNationality": [],
+"id": "spellsword",
+"isMagic": true,
+"rarity": 0.21
+},
+"warrior": {
+"appearance": {
+"hairVisible": true,
+"hat": "",
+"weapon": "W_WARRIOR"
+},
+"baseOffScore": 5,
+"baseSupScore": 1,
+"displayName": "Warrior",
+"excludeForNationality": ["Vignarran"],
+"id": "warrior",
+"isMagic": false,
+"rarity": 0.2
+}
+}

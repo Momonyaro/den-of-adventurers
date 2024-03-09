@@ -1,0 +1,8 @@
+[gd_resource type="JSON" format=3 uid="uid://dpqyh8bslhc0w"]
+
+[resource]
+data = {
+"family": ["Arezzé", "Dacci", "Aiello", "Bruno", "De Lici", "Agri", "Baresi", "Boni"],
+"given_f": ["Leori", "Gia", "Caterin", "Luisa", "Nunzia", "Patrizia", "Dina"],
+"given_m": ["Grato", "Alfio", "Also", "Durante", "Furio", "Nevio", "Siro", "Pier"]
+}
