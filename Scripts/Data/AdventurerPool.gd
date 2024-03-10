@@ -8,25 +8,25 @@ var _name_pool : NamePool = null;
 func _init(name_pool: NamePool):
 	_name_pool = name_pool;
 	
-	define_adventurer("Aerithus", "Sól", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "Tri-Aspect Magician", "M_HAIR_0", "HAT_MAGICIAN");
-	define_adventurer("Monrose", "Faertag", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "Swordsman", "M_HAIR_0");
-	define_adventurer("Atou", "Graeli", Adventurer.Race.HUMAN, Adventurer.Nationality.Blacholer, 21, 10, 3, "Ranger", "F_HAIR_0");
+	define_adventurer("Aerithus", "Sól", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "sourcerer", "MALE");
+	define_adventurer("Monrose", "Faertag", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Vignarran, 19, 10, 2, "spellsword", "MALE");
+	define_adventurer("Atou", "Graeli", Adventurer.Race.HUMAN, Adventurer.Nationality.Blacholer, 21, 10, 3, "ranger", "FEMALE");
 	
 	for i in POOL_SIZE - _adv_pool.keys().size():
 		generate_adventurer();
 	pass;
 
-func define_adventurer(given_name: String, family_name: String, race: Adventurer.Race, nationality: Adventurer.Nationality, age: int, health: int, level: int, adv_class: String, hair_option: String = "", hat_option: String = ""):
+func define_adventurer(given_name: String, family_name: String, race: Adventurer.Race, nationality: Adventurer.Nationality, age: int, health: int, level: int, adv_class: String, gender: String):
 	_name_pool.reserve_name(given_name, family_name);
 	var adv_index = _adv_pool.keys().size();
 	var adv = Adventurer.new(given_name, family_name, age, health, level, race, nationality, adv_index);
 	adv._class = adv_class;
+	var class_appearance = ClassDataContainer.get_class_from_id(adv_class)['appearance'];
 	adv._defined = true;
-	adv.LOOK_hair = hair_option;
-	adv.LOOK_hat = hat_option;
-
-	if adv._race == Adventurer.Race.DEMI_HUMAN:
-		adv.LOOK_race = "DH_HORNS";
+	adv.LOOK_race = get_race_customization(race, nationality);
+	adv.LOOK_hair = get_hair_customization(gender) if class_appearance['hairVisible'] else "";
+	adv.LOOK_hat = class_appearance['hat'];
+	adv.LOOK_weapon =  class_appearance['weapon'];
 	
 	_adv_pool[adv._unique_id] = adv;
 	pass;

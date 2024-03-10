@@ -8,11 +8,25 @@ data = {
 "hat": "HAT_KNIGHT",
 "weapon": "W_KNIGHT"
 },
-"baseOffScore": 4,
-"baseSupScore": 2,
+"baseOffScore": [4, 1],
+"baseSupScore": [2, 1],
 "displayName": "Knight",
 "excludeForNationality": ["Montian", "Blacholer"],
 "id": "knight",
+"isMagic": false,
+"rarity": 0.2
+},
+"ranger": {
+"appearance": {
+"hairVisible": true,
+"hat": "HAT_RANGER",
+"weapon": "W_RANGER"
+},
+"baseOffScore": [2, 2],
+"baseSupScore": [4, 0],
+"displayName": "Ranger",
+"excludeForNationality": [],
+"id": "ranger",
 "isMagic": false,
 "rarity": 0.2
 },
@@ -22,8 +36,8 @@ data = {
 "hat": "HAT_SOURCERER",
 "weapon": "W_SOURCERER"
 },
-"baseOffScore": 4,
-"baseSupScore": 2,
+"baseOffScore": [4, 1],
+"baseSupScore": [2, 1],
 "displayName": "Sourcerer",
 "excludeForNationality": [],
 "id": "sourcerer",
@@ -36,8 +50,8 @@ data = {
 "hat": "",
 "weapon": "W_KNIGHT"
 },
-"baseOffScore": 4,
-"baseSupScore": 2,
+"baseOffScore": [4, 1],
+"baseSupScore": [2, 1],
 "displayName": "Spellsword",
 "excludeForNationality": [],
 "id": "spellsword",
@@ -50,8 +64,8 @@ data = {
 "hat": "",
 "weapon": "W_WARRIOR"
 },
-"baseOffScore": 5,
-"baseSupScore": 1,
+"baseOffScore": [5, 2],
+"baseSupScore": [2, 0],
 "displayName": "Warrior",
 "excludeForNationality": ["Vignarran"],
 "id": "warrior",

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfxnh8rfend8s"]
+[gd_scene load_steps=20 format=3 uid="uid://bfxnh8rfend8s"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_11kd4"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/VideoSettings.gd" id="1_ekxpx"]
@@ -62,6 +62,16 @@ border_color = Color(0, 0, 0, 1)
 content_margin_left = 12.0
 content_margin_right = 12.0
 bg_color = Color(0.729412, 0.776471, 0.854902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5426"]
+content_margin_left = 12.0
+content_margin_right = 12.0
+bg_color = Color(0, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -220,6 +230,7 @@ offset_bottom = 29.0
 [node name="GAME_TAB" type="Button" parent="Panel/HBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_tgql8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h5426")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_82470")
 toggle_mode = true
 button_pressed = true
@@ -228,6 +239,7 @@ text = "Game"
 [node name="VIDEO_TAB" type="Button" parent="Panel/HBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_tgql8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h5426")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_82470")
 toggle_mode = true
 text = "Video"
@@ -235,6 +247,8 @@ text = "Video"
 [node name="SOUND_TAB" type="Button" parent="Panel/HBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_tgql8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_h5426")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_82470")
+disabled = true
 toggle_mode = true
 text = "Sound"
