@@ -5427,6 +5427,16 @@ _subresources={
 "slice_99/start_frame": 0,
 "slices/amount": null
 }
+},
+"materials": {
+"ClothingPalette": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/ClothingPalette.tres"
+},
+"Palette": {
+"use_external/enabled": true,
+"use_external/path": "res://Models/Palette.tres"
+}
 }
 }
 gltf/embedded_image_handling=1

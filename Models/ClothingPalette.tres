@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://wlv036n4wxbk"]
+
+[resource]
+resource_name = "ClothingPalette"
+cull_mode = 2
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.282353, 0.423529, 0.498039, 1)
+roughness = 0.5
