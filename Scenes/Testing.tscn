@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://f64ofd2jr8sn"]
+[gd_scene load_steps=31 format=3 uid="uid://f64ofd2jr8sn"]
 
 [ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_8246l"]
 [ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="2_dls8v"]
@@ -13,12 +13,8 @@
 [ext_resource type="Script" path="res://Scripts/Managers/RequestManager.gd" id="6_abixe"]
 [ext_resource type="Script" path="res://Scripts/Activities/LeaveActivity.gd" id="6_pdokr"]
 [ext_resource type="PackedScene" uid="uid://daoo1s5dlp1si" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
+[ext_resource type="PackedScene" uid="uid://06sse8nkfhmp" path="res://Models/bed.glb" id="9_cqd85"]
 [ext_resource type="Script" path="res://addons/persistence_node/persistence_node.gd" id="12_ebu0n"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nxyx"]
-albedo_color = Color(0.670588, 0.301961, 0.901961, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_6y5rr"]
 
 [sub_resource type="Gradient" id="Gradient_6sds3"]
 offsets = PackedFloat32Array(0, 0.569288, 1)
@@ -62,6 +58,11 @@ text = "Z"
 font = ExtResource("5_lyn1g")
 font_size = 24
 depth = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nxyx"]
+albedo_color = Color(0.670588, 0.301961, 0.901961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6y5rr"]
 
 [sub_resource type="Environment" id="Environment_wun1a"]
 background_mode = 1
@@ -115,20 +116,18 @@ script = ExtResource("2_tfev1")
 unique_name_in_owner = true
 script = ExtResource("3_ue1fi")
 
-[node name="BedActivity" type="MeshInstance3D" parent="Activities"]
-transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, 2.611, 0.1, -1.828)
-material_override = SubResource("StandardMaterial3D_4nxyx")
-mesh = SubResource("BoxMesh_6y5rr")
+[node name="BedActivity" type="Node3D" parent="Activities"]
+transform = Transform3D(0.613582, 0, 0.789631, 0, 1, 0, -0.789631, 0, 0.613582, 2.611, 0.1, -1.828)
 script = ExtResource("4_a3onc")
 
 [node name="START_POINT" type="Node3D" parent="Activities/BedActivity"]
-transform = Transform3D(0.999999, 0, -3.57628e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, -1.5805, -0.5, 0.325)
+transform = Transform3D(0.999999, 0, -3.8743e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, -0.644564, -0.0831673, 0.261748)
 
 [node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity"]
-transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, 4.76837e-07, 0.5, 0.166481)
+transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, -0.000793219, 0.200576, 0.182067)
 
 [node name="ZZZParticles" type="GPUParticles3D" parent="Activities/BedActivity"]
-transform = Transform3D(0.999999, 0, 9.60277e-10, 0, 0.999999, 0, 1.6403e-07, 0, 1, -0.0305171, 3.04784, -0.231517)
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 1.49012e-07, 0, 1, -0.0305171, 0.477519, -0.313852)
 emitting = false
 amount = 4
 lifetime = 1.2
@@ -138,8 +137,11 @@ trail_lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_v047h")
 draw_pass_1 = SubResource("TextMesh_5yyk0")
 
+[node name="bed" parent="Activities/BedActivity" instance=ExtResource("9_cqd85")]
+transform = Transform3D(0.45, 0, 4.57195e-08, 0, 0.45, 0, -4.57195e-08, 0, 0.45, 2.38419e-07, -0.0792927, -0.0288436)
+
 [node name="BedActivity2" type="MeshInstance3D" parent="Activities"]
-transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, -2.20243, 0.0999995, -0.0888628)
+transform = Transform3D(0.306791, 0, 0.789631, 0, 0.2, 0, -0.394815, 0, 0.613583, -2.19988, 0.0999995, -0.0732054)
 material_override = SubResource("StandardMaterial3D_4nxyx")
 mesh = SubResource("BoxMesh_6y5rr")
 script = ExtResource("4_a3onc")
@@ -250,6 +252,11 @@ shadow_normal_bias = 2.531
 shadow_transmittance_bias = -9.72
 shadow_opacity = 0.6
 shadow_blur = 2.15
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.254
+directional_shadow_fade_start = 0.372
+directional_shadow_max_distance = 8.8
+directional_shadow_pancake_size = 4.2
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_av4e2")

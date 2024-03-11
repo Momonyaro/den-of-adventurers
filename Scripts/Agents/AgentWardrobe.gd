@@ -36,8 +36,9 @@ static func color_clothes(parent: Node, shirt_col: Color, arm_col: Color):
 	shoulder_mat.albedo_color = arm_col;
 	shoulders.material_override = shoulder_mat;
 
-	var torso_mat = torso.get_active_material(0) as Material;
+	var torso_mat = (torso.get_active_material(0) as Material).duplicate(true);
 	torso_mat.albedo_color = shirt_col;
+	torso.material_override = torso_mat;
 
 
 static func enable_body(parent: Node):

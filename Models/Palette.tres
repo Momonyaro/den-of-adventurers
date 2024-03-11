@@ -13,4 +13,5 @@ rim = 0.03
 rim_tint = 0.1
 ao_light_affect = 0.07
 heightmap_scale = -11.566
+texture_filter = 1
 grow_amount = 0.727
