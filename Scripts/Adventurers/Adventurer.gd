@@ -157,7 +157,7 @@ func to_dict() -> Dictionary:
 	};
 
 static func from_dict(dict: Dictionary) -> Adventurer:
-	var health = SettingsManager.string_to_vector2i(String(dict['_health'])) as Vector2i;
+	var health = SettingsManager.string_to_vector2i(str(dict['_health']));
 	var race = dict['_race'] as Race;
 	var nationality = dict['_nationality'] as Nationality;
 

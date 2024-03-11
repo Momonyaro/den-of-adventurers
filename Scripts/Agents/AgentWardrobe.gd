@@ -1,8 +1,10 @@
 class_name AgentWardrobe;
 
 static func dress_up(adv: Adventurer, model: Node):
+	var class_appearance = ClassDataContainer.get_class_from_id(adv._class)['appearance'];
 	hide_all_children(model.find_child("Skeleton3D"));
 	enable_body(model);
+	color_clothes(model, Color.from_string(class_appearance['shirtCol'], Color.MAGENTA), Color.from_string(class_appearance['armCol'], Color.MAGENTA));
 	
 	var race = find_child_node(model, adv.LOOK_race);
 	if race != null:
@@ -25,6 +27,18 @@ static func dress_up(adv: Adventurer, model: Node):
 static func hide_all_children(parent: Node):
 	for child in parent.get_children():
 		child.hide();
+
+static func color_clothes(parent: Node, shirt_col: Color, arm_col: Color):
+	var shoulders = find_child_node(parent, "SHOULDERS") as MeshInstance3D;
+	var torso = find_child_node(parent, "BODY") as MeshInstance3D;
+	
+	var shoulder_mat = (shoulders.get_active_material(0) as Material).duplicate(true);
+	shoulder_mat.albedo_color = arm_col;
+	shoulders.material_override = shoulder_mat;
+
+	var torso_mat = torso.get_active_material(0) as Material;
+	torso_mat.albedo_color = shirt_col;
+
 
 static func enable_body(parent: Node):
 	find_child_node(parent, "BODY").show();

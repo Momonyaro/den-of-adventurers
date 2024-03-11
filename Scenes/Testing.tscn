@@ -106,7 +106,6 @@ script = ExtResource("4_fckrr")
 [node name="HOT_DRIVE" type="Node" parent="DataStore"]
 script = ExtResource("12_ebu0n")
 file_name = "save"
-mode = 1
 store_objects = true
 
 [node name="Game" type="Node" parent="."]
