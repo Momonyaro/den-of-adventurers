@@ -52,3 +52,6 @@ r_click={
 [rendering]
 
 global_illumination/voxel_gi/quality=1
+anti_aliasing/quality/msaa_2d=1
+anti_aliasing/quality/msaa_3d=1
+anti_aliasing/quality/use_debanding=true
