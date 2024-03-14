@@ -22,12 +22,13 @@ func _process(_delta):
 	for party in queued_parties:
 		if adv_manager.party_can_start_mission(party):
 			if _active_requests.has(party._current_request_id):
-				var _request = _active_requests[party._current_request_id];
-				timers.start_timer(_request.TIMER_go_to);
+				var _active_request = _active_requests[party._current_request_id];
+				var _request = _try_get_request(party._current_request_id)[1];
+				timers.start_timer(_active_request.TIMER_go_to);
 				party._status = Party.PartyStatus.GOING_TO_MISSION;
 				notifications.create_notification(
 					ResourceLoader.load('res://Textures/Icons/exit.png') as Texture2D,
-					str("Party: '", party._title, "' are now setting off on their mission!"),
+					str("Party '", party._title, "' are now setting off towards ", _request._location, " for their mission!"),
 					func(): pass,
 					30
 				);
@@ -136,6 +137,13 @@ func _on_timer_done(id: String):
 				var matches = adv_manager.try_get_party_with_request(key);
 				for p in matches:
 					p._status = Party.PartyStatus.RETURNED;
+				
+				notifications.create_notification(
+					ResourceLoader.load('res://Textures/Icons/mail.png') as Texture2D,
+					"A request is ready to be turned in!",
+					func(): pass,
+					30
+				);
 				req.TIMER_go_home = "";
 
 	pass;
@@ -149,8 +157,22 @@ func _on_load_game(loaded_data: Dictionary):
 	_completed_requests = loaded_data['completed_requests'] as Array[String];
 	_active_requests.clear();
 
+	var has_unredeemed = false;
+
 	for item in loaded_data['active_requests'].map(func (ard): return ActiveRequestItem.from_dict(ard)):
 		_active_requests[item._id] = item;
+		if _active_requests[item._id].TIMER_go_home == "":
+			has_unredeemed = true;
+	
+	# Find requests that you can turn in and create a notification to tell the player.
+	if has_unredeemed:
+		await get_tree().create_timer(0.1).timeout;
+		notifications.create_notification(
+			ResourceLoader.load('res://Textures/Icons/exclamation.png') as Texture2D,
+			"There are requests ready to be turned in!",
+			func(): pass,
+			30
+		);
 
 	_initialized = true;
 	pass # Replace with function body.

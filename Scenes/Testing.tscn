@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://f64ofd2jr8sn"]
+[gd_scene load_steps=29 format=3 uid="uid://f64ofd2jr8sn"]
 
 [ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_8246l"]
 [ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="2_dls8v"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://addons/persistence_node/persistence_node.gd" id="12_ebu0n"]
 [ext_resource type="PackedScene" uid="uid://cspjx814ecba8" path="res://Models/chair.glb" id="16_d6hij"]
 [ext_resource type="PackedScene" uid="uid://kv0j1ytnhqui" path="res://Models/dining_table.glb" id="17_1jl0l"]
+[ext_resource type="PackedScene" uid="uid://drexe03sykd00" path="res://Models/wall_p_1.glb" id="18_p63jj"]
 
 [sub_resource type="Gradient" id="Gradient_6sds3"]
 offsets = PackedFloat32Array(0, 0.569288, 1)
@@ -70,18 +71,21 @@ ambient_light_energy = 0.0
 tonemap_white = 1.74
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_av4e2"]
-vertices = PackedVector3Array(0, 0.0199981, -4, 0.25, 0.0199981, -3.5, 1.25, 0.0199981, -4, -2.5, 0.0199981, -4.25, 0, 0.0199981, -4, 1.25, 0.0199981, -4, 1, 0.0199981, -9.25, -2.5, 0.0199981, -4.25, 1, 0.0199981, -9.25, -9.25, 0.0199981, -9.25, -9.25, 0.0199981, -2.75, -9.25, 0.0199981, -2.75, -3, 0.0199981, -2.75, -2.5, 0.0199981, -4.25, 1, 0.0199981, -9.25, 1.25, 0.0199981, -4, 2.5, 0.0199981, -3.75, 9.25, 0.0199981, -3.75, 9.25, 0.0199981, -9.25, 2.75, 0.0199981, -1.75, 2.75, 0.0199981, -0.25, 3.5, 0.0199981, 0.5, 9.25, 0.0199981, 1.25, 9.25, 0.0199981, -3.75, 3, 0.0199981, -3.25, 9.25, 0.0199981, -3.75, 2.5, 0.0199981, -3.75, 3, 0.0199981, -3.25, 3.5, 0.0199981, 0.5, 3.5, 0.0199981, 1.25, 9.25, 0.0199981, 1.25, 2.75, 0.0199981, -0.25, 2.75, 0.0199981, -1.75, 2.25, 0.0199981, -1.25, 1.5, 0.0199981, -0.5, 2.75, 0.0199981, -0.25, 2.25, 0.0199981, -1.25, 0.25, 0.0199981, -1.75, 0, 0.0199981, -1.25, -3, 0.0199981, -2, -3, 0.0199981, -2.75, -9.25, 0.0199981, -2.75, -1.25, 0.0199981, 1, -0.75, 0.0199981, 0.25, -1.5, 0.0199981, -1.25, -3, 0.0199981, -2, -9.25, 0.0199981, -2.75, -9.25, 0.0199981, 1, -0.75, 0.0199981, 0.25, 0.75, 0.0199981, 0.5, 1.5, 0.0199981, -0.5, 0, 0.0199981, -1.25, -1.5, 0.0199981, -1.25, -0.25, 0.0199981, 9.25, -0.25, 0.0199981, 3.25, -1.5, 0.0199981, 2.25, -9.25, 0.0199981, 1, -9.25, 0.0199981, 9.25, -1.5, 0.0199981, 2.25, -1.25, 0.0199981, 1, -9.25, 0.0199981, 1, 2.5, 0.0199981, 2.75, 1, 0.0199981, 2.25, -0.25, 0.0199981, 3.25, -0.25, 0.0199981, 9.25, 9.25, 0.0199981, 1.25, 3.5, 0.0199981, 1.25, 2.5, 0.0199981, 2.75, -0.25, 0.0199981, 9.25, 9.25, 0.0199981, 9.25)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(10, 9, 7), PackedInt32Array(7, 9, 8), PackedInt32Array(13, 12, 11), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(17, 14, 18), PackedInt32Array(20, 19, 21), PackedInt32Array(21, 19, 24), PackedInt32Array(21, 24, 23), PackedInt32Array(21, 23, 22), PackedInt32Array(27, 26, 25), PackedInt32Array(30, 29, 28), PackedInt32Array(33, 32, 31), PackedInt32Array(35, 34, 36), PackedInt32Array(36, 34, 37), PackedInt32Array(37, 34, 38), PackedInt32Array(41, 40, 39), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 45), PackedInt32Array(45, 42, 47), PackedInt32Array(45, 47, 46), PackedInt32Array(50, 49, 51), PackedInt32Array(51, 49, 48), PackedInt32Array(51, 48, 52), PackedInt32Array(54, 53, 55), PackedInt32Array(55, 53, 57), PackedInt32Array(55, 57, 56), PackedInt32Array(60, 59, 58), PackedInt32Array(62, 61, 63), PackedInt32Array(63, 61, 64), PackedInt32Array(66, 65, 67), PackedInt32Array(67, 65, 69), PackedInt32Array(67, 69, 68)]
+vertices = PackedVector3Array(-3.5, 0.010393, -2.75, -3.25, 0.010393, -2.75, -3, 0.010393, -3.25, -9.25, 0.010393, -1.5, -3.5, 0.010393, -1.25, -3.5, 0.010393, -2.75, -3, 0.010393, -3.25, -2.5, 0.010393, -3.25, -2.5, 0.010393, -9.25, -9.25, 0.010393, -1.5, -3.5, 0.010393, -2.75, -3, 0.010393, -3.25, -2.5, 0.010393, -9.25, -9.25, 0.010393, -9.25, 0, 0.010393, -2, 0, 0.010393, -1.75, 0.5, 0.010393, -1.5, -1.75, 0.010393, -2.75, -1.75, 0.010393, -2, 0, 0.010393, -2, -2.5, 0.010393, -3.25, -1.75, 0.010393, -2.75, 0, 0.010393, -2, -2.5, 0.010393, -9.25, 0.5, 0.010393, -1.5, 0.5, 0.010393, -0.5, 9.25, 0.010393, -0.5, -2.5, 0.010393, -9.25, 0, 0.010393, -2, 0.5, 0.010393, -1.5, 9.25, 0.010393, -0.5, 9.25, 0.010393, -9.25, -9.25, 0.010393, 2, -3.5, 0.010393, 1.75, -3.5, 0.010393, -1.25, -9.25, 0.010393, -1.5, 0.5, 0.010393, 0.25, 0, 0.010393, 0.5, 0, 0.010393, 0.75, -1.5, 0.010393, 3.25, -2, 0.010393, 3.5, -2, 0.010393, 3.75, 0, 0.010393, 0.75, -1.5, 0.010393, 0.75, -1.5, 0.010393, 3.25, 0.5, 0.010393, 0.25, 0, 0.010393, 0.75, -1.5, 0.010393, 3.25, -2.5, 0.010393, 9.25, 9.25, 0.010393, 9.25, 9.25, 0.010393, -0.5, -2, 0.010393, 3.75, -2.5, 0.010393, 3.75, -2.5, 0.010393, 9.25, -1.5, 0.010393, 3.25, -2, 0.010393, 3.75, -2.5, 0.010393, 9.25, 9.25, 0.010393, -0.5, 0.5, 0.010393, -0.5, 0.5, 0.010393, 0.25, -3, 0.010393, 3.75, -3.25, 0.010393, 3.25, -3.5, 0.010393, 3.25, -2.5, 0.010393, 9.25, -2.5, 0.010393, 3.75, -3, 0.010393, 3.75, -3.5, 0.010393, 3.25, -3.5, 0.010393, 1.75, -9.25, 0.010393, 2, -2.5, 0.010393, 9.25, -3, 0.010393, 3.75, -3.5, 0.010393, 3.25, -9.25, 0.010393, 2, -9.25, 0.010393, 9.25)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(10, 9, 11), PackedInt32Array(11, 9, 12), PackedInt32Array(12, 9, 13), PackedInt32Array(16, 15, 14), PackedInt32Array(19, 18, 17), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(26, 25, 24), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 31), PackedInt32Array(29, 31, 30), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(38, 37, 36), PackedInt32Array(41, 40, 39), PackedInt32Array(44, 43, 42), PackedInt32Array(46, 45, 47), PackedInt32Array(47, 45, 48), PackedInt32Array(48, 45, 50), PackedInt32Array(48, 50, 49), PackedInt32Array(53, 52, 51), PackedInt32Array(56, 55, 54), PackedInt32Array(59, 58, 57), PackedInt32Array(62, 61, 60), PackedInt32Array(65, 64, 63), PackedInt32Array(68, 67, 66), PackedInt32Array(70, 69, 71), PackedInt32Array(71, 69, 73), PackedInt32Array(71, 73, 72)]
 cell_height = 0.01
 agent_height = 1.0
-agent_radius = 0.7
+agent_radius = 0.75
+agent_max_climb = 0.0
+agent_max_slope = 14.12
+region_min_size = 5.0
+region_merge_size = 17.0
+edge_max_length = 17.0
+edge_max_error = 0.62
+vertices_per_polygon = 8.0
+detail_sample_distance = 8.06
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wambb"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_0jipx"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8m8ew"]
-albedo_color = Color(0.27451, 0.27451, 0.27451, 1)
 
 [node name="Root" type="Node3D"]
 script = ExtResource("1_8246l")
@@ -110,8 +114,32 @@ script = ExtResource("2_tfev1")
 unique_name_in_owner = true
 script = ExtResource("3_ue1fi")
 
+[node name="BedActivity4" type="Node3D" parent="Activities"]
+transform = Transform3D(-0.0590807, 0, 0.998253, 0, 1, 0, -0.998253, 0, -0.0590807, -1.74245, 0.1, 2.24885)
+script = ExtResource("4_a3onc")
+
+[node name="START_POINT" type="Node3D" parent="Activities/BedActivity4"]
+transform = Transform3D(0.999999, 0, -3.8743e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, 0.779314, -0.0831673, 0.316373)
+
+[node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity4"]
+transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, -0.000793219, 0.200576, 0.182067)
+
+[node name="ZZZParticles" type="GPUParticles3D" parent="Activities/BedActivity4"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 1.49012e-07, 0, 1, -0.0305171, 0.477519, -0.313852)
+emitting = false
+amount = 4
+lifetime = 1.2
+visibility_aabb = AABB(-0.586999, -0.965922, -1.08275, 1.174, 1.93182, 2.16551)
+transform_align = 3
+trail_lifetime = 0.8
+process_material = SubResource("ParticleProcessMaterial_v047h")
+draw_pass_1 = SubResource("TextMesh_5yyk0")
+
+[node name="bed" parent="Activities/BedActivity4" instance=ExtResource("9_cqd85")]
+transform = Transform3D(0.45, 0, 7.45058e-08, 0, 0.45, 0, -7.45058e-08, 0, 0.45, 2.38419e-07, -0.0975402, -0.0288435)
+
 [node name="BedActivity" type="Node3D" parent="Activities"]
-transform = Transform3D(0.613582, 0, 0.789631, 0, 1, 0, -0.789631, 0, 0.613582, 2.611, 0.1, -1.828)
+transform = Transform3D(-0.797046, 0, -0.603918, 0, 1, 0, 0.603918, 0, -0.797046, 0.782762, 0.0999995, 2.29748)
 script = ExtResource("4_a3onc")
 
 [node name="START_POINT" type="Node3D" parent="Activities/BedActivity"]
@@ -135,7 +163,7 @@ draw_pass_1 = SubResource("TextMesh_5yyk0")
 transform = Transform3D(0.45, 0, 7.45058e-08, 0, 0.45, 0, -7.45058e-08, 0, 0.45, 2.38419e-07, -0.0975402, -0.0288435)
 
 [node name="BedActivity2" type="Node3D" parent="Activities"]
-transform = Transform3D(0.613582, 0, 0.789631, 0, 1, 0, -0.789631, 0, 0.613582, 0.94659, 0.1, -1.70343)
+transform = Transform3D(-0.797046, 0, -0.603918, 0, 1, 0, 0.603918, 0, -0.797046, 2.4227, 0.0999995, 2.60794)
 script = ExtResource("4_a3onc")
 
 [node name="START_POINT" type="Node3D" parent="Activities/BedActivity2"]
@@ -159,7 +187,7 @@ draw_pass_1 = SubResource("TextMesh_5yyk0")
 transform = Transform3D(0.45, 0, 7.45058e-08, 0, 0.45, 0, -7.45058e-08, 0, 0.45, 2.38419e-07, -0.0975402, -0.0288435)
 
 [node name="BedActivity3" type="Node3D" parent="Activities"]
-transform = Transform3D(-0.289383, 0, 0.957213, 0, 1, 0, -0.957213, 0, -0.289383, -2.41562, 0.111173, 0.00885308)
+transform = Transform3D(0.0317775, 0, -0.999495, 0, 1, 0, 0.999495, 0, 0.0317775, 2.22266, 0.111173, 0.175562)
 script = ExtResource("4_a3onc")
 
 [node name="START_POINT" type="Node3D" parent="Activities/BedActivity3"]
@@ -180,30 +208,6 @@ process_material = SubResource("ParticleProcessMaterial_v047h")
 draw_pass_1 = SubResource("TextMesh_5yyk0")
 
 [node name="bed" parent="Activities/BedActivity3" instance=ExtResource("9_cqd85")]
-transform = Transform3D(0.45, 0, 7.45058e-08, 0, 0.45, 0, -7.45058e-08, 0, 0.45, 2.38419e-07, -0.0975402, -0.0288435)
-
-[node name="BedActivity4" type="Node3D" parent="Activities"]
-transform = Transform3D(-0.633029, 0, -0.774128, 0, 1, 0, 0.774128, 0, -0.633029, -1.27213, 0.1, 2.68348)
-script = ExtResource("4_a3onc")
-
-[node name="START_POINT" type="Node3D" parent="Activities/BedActivity4"]
-transform = Transform3D(0.999999, 0, -3.8743e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, 0.778622, -0.0831673, 0.261748)
-
-[node name="ACTIVITY_POINT" type="Node3D" parent="Activities/BedActivity4"]
-transform = Transform3D(1, 0, -2.38419e-07, 0, 1, 0, 5.96046e-08, 0, 1, -0.000793219, 0.200576, 0.182067)
-
-[node name="ZZZParticles" type="GPUParticles3D" parent="Activities/BedActivity4"]
-transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 1.49012e-07, 0, 1, -0.0305171, 0.477519, -0.313852)
-emitting = false
-amount = 4
-lifetime = 1.2
-visibility_aabb = AABB(-0.586999, -0.965922, -1.08275, 1.174, 1.93182, 2.16551)
-transform_align = 3
-trail_lifetime = 0.8
-process_material = SubResource("ParticleProcessMaterial_v047h")
-draw_pass_1 = SubResource("TextMesh_5yyk0")
-
-[node name="bed" parent="Activities/BedActivity4" instance=ExtResource("9_cqd85")]
 transform = Transform3D(0.45, 0, 7.45058e-08, 0, 0.45, 0, -7.45058e-08, 0, 0.45, 2.38419e-07, -0.0975402, -0.0288435)
 
 [node name="LeavePoint" type="MeshInstance3D" parent="Activities"]
@@ -234,14 +238,14 @@ script = ExtResource("4_uo78h")
 [node name="UI" parent="." instance=ExtResource("6_xnocw")]
 
 [node name="SCENE_CAM" type="Camera3D" parent="."]
-transform = Transform3D(0.752082, -0.437961, 0.492507, 1.49012e-08, 0.747276, 0.664513, -0.65907, -0.499768, 0.562013, 3.18393, 4.02101, 3.68818)
+transform = Transform3D(0.752082, -0.437961, 0.492507, 1.49012e-08, 0.747276, 0.664514, -0.65907, -0.499768, 0.562013, 3.68466, 4.69661, 4.25957)
 environment = SubResource("Environment_wun1a")
 current = true
 fov = 70.8
 size = 3.65732
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.73392, 2.29661e-07, -0.679236, 0.63007, 0.373538, 0.680795, 0.253721, -0.927615, 0.274147, 0, 3.7599, 1.23124)
+transform = Transform3D(0.73392, 3.4996e-07, -0.679236, 0.63007, 0.373538, 0.680795, 0.253721, -0.927615, 0.274147, 0, 3.7599, 1.23124)
 light_color = Color(0.682353, 0.768627, 0.968627, 1)
 light_energy = 1.15
 shadow_enabled = true
@@ -250,11 +254,11 @@ shadow_normal_bias = 2.531
 shadow_transmittance_bias = -9.72
 shadow_opacity = 0.6
 shadow_blur = 2.15
-directional_shadow_mode = 1
+directional_shadow_mode = 0
 directional_shadow_split_1 = 0.254
-directional_shadow_fade_start = 1.0
-directional_shadow_max_distance = 8.8
-directional_shadow_pancake_size = 4.2
+directional_shadow_fade_start = 0.93
+directional_shadow_max_distance = 13.6
+directional_shadow_pancake_size = 3.3
 
 [node name="MAP_OBJECTS" type="Node3D" parent="."]
 
@@ -266,41 +270,32 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("PlaneMesh_wambb")
 skeleton = NodePath("../../..")
 
-[node name="ObstacleCube1" type="MeshInstance3D" parent="MAP_OBJECTS/COLLISIONS"]
-transform = Transform3D(0.609733, 0, -0.498952, 0, 1, 0, 0.4291, 0, 0.708989, -0.143541, -1.43051e-06, 1.71402)
-mesh = SubResource("BoxMesh_0jipx")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_8m8ew")
-
-[node name="ObstacleCube2" type="MeshInstance3D" parent="MAP_OBJECTS/COLLISIONS"]
-transform = Transform3D(0.817788, 0, -0.575519, 0, 1, 0, 0.575519, 0, 0.817788, 2.00375, -4.76837e-07, 1.10703)
-mesh = SubResource("BoxMesh_0jipx")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_8m8ew")
-
-[node name="ObstacleCube4" type="MeshInstance3D" parent="MAP_OBJECTS/COLLISIONS"]
-transform = Transform3D(0.609733, 0, -0.498952, 0, 1, 0, 0.4291, 0, 0.708989, 1.66733, -1.90735e-06, -2.60774)
-mesh = SubResource("BoxMesh_0jipx")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_8m8ew")
-
 [node name="dining_table" parent="MAP_OBJECTS/COLLISIONS" instance=ExtResource("17_1jl0l")]
-transform = Transform3D(0.979113, 0, -0.203317, 0, 1, 0, 0.203317, 0, 0.979113, -1.22314, 0, -2.72446)
+transform = Transform3D(0.998114, 0, 0.0613796, 0, 1, 0, -0.0613796, 0, 0.998114, -1.22065, 0, -0.596028)
+
+[node name="wall_p_1" parent="MAP_OBJECTS/COLLISIONS" instance=ExtResource("18_p63jj")]
+transform = Transform3D(0.0293349, 0, -0.99957, 0, 1, 0, 0.99957, 0, 0.0293349, -2.51366, -0.339607, 2.07972)
+
+[node name="wall_p_2" parent="MAP_OBJECTS/COLLISIONS" instance=ExtResource("18_p63jj")]
+transform = Transform3D(0.0293349, 0, -0.99957, 0, 1, 0, 0.99957, 0, 0.0293349, -2.5698, -0.339607, 0.294778)
+
+[node name="wall_p_3" parent="MAP_OBJECTS/COLLISIONS" instance=ExtResource("18_p63jj")]
+transform = Transform3D(0.0293349, 0, -0.99957, 0, 1, 0, 0.99957, 0, 0.0293349, -2.62167, -0.339607, -1.49942)
 
 [node name="FURNITURE_NO_COL" type="Node3D" parent="MAP_OBJECTS"]
 transform = Transform3D(0.979113, 0, -0.203317, 0, 1, 0, 0.203317, 0, 0.979113, -0.468931, 0, 0.800919)
 
 [node name="chair" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.0704, 0, -2.55894)
+transform = Transform3D(-0.263031, 0, 0.964787, 0, 1, 0, -0.964787, 0, -0.263031, -0.454266, 0, -0.60273)
 
 [node name="chair2" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.84933, 0, -2.55894)
+transform = Transform3D(-0.263031, 0, 0.964787, 0, 1, 0, -0.964787, 0, -0.263031, -1.20577, 0, -0.397847)
 
 [node name="chair3" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -1.0704, 0, -4.049)
+transform = Transform3D(0.263031, 0, -0.964787, 0, 1, 0, 0.964787, 0, 0.263031, -0.846198, 0, -2.04032)
 
 [node name="chair4" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -1.84933, 0, -4.049)
+transform = Transform3D(0.263031, 0, -0.964787, 0, 1, 0, 0.964787, 0, 0.263031, -1.5977, 0, -1.83544)
 
 [connection signal="load_game" from="DataStore" to="Game" method="_on_load_game"]
 [connection signal="load_game" from="DataStore" to="Activities" method="_on_load_game"]
