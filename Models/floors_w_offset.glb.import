@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cykp10f4sc8w8"
-path="res://.godot/imported/door_p_1.glb-cc5ed0763a34a7ed6e2f1c529bb9585c.scn"
+uid="uid://bmxaa7ijghudj"
+path="res://.godot/imported/floors_w_offset.glb-ed067a5d50ec2e91ae051f26a9666339.scn"
 
 [deps]
 
-source_file="res://Models/door_p_1.glb"
-dest_files=["res://.godot/imported/door_p_1.glb-cc5ed0763a34a7ed6e2f1c529bb9585c.scn"]
+source_file="res://Models/floors_w_offset.glb"
+dest_files=["res://.godot/imported/floors_w_offset.glb-ed067a5d50ec2e91ae051f26a9666339.scn"]
 
 [params]
 
@@ -30,13 +30,9 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
-"FloorMat": {
+"Material": {
 "use_external/enabled": true,
 "use_external/path": "res://Models/FloorMat.tres"
-},
-"Material.001": {
-"use_external/enabled": true,
-"use_external/path": "res://Models/Palette.tres"
 }
 }
 }

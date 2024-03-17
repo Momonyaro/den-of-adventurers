@@ -27,6 +27,7 @@ func update(delta: float, agent: Node, camera: Node):
 
 	pathing.update_target_pos(start_pos);
 	if _agent.global_position.distance_to(start_pos) < 0.2:
+		pathing.is_moving = false;
 		var activity_point = activity.get_activity_point();
 		_agent.global_position = activity_point.global_position;
 		_agent.global_rotation = activity_point.global_rotation;

@@ -1,0 +1,156 @@
+[gd_scene load_steps=13 format=3 uid="uid://dtaehmps5bbbv"]
+
+[ext_resource type="PackedScene" uid="uid://cykp10f4sc8w8" path="res://Models/door_p_1.glb" id="1_elbdf"]
+[ext_resource type="PackedScene" uid="uid://drexe03sykd00" path="res://Models/wall_p_1.glb" id="2_7u3vp"]
+[ext_resource type="PackedScene" uid="uid://c2sd4wilb338o" path="res://Models/corner_p_1.glb" id="3_28akd"]
+[ext_resource type="Material" uid="uid://scqfwrgbyuyf" path="res://Models/FloorMat.tres" id="4_tbhws"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_evfuw"]
+_surfaces = [{
+"aabb": AABB(7.07805e-08, 2, -1, 1, 1.00136e-05, 1.00001),
+"format": 4097,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(180, 16, 29, 52, 0, 0, 0, 64, 0, 0, 0, 128, 1, 0, 128, 63, 0, 0, 0, 64, 0, 0, 0, 128, 0, 0, 152, 51, 0, 0, 0, 64, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 191)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8u8cg"]
+resource_name = "floors_w_offset_Plane_007"
+_surfaces = [{
+"aabb": AABB(7.07805e-08, 2, -1, 1, 1.00136e-05, 1.00001),
+"attribute_data": PackedByteArray(252, 255, 255, 62, 254, 255, 255, 62, 252, 255, 255, 62, 0, 0, 128, 51, 0, 0, 0, 179, 0, 0, 0, 63, 0, 0, 0, 179, 0, 0, 0, 52),
+"format": 4119,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"material": ExtResource("4_tbhws"),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(180, 16, 29, 52, 0, 0, 0, 64, 0, 0, 0, 128, 255, 127, 255, 255, 255, 127, 255, 191, 1, 0, 128, 63, 0, 0, 0, 64, 0, 0, 0, 128, 255, 127, 255, 255, 255, 127, 255, 191, 0, 0, 152, 51, 0, 0, 0, 64, 0, 0, 128, 191, 255, 127, 255, 255, 255, 127, 255, 191, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 191, 255, 127, 255, 255, 255, 127, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_evfuw")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kcrg5"]
+_surfaces = [{
+"aabb": AABB(7.07805e-08, 2, -1, 1, 1.00136e-05, 2.00001),
+"format": 4097,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 152, 51, 0, 0, 0, 64, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 63, 0, 0, 152, 51, 0, 0, 0, 64, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 191)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vmuqh"]
+resource_name = "floors_w_offset_Plane_004"
+_surfaces = [{
+"aabb": AABB(7.07805e-08, 2, -1, 1, 1.00136e-05, 2.00001),
+"attribute_data": PackedByteArray(0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63),
+"format": 4119,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"material": ExtResource("4_tbhws"),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 152, 51, 0, 0, 0, 64, 0, 0, 128, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 152, 51, 0, 0, 0, 64, 0, 0, 128, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 191, 255, 127, 255, 255, 0, 0, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kcrg5")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_475ts"]
+_surfaces = [{
+"aabb": AABB(-1, 2, -1, 2, 1.00136e-05, 2.00001),
+"format": 4097,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 0, 64, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 0, 64, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 191)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_phc1c"]
+resource_name = "floors_w_offset_Plane_001"
+_surfaces = [{
+"aabb": AABB(-1, 2, -1, 2, 1.00136e-05, 2.00001),
+"attribute_data": PackedByteArray(254, 255, 127, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 52, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63),
+"format": 4119,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0),
+"material": ExtResource("4_tbhws"),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 0, 64, 0, 0, 128, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 63, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 128, 191, 0, 0, 0, 64, 0, 0, 128, 191, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 128, 191, 255, 127, 255, 255, 0, 0, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_475ts")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ap4jo"]
+_surfaces = [{
+"aabb": AABB(-1, 2, -0.5, 2, 1.00136e-05, 1.00001),
+"format": 4097,
+"index_count": 18,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 3, 0, 4, 0, 1, 0, 3, 0, 5, 0, 4, 0, 0, 0, 7, 0, 2, 0, 0, 0, 6, 0, 7, 0),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 8,
+"vertex_data": PackedByteArray(205, 204, 12, 191, 0, 0, 0, 64, 0, 0, 0, 63, 205, 204, 12, 63, 0, 0, 0, 64, 0, 0, 0, 63, 205, 204, 12, 191, 0, 0, 0, 64, 0, 0, 0, 191, 205, 204, 12, 63, 0, 0, 0, 64, 0, 0, 0, 191, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 0, 63, 0, 0, 128, 63, 0, 0, 0, 64, 200, 204, 76, 189, 0, 0, 128, 191, 0, 0, 0, 64, 0, 0, 0, 63, 0, 0, 128, 191, 0, 0, 0, 64, 200, 204, 76, 189)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ykx1l"]
+resource_name = "floors_w_offset_Plane"
+_surfaces = [{
+"aabb": AABB(-1, 2, -0.5, 2, 1.00136e-05, 1.00001),
+"attribute_data": PackedByteArray(0, 0, 0, 0, 104, 102, 102, 62, 0, 0, 0, 0, 102, 102, 70, 63, 0, 0, 0, 63, 104, 102, 102, 62, 0, 0, 0, 63, 102, 102, 70, 63, 0, 0, 0, 0, 0, 0, 128, 63, 204, 204, 140, 62, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 204, 204, 140, 62, 0, 0, 0, 0),
+"format": 4119,
+"index_count": 18,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 3, 0, 4, 0, 1, 0, 3, 0, 5, 0, 4, 0, 0, 0, 7, 0, 2, 0, 0, 0, 6, 0, 7, 0),
+"material": ExtResource("4_tbhws"),
+"name": "Material",
+"primitive": 3,
+"vertex_count": 8,
+"vertex_data": PackedByteArray(205, 204, 12, 191, 0, 0, 0, 64, 0, 0, 0, 63, 255, 127, 255, 255, 255, 255, 255, 255, 205, 204, 12, 63, 0, 0, 0, 64, 0, 0, 0, 63, 255, 127, 255, 255, 255, 255, 255, 255, 205, 204, 12, 191, 0, 0, 0, 64, 0, 0, 0, 191, 255, 127, 255, 255, 255, 255, 255, 255, 205, 204, 12, 63, 0, 0, 0, 64, 0, 0, 0, 191, 255, 127, 255, 255, 255, 255, 255, 255, 0, 0, 128, 63, 0, 0, 0, 64, 0, 0, 0, 63, 255, 127, 255, 255, 255, 255, 255, 255, 0, 0, 128, 63, 0, 0, 0, 64, 200, 204, 76, 189, 255, 127, 255, 255, 255, 255, 255, 255, 0, 0, 128, 191, 0, 0, 0, 64, 0, 0, 0, 63, 255, 127, 255, 255, 255, 255, 255, 255, 0, 0, 128, 191, 0, 0, 0, 64, 200, 204, 76, 189, 255, 127, 255, 255, 255, 255, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ap4jo")
+
+[node name="TILEFATHER" type="Node3D"]
+
+[node name="door_p_1" parent="." instance=ExtResource("1_elbdf")]
+
+[node name="wall_p_1" parent="." instance=ExtResource("2_7u3vp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="corner_p_1" parent="." instance=ExtResource("3_28akd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, 0)
+
+[node name="Plane_007" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2.5, -2, 0)
+mesh = SubResource("ArrayMesh_8u8cg")
+skeleton = NodePath("")
+
+[node name="Plane_004" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 1.5, -2, 1)
+mesh = SubResource("ArrayMesh_vmuqh")
+skeleton = NodePath("")
+
+[node name="Plane_001" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2, 2)
+mesh = SubResource("ArrayMesh_phc1c")
+skeleton = NodePath("")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2, 0.5)
+mesh = SubResource("ArrayMesh_ykx1l")
+skeleton = NodePath("")

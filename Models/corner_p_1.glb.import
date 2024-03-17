@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cykp10f4sc8w8"
-path="res://.godot/imported/door_p_1.glb-cc5ed0763a34a7ed6e2f1c529bb9585c.scn"
+uid="uid://c2sd4wilb338o"
+path="res://.godot/imported/corner_p_1.glb-915e2667bf1529777ec88fe09bb0555d.scn"
 
 [deps]
 
-source_file="res://Models/door_p_1.glb"
-dest_files=["res://.godot/imported/door_p_1.glb-cc5ed0763a34a7ed6e2f1c529bb9585c.scn"]
+source_file="res://Models/corner_p_1.glb"
+dest_files=["res://.godot/imported/corner_p_1.glb-915e2667bf1529777ec88fe09bb0555d.scn"]
 
 [params]
 
@@ -30,10 +30,6 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
-"FloorMat": {
-"use_external/enabled": true,
-"use_external/path": "res://Models/FloorMat.tres"
-},
 "Material.001": {
 "use_external/enabled": true,
 "use_external/path": "res://Models/Palette.tres"

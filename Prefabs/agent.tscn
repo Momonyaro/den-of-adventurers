@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ki8gd"]
 radius = 0.430438
-height = 0.972774
+height = 1.32663
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tabyh"]
 shading_mode = 0
@@ -26,10 +26,10 @@ collision_mask = 8
 script = ExtResource("1_56vq6")
 
 [node name="little_guy" parent="." instance=ExtResource("2_63leg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00655589, 0)
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -0.00655589, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.528857, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.676171, 0)
 shape = SubResource("CapsuleShape3D_ki8gd")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -37,10 +37,11 @@ path_desired_distance = 0.1
 target_desired_distance = 0.1
 path_max_distance = 10.01
 debug_enabled = true
+debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="CHAR_NAME" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2517, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.37986, 0)
 pixel_size = 0.001
 billboard = 1
 double_sided = false
