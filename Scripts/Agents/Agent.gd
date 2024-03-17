@@ -35,10 +35,10 @@ func _process(delta):
 
 	pass;
 
-func _physics_process(_delta):
+func _physics_process(delta):
 
 	if state_manager.can_move():
-		navigation.tick_movement(self);
+		navigation.tick_movement(self, delta);
 	pass;
 
 func _on_input_event(_camera, event, _position, _normal, _shape_idx):

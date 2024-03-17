@@ -20,5 +20,5 @@ refraction_scale = -0.1
 texture_filter = 0
 grow_amount = 0.727
 distance_fade_mode = 2
-distance_fade_min_distance = 0.4
-distance_fade_max_distance = 2.0
+distance_fade_min_distance = 0.5
+distance_fade_max_distance = 1.0

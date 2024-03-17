@@ -49,6 +49,11 @@ r_click={
 ]
 }
 
+[navigation]
+
+3d/default_edge_connection_margin=0.05
+3d/default_link_connection_radius=0.4
+
 [rendering]
 
 global_illumination/voxel_gi/quality=1
