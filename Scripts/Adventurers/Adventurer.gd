@@ -72,8 +72,8 @@ func tick_fatigue(delta: float) -> void:
 
 func add_xp(xp: int):
 	_xp.x += xp;
-	if _xp.x >= _xp.y:
-		_xp.x = _xp.y - _xp.x;
+	while _xp.x >= _xp.y:
+		_xp.x = _xp.x - _xp.y;
 		_level += 1;
 
 func set_status(new_status: Status) -> void:

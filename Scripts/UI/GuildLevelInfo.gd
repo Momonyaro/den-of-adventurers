@@ -6,7 +6,8 @@ extends HBoxContainer
 @onready var _game_manager : GameManager = get_node("/root/Root/Game");
 
 func _process(_delta):
-	populate(_game_manager.guild_data);
+	if _game_manager != null:
+		populate(_game_manager.guild_data);
 
 func populate(data: GuildData):
 	level_text.text = str(data.guild_level);

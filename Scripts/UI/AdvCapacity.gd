@@ -8,4 +8,5 @@ func _ready():
 	_adv_manager = get_node("/root/Root/Adventurers")
 
 func _process(_delta):
-	self.text = str(_adv_manager.recruited().size(), "/", _game_manager.guild_data.guildhall_adv_cap, " Adv.");
+	if _game_manager != null && _adv_manager != null:
+		self.text = str(_adv_manager.recruited().size(), "/", _game_manager.guild_data.guildhall_adv_cap, " Adv.");

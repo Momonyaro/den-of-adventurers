@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://m7mvoj5x6lb5"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://m7mvoj5x6lb5"]
 
 [ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="1_6bd6u"]
 [ext_resource type="Texture2D" uid="uid://dh2bq5xlgec87" path="res://Textures/Icons/border_dotted.png" id="1_8117p"]
+[ext_resource type="Texture2D" uid="uid://nbpnedxy8jbp" path="res://Textures/Icons/tick.png" id="2_uhi7m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ucswv"]
 content_margin_left = 12.0
@@ -39,6 +40,25 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2xfdt"]
 content_margin_left = 12.0
 content_margin_right = 12.0
+bg_color = Color(0.729412, 0.776471, 0.854902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_4mheu"]
+colors = PackedColorArray(0.960784, 0.960784, 0.960784, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lo72b"]
+gradient = SubResource("Gradient_4mheu")
+width = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wlw0h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q76bq"]
+content_margin_top = 3.0
+content_margin_bottom = 3.0
 bg_color = Color(0.729412, 0.776471, 0.854902, 1)
 border_width_left = 2
 border_width_top = 2
@@ -131,6 +151,12 @@ CheckBox/colors/font_focus_color = Color(0, 0, 0, 1)
 CheckBox/font_sizes/font_size = 20
 CheckButton/colors/font_focus_color = Color(0, 0, 0, 1)
 CheckButton/font_sizes/font_size = 20
+HSlider/icons/grabber = ExtResource("2_uhi7m")
+HSlider/icons/grabber_highlight = ExtResource("2_uhi7m")
+HSlider/icons/tick = SubResource("GradientTexture1D_lo72b")
+HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_wlw0h")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_wlw0h")
+HSlider/styles/slider = SubResource("StyleBoxFlat_q76bq")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/styles/normal = SubResource("StyleBoxEmpty_5tpnp")
 LineEdit/colors/caret_color = Color(0, 0, 0, 1)

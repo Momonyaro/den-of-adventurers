@@ -8,7 +8,8 @@ var TIMER_autosave = "";
 
 func _ready():
 	_load_data();
-	timers.timer_done.connect(_on_timer_done);
+	if timers != null:
+		timers.timer_done.connect(_on_timer_done);
 
 	var autosave_time = settings.data['autosave_time'] if settings.data.has('autosave_time') else 0;
 	if autosave_time > 0:
@@ -28,7 +29,13 @@ func _load_data():
 				_set_res(SettingsManager.string_to_vector2i(str(settings_dict[key])));
 				continue;
 			'ui_scaling':
-				_set_ui_scaling((settings_dict[key]));
+				_set_ui_scaling(settings_dict[key]);
+				continue;
+			'pan_speed':
+				_set_cam_pan_speed(settings_dict[key]);
+				continue;
+			'zoom_speed':
+				_set_cam_zoom_speed(settings_dict[key]);
 				continue;
 
 func _set_res(size: Vector2i):
@@ -37,6 +44,16 @@ func _set_res(size: Vector2i):
 
 func _set_ui_scaling(value: int):
 	get_tree().root.content_scale_mode = value as Window.ContentScaleMode;
+
+func _set_cam_pan_speed(value: float):
+	var cam_base = get_node("/root/Root/CAMERA_BASE");
+	if cam_base != null:
+		cam_base.camera_pan_speed = value;
+
+func _set_cam_zoom_speed(value: float):
+	var cam_base = get_node("/root/Root/CAMERA_BASE");
+	if cam_base != null:
+		cam_base.camera_zoom_speed = value;
 
 func reset_autosave_timer(new_time: int):
 	if TIMER_autosave != '':

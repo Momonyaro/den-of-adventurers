@@ -27,6 +27,12 @@ func _load_game():
 	_upgrade_save(hot_drive.data);
 	load_game.emit(hot_drive.data);
 
+func change_to_game():
+	get_tree().change_scene_to_file("res://Scenes/Game.tscn");
+
+func change_to_main():
+	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn");
+
 func _upgrade_save(save_data: Dictionary):
 	if save_data.size() == 0:
 		var new_data = SaveData.new();

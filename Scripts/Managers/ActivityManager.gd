@@ -8,7 +8,7 @@ func _ready():
 	pass;
 
 func try_get_activity(type: String, agent: Agent) -> Activity:
-	var activities_of_type = _activities.filter(func (x): return x.type_key == type);
+	var activities_of_type = _activities.filter(func (x): return x.type_key == type && x.activity_node != null);
 	for activity in activities_of_type:
 		if activity.activity_node.is_available(agent):
 			if activity.occupied_by == "":

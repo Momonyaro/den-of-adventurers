@@ -8,8 +8,8 @@ var guild_xp: Vector2i = Vector2i(0, 100);
 
 func add_xp(xp: int):
 	guild_xp.x += xp;
-	if guild_xp.x >= guild_xp.y:
-		guild_xp.x = guild_xp.y - guild_xp.x;
+	while guild_xp.x >= guild_xp.y:
+		guild_xp.x = guild_xp.x - guild_xp.y;
 		guild_level += 1;
 
 func to_dict() -> Dictionary:

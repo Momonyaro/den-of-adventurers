@@ -24,7 +24,7 @@ func _ready():
 
 func _process(delta):
 	var adv_party = adv_manager.get_adventurer_party(adventurer._unique_id);
-	state_manager.update(delta, adventurer._status, navigation.is_moving, self, get_node("/root/Root/SCENE_CAM"), adv_party);
+	state_manager.update(delta, adventurer._status, navigation.is_moving, self, get_node("/root/Root/CAMERA_BASE/SCENE_CAM"), adv_party);
 
 	if adventurer == null:
 		agent_manager.agents.erase(adv_id);

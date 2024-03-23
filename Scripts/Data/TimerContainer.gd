@@ -46,8 +46,11 @@ func delete_timer(id: String):
 	_timers.erase(id);
 	pass;
 
+func _init_timer_index(count: int):
+	_timerIndex = (count + 100) % 99999;
+
 func _create_id() -> String:
-	var id = str(_timerIndex,"__timer");
+	var id = str(_timerIndex, "__timer");
 	_timerIndex = (_timerIndex + 100) % 99999;
 	return Marshalls.utf8_to_base64(id);
 
@@ -62,6 +65,7 @@ func _on_save_game(save_buffer: Dictionary):
 
 func _on_load_game(loaded_data: Dictionary):
 	var loaded_arr = loaded_data['timers'] as Array;
+	_init_timer_index(loaded_arr.size());
 	for item in loaded_arr:
 		var timer_obj = InternalTimer.new( item['_id'], item['_length'], item['_description'], item['_started'] );
 		timer_obj._value = item['_value'];

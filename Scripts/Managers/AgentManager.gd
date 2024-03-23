@@ -54,7 +54,7 @@ func _on_load_game(loaded_data: Dictionary):
 		instance.global_transform.origin = SettingsManager.string_to_vector3(str(aData['position']));
 		instance.fallback_position = SettingsManager.string_to_vector3(str(aData['fallback_position']));
 		instance.current_activity = act_manager.get_activity_by_id(aData['current_activity']);
-		instance.navigation._target_pos = SettingsManager.string_to_vector3(str(aData['nav_target']));
+		instance.navigation.update_target_pos(SettingsManager.string_to_vector3(str(aData['nav_target'])));
 		instance.state_manager.force_state(BaseState.StateReference.keys()[aData['agent_state']]);
 		instance.rotation_degrees.y = float(aData['y_rot']);
 		AgentWardrobe.dress_up(adv, instance);

@@ -12,11 +12,11 @@ func _ready():
 	_toggle.button_pressed = value;
 
 func _on_new_value():
-	var current_mode = get_window().mode == Window.Mode.MODE_EXCLUSIVE_FULLSCREEN;
+	var current_mode = get_window().mode == Window.Mode.MODE_FULLSCREEN;
 	if  current_mode:
 		_set_mode(Window.Mode.MODE_WINDOWED);
 	else:
-		_set_mode(Window.Mode.MODE_EXCLUSIVE_FULLSCREEN);
+		_set_mode(Window.Mode.MODE_FULLSCREEN);
 
 func _set_mode(mode: Window.Mode):
 	get_window().mode = mode;

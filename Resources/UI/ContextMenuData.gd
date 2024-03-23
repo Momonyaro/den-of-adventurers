@@ -98,3 +98,76 @@ static func get_menu_data():
 	}
 
 };
+
+static func get_main_menu_data():
+	return {
+	'WIZ_ICON': {
+		'System Information': {
+			'type': 'action',
+			'icon': 'res://Textures/Icons/pc.png',
+			'msg': 'WINDOW:OPEN:SYS_INFO'
+		},
+		'settings_divider': {
+			'type': 'divider',
+			'label_visible': false,
+			'exclude_for': ['web']
+		},
+		'Settings': {
+			'type': 'action',
+			'icon': 'res://Textures/Icons/options.png',
+			'msg': 'WINDOW:RESET:VIDEO_SETTINGS',
+			'exclude_for': ['web']
+		},
+		'quit_divider': {
+			'type': 'divider',
+			'label_visible': false
+		},
+		'Exit to Desktop': {
+			'type': 'big_action',
+			'msg': 'GAME_QUIT',
+			'exclude_for': ['web'],
+			'prompt_title': 'Quit to Desktop',
+			'prompt_warning': 'Are you sure?',
+			'prompt_icon': 'res://Textures/Icons/pc_sad.png',
+			'ok_option': 'Yes, I\'m sure',
+			'no_option': 'No',
+		}
+	},
+	'Game': {
+		'Continue Last Save': {
+			'type': 'big_action',
+			'msg': 'RESUME_SAVED_GAME',
+			'icon': 'res://Textures/Icons/load.png',
+			'exclude_for': ['web' , 'NO_SAVE'],
+			'prompt_title': 'Continue Last Save',
+			'prompt_warning': 'Load "$GUILD_NAME"?\n\nGuild Tier: $GUILD_TIER | Level: $GUILD_LEVEL',
+			'prompt_icon': 'res://Textures/Icons/load.png',
+			'ok_option': 'Yes',
+			'no_option': 'No',
+		},
+		'Start New Guild': {
+			'type': 'action',
+			'msg': 'WINDOW:RESET:NEW_GAME'
+		}
+	},
+	'Programs': {
+		'Distractions': {
+			'type': 'folder',
+			'icon': 'res://Textures/Icons/folder.png',
+			'items': {
+				'Minesweeper': {
+					'type': 'action',
+					'icon': 'res://Textures/Icons/minesweeper.png',
+					'msg': 'WINDOW:RESET:MINESWEEPER'
+				},
+				'Solitaire': {
+					'type': 'action',
+					'icon': 'res://Textures/Icons/solitaire.png',
+					'msg': 'WINDOW:RESET:SOLITAIRE'
+				}
+			}
+		}
+	}
+
+};
+

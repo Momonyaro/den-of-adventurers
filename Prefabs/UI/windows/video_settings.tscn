@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfxnh8rfend8s"]
+[gd_scene load_steps=25 format=3 uid="uid://bfxnh8rfend8s"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_11kd4"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/VideoSettings.gd" id="1_ekxpx"]
@@ -7,8 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://dlggxv5xajmh4" path="res://Prefabs/UI/components/dropdown.tscn" id="3_xvup6"]
 [ext_resource type="Script" path="res://Scripts/UI/settings/video/resolution_dropdown.gd" id="4_0o8gg"]
 [ext_resource type="Texture2D" uid="uid://dcefs5w3baws" path="res://Textures/Icons/options.png" id="4_k0nu8"]
+[ext_resource type="Script" path="res://Scripts/UI/settings/game/pan_spd_slider.gd" id="5_gq15u"]
+[ext_resource type="Texture2D" uid="uid://cyxgi0uhqo7cl" path="res://Textures/Icons/reset.png" id="6_4p0y8"]
 [ext_resource type="Script" path="res://Scripts/UI/settings/video/fullscreen_toggle.gd" id="6_dt5wn"]
 [ext_resource type="Texture2D" uid="uid://c0t18nhd2xsyy" path="res://Textures/Icons/cross.png" id="7_e8fip"]
+[ext_resource type="Script" path="res://Scripts/UI/settings/game/zoom_spd_slider.gd" id="7_hulc5"]
 [ext_resource type="Texture2D" uid="uid://cpk4ra55sxwf5" path="res://Textures/Icons/plus.png" id="8_sbe3h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
@@ -17,6 +20,27 @@ content_margin_top = 24.0
 content_margin_right = 24.0
 content_margin_bottom = 24.0
 bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxkow"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7hx6q"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qavf7"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2jwr"]
 content_margin_left = 8.0
@@ -28,11 +52,6 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wxkow"]
-bg_color = Color(0, 0, 0, 1)
-border_width_top = 2
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ck7en"]
@@ -127,6 +146,99 @@ text = "Autosave Frequency:"
 
 [node name="dropdown" parent="MarginContainer/GAME_CONTAINER/autosave_dropdown" instance=ExtResource("3_xvup6")]
 layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/GAME_CONTAINER"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxFlat_wxkow")
+
+[node name="pan_spd_slider" type="HBoxContainer" parent="MarginContainer/GAME_CONTAINER"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("1_11kd4")
+theme_override_constants/separation = 24
+script = ExtResource("5_gq15u")
+
+[node name="label" type="Label" parent="MarginContainer/GAME_CONTAINER/pan_spd_slider"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Camera Pan Speed:"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GAME_CONTAINER/pan_spd_slider"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/GAME_CONTAINER/pan_spd_slider/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 4.0
+max_value = 16.0
+step = 0.1
+value = 4.0
+scrollable = false
+tick_count = 6
+ticks_on_borders = true
+
+[node name="reset_btn" type="Button" parent="MarginContainer/GAME_CONTAINER/pan_spd_slider/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+tooltip_text = "Restore default value."
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_11kd4")
+theme_override_constants/h_separation = 1
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_7hx6q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qavf7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qavf7")
+icon = ExtResource("6_4p0y8")
+icon_alignment = 1
+
+[node name="zoom_spd_slider" type="HBoxContainer" parent="MarginContainer/GAME_CONTAINER"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("1_11kd4")
+theme_override_constants/separation = 24
+script = ExtResource("7_hulc5")
+
+[node name="label" type="Label" parent="MarginContainer/GAME_CONTAINER/zoom_spd_slider"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Camera Zoom Speed:"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GAME_CONTAINER/zoom_spd_slider"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/GAME_CONTAINER/zoom_spd_slider/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 2.0
+max_value = 12.0
+step = 0.1
+value = 8.0
+scrollable = false
+tick_count = 6
+ticks_on_borders = true
+
+[node name="reset_btn" type="Button" parent="MarginContainer/GAME_CONTAINER/zoom_spd_slider/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+tooltip_text = "Restore default value."
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_11kd4")
+theme_override_constants/h_separation = 1
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_7hx6q")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qavf7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qavf7")
+icon = ExtResource("6_4p0y8")
+icon_alignment = 1
 
 [node name="VIDEO_CONTAINER" type="VBoxContainer" parent="MarginContainer"]
 visible = false

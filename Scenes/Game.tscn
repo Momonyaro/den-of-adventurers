@@ -1,23 +1,24 @@
-[gd_scene load_steps=29 format=3 uid="uid://f64ofd2jr8sn"]
+[gd_scene load_steps=30 format=3 uid="uid://f64ofd2jr8sn"]
 
-[ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_8246l"]
-[ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="2_dls8v"]
-[ext_resource type="Script" path="res://Scripts/Managers/GameManager.gd" id="2_tfev1"]
-[ext_resource type="Script" path="res://Scripts/Managers/SettingsManager.gd" id="3_pb3he"]
-[ext_resource type="Script" path="res://Scripts/Managers/AdventurerManager.gd" id="3_q8kab"]
-[ext_resource type="Script" path="res://Scripts/Managers/ActivityManager.gd" id="3_ue1fi"]
-[ext_resource type="Script" path="res://Scripts/Activities/BedActivity.gd" id="4_a3onc"]
-[ext_resource type="Script" path="res://Scripts/Data/DataStore.gd" id="4_fckrr"]
-[ext_resource type="Script" path="res://Scripts/Managers/AgentManager.gd" id="4_uo78h"]
-[ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="5_lyn1g"]
-[ext_resource type="Script" path="res://Scripts/Managers/RequestManager.gd" id="6_abixe"]
-[ext_resource type="Script" path="res://Scripts/Activities/LeaveActivity.gd" id="6_pdokr"]
-[ext_resource type="PackedScene" uid="uid://daoo1s5dlp1si" path="res://Scenes/UI/ui.tscn" id="6_xnocw"]
-[ext_resource type="PackedScene" uid="uid://06sse8nkfhmp" path="res://Models/bed.glb" id="9_cqd85"]
-[ext_resource type="Script" path="res://addons/persistence_node/persistence_node.gd" id="12_ebu0n"]
-[ext_resource type="PackedScene" uid="uid://cspjx814ecba8" path="res://Models/chair.glb" id="16_d6hij"]
-[ext_resource type="PackedScene" uid="uid://kv0j1ytnhqui" path="res://Models/dining_table.glb" id="17_1jl0l"]
-[ext_resource type="MeshLibrary" uid="uid://bniioqoiyqp3n" path="res://Prefabs/map_mesh_lib.tres" id="20_fjnpj"]
+[ext_resource type="Script" path="res://Scripts/Data/DataContainer.gd" id="1_hsski"]
+[ext_resource type="Script" path="res://Scripts/Managers/SettingsManager.gd" id="2_mdl76"]
+[ext_resource type="Script" path="res://addons/persistence_node/persistence_node.gd" id="3_n08xb"]
+[ext_resource type="Script" path="res://Scripts/Data/DataStore.gd" id="4_do1km"]
+[ext_resource type="Script" path="res://Scripts/Managers/GameManager.gd" id="5_m0j6l"]
+[ext_resource type="Script" path="res://Scripts/Managers/ActivityManager.gd" id="6_vmu0p"]
+[ext_resource type="Script" path="res://Scripts/Activities/BedActivity.gd" id="7_yne1r"]
+[ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="8_ka0tc"]
+[ext_resource type="PackedScene" uid="uid://06sse8nkfhmp" path="res://Models/bed.glb" id="9_kev4m"]
+[ext_resource type="Script" path="res://Scripts/Activities/LeaveActivity.gd" id="10_1f33b"]
+[ext_resource type="Script" path="res://Scripts/Managers/RequestManager.gd" id="11_tt3ut"]
+[ext_resource type="Script" path="res://Scripts/Data/TimerContainer.gd" id="12_oc6mm"]
+[ext_resource type="Script" path="res://Scripts/Managers/AdventurerManager.gd" id="13_rckj3"]
+[ext_resource type="Script" path="res://Scripts/Managers/AgentManager.gd" id="14_kr32h"]
+[ext_resource type="PackedScene" uid="uid://daoo1s5dlp1si" path="res://Scenes/UI/ui.tscn" id="15_rqxnt"]
+[ext_resource type="Script" path="res://Scripts/Camera/CameraBase.gd" id="16_h5pva"]
+[ext_resource type="MeshLibrary" uid="uid://bniioqoiyqp3n" path="res://Prefabs/map_mesh_lib.tres" id="17_y5ks1"]
+[ext_resource type="PackedScene" uid="uid://kv0j1ytnhqui" path="res://Models/dining_table.glb" id="18_m66ob"]
+[ext_resource type="PackedScene" uid="uid://cspjx814ecba8" path="res://Models/chair.glb" id="19_r77o8"]
 
 [sub_resource type="Gradient" id="Gradient_6sds3"]
 offsets = PackedFloat32Array(0, 0.569288, 1)
@@ -58,7 +59,7 @@ albedo_color = Color(0.729412, 0.776471, 0.854902, 0.831373)
 material = SubResource("StandardMaterial3D_hj15a")
 uv2_padding = 1.46
 text = "Z"
-font = ExtResource("5_lyn1g")
+font = ExtResource("8_ka0tc")
 font_size = 24
 depth = 0.02
 
@@ -92,35 +93,36 @@ detail_sample_distance = 8.06
 [sub_resource type="PlaneMesh" id="PlaneMesh_wambb"]
 
 [node name="Root" type="Node3D"]
-script = ExtResource("1_8246l")
+script = ExtResource("1_hsski")
 
 [node name="SettingsMngr" type="Node" parent="."]
-script = ExtResource("3_pb3he")
+script = ExtResource("2_mdl76")
 
 [node name="Settings" type="Node" parent="SettingsMngr"]
-script = ExtResource("12_ebu0n")
+script = ExtResource("3_n08xb")
 folder_name = ""
 file_name = "settings"
 mode = 1
 
 [node name="DataStore" type="Node" parent="."]
-script = ExtResource("4_fckrr")
+script = ExtResource("4_do1km")
 
 [node name="HOT_DRIVE" type="Node" parent="DataStore"]
-script = ExtResource("12_ebu0n")
+script = ExtResource("3_n08xb")
 file_name = "save"
+mode = 1
 store_objects = true
 
 [node name="Game" type="Node" parent="."]
-script = ExtResource("2_tfev1")
+script = ExtResource("5_m0j6l")
 
 [node name="Activities" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("3_ue1fi")
+script = ExtResource("6_vmu0p")
 
 [node name="BedActivity4" type="Node3D" parent="Activities"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.01868, 0.1, -4.68527)
-script = ExtResource("4_a3onc")
+script = ExtResource("7_yne1r")
 
 [node name="START_POINT" type="Node3D" parent="Activities/BedActivity4"]
 transform = Transform3D(0.999999, 0, -3.8743e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, 0.779314, -0.0831673, 0.316373)
@@ -139,12 +141,12 @@ trail_lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_v047h")
 draw_pass_1 = SubResource("TextMesh_5yyk0")
 
-[node name="bed" parent="Activities/BedActivity4" instance=ExtResource("9_cqd85")]
+[node name="bed" parent="Activities/BedActivity4" instance=ExtResource("9_kev4m")]
 transform = Transform3D(1, 0, 1.65568e-07, 0, 1, 0, -1.65568e-07, 0, 1, 2.38419e-07, -0.0975402, -0.0288435)
 
 [node name="BedActivity3" type="Node3D" parent="Activities"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.975, 0.111173, -0.764874)
-script = ExtResource("4_a3onc")
+script = ExtResource("7_yne1r")
 
 [node name="START_POINT" type="Node3D" parent="Activities/BedActivity3"]
 transform = Transform3D(0.999999, 0, -3.8743e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, -0.949848, -0.0831673, 0.261748)
@@ -163,12 +165,12 @@ trail_lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_v047h")
 draw_pass_1 = SubResource("TextMesh_5yyk0")
 
-[node name="bed" parent="Activities/BedActivity3" instance=ExtResource("9_cqd85")]
+[node name="bed" parent="Activities/BedActivity3" instance=ExtResource("9_kev4m")]
 transform = Transform3D(1, 0, 1.65568e-07, 0, 1, 0, -1.65568e-07, 0, 1, 2.38419e-07, -0.0975402, -0.0288435)
 
 [node name="BedActivity5" type="Node3D" parent="Activities"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.01868, 0.1, 1.31473)
-script = ExtResource("4_a3onc")
+script = ExtResource("7_yne1r")
 
 [node name="START_POINT" type="Node3D" parent="Activities/BedActivity5"]
 transform = Transform3D(0.999999, 0, -3.8743e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, 0.779314, -0.0831673, 0.316373)
@@ -187,12 +189,12 @@ trail_lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_v047h")
 draw_pass_1 = SubResource("TextMesh_5yyk0")
 
-[node name="bed" parent="Activities/BedActivity5" instance=ExtResource("9_cqd85")]
+[node name="bed" parent="Activities/BedActivity5" instance=ExtResource("9_kev4m")]
 transform = Transform3D(1, 0, 1.65568e-07, 0, 1, 0, -1.65568e-07, 0, 1, 2.38419e-07, -0.0975402, -0.0288435)
 
 [node name="BedActivity6" type="Node3D" parent="Activities"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.975, 0.111173, 5.23513)
-script = ExtResource("4_a3onc")
+script = ExtResource("7_yne1r")
 
 [node name="START_POINT" type="Node3D" parent="Activities/BedActivity6"]
 transform = Transform3D(0.999999, 0, -3.8743e-07, 0, 0.999999, 0, 8.9407e-08, 0, 0.999999, -0.949848, -0.0831673, 0.261748)
@@ -211,12 +213,12 @@ trail_lifetime = 0.8
 process_material = SubResource("ParticleProcessMaterial_v047h")
 draw_pass_1 = SubResource("TextMesh_5yyk0")
 
-[node name="bed" parent="Activities/BedActivity6" instance=ExtResource("9_cqd85")]
+[node name="bed" parent="Activities/BedActivity6" instance=ExtResource("9_kev4m")]
 transform = Transform3D(1, 0, 1.65568e-07, 0, 1, 0, -1.65568e-07, 0, 1, 2.38419e-07, -0.0975402, -0.0288435)
 
 [node name="LeavePoint" type="MeshInstance3D" parent="Activities"]
 transform = Transform3D(0.613582, 0, 0.789631, 0, 1, 0, -0.789631, 0, 0.613582, -8.83489, 9.53674e-07, 8.80261)
-script = ExtResource("6_pdokr")
+script = ExtResource("10_1f33b")
 
 [node name="START_POINT" type="Node3D" parent="Activities/LeavePoint"]
 
@@ -225,24 +227,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
 
 [node name="Requests" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("6_abixe")
+script = ExtResource("11_tt3ut")
 
 [node name="Timers" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_dls8v")
+script = ExtResource("12_oc6mm")
 
 [node name="Adventurers" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("3_q8kab")
+script = ExtResource("13_rckj3")
 
 [node name="Agents" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("4_uo78h")
+script = ExtResource("14_kr32h")
 
-[node name="UI" parent="." instance=ExtResource("6_xnocw")]
+[node name="UI" parent="." instance=ExtResource("15_rqxnt")]
 
-[node name="SCENE_CAM" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.660565, 0.750769, 0, -0.750769, 0.660565, 0.18466, 7.12121, 7.24897)
+[node name="CAMERA_BASE" type="Node3D" parent="."]
+script = ExtResource("16_h5pva")
+camera_pan_speed = 8.0
+camera_zoom_speed = 8.0
+camera_near_dist = 3.0
+camera_near_height = 1.5
+left = 9.0
+top = 6.0
+right = 9.0
+bottom = 6.0
+
+[node name="CAMERA_FOOT" type="Node3D" parent="CAMERA_BASE"]
+
+[node name="CAMERA_FOCUS" type="Node3D" parent="CAMERA_BASE/CAMERA_FOOT"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="SCENE_CAM" type="Camera3D" parent="CAMERA_BASE"]
+transform = Transform3D(1, 0, 0, 0, 0.660565, 0.750769, 0, -0.750769, 0.660565, 0, 8, 6)
 environment = SubResource("Environment_wun1a")
 current = true
 fov = 70.8
@@ -271,7 +289,7 @@ navigation_mesh = SubResource("NavigationMesh_av4e2")
 
 [node name="GridMap" type="GridMap" parent="MAP_OBJECTS/COLLISIONS"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.06397, -1, 2.28557)
-mesh_library = ExtResource("20_fjnpj")
+mesh_library = ExtResource("17_y5ks1")
 cell_octant_size = 16
 bake_navigation = true
 data = {
@@ -284,37 +302,37 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -0.0117028, 0)
 mesh = SubResource("PlaneMesh_wambb")
 skeleton = NodePath("../../..")
 
-[node name="dining_table" parent="MAP_OBJECTS/COLLISIONS" instance=ExtResource("17_1jl0l")]
+[node name="dining_table" parent="MAP_OBJECTS/COLLISIONS" instance=ExtResource("18_m66ob")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.55841, -4.76837e-07, 2.36562)
 
-[node name="dining_table2" parent="MAP_OBJECTS/COLLISIONS" instance=ExtResource("17_1jl0l")]
+[node name="dining_table2" parent="MAP_OBJECTS/COLLISIONS" instance=ExtResource("18_m66ob")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.55841, -4.76837e-07, 2.36562)
 
 [node name="FURNITURE_NO_COL" type="Node3D" parent="MAP_OBJECTS"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.468931, 0, 0.800919)
 
-[node name="chair" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
+[node name="chair" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("19_r77o8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.91025, 0, 2.08344)
 
-[node name="chair2" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
+[node name="chair2" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("19_r77o8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9091, 0, 1.16555)
 
-[node name="chair3" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
+[node name="chair3" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("19_r77o8")]
 transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, -3.25406, 0, 1.16788)
 
-[node name="chair4" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
+[node name="chair4" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("19_r77o8")]
 transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, -3.24764, 0, 2.10488)
 
-[node name="chair5" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
+[node name="chair5" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("19_r77o8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.91026, 0, 2.08344)
 
-[node name="chair6" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
+[node name="chair6" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("19_r77o8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9091, 0, 1.16555)
 
-[node name="chair7" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
+[node name="chair7" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("19_r77o8")]
 transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, -6.25406, 0, 1.16788)
 
-[node name="chair8" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("16_d6hij")]
+[node name="chair8" parent="MAP_OBJECTS/FURNITURE_NO_COL" instance=ExtResource("19_r77o8")]
 transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, -6.24764, 0, 2.10488)
 
 [connection signal="load_game" from="DataStore" to="Game" method="_on_load_game"]

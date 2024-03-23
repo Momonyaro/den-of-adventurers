@@ -8,12 +8,19 @@ var section_divider_prefab = preload("res://Prefabs/UI/context_section_divider.t
 @export var prompt: Node = null;
 @export var notifications: Node = null;
 @export var window_manager: Node = null;
+@export var show_guild_level: bool = true;
+@export var show_adv_cap: bool = true;
+@export_enum("menu_data:0", "main_menu_data:1") var data_src: int = 0;
 var _current_context: String = "";
 
 signal new_context(id: String);
 signal command_msg(msg: String);
 
 func _ready():
+	if !show_guild_level:
+		$MarginContainer/HBoxContainer2.queue_free();
+	if !show_adv_cap:
+		$MarginContainer/MarginContainer/HBoxContainer/AdvCapacity.queue_free();
 	create_menu();
 
 func set_context(id: String):
@@ -22,7 +29,7 @@ func set_context(id: String):
 
 func create_menu():
 	clear_menu();
-	var menu_data = ContextMenuData.get_menu_data();
+	var menu_data = ContextMenuData.get_menu_data() if data_src == 0 else ContextMenuData.get_main_menu_data();
 	for section_key in menu_data.keys():
 		create_section(section_key, menu_data[section_key]);
 	pass;
@@ -119,8 +126,11 @@ func clear_menu():
 		child.queue_free();
 
 func chk_tag(obj):
+	var save_data = get_node("/root/Root/DataStore/HOT_DRIVE").data;
 	var tags = obj['exclude_for'];
 	for tag in tags:
+		if tag == 'NO_SAVE':
+			return save_data['saved_at'] == "" if save_data.has('saved_at') else true;
 		if OS.has_feature(tag):
 			return true;
 	return false;
@@ -143,9 +153,18 @@ func create_prompt(title: String, warning: String, icon: String, ok_option: Stri
 
 func _on_command_msg(obj):
 
+	var guild_data = get_node("/root/Root/DataStore").hot_drive.data['guild_data'];
+	print(guild_data);
+	var guild_name = guild_data['guild_name'] if guild_data.has('guild_name') else "";
+	var guild_level = guild_data['guild_level'] if guild_data.has('guild_level') else 0;
+	var guild_tier = guild_data['guildhall_tier'] if guild_data.has('guildhall_tier') else 0;
+
 	if obj.has('type'):
 		match (obj['type']):
 			'big_action': 
+				obj['prompt_warning'] = obj['prompt_warning'].replace('$GUILD_NAME', guild_name);
+				obj['prompt_warning'] = obj['prompt_warning'].replace('$GUILD_LEVEL', str(guild_level));
+				obj['prompt_warning'] = obj['prompt_warning'].replace('$GUILD_TIER', str(guild_tier + 1));
 				prompt.set_prompt.emit(obj);
 				set_context("");
 				return;
@@ -158,6 +177,7 @@ func _on_command_msg(obj):
 		return;
 
 	match obj['msg']:
+		'RESUME_SAVED_GAME': get_node("/root/Root/DataStore").change_to_game();
 		'GAME_SAVE': get_node("/root/Root/DataStore")._save_game(); set_context("");
-		"GAME_QUIT": get_tree().quit();
-		'GOTO_MAIN': return;
+		'GAME_QUIT': get_tree().quit();
+		'GOTO_MAIN': get_node("/root/Root/DataStore").change_to_main();

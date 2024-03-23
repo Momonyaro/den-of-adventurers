@@ -25,7 +25,7 @@ func _ready():
 
 func _process(_delta):
 	var _mode = get_window().mode;
-	var is_fullscreen = _mode == Window.Mode.MODE_EXCLUSIVE_FULLSCREEN;
+	var is_fullscreen = _mode == Window.Mode.MODE_FULLSCREEN;
 	_dropdown._disabled = is_fullscreen;
 	if is_fullscreen:
 		var screen_res = get_tree().root.size;
@@ -51,7 +51,7 @@ func _on_new_value(label: String, value: String, id: int):
 
 func _get_current() -> Array:
 	var data = settings.data;
-	var current = SettingsManager.string_to_vector2i(data['resolution']) if data.has('resolution') else get_tree().root.size;
+	var current = SettingsManager.string_to_vector2i(str(data['resolution'])) if data.has('resolution') else get_tree().root.size;
 	var current_str = str(current.x, "x", current.y)
 	return [current_str, current.y];
 
@@ -61,10 +61,10 @@ func _get_options(screen_w: int, screen_h: int) -> Array: # only 16:9 support fo
 	if screen_w >= 1280 && screen_h >= 720:  resolutions.push_back(["1280x720",  720]); # project baseline
 	if screen_w >= 1366 && screen_h >= 768:  resolutions.push_back(["1366x768",  768]);
 	if screen_w >= 1600 && screen_h >= 900:  resolutions.push_back(["1600x900",  900]);
-	if screen_w >= 1920 && screen_h >= 1080: resolutions.push_back(["1920x1080", 1080]);
+	if screen_w >= 1920 && screen_h >= 1080: resolutions.push_back(["1920x1080", 1080]); # most common res?
 	if screen_w >= 2560 && screen_h >= 1440: resolutions.push_back(["2560x1440", 1440]); # my current monitor
 	if screen_w >= 3200 && screen_h >= 1800: resolutions.push_back(["3200x1800", 1800]);
-	if screen_w >= 3840 && screen_h >= 2160: resolutions.push_back(["3840x2160", 2160]);
+	if screen_w >= 3840 && screen_h >= 2160: resolutions.push_back(["3840x2160", 2160]); # 4k, current top we support.
 	
 	return resolutions;
 
@@ -74,5 +74,3 @@ func _set_res(w: int, h: int):
 	
 	settings.data['resolution'] = Vector2i(w, h);
 	settings.save();
-	#ProjectSettings.set('display/window/size/viewport_width', w);
-	#ProjectSettings.set('display/window/size/viewport_height', h);

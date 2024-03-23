@@ -17,7 +17,7 @@ func _process(_delta):
 
 	item_list.clear();
 	for active_timer in active_timers:
-		var idx = item_list.add_item(str("<", active_timer._id, "> [", active_timer.get_timer_text(), "]"), icon, false);
+		var idx = item_list.add_item(str("[", active_timer.get_timer_text(), "] <", active_timer._id, ">"), icon, false);
 		item_list.set_item_tooltip(idx, active_timer._description);
 
 	pass;
