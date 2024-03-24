@@ -6,6 +6,7 @@ var _active = false;
 var _id = "";
 @onready var _dropdown = get_child(1).get_child(0);
 @onready var _dropdown_content_parent = get_child(1).get_child(0).get_child(0);
+@onready var _composer: Node = get_node("/root/Root/UI/Composer");
 
 signal new_item(id: String);
 
@@ -46,10 +47,12 @@ func _on_new_context(id: String):
 func _gui_input(ev):  
 	if ev is InputEventMouseButton and ev.button_index == 1 and ev.pressed:
 		ctx_menu.set_context(_id if not _active else "");
+		_composer.play("res://Audio/SFX/UI/click_004.ogg");
 
 
 func _on_mouse_entered():
 	var current = ctx_menu._current_context
 	if current != "" && current != _id:
 		ctx_menu.set_context(_id);
+		_composer.play("res://Audio/SFX/Kort_3.ogg");
 	pass

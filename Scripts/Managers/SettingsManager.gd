@@ -12,7 +12,7 @@ func _ready():
 		timers.timer_done.connect(_on_timer_done);
 
 	var autosave_time = settings.data['autosave_time'] if settings.data.has('autosave_time') else 0;
-	if autosave_time > 0:
+	if autosave_time > 0 && timers != null:
 		TIMER_autosave = timers.create_timer(autosave_time, "Autosave Timer");
 	else:
 		TIMER_autosave = "";
@@ -39,6 +39,8 @@ func _load_data():
 				continue;
 
 func _set_res(size: Vector2i):
+	if get_window().mode == Window.Mode.MODE_FULLSCREEN:
+		return;
 	get_tree().root.size = size;
 	get_window().size = size;
 
@@ -56,10 +58,10 @@ func _set_cam_zoom_speed(value: float):
 		cam_base.camera_zoom_speed = value;
 
 func reset_autosave_timer(new_time: int):
-	if TIMER_autosave != '':
+	if TIMER_autosave != '' && timers != null:
 		timers.delete_timer(TIMER_autosave);
 
-	if new_time > 0:
+	if new_time > 0 && timers != null:
 		TIMER_autosave = timers.create_timer(new_time, "Autosave Timer");
 	else:
 		TIMER_autosave = "";
@@ -68,7 +70,7 @@ func reset_autosave_timer(new_time: int):
 func _on_timer_done(id: String):
 	if id == TIMER_autosave:
 		var autosave_time = settings.data['autosave_time'] if settings.data.has('autosave_time') else 0;
-		if autosave_time > 0:
+		if autosave_time > 0 && timers != null:
 			TIMER_autosave = timers.create_timer(autosave_time, "Autosave Timer");
 			get_node("/root/Root/DataStore")._save_game();
 		else:

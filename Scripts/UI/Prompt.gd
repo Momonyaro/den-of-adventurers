@@ -7,6 +7,8 @@ extends Panel
 @export var _no_option: Button = null;
 @export var _ctx_menu: Node = null;
 
+@onready var _composer: Node = get_node("/root/Root/UI/Composer");
+
 var _obj = null;
 
 signal set_prompt(prompt_obj);
@@ -38,6 +40,7 @@ func _on_set_prompt(prompt_obj):
 	visible = true;
 	
 	var data = _verify_prompt(prompt_obj);
+	_composer.play('res://Audio/SFX/prompt.wav'); 
 	_obj = data.duplicate(true);
 	_obj['type'] = 'action';
 	_prompt_title.text = str(_obj['prompt_title']);
@@ -56,9 +59,11 @@ func _on_set_prompt(prompt_obj):
 	pass # Replace with function body.
 
 func _on_no_pressed():
+	_composer.play('res://Audio/SFX/UI/click_004.ogg'); 
 	set_prompt.emit(null);
 
 func _on_ok_pressed():
+	_composer.play('res://Audio/SFX/UI/click_004.ogg'); 
 	if _obj.has('ok_callback'):
 		_obj['ok_callback'].call();
 	else:

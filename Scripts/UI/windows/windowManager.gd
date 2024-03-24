@@ -6,6 +6,7 @@ const OPEN_ANIM_LENGTH = 0.26;
 @export var prompt: Node = null;
 @export var window_base: PackedScene = preload("res://Prefabs/UI/windows/window_base.tscn");
 var preview_rect: PackedScene = preload("res://Prefabs/UI/windows/preview_rect.tscn");
+@onready var _composer: Node = get_node("/root/Root/UI/Composer");
 
 var windows = []; # store id and ref to node.
 
@@ -84,7 +85,7 @@ func open_window(ref: String, start_pos: Vector2, window_pos):
 	instance._manager = self;
 	windows.push_front([ref, instance]);
 	_animate_opening(start_pos, instance, ref);
-	self.get_parent().get_child(0).play("res://Audio/SFX/UI/maximize_006.ogg");
+	_composer.play("res://Audio/SFX/UI/maximize_006.ogg");
 	_sort_windows();
 
 func reset_window(ref: String, start_pos: Vector2, window_pos):
@@ -106,7 +107,7 @@ func close_window(ref: String, force: bool = false):
 	if active_tweens.has(ref) && !force:
 		return;
 
-	self.get_parent().get_child(0).play("res://Audio/SFX/UI/minimize_008.ogg");
+	_composer.play("res://Audio/SFX/UI/minimize_008.ogg");
 	window[1].queue_free();
 	_del_instance(ref);
 	pass;

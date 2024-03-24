@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=3 uid="uid://bk5uqvylvu6c0"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Composer.gd" id="1_22wrk"]
+[ext_resource type="Shader" uid="uid://csv3x6tcw7wgq" path="res://Scripts/Shaders/PixelFade.tres" id="3_2gl1o"]
+[ext_resource type="Script" path="res://Scripts/UI/PixelFadeAccessor.gd" id="4_hji78"]
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="7_1euwr"]
+[ext_resource type="Script" path="res://Scripts/UI/windows/Greeter.gd" id="8_2hrk7"]
+[ext_resource type="Texture2D" uid="uid://bxauae4whso3v" path="res://Textures/Icons/pc.png" id="8_javl3"]
+[ext_resource type="Script" path="res://Scripts/Managers/SettingsManager.gd" id="12_pra4c"]
+[ext_resource type="Script" path="res://addons/persistence_node/persistence_node.gd" id="13_ff5cn"]
+[ext_resource type="Texture2D" uid="uid://b3w6r8tt4ipv6" path="res://Textures/wallpaper.png" id="15_jsbty"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rxwkl"]
+shader = ExtResource("3_2gl1o")
+shader_parameter/color = null
+shader_parameter/resolution = Vector2(1920, 1080)
+shader_parameter/opacity = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fnfg4"]
+
+[node name="Root" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Composer" type="Node" parent="."]
+script = ExtResource("1_22wrk")
+sfx_play_on_awake = "res://Audio/SFX/os_boot.wav"
+
+[node name="Transition" type="TextureRect" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_rxwkl")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CanvasTexture_fnfg4")
+script = ExtResource("4_hji78")
+delay = 2
+
+[node name="SettingsMngr" type="Node" parent="."]
+script = ExtResource("12_pra4c")
+
+[node name="Settings" type="Node" parent="SettingsMngr"]
+script = ExtResource("13_ff5cn")
+folder_name = ""
+file_name = "settings"
+mode = 1
+
+[node name="WALLPAPER" type="TextureRect" parent="."]
+z_index = -1
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_jsbty")
+stretch_mode = 6
+
+[node name="GREETER" type="Panel" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -60.0
+offset_right = 200.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_1euwr")
+script = ExtResource("8_2hrk7")
+
+[node name="MarginContainer" type="MarginContainer" parent="GREETER"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GREETER/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PC_ICON" type="TextureRect" parent="GREETER/MarginContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture = ExtResource("8_javl3")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GREETER/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="GREETER/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Nice to see you again!"
+
+[node name="Label2" type="Label" parent="GREETER/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Logging in $USER!"

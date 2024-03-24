@@ -56,8 +56,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Composer" type="Node" parent="."]
+[node name="UI" type="Node" parent="."]
+
+[node name="Composer" type="Node" parent="UI"]
 script = ExtResource("1_8hrjs")
+delay_awake_sfx = 0.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="UI/Composer"]
+process_mode = 3
 
 [node name="WindowManager" type="Control" parent="." node_paths=PackedStringArray("prompt")]
 layout_mode = 1
@@ -72,6 +78,7 @@ script = ExtResource("1_u2578")
 prompt = NodePath("../PromptContainer")
 
 [node name="Transition" type="TextureRect" parent="."]
+visible = false
 z_index = 5
 material = SubResource("ShaderMaterial_rxwkl")
 layout_mode = 1

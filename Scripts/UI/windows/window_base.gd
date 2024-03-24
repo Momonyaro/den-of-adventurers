@@ -1,4 +1,6 @@
 extends Control
+class_name WindowBase
+
 const HEADER_HEIGHT = 24;
 const MARGINS_LRD = 6;
 const MARGINS_TOP = 4;
@@ -49,7 +51,7 @@ func _on_win_close():
 	_manager.close_window(_key);
 
 func play_audio(stream_path: String):
-	_manager.get_parent().get_child(0).play(stream_path);
+	_manager._composer.play(stream_path);
 
 func create_prompt(title: String, warning: String, icon: String, ok_option: String, no_option: String, ok_callback: Callable):
 	_manager.create_prompt(title, warning, icon, ok_option, no_option, ok_callback);

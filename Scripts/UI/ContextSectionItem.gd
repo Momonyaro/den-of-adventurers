@@ -6,6 +6,7 @@ var _msg_event = null;
 var _obj = null;
 var _id: Array[String] = [];
 @export var _has_dropdown: bool = false;
+@onready var _composer: Node = get_node("/root/Root/UI/Composer");
 
 func _ready():
 	_set_active(false, false);

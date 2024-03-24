@@ -4,6 +4,7 @@ class_name Dropdown
 @onready var _dropdown: Node = get_child(2);
 @onready var _dropdown_content: Node = get_child(2).get_child(0);
 @onready var _current_items: Node = get_child(0).get_child(0);
+@onready var _composer: Node = get_node("/root/Root/UI/Composer");
 @export var _disabled = false;
 var _dropdown_item = preload("res://Prefabs/UI/components/dropdown_item.tscn");
 
@@ -55,6 +56,7 @@ func _sort_items():
 func _set_active(item: DropdownItem):
 	_current_id = item._id;
 	new_current.emit(item._label.text, item._value, item._id);
+	_composer.play("res://Audio/SFX/UI/click_004.ogg");
 	set_active_no_event(item._label.text, item._id);
 	_set_foldout(false);
 
@@ -71,9 +73,8 @@ func _set_foldout(value: bool):
 
 func _on_dropdown_click(event:InputEvent):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
+		_composer.play("res://Audio/SFX/UI/click_004.ogg");
 		_set_foldout(!_is_open);
-
-	pass;
 
 class DropdownItem:
 	var _instance: Node = null;

@@ -6,33 +6,36 @@ extends Panel
 
 @onready var game_panel: Control = self.get_node("MarginContainer/GAME_CONTAINER");
 @onready var video_panel: Control = self.get_node("MarginContainer/VIDEO_CONTAINER");
+var _window_base: WindowBase = null;
 
 func _ready():
-    _on_change_tab('GAME');
-    game_tab.toggled.connect(func (_value: bool): _on_change_tab('GAME'));
-    video_tab.toggled.connect(func (_value: bool): _on_change_tab('VIDEO'));
-    sound_tab.toggled.connect(func (_value: bool): _on_change_tab('SOUND'));
+	_on_change_tab('GAME', true);
+	game_tab.toggled.connect(func (_value: bool): _on_change_tab('GAME'));
+	video_tab.toggled.connect(func (_value: bool): _on_change_tab('VIDEO'));
+	sound_tab.toggled.connect(func (_value: bool): _on_change_tab('SOUND'));
 
-func _on_change_tab(id: String):
-    match id:
-        'GAME':
-            game_tab.set_pressed_no_signal(true);
-            video_tab.set_pressed_no_signal(false);
-            sound_tab.set_pressed_no_signal(false);
-            
-            game_panel.visible = true;
-            video_panel.visible = false;
-        'VIDEO':
-            game_tab.set_pressed_no_signal(false);
-            video_tab.set_pressed_no_signal(true);
-            sound_tab.set_pressed_no_signal(false);
+func _on_change_tab(id: String, silent: bool = false):
+	if !silent:
+		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
+	match id:
+		'GAME':
+			game_tab.set_pressed_no_signal(true);
+			video_tab.set_pressed_no_signal(false);
+			sound_tab.set_pressed_no_signal(false);
+			
+			game_panel.visible = true;
+			video_panel.visible = false;
+		'VIDEO':
+			game_tab.set_pressed_no_signal(false);
+			video_tab.set_pressed_no_signal(true);
+			sound_tab.set_pressed_no_signal(false);
 
-            game_panel.visible = false;
-            video_panel.visible = true;
-        'SOUND':
-            game_tab.set_pressed_no_signal(false);
-            video_tab.set_pressed_no_signal(false);
-            sound_tab.set_pressed_no_signal(true);
+			game_panel.visible = false;
+			video_panel.visible = true;
+		'SOUND':
+			game_tab.set_pressed_no_signal(false);
+			video_tab.set_pressed_no_signal(false);
+			sound_tab.set_pressed_no_signal(true);
 
-            game_panel.visible = false;
-            video_panel.visible = false;
+			game_panel.visible = false;
+			video_panel.visible = false;
