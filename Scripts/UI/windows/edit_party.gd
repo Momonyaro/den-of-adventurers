@@ -52,11 +52,16 @@ func populate_item(list_item: Node, adventurer: Adventurer, in_party: bool):
 	var _edit_func = func (): _on_edit_members(_adv_manager.party_edited, adventurer._unique_id); populate_fields();
 	var check_box = list_item.get_child(0) as CheckBox;
 
+	var existing_party = _adv_manager.get_adventurer_party(adventurer._unique_id);
+	var has_party = existing_party != null;
+
+	if has_party:
+		check_box.disabled = existing_party._status != Party.PartyStatus.IDLE;
+
 	for result in check_box.get_signal_connection_list('pressed'):
 		check_box.disconnect((result['signal'] as Signal).get_name(), result['callable']);
 	check_box.pressed.connect(_edit_func);
 
-	var has_party = _adv_manager.get_adventurer_party(adventurer._unique_id) != null;
 	(list_item.get_child(3) as Label).visible = has_party;
 
 func _on_close_btn_pressed():

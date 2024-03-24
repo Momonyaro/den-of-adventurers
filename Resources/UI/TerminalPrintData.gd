@@ -45,7 +45,7 @@ static func get_terminal_text():
         },
         {
             'instruction': 'insert',
-            'text': 'GETTING NUCLEAR LAUNCH CODES',
+            'text': 'ACCESSING NUCLEAR LAUNCH CODES',
             'duration': .1
         },
         {

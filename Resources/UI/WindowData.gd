@@ -47,6 +47,10 @@ const window_data = {
 	'REQUESTS': {
 		'title': 'Requests',
 		'content_ref': 'res://Prefabs/UI/windows/requests.tscn'
+	},
+	'NEW_GAME': {
+		'title': 'New Game',
+		'content_ref': 'res://Prefabs/UI/windows/new_game.tscn'
 	}
 }
 

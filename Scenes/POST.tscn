@@ -54,15 +54,25 @@ offset_right = 512.0
 offset_bottom = 132.0
 texture = ExtResource("4_8btvr")
 
-[node name="Label" type="Label" parent="WALLPAPER/TextureRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WALLPAPER/TextureRect"]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 90.0
+offset_left = 10.0
+offset_top = 92.0
 offset_right = 470.0
-offset_bottom = 124.0
+offset_bottom = 132.0
+
+[node name="Label" type="Label" parent="WALLPAPER/TextureRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_rq6ff")
 theme_override_font_sizes/font_size = 30
-text = "Momonyaro Systems"
+text = "Momonyaro System"
+
+[node name="Label2" type="Label" parent="WALLPAPER/TextureRect/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_rq6ff")
+theme_override_font_sizes/font_size = 30
+text = "est. 2000"
 
 [node name="TERMINAL_WRITER" type="Control" parent="."]
 layout_mode = 1
