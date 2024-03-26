@@ -129,6 +129,7 @@ theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
 [node name="GAME_CONTAINER" type="VBoxContainer" parent="MarginContainer"]
+visible = false
 layout_mode = 2
 
 [node name="autosave_dropdown" type="HBoxContainer" parent="MarginContainer/GAME_CONTAINER"]
@@ -141,7 +142,7 @@ script = ExtResource("3_0bi7w")
 [node name="label" type="Label" parent="MarginContainer/GAME_CONTAINER/autosave_dropdown"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Autosave Frequency:"
 
 [node name="dropdown" parent="MarginContainer/GAME_CONTAINER/autosave_dropdown" instance=ExtResource("3_xvup6")]
@@ -162,7 +163,7 @@ script = ExtResource("5_gq15u")
 [node name="label" type="Label" parent="MarginContainer/GAME_CONTAINER/pan_spd_slider"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Camera Pan Speed:"
 vertical_alignment = 1
 
@@ -206,7 +207,7 @@ script = ExtResource("7_hulc5")
 [node name="label" type="Label" parent="MarginContainer/GAME_CONTAINER/zoom_spd_slider"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Camera Zoom Speed:"
 vertical_alignment = 1
 
@@ -241,7 +242,6 @@ icon = ExtResource("6_4p0y8")
 icon_alignment = 1
 
 [node name="VIDEO_CONTAINER" type="VBoxContainer" parent="MarginContainer"]
-visible = false
 layout_mode = 2
 
 [node name="interface_scaling" type="HBoxContainer" parent="MarginContainer/VIDEO_CONTAINER"]
@@ -254,7 +254,7 @@ script = ExtResource("2_ulpcs")
 [node name="scaling_option" type="Label" parent="MarginContainer/VIDEO_CONTAINER/interface_scaling"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Interface Scaling:"
 
 [node name="dropdown" parent="MarginContainer/VIDEO_CONTAINER/interface_scaling" instance=ExtResource("3_xvup6")]
@@ -276,7 +276,7 @@ stretch_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VIDEO_CONTAINER/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "NOTE: Pixel-perfect scaling is not recommended for resolutions higher than '2560 x 1440'."
 autowrap_mode = 2
 
@@ -295,7 +295,7 @@ script = ExtResource("4_0o8gg")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_11kd4")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Resolution:"
 
 [node name="dropdown" parent="MarginContainer/VIDEO_CONTAINER/resoultion" instance=ExtResource("3_xvup6")]
@@ -311,7 +311,7 @@ script = ExtResource("6_dt5wn")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_11kd4")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Fullscreen:"
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/VIDEO_CONTAINER/fullscreen"]

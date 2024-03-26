@@ -5,6 +5,7 @@ extends Node3D
 @onready var zzz_particles = self.get_child(2) if self.get_child_count() > 2 else null;
 
 var activity_manager: ActivityManager = null;
+var _agent: Agent = null;
 var adventurer = "";
 
 func _ready():
@@ -17,6 +18,7 @@ func update(state: bool):
 func is_available(agent: Agent) -> bool:
 	if adventurer == "" || adventurer == agent.adv_id:
 		adventurer = agent.adv_id;
+		_agent = agent;
 		return true;
 	return false;
 
@@ -28,6 +30,7 @@ func get_activity_point() -> Node3D:
 
 func get_activity_state() -> BaseState:
 	var activity_state = BedActivityState.new();
+	_agent.fallback_position = start_point.global_position;
 	activity_state._activity = self;
 	return activity_state;
 

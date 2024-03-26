@@ -45,7 +45,8 @@ theme_override_font_sizes/italics_font_size = 15
 theme_override_font_sizes/bold_italics_font_size = 15
 theme_override_font_sizes/mono_font_size = 15
 bbcode_enabled = true
-text = "[u]Den of Hungry Adventurers[/u]"
+text = "Den of Hungry Adventurers"
+fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
@@ -133,21 +134,12 @@ offset_bottom = 36.0
 theme_override_font_sizes/font_size = 15
 text = "Adventurers: 4/4"
 
-[node name="guild_tier" type="Label" parent="info_box"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 185.0
-offset_right = 190.0
-offset_bottom = 206.0
-theme_override_font_sizes/font_size = 15
-text = "Current Guildhall Tier: 1"
-
 [node name="adv_info" type="HBoxContainer" parent="info_box"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 38.0
+offset_top = 54.0
 offset_right = 427.0
-offset_bottom = 59.0
+offset_bottom = 75.0
 theme_override_constants/separation = 12
 
 [node name="adv_avg_level" type="Label" parent="info_box/adv_info"]
@@ -192,10 +184,19 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
 text = "Active Requests: 2"
 
+[node name="guild_tier" type="Label" parent="info_box"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 192.0
+offset_right = 190.0
+offset_bottom = 213.0
+theme_override_font_sizes/font_size = 15
+text = "Current Guildhall Tier: 1"
+
 [node name="Panel" type="NinePatchRect" parent="info_box"]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 206.0
+offset_top = 213.0
 offset_right = 428.0
 offset_bottom = 270.0
 texture = ExtResource("5_1uj7t")
@@ -206,47 +207,45 @@ patch_margin_bottom = 2
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="req_complete2" type="Label" parent="info_box/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="info_box/Panel"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 12.0
-offset_top = -21.0
-offset_right = 178.0
-offset_bottom = 21.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 15
-text = "Next upgrade at: 
-Guild Level 10 "
-vertical_alignment = 1
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="req_complete3" type="Label" parent="info_box/Panel"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 238.0
-offset_top = -23.0
-offset_right = 404.0
-offset_bottom = -2.0
-grow_vertical = 2
+[node name="GridContainer" type="GridContainer" parent="info_box/Panel/MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="req_complete2" type="Label" parent="info_box/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 15
+text = "Next upgrade at: "
+
+[node name="req_complete4" type="Label" parent="info_box/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 15
+text = "Guild Level 10 "
+
+[node name="req_complete3" type="Label" parent="info_box/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 theme_override_font_sizes/font_size = 15
 text = "Cost: 500 Gold"
-horizontal_alignment = 2
-vertical_alignment = 1
 
-[node name="Button" type="Button" parent="info_box/Panel"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -199.0
-offset_top = -2.0
-offset_right = -12.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="Button" type="Button" parent="info_box/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "Upgrade"

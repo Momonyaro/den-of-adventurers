@@ -25,7 +25,7 @@ const FATIGUE_REST_TIME : float = 10 * 60;
 # to rest and enters it's tired state if idle.
 
 var _level : int = 1;
-var _xp : Vector2i = Vector2i.ZERO;
+var _xp : Vector2i = Vector2i(0, 50);
 
 #Wardrobe
 var LOOK_race : String;

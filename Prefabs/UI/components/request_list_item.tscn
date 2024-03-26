@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dn60vyjh4fpbd"]
+[gd_scene load_steps=17 format=3 uid="uid://dn60vyjh4fpbd"]
 
 [ext_resource type="Texture2D" uid="uid://d081b071oeqiu" path="res://Textures/Icons/anim_0.png" id="1_dheow"]
 [ext_resource type="Script" path="res://Scripts/UI/components/request_list_item.gd" id="2_em3nu"]
@@ -6,11 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dtrjj2ceulm1n" path="res://Textures/Icons/anim_2.png" id="3_apuvp"]
 [ext_resource type="Texture2D" uid="uid://bkcc823h0clki" path="res://Textures/Icons/anim_3.png" id="4_3flrv"]
 [ext_resource type="Texture2D" uid="uid://cthkmsbwdwj8a" path="res://Textures/Icons/gold.png" id="5_ilow1"]
-[ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="6_dx606"]
 [ext_resource type="Texture2D" uid="uid://dsejrvql81x6p" path="res://Textures/Icons/avatar.png" id="7_7wt4c"]
 [ext_resource type="Texture2D" uid="uid://7bcoq6h35a7o" path="res://Textures/Icons/check2.png" id="7_8uxh0"]
 [ext_resource type="Texture2D" uid="uid://d1enbwehm7ko0" path="res://Textures/Icons/exclamation.png" id="7_xi1du"]
-[ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="8_rs1ts"]
 [ext_resource type="Texture2D" uid="uid://rjt00bwx41uj" path="res://Textures/Icons/flag.png" id="9_145du"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="10_1orss"]
 [ext_resource type="Texture2D" uid="uid://b78rlbuhxaln7" path="res://Textures/Icons/mail.png" id="11_himki"]
@@ -129,10 +127,8 @@ stretch_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/Control/SUB_VALUES/GOLD"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_dx606")
 theme_override_font_sizes/font_size = 15
 text = "9999"
-vertical_alignment = 2
 
 [node name="REQUESTOR" type="HBoxContainer" parent="HBoxContainer/Control/SUB_VALUES"]
 layout_mode = 2
@@ -147,10 +143,8 @@ stretch_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/Control/SUB_VALUES/REQUESTOR"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_rs1ts")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Requestor"
-vertical_alignment = 1
 
 [node name="LOCATION" type="HBoxContainer" parent="HBoxContainer/Control/SUB_VALUES"]
 layout_mode = 2
@@ -165,10 +159,8 @@ stretch_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/Control/SUB_VALUES/LOCATION"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("8_rs1ts")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Location"
-vertical_alignment = 1
 
 [node name="open_btn" type="Button" parent="."]
 texture_filter = 1

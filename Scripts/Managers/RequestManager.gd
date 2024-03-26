@@ -96,6 +96,10 @@ func complete_request(request: RequestItem, party: Party):
 	var split = guild_xp_reward.split('$');
 	var guild_xp = int(split[1]);
 
+	var members = adv_manager.get_party_adventurers(party);
+	for member in members:
+		member.add_xp(guild_xp);
+
 	game_manager.guild_data.add_xp(guild_xp);
 
 	_active_requests.erase(request._id);

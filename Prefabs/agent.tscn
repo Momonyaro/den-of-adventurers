@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bthpxev4cvx8j"]
+[gd_scene load_steps=9 format=3 uid="uid://bthpxev4cvx8j"]
 
 [ext_resource type="Script" path="res://Scripts/Agents/Agent.gd" id="1_56vq6"]
 [ext_resource type="PackedScene" uid="uid://78qqxoqecl1p" path="res://Models/little_guy.glb" id="2_63leg"]
+[ext_resource type="FontFile" uid="uid://c3yr2ft5uxgek" path="res://Fonts/Sysfont C.ttf" id="3_pfhhb"]
 [ext_resource type="Animation" uid="uid://cc02747b2p5hd" path="res://Animations/temp_marker_spin.res" id="3_re5xy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ki8gd"]
@@ -47,7 +48,8 @@ billboard = 1
 double_sided = false
 fixed_size = true
 text = "NAME"
-font_size = 22
+font = ExtResource("3_pfhhb")
+font_size = 24
 
 [node name="SELECTED" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0.01, 0)

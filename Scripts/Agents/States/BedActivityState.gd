@@ -28,6 +28,7 @@ func update(delta: float, agent: Node, camera: Node):
 func end() -> StateReference:
 	_state_exit_count += 1;
 	_agent.current_activity.activity_node.update(false);
+	_agent.global_position = _agent.fallback_position;
 	_agent.current_activity = null;
 	return StateReference.NIL;
 

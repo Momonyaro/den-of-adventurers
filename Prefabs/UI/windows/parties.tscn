@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://chatrilhtmb4y"]
+[gd_scene load_steps=9 format=3 uid="uid://chatrilhtmb4y"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_4wybq"]
 [ext_resource type="PackedScene" uid="uid://c2neajds6dpta" path="res://Prefabs/UI/party_list_item.tscn" id="2_lvroo"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/party_list.gd" id="2_s4n73"]
-[ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="4_1ddud"]
 [ext_resource type="Texture2D" uid="uid://c21i62rrwtnw7" path="res://Textures/Icons/arrow_right.png" id="4_p576x"]
 [ext_resource type="Texture2D" uid="uid://p6dd54egscgq" path="res://Textures/Icons/border_dotted_light.png" id="6_bjr1f"]
 
@@ -41,12 +40,12 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_l1t4f")
 
 [node name="NO_CONTENT_MSG" type="Label" parent="LIST"]
 layout_mode = 0
-offset_left = 85.0
+offset_left = 83.0
 offset_top = 37.0
-offset_right = 187.0
+offset_right = 192.0
 offset_bottom = 61.0
 theme_override_colors/font_color = Color(0.729412, 0.776471, 0.854902, 1)
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "No parties found."
 
 [node name="Panel" type="Panel" parent="LIST"]
@@ -59,6 +58,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rpjdq")
 
 [node name="CONTENT_PARENT" type="VBoxContainer" parent="LIST/Panel"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -114,7 +114,7 @@ theme_override_constants/margin_bottom = 6
 [node name="Label" type="Label" parent="LIST/Panel2/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 14
 text = "Hunting parties are used to send adventurers out to fulfill requests. 
 
 Requests may have requirements that force you to swap out members in order to participate.
@@ -150,11 +150,9 @@ flip_h = true
 
 [node name="PAGE_NUM" type="Label" parent="LIST/PAGINATION"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_1ddud")
 theme_override_font_sizes/font_size = 16
 text = "1"
 horizontal_alignment = 1
-vertical_alignment = 2
 
 [node name="ARROW_RIGHT" type="TextureButton" parent="LIST/PAGINATION"]
 layout_mode = 2

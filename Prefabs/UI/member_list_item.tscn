@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7xjekru3jo65"]
+[gd_scene load_steps=5 format=3 uid="uid://c7xjekru3jo65"]
 
+[ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_1jdxr"]
 [ext_resource type="Texture2D" uid="uid://c0t18nhd2xsyy" path="res://Textures/Icons/cross.png" id="1_6inxp"]
 [ext_resource type="Texture2D" uid="uid://cpk4ra55sxwf5" path="res://Textures/Icons/plus.png" id="2_dm4gj"]
 
@@ -16,6 +17,7 @@ border_color = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(0, 45)
 offset_right = 285.0
 offset_bottom = 45.0
+theme = ExtResource("1_1jdxr")
 
 [node name="CheckBox" type="CheckBox" parent="."]
 layout_mode = 0
@@ -35,15 +37,16 @@ offset_left = 44.0
 offset_top = 6.0
 offset_right = 177.0
 offset_bottom = 27.0
+rotation = 0.00191497
 theme_override_font_sizes/font_size = 15
 text = "Adventurer Name"
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 44.0
-offset_top = 23.0
+offset_top = 22.0
 offset_right = 177.0
-offset_bottom = 44.0
+offset_bottom = 43.0
 theme_override_font_sizes/font_size = 12
 text = "Level 5 Warrior"
 
@@ -52,10 +55,11 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -23.0
-offset_top = 4.0
-offset_right = -9.0
-offset_bottom = 30.0
+offset_left = -28.0
+offset_top = 3.0
+offset_right = -7.0
+offset_bottom = 33.0
 grow_horizontal = 0
-text = "*"
+theme_override_font_sizes/font_size = 20
+text = "@"
 horizontal_alignment = 2

@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddcfeq62x7vl5"]
+[gd_scene load_steps=11 format=3 uid="uid://ddcfeq62x7vl5"]
 
 [ext_resource type="Texture2D" uid="uid://dyx6v70at8syt" path="res://Textures/Icons/unknown.png" id="1_b1eb3"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/adv_preview.gd" id="2_cr237"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="3_mt308"]
 [ext_resource type="Texture2D" uid="uid://dllcbu7i28aiw" path="res://Textures/Icons/small_heart.png" id="4_dtyc1"]
 [ext_resource type="Texture2D" uid="uid://btxj61otcm2qj" path="res://Textures/Icons/star.png" id="4_g3uuj"]
-[ext_resource type="Texture2D" uid="uid://b17jgov1xht4n" path="res://Textures/Icons/snooze.png" id="5_8blsd"]
 [ext_resource type="Texture2D" uid="uid://d1fqd8npldynv" path="res://Textures/Icons/demi-human.png" id="5_h3oi5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
@@ -65,10 +64,10 @@ texture = ExtResource("1_b1eb3")
 texture_filter = 1
 layout_mode = 0
 offset_left = 106.0
-offset_top = 6.0
+offset_top = 5.0
 offset_right = 303.0
 offset_bottom = 27.0
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 18
 text = "CHARACTER  NAME"
 
 [node name="level_race" type="Label" parent="VBoxContainer/BaseInfoRect"]
@@ -78,26 +77,26 @@ offset_left = 88.0
 offset_top = 22.0
 offset_right = 225.0
 offset_bottom = 43.0
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Level X, Human"
 
 [node name="state" type="Label" parent="VBoxContainer/BaseInfoRect"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 171.0
-offset_top = 46.0
+offset_top = 47.0
 offset_right = 308.0
-offset_bottom = 67.0
-theme_override_font_sizes/font_size = 12
+offset_bottom = 68.0
+theme_override_font_sizes/font_size = 15
 text = "State"
 horizontal_alignment = 2
 
 [node name="xp_bar" type="ProgressBar" parent="VBoxContainer/BaseInfoRect"]
 layout_mode = 1
 offset_left = 88.0
-offset_top = 38.0
+offset_top = 40.0
 offset_right = 310.0
-offset_bottom = 44.0
+offset_bottom = 46.0
 max_value = 1.0
 value = 0.5
 show_percentage = false
@@ -111,7 +110,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -141.0
-offset_top = -36.0
+offset_top = -30.0
 offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 0
@@ -124,7 +123,7 @@ text = "Recruit"
 layout_mode = 0
 offset_left = -91.0
 offset_right = -7.0
-offset_bottom = 26.0
+offset_bottom = 20.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_hfw1k")
 text = "Dismiss"
 
@@ -208,17 +207,16 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -75.0
-offset_top = -32.0
+offset_left = -80.0
+offset_top = -28.0
 offset_bottom = -8.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme = ExtResource("3_mt308")
-theme_override_constants/h_separation = 8
 theme_override_font_sizes/font_size = 15
 text = "Rest"
-icon = ExtResource("5_8blsd")
+expand_icon = true
 
 [connection signal="pressed" from="VBoxContainer/BaseInfoRect/recruit_btn" to="." method="_on_recruit_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/BaseInfoRect/recruit_btn/dismiss_btn" to="." method="_on_dismiss_btn_pressed"]

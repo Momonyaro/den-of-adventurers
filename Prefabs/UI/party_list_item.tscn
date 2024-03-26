@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c2neajds6dpta"]
 
-[ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="1_ppxjy"]
+[ext_resource type="FontFile" uid="uid://c3yr2ft5uxgek" path="res://Fonts/Sysfont C.ttf" id="1_h50uy"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="2_cf71s"]
 [ext_resource type="Texture2D" uid="uid://b17jgov1xht4n" path="res://Textures/Icons/snooze.png" id="2_x2qvb"]
 [ext_resource type="Texture2D" uid="uid://bnxb4jg6dbifq" path="res://Textures/Icons/trashcan.png" id="3_qjvxv"]
@@ -23,6 +23,8 @@ border_color = Color(0, 0, 0, 1)
 
 [node name="PARTY_LIST_ITEM" type="Panel"]
 custom_minimum_size = Vector2(0, 53)
+offset_right = 264.0
+offset_bottom = 53.0
 
 [node name="Label" type="Label" parent="."]
 texture_filter = 1
@@ -30,38 +32,40 @@ layout_mode = 0
 offset_left = 30.0
 offset_top = 6.0
 offset_right = 222.0
-offset_bottom = 30.0
-theme_override_fonts/font = ExtResource("1_ppxjy")
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("1_h50uy")
 theme_override_font_sizes/font_size = 15
 text = "Alpha"
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 168.0
-offset_top = 3.0
+offset_top = 6.0
 offset_right = 256.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 12
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("1_h50uy")
+theme_override_font_sizes/font_size = 15
 text = "2/3"
 horizontal_alignment = 2
-vertical_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 30.0
-offset_right = 83.0
-offset_bottom = 48.0
+offset_top = 28.0
+offset_right = 134.0
+offset_bottom = 46.0
 theme_override_constants/separation = 6
 
 [node name="Label3" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("1_h50uy")
+theme_override_font_sizes/font_size = 15
 text = "[ATK_PTS]"
 
 [node name="Label4" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("1_h50uy")
+theme_override_font_sizes/font_size = 15
 text = "[SUP_PTS]"
 
 [node name="delete_btn" type="Button" parent="."]
@@ -70,7 +74,7 @@ layout_mode = 1
 offset_left = 237.0
 offset_top = 26.0
 offset_right = 256.0
-offset_bottom = 45.0
+offset_bottom = 46.0
 tooltip_text = "Delete party."
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_cf71s")
@@ -84,13 +88,13 @@ icon_alignment = 1
 
 [node name="edit_btn" type="Button" parent="."]
 layout_mode = 0
-offset_left = 178.0
+offset_left = 177.0
 offset_top = 26.0
-offset_right = 233.0
-offset_bottom = 45.0
+offset_right = 235.0
+offset_bottom = 46.0
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_cf71s")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Edit..."
 
 [node name="STATUS_ICON" type="TextureRect" parent="."]

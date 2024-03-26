@@ -140,7 +140,7 @@ static func get_main_menu_data():
 			'icon': 'res://Textures/Icons/load.png',
 			'exclude_for': ['web' , 'NO_SAVE'],
 			'prompt_title': 'Continue Last Save',
-			'prompt_warning': 'Load "$GUILD_NAME"?\n\nGuild Tier: $GUILD_TIER | Level: $GUILD_LEVEL',
+			'prompt_warning': 'Load "$GUILD_NAME"?\n\nGuild Tier: $GUILD_TIER, Level: $GUILD_LEVEL',
 			'prompt_icon': 'res://Textures/Icons/load.png',
 			'ok_option': 'Yes',
 			'no_option': 'No',

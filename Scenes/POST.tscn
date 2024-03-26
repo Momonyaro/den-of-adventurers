@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/TerminalWriter.gd" id="4_54vcg"]
 [ext_resource type="Script" path="res://Scripts/Managers/SettingsManager.gd" id="4_c0edr"]
 [ext_resource type="Script" path="res://addons/persistence_node/persistence_node.gd" id="5_54kje"]
-[ext_resource type="FontFile" uid="uid://c6qdqski5ul8c" path="res://Fonts/VT323-Regular.ttf" id="5_rq6ff"]
+[ext_resource type="FontFile" uid="uid://c8y5itcayjp3g" path="res://Fonts/Flexi_IBM_VGA_True.ttf" id="5_n4k5u"]
 
 [sub_resource type="Gradient" id="Gradient_xkl0i"]
 offsets = PackedFloat32Array(0.992443, 1)
@@ -64,13 +64,13 @@ offset_bottom = 132.0
 [node name="Label" type="Label" parent="WALLPAPER/TextureRect/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_rq6ff")
+theme_override_fonts/font = ExtResource("5_n4k5u")
 theme_override_font_sizes/font_size = 30
 text = "Momonyaro System"
 
 [node name="Label2" type="Label" parent="WALLPAPER/TextureRect/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_rq6ff")
+theme_override_fonts/font = ExtResource("5_n4k5u")
 theme_override_font_sizes/font_size = 30
 text = "est. 2000"
 
@@ -90,7 +90,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 32
+theme_override_constants/margin_left = 36
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12

@@ -10,12 +10,25 @@ func _ready():
 	_load_game();
 	pass
 
+func start_new_game(guild_name: String):
+	_wipe_save();
+	var data_buffer = hot_drive.data;
+	data_buffer['guild_data']['guild_name'] = guild_name;
+	print(data_buffer);
+
+	await _save_game();
+	change_to_game();
+
 func _save_game():
 	var data_buffer = hot_drive.data;
 	save_game.emit(data_buffer);
 	await get_tree().create_timer(0.2).timeout;
 	data_buffer['saved_at'] = Time.get_datetime_string_from_unix_time(floori(Time.get_unix_time_from_system()));
 	hot_drive.save();
+
+	if notifications == null:
+		return;
+
 	notifications.create_notification(
 		ResourceLoader.load('res://Textures/Icons/save.png') as Texture2D,
 		'Saved the game.',
@@ -24,7 +37,7 @@ func _save_game():
 	);
 
 func _load_game():
-	_upgrade_save(hot_drive.data);
+	_upgrade_save();
 	load_game.emit(hot_drive.data);
 
 func change_to_game():
@@ -33,11 +46,30 @@ func change_to_game():
 func change_to_main():
 	get_tree().change_scene_to_file("res://Scenes/MainMenu.tscn");
 
-func _upgrade_save(save_data: Dictionary):
-	if save_data.size() == 0:
+func _upgrade_save():
+	if hot_drive.data.size() == 0:
 		var new_data = SaveData.new();
 		for key in new_data.to_dict():
 			hot_drive.data[key] = new_data[key];
+		
+	var version = hot_drive.data['version'];    
+
+	while (true):
+		version = hot_drive.data['version'];
+		print(version);
+
+		match version:
+			'v3': break;
+			'v2': _to_v3(hot_drive.data);
+			'v1': _to_v2(hot_drive.data);
+			_: _to_v1(hot_drive.data);
+
+func _wipe_save():
+	hot_drive.data.clear();
+
+	var new_data = SaveData.new();
+	for key in new_data.to_dict():
+		hot_drive.data[key] = new_data[key];
 		
 	var version = hot_drive.data['version'];    
 

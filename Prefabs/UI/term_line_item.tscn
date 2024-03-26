@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ejqua282jjlw"]
 
 [ext_resource type="Script" path="res://Scripts/UI/components/TermLineItem.gd" id="1_1fo2x"]
-[ext_resource type="FontFile" uid="uid://c6qdqski5ul8c" path="res://Fonts/VT323-Regular.ttf" id="1_ag2r7"]
+[ext_resource type="FontFile" uid="uid://c8y5itcayjp3g" path="res://Fonts/Flexi_IBM_VGA_True.ttf" id="2_6tv1g"]
 
 [node name="TERM_LINE_ITEM" type="HBoxContainer"]
 script = ExtResource("1_1fo2x")
@@ -9,7 +9,7 @@ script = ExtResource("1_1fo2x")
 [node name="LINE" type="Label" parent="."]
 texture_filter = 5
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ag2r7")
+theme_override_fonts/font = ExtResource("2_6tv1g")
 theme_override_font_sizes/font_size = 24
 text = "Test Text line for funny stuff :)"
 
@@ -17,6 +17,6 @@ text = "Test Text line for funny stuff :)"
 visible = false
 texture_filter = 5
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_ag2r7")
+theme_override_fonts/font = ExtResource("2_6tv1g")
 theme_override_font_sizes/font_size = 24
 text = "_"

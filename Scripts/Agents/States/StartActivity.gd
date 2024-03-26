@@ -26,8 +26,8 @@ func update(delta: float, agent: Node, camera: Node):
 		_animator.play("WALK", 0.2);
 
 	pathing.update_target_pos(start_pos);
-	if _agent.global_position.distance_to(start_pos) < 0.2:
-		pathing.is_moving = false;
+	if _agent.global_position.distance_to(start_pos) < 0.1:
+		pathing.cancel_nav();
 		var activity_point = activity.get_activity_point();
 		_agent.global_position = activity_point.global_position;
 		_agent.global_rotation = activity_point.global_rotation;

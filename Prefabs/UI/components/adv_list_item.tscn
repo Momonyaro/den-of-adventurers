@@ -69,10 +69,10 @@ stretch_mode = 2
 [node name="name" type="Label" parent="content"]
 layout_mode = 1
 offset_left = 78.0
-offset_top = 3.0
+offset_top = 2.0
 offset_right = 219.0
-offset_bottom = 24.0
-theme_override_font_sizes/font_size = 15
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 16
 text = "Adventurer Name"
 vertical_alignment = 1
 text_overrun_behavior = 3
@@ -103,7 +103,7 @@ anchor_bottom = 1.0
 offset_left = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Currently: IDLE"
 vertical_alignment = 1
 
@@ -138,7 +138,7 @@ offset_left = 59.0
 offset_top = 23.0
 offset_right = 196.0
 offset_bottom = 44.0
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Level X, Human"
 
 [node name="party_status" type="Label" parent="content"]
@@ -148,6 +148,6 @@ offset_left = 59.0
 offset_top = 39.0
 offset_right = 218.0
 offset_bottom = 60.0
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Party: None"
 text_overrun_behavior = 3

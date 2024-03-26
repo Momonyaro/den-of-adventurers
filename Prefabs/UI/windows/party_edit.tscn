@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgiunjcdocb1x"]
+[gd_scene load_steps=7 format=3 uid="uid://cgiunjcdocb1x"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_r12uq"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/edit_party.gd" id="2_4pgr4"]
-[ext_resource type="FontFile" uid="uid://dinw4r8yhno6k" path="res://Fonts/ArgentPixelCF-Regular.otf" id="3_y3ovf"]
 [ext_resource type="PackedScene" uid="uid://c7xjekru3jo65" path="res://Prefabs/UI/member_list_item.tscn" id="4_nsnly"]
 [ext_resource type="Texture2D" uid="uid://c21i62rrwtnw7" path="res://Textures/Icons/arrow_right.png" id="5_rpb12"]
-[ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="6_iev1g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
 content_margin_left = 24.0
@@ -67,9 +65,10 @@ offset_top = -17.0
 offset_right = 65.0
 offset_bottom = -25.0
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Title"
 horizontal_alignment = 3
+vertical_alignment = 1
 
 [node name="CAP" type="Label" parent="LineEdit"]
 layout_mode = 1
@@ -82,10 +81,10 @@ offset_top = -17.0
 offset_bottom = -25.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_y3ovf")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "(19/30)"
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="MEMBER_LIST" type="Panel" parent="."]
 layout_mode = 0
@@ -100,8 +99,9 @@ layout_mode = 1
 offset_top = -17.0
 offset_right = 65.0
 offset_bottom = 1.0
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Members"
+vertical_alignment = 1
 
 [node name="CAP" type="Label" parent="MEMBER_LIST"]
 layout_mode = 1
@@ -112,9 +112,10 @@ offset_left = -65.0
 offset_top = -17.0
 offset_bottom = 1.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "(0/3)"
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="CONTENT_PARENT" type="VBoxContainer" parent="MEMBER_LIST"]
 unique_name_in_owner = true
@@ -164,7 +165,6 @@ flip_h = true
 
 [node name="PAGE_NUM" type="Label" parent="PAGINATION"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_iev1g")
 theme_override_font_sizes/font_size = 16
 text = "1"
 horizontal_alignment = 1

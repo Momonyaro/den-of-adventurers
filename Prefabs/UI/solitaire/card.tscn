@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhrglp6qg1oi7"]
+[gd_scene load_steps=6 format=3 uid="uid://dhrglp6qg1oi7"]
 
 [ext_resource type="Texture2D" uid="uid://divld3paipclp" path="res://Textures/Icons/border.png" id="1_2qxda"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="2_1j3jl"]
 [ext_resource type="Script" path="res://Prefabs/UI/solitaire/card.gd" id="2_vsuoa"]
-[ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="3_rb0hb"]
 [ext_resource type="Texture2D" uid="uid://c6obd2s8ug4mb" path="res://Textures/Icons/grid.png" id="4_kldru"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2gaug"]
@@ -30,11 +29,11 @@ script = ExtResource("2_vsuoa")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 23.0
+offset_top = -2.0
+offset_bottom = 36.0
 grow_horizontal = 2
 theme = ExtResource("2_1j3jl")
-theme_override_fonts/font = ExtResource("3_rb0hb")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2gaug")
 autowrap_mode = 3
 
@@ -44,12 +43,12 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -27.0
+offset_top = -37.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("2_1j3jl")
-theme_override_fonts/font = ExtResource("3_rb0hb")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2gaug")
 horizontal_alignment = 2
 vertical_alignment = 2
