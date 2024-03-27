@@ -154,7 +154,6 @@ func create_prompt(title: String, warning: String, icon: String, ok_option: Stri
 func _on_command_msg(obj):
 
 	var guild_data = get_node("/root/Root/DataStore").hot_drive.data['guild_data'];
-	print(guild_data);
 	var guild_name = guild_data['guild_name'] if guild_data.has('guild_name') else "";
 	var guild_level = guild_data['guild_level'] if guild_data.has('guild_level') else 0;
 	var guild_tier = guild_data['guildhall_tier'] if guild_data.has('guildhall_tier') else 0;

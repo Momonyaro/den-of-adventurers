@@ -1,0 +1,181 @@
+[gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://chxp4r774k37n"]
+
+[ext_resource type="Script" path="res://addons/shaderV/rgba/noise/fractal/simplex2d_fractal.gd" id="1_a6u11"]
+
+[sub_resource type="VisualShaderNodeIntConstant" id="VisualShaderNodeIntConstant_cprmn"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ptmvo"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_c100o"]
+output_port_for_preview = 0
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0.5, 0.5, 0.5, 0.5)]
+op_type = 2
+operator = 1
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_c3ct7"]
+output_port_for_preview = 0
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1.5, 1.5, 1.5, 1.5)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_yxfx3"]
+output_port_for_preview = 0
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0.5, 0.5, 0.5, 0.5)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_q1sko"]
+output_port_for_preview = 0
+default_input_values = [1, 5, 2, Vector3(2, 2, 0), 3, 3.74, 4, 0.9, 5, 0.61, 6, 0.47, 7, Vector3(0.5, 0.5, 0)]
+initialized = true
+script = ExtResource("1_a6u11")
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_utc8d"]
+output_port_for_preview = 0
+parameter_name = "LightColor"
+default_value_enabled = true
+default_value = Color(0.617455, 0.617455, 0.617455, 1)
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_l5pxu"]
+output_port_for_preview = 0
+parameter_name = "DimColor"
+default_value_enabled = true
+default_value = Color(0.505344, 0.505344, 0.505344, 1)
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_a5yrx"]
+input_name = "node_position_world"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_uury0"]
+output_port_for_preview = 0
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_ihadl"]
+output_port_for_preview = 0
+default_input_values = [0, 1.0, 1, 0.0]
+operator = 1
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_lytlr"]
+output_port_for_preview = 0
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_w41jn"]
+output_port_for_preview = 0
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 LightColor : source_color = vec4(0.617455, 0.617455, 0.617455, 1.000000);
+uniform vec4 DimColor : source_color = vec4(0.505344, 0.505344, 0.505344, 1.000000);
+
+
+// FractalSimplexNoise2D
+#include \"res://addons/shaderV/rgba/noise/fractal/simplex2d_fractal.gdshaderinc\"
+
+void fragment() {
+// Input:11
+	vec2 n_out11p0 = UV;
+
+
+// Input:5
+	vec3 n_out5p0 = NODE_POSITION_WORLD;
+
+
+	float n_out16p0;
+// FractalSimplexNoise2D:16
+	int n_in16p1 = 5;
+	vec3 n_in16p2 = vec3(2.00000, 2.00000, 0.00000);
+	float n_in16p3 = 3.74000;
+	float n_in16p4 = 0.90000;
+	float n_in16p5 = 0.61000;
+	float n_in16p6 = 0.47000;
+	{
+		n_out16p0 = _simplexNoise2DFBM(vec3(n_out11p0, 0.0).xy, int(n_in16p1), n_in16p2.xy, n_in16p3, n_in16p4, n_in16p5, n_in16p6, n_out5p0.xy);
+	}
+
+
+// ColorParameter:2
+	vec4 n_out2p0 = LightColor;
+
+
+// VectorOp:6
+	vec4 n_out6p0 = vec4(n_out16p0) * n_out2p0;
+
+
+// FloatOp:7
+	float n_in7p0 = 1.00000;
+	float n_out7p0 = n_in7p0 - n_out16p0;
+
+
+// ColorParameter:3
+	vec4 n_out3p0 = DimColor;
+
+
+// VectorOp:8
+	vec4 n_out8p0 = vec4(n_out7p0) * n_out3p0;
+
+
+// VectorOp:9
+	vec4 n_out9p0 = n_out6p0 + n_out8p0;
+
+
+// VectorOp:12
+	vec4 n_in12p1 = vec4(0.50000, 0.50000, 0.50000, 0.50000);
+	vec4 n_out12p0 = n_out9p0 - n_in12p1;
+
+
+// VectorOp:13
+	vec4 n_in13p1 = vec4(1.50000, 1.50000, 1.50000, 1.50000);
+	vec4 n_out13p0 = n_out12p0 * n_in13p1;
+
+
+// VectorOp:14
+	vec4 n_in14p1 = vec4(0.50000, 0.50000, 0.50000, 0.50000);
+	vec4 n_out14p0 = n_out13p0 + n_in14p1;
+
+
+// IntConstant:10
+	int n_out10p0 = 0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out14p0.xyz);
+	SPECULAR = float(n_out10p0);
+
+
+}
+"
+graph_offset = Vector2(-1685.15, -304.74)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_utc8d")
+nodes/fragment/2/position = Vector2(-1900, 260)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_l5pxu")
+nodes/fragment/3/position = Vector2(-1580, 500)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_a5yrx")
+nodes/fragment/5/position = Vector2(-2040, -20)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVectorOp_uury0")
+nodes/fragment/6/position = Vector2(-1080, -120)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatOp_ihadl")
+nodes/fragment/7/position = Vector2(-1220, 240)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVectorOp_lytlr")
+nodes/fragment/8/position = Vector2(-1000, 440)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_w41jn")
+nodes/fragment/9/position = Vector2(-780, 160)
+nodes/fragment/10/node = SubResource("VisualShaderNodeIntConstant_cprmn")
+nodes/fragment/10/position = Vector2(-420, 720)
+nodes/fragment/11/node = SubResource("VisualShaderNodeInput_ptmvo")
+nodes/fragment/11/position = Vector2(-2000, -140)
+nodes/fragment/12/node = SubResource("VisualShaderNodeVectorOp_c100o")
+nodes/fragment/12/position = Vector2(-560, -120)
+nodes/fragment/13/node = SubResource("VisualShaderNodeVectorOp_c3ct7")
+nodes/fragment/13/position = Vector2(-360, -120)
+nodes/fragment/14/node = SubResource("VisualShaderNodeVectorOp_yxfx3")
+nodes/fragment/14/position = Vector2(-160, -120)
+nodes/fragment/16/node = SubResource("VisualShaderNodeCustom_q1sko")
+nodes/fragment/16/position = Vector2(-1660, -300)
+nodes/fragment/connections = PackedInt32Array(2, 0, 6, 1, 7, 0, 8, 0, 3, 0, 8, 1, 6, 0, 9, 0, 8, 0, 9, 1, 9, 0, 12, 0, 12, 0, 13, 0, 13, 0, 14, 0, 10, 0, 0, 4, 14, 0, 0, 0, 11, 0, 16, 0, 5, 0, 16, 7, 16, 0, 6, 0, 16, 0, 7, 1)

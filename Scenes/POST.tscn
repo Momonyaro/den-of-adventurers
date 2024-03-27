@@ -66,7 +66,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_n4k5u")
 theme_override_font_sizes/font_size = 30
-text = "Momonyaro System"
+text = "Momonyaro Systems"
 
 [node name="Label2" type="Label" parent="WALLPAPER/TextureRect/HBoxContainer"]
 layout_mode = 2

@@ -27,7 +27,9 @@ offset_right = 27.0
 offset_bottom = 27.0
 theme_override_constants/check_v_offset = 1
 theme_override_icons/checked = ExtResource("1_6inxp")
+theme_override_icons/checked_disabled = ExtResource("1_6inxp")
 theme_override_icons/unchecked = ExtResource("2_dm4gj")
+theme_override_icons/unchecked_disabled = ExtResource("2_dm4gj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jhjdn")
 icon_alignment = 1
 

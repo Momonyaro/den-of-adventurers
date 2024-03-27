@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Den Of Hungry Adventurers"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://Scenes/POST.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]
