@@ -26,12 +26,7 @@ func _ready():
 func _process(_delta):
 	var _mode = get_window().mode;
 	var is_fullscreen = _mode == Window.Mode.MODE_FULLSCREEN;
-	_dropdown._disabled = is_fullscreen;
-	if is_fullscreen:
-		var screen_res = get_tree().root.size;
-		var screen_res_str = str(screen_res.x, 'x', screen_res.y);
-		_dropdown.set_active_no_event(screen_res_str, -1);
-	elif _mode != _last_mode:
+	if _mode != _last_mode:
 		var default = _get_current();
 		_dropdown.set_active_no_event(default[0], default[1]);
 	
@@ -51,7 +46,7 @@ func _on_new_value(label: String, value: String, id: int):
 
 func _get_current() -> Array:
 	var data = settings.data;
-	var current = SettingsManager.string_to_vector2i(str(data['resolution'])) if data.has('resolution') else get_tree().root.size;
+	var current = SettingsManager.string_to_vector2i(str(data['resolution'])) if data.has('resolution') else get_window().size;
 	var current_str = str(current.x, "x", current.y)
 	return [current_str, current.y];
 
@@ -69,8 +64,7 @@ func _get_options(screen_w: int, screen_h: int) -> Array: # only 16:9 support fo
 	return resolutions;
 
 func _set_res(w: int, h: int):
-	get_tree().root.size = Vector2(w, h);
-	get_window().size = Vector2(w, h);
+	get_window().size = Vector2i(w, h);
 	
 	settings.data['resolution'] = Vector2i(w, h);
 	settings.save();

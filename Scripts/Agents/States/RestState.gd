@@ -9,7 +9,12 @@ func start(animator: AnimationPlayer):
 	_animator = animator;
 
 func evaluate(agent: Agent, adv_state: Adventurer.Status, has_destination: bool, party: Party) -> bool:
-	if (adv_state == Adventurer.Status.RESTING || adv_state == Adventurer.Status.EXHAUSTED) && agent.current_activity == null:
+	var has_party = party != null;
+	var party_is_gone = false;
+	if has_party:
+		party_is_gone = party._status != Party.PartyStatus.IDLE;
+
+	if (adv_state == Adventurer.Status.RESTING || adv_state == Adventurer.Status.EXHAUSTED) && agent.current_activity == null && !party_is_gone:
 		return true;
 	return false;
 

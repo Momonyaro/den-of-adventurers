@@ -64,9 +64,9 @@ func heal_damage(amount: int) -> void:
 
 func tick_fatigue(delta: float) -> void:
 	var delta_amount = delta * (1.0 / FATIGUE_REST_TIME);
-	if _status == Status.AWAY: _fatigue = clampf(_fatigue + delta_amount, 0, 1);
-	elif _status == Status.EXHAUSTED: _fatigue = clampf(_fatigue - (delta_amount * 0.75), 0, 1);
+	if _status == Status.EXHAUSTED: _fatigue = clampf(_fatigue - (delta_amount * 0.75), 0, 1);
 	elif _status == Status.RESTING: _fatigue = clampf(_fatigue - delta_amount, 0, 1);
+	else: _fatigue = clampf(_fatigue + delta_amount, 0, 1);
 	
 	update_status();
 

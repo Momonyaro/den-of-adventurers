@@ -1,10 +1,10 @@
 extends Requirement
 class_name NoDemiHumans;
 
-func validate(party: Party) -> bool:
-	for i in party._members:
-		if i == null: continue;
-		if i._race == Adventurer.Race.DEMI_HUMAN:
+func validate(party: Party, members: Array) -> bool:
+	for adv in members:
+		if adv == null: continue;
+		if adv._race == Adventurer.Race.DEMI_HUMAN:
 			return false;
 	return true;
 

@@ -30,4 +30,5 @@ func state_transition_allowed(state_ref: StateReference) -> bool:
 		StateReference.CHEER: return true;
 		StateReference.REST: return true;
 		StateReference.ON_REQUEST_START: return true;
+		StateReference.ON_DISMISSED: return true;
 		_: return false;

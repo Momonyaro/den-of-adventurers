@@ -33,7 +33,7 @@ func state_transition_allowed(state_ref: StateReference) -> bool:
 		StateReference.WALK: return true;
 		StateReference.START_WANDER: return (_timer >= _idle_time);
 		StateReference.CHEER: return true;
-		StateReference.DELETE_DISMISSED: return true;
 		StateReference.REST: return true;
 		StateReference.ON_REQUEST_START: return true;
+		StateReference.ON_DISMISSED: return true;
 		_: return false;

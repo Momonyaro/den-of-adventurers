@@ -20,7 +20,7 @@ func _ready():
 	_selected_agent = _game_manager._selected_agent;
 	_game_manager.select_agent.connect(update_menu);
 
-	get_node("%AdvHealthRect/fatigue/bar/rest_btn").pressed.connect( func(): 
+	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/rest_btn").pressed.connect( func(): 
 		var agent = agent_manager.agents[_selected_agent];
 		_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg"); 
 		agent.adventurer.set_status(Adventurer.Status.RESTING)
@@ -76,18 +76,19 @@ func _draw_health_info():
 	var current_status = adventurer.adv_status();
 	var resting = current_status == "RESTING" || current_status == "EXHAUSTED"
 
-	get_node("%AdvHealthRect").visible = current_status != "RECRUIT";
-	get_node("%AdvHealthRect/health").text = str("Health: (", adventurer._health.x, "/", adventurer._health.y, ")");
-	get_node("%AdvHealthRect/health/bar").value = adventurer._health.x / float(adventurer._health.y);
-	get_node("%AdvHealthRect/fatigue").text = _get_fatigue_text(adventurer._fatigue);
-	get_node("%AdvHealthRect/fatigue/bar").value = adventurer._fatigue / 1.0;
+	get_node("%AdvHealthRect").visible = current_status != "RECRUIT" && current_status != "DISMISSED";
+	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer/health").text = str("Health: (", adventurer._health.x, "/", adventurer._health.y, ")");
+	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer/bar").value = adventurer._health.x / float(adventurer._health.y);
+	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/fatigue").text = _get_fatigue_text(adventurer._fatigue);
+	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/bar").value = adventurer._fatigue / 1.0;
 	var is_enabled = adventurer._fatigue >= 0.1 && adventurer.adv_status() == "IDLE";
-	get_node("%AdvHealthRect/fatigue/bar/rest_btn").disabled = !is_enabled;
-	get_node("%AdvHealthRect/fatigue/bar/rest_btn").tooltip_text = "Tell the adventurer to go rest." if is_enabled else "";
+	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/rest_btn").disabled = !is_enabled;
+	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/rest_btn").tooltip_text = "Tell the adventurer to go rest." if is_enabled else "";
 	if resting:
-		get_node("%AdvHealthRect/fatigue/bar/rest_btn").text = get_timer_text(adventurer._fatigue, adventurer.FATIGUE_REST_TIME);
+		get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/rest_btn").text = get_timer_text(adventurer._fatigue, adventurer.FATIGUE_REST_TIME);
 	else:
-		get_node("%AdvHealthRect/fatigue/bar/rest_btn").text = "Rest";
+		get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/rest_btn").text = "Rest";
+	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/dismiss_btn").disabled = current_status == "DEAD" || current_status == "AWAY";
 
 
 func _check_capacity():

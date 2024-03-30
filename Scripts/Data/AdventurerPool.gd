@@ -48,7 +48,7 @@ func generate_adventurer():
 	adv.LOOK_hat = class_appearance['hat'];
 	adv.LOOK_weapon =  class_appearance['weapon'];
 
-	adv._fatigue = randf_range(0, 0.9);
+	adv._fatigue = randf_range(0, .2);
 	adv._xp = Vector2i(randi_range(0, 80), 100);
 	adv._class = rand_class['id'];
 	

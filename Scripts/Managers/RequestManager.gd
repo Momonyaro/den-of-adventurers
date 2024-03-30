@@ -95,12 +95,18 @@ func complete_request(request: RequestItem, party: Party):
 	guild_xp_reward = guild_xp_reward[0] if guild_xp_reward.size() > 0 else 'g_xp$0';
 	var split = guild_xp_reward.split('$');
 	var guild_xp = int(split[1]);
+	# Add gold to guild_balance
+	var gold_reward = request._rewards.filter(func (r): return r.contains('gold'));
+	gold_reward = gold_reward[0] if gold_reward.size() > 0 else 'gold$0';
+	var gold_split = gold_reward.split('$');
+	var gold = int(gold_split[1]);
 
 	var members = adv_manager.get_party_adventurers(party);
 	for member in members:
 		member.add_xp(guild_xp);
 
 	game_manager.guild_data.add_xp(guild_xp);
+	game_manager.guild_data.guild_balance += gold;
 
 	_active_requests.erase(request._id);
 	_completed_requests.push_back(request._id);
@@ -111,6 +117,7 @@ func get_requirement(type: String, value: int) -> Requirement:
 	match (type):
 		"PartyMembersAbove": return PartyMembersAbove.new(value);
 		"NoDemiHumans": return NoDemiHumans.new();
+		"AtkScoreAbove": return PartyAtkScoreAbove.new(value);
 		_: return null;
 
 func _on_timer_done(id: String):

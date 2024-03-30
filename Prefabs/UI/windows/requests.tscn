@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dnogswpgpr5a1"]
+[gd_scene load_steps=32 format=3 uid="uid://dnogswpgpr5a1"]
 
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="1_g2oe8"]
 [ext_resource type="PackedScene" uid="uid://dn60vyjh4fpbd" path="res://Prefabs/UI/components/request_list_item.tscn" id="2_1f5uo"]
@@ -12,10 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://c6hvlfudpwi6r" path="res://Textures/Icons/map_marker_small.png" id="5_a7qmr"]
 [ext_resource type="Texture2D" uid="uid://rjt00bwx41uj" path="res://Textures/Icons/flag.png" id="6_7tvhc"]
 [ext_resource type="Texture2D" uid="uid://dfh7c5mkrlbvo" path="res://Textures/Icons/back.png" id="6_ow0q3"]
-[ext_resource type="FontFile" uid="uid://dm3aikw5bkfnk" path="res://Fonts/ArgentPixelCF-Italic.otf" id="7_2g0t1"]
 [ext_resource type="Texture2D" uid="uid://b04rdgvb7g4d" path="res://Textures/Icons/back_hover.png" id="7_a6ak0"]
 [ext_resource type="Texture2D" uid="uid://dsejrvql81x6p" path="res://Textures/Icons/avatar.png" id="8_fly1e"]
-[ext_resource type="FontFile" uid="uid://c3yr2ft5uxgek" path="res://Fonts/Sysfont C.ttf" id="9_qu788"]
+[ext_resource type="FontFile" uid="uid://y8hwagmk77ox" path="res://Fonts/Sysfont C.ttf" id="9_qu788"]
 [ext_resource type="Texture2D" uid="uid://p6dd54egscgq" path="res://Textures/Icons/border_dotted_light.png" id="11_jlxok"]
 [ext_resource type="PackedScene" uid="uid://dlggxv5xajmh4" path="res://Prefabs/UI/components/dropdown.tscn" id="11_rb8df"]
 [ext_resource type="Texture2D" uid="uid://cudq8xoffd8rm" path="res://Textures/line.png" id="12_ep50f"]
@@ -350,7 +349,6 @@ disabled = true
 text = "Complete Request"
 
 [node name="TIME_REMAINING" type="PanelContainer" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_vq6kh")
 
@@ -381,7 +379,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Time Remaining:"
 vertical_alignment = 1
 autowrap_mode = 3
@@ -390,7 +388,7 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "16h 21m 31s"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -403,7 +401,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "Party"
 vertical_alignment = 1
 autowrap_mode = 3
@@ -412,8 +410,7 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("7_2g0t1")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3

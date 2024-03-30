@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ddcfeq62x7vl5"]
+[gd_scene load_steps=12 format=3 uid="uid://ddcfeq62x7vl5"]
 
 [ext_resource type="Texture2D" uid="uid://dyx6v70at8syt" path="res://Textures/Icons/unknown.png" id="1_b1eb3"]
 [ext_resource type="Script" path="res://Scripts/UI/windows/adv_preview.gd" id="2_cr237"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dllcbu7i28aiw" path="res://Textures/Icons/small_heart.png" id="4_dtyc1"]
 [ext_resource type="Texture2D" uid="uid://btxj61otcm2qj" path="res://Textures/Icons/star.png" id="4_g3uuj"]
 [ext_resource type="Texture2D" uid="uid://d1fqd8npldynv" path="res://Textures/Icons/demi-human.png" id="5_h3oi5"]
+[ext_resource type="Texture2D" uid="uid://12rbu138ugdb" path="res://Textures/Icons/small_guy.png" id="7_oqrln"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hhn2u"]
 content_margin_left = 24.0
@@ -147,76 +148,94 @@ offset_bottom = 24.0
 texture = ExtResource("5_h3oi5")
 stretch_mode = 2
 
-[node name="AdvHealthRect" type="Panel" parent="VBoxContainer"]
+[node name="AdvHealthRect" type="PanelContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_7xp30")
 
-[node name="health" type="Label" parent="VBoxContainer/AdvHealthRect"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/AdvHealthRect"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/AdvHealthRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="health" type="Label" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer"]
 texture_filter = 1
-layout_mode = 0
-offset_left = 10.0
-offset_top = 14.0
-offset_right = 267.0
-offset_bottom = 38.0
+layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "Health: 15/15"
 
-[node name="bar" type="ProgressBar" parent="VBoxContainer/AdvHealthRect/health"]
-layout_mode = 0
-offset_top = 22.0
-offset_right = 300.0
-offset_bottom = 36.0
+[node name="bar" type="ProgressBar" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 14)
+layout_mode = 2
 max_value = 1.0
 show_percentage = false
 
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/AdvHealthRect/health/bar"]
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer/bar"]
 self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
+layout_mode = 2
 offset_left = 3.0
 offset_top = 3.0
-offset_right = 11.0
+offset_right = 307.0
 offset_bottom = 11.0
 texture = ExtResource("4_dtyc1")
 stretch_mode = 2
 
-[node name="fatigue" type="Label" parent="VBoxContainer/AdvHealthRect"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="fatigue" type="Label" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 texture_filter = 1
-layout_mode = 0
-offset_left = 10.0
-offset_top = 61.0
-offset_right = 105.0
-offset_bottom = 85.0
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
 text = "Fatigue: (16%)"
+vertical_alignment = 1
 
-[node name="bar" type="ProgressBar" parent="VBoxContainer/AdvHealthRect/fatigue"]
-layout_mode = 0
-offset_top = 22.0
-offset_right = 300.0
-offset_bottom = 28.0
-max_value = 1.0
-value = 0.5
-show_percentage = false
-
-[node name="rest_btn" type="Button" parent="VBoxContainer/AdvHealthRect/fatigue/bar"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -28.0
-offset_bottom = -8.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="rest_btn" type="Button" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(80, 2.08165e-12)
+layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("3_mt308")
 theme_override_font_sizes/font_size = 15
 text = "Rest"
 expand_icon = true
 
+[node name="bar" type="ProgressBar" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(2.08165e-12, 14)
+layout_mode = 2
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/bar"]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 307.0
+offset_bottom = 11.0
+texture = ExtResource("7_oqrln")
+stretch_mode = 2
+
+[node name="dismiss_btn" type="Button" parent="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_hfw1k")
+text = "Dismiss"
+
 [connection signal="pressed" from="VBoxContainer/BaseInfoRect/recruit_btn" to="." method="_on_recruit_btn_pressed"]
 [connection signal="pressed" from="VBoxContainer/BaseInfoRect/recruit_btn/dismiss_btn" to="." method="_on_dismiss_btn_pressed"]
+[connection signal="pressed" from="VBoxContainer/AdvHealthRect/MarginContainer/VBoxContainer/dismiss_btn" to="." method="_on_dismiss_btn_pressed"]

@@ -10,7 +10,7 @@ var adventurer = "";
 
 func _ready():
 	activity_manager = get_parent();
-	activity_manager.register(_get_id(), 'leave_point', self);
+	activity_manager.register(_get_id(), 'recruit_wait', self);
 
 func update(state: bool):
 	pass;
@@ -26,9 +26,9 @@ func get_activity_point() -> Node3D:
 	return activity_point;
 
 func get_activity_state(agent) -> BaseState:
-	var activity_state = LeaveActivityState.new();
+	var activity_state = RecruitWaitActivityState.new();
 	agent.fallback_position = start_point.global_position;
 	return activity_state;
 
 func _get_id():
-	return 'LEAVE_POINT';
+	return 'RECRUIT_WAIT';

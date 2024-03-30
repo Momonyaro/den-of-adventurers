@@ -245,6 +245,7 @@ icon_alignment = 1
 layout_mode = 2
 
 [node name="interface_scaling" type="HBoxContainer" parent="MarginContainer/VIDEO_CONTAINER"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("1_11kd4")
@@ -261,6 +262,7 @@ text = "Interface Scaling:"
 layout_mode = 2
 
 [node name="Panel" type="PanelContainer" parent="MarginContainer/VIDEO_CONTAINER"]
+visible = false
 layout_mode = 2
 theme = ExtResource("1_11kd4")
 theme_override_styles/panel = SubResource("StyleBoxFlat_p2jwr")
@@ -281,6 +283,7 @@ text = "NOTE: Pixel-perfect scaling is not recommended for resolutions higher th
 autowrap_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VIDEO_CONTAINER"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 12
 theme_override_styles/separator = SubResource("StyleBoxFlat_wxkow")

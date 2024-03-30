@@ -3,7 +3,7 @@ class_name PartyMembersAbove;
 
 var _threshold: int = 0;
 
-func validate(party: Party) -> bool:
+func validate(party: Party, members: Array) -> bool:
 	var member_count = party._members.size();
 	return member_count > _threshold;
 

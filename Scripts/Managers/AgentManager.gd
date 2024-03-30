@@ -6,6 +6,7 @@ var agents = {};
 var prefab_agent = preload("res://Prefabs/agent.tscn");
 @onready var adv_manager : AdventurerManager = get_node("%Adventurers");
 @onready var act_manager : ActivityManager = get_node("%Activities");
+@onready var notifications = self.get_node("/root/Root/UI/Notifications");
 
 func _ready():
 	adv_manager.new_recruit.connect(_on_new_recruit);
@@ -21,7 +22,16 @@ func _on_new_recruit(id: String):
 	instance.adv_id = adv._unique_id;
 	AgentWardrobe.dress_up(adv, instance);
 	add_child(instance);
-	instance.set_position(Vector3(0, 0, 0));
+	var rec_spawn_point = act_manager.try_get_activity('recruit_spawn', instance).activity_node;
+	instance.set_position(rec_spawn_point.activity_point.global_position);
+
+	notifications.create_notification(
+		ResourceLoader.load('res://Textures/Icons/avatar.png') as Texture2D,
+		'A new recruit has appeared in your guild!',
+		func (): pass,
+		30
+	);
+
 	pass;
 
 func _recruit_agent(adv_id: String):
@@ -33,6 +43,10 @@ func _recruit_agent(adv_id: String):
 			return;
 	pass;
 
+func get_wander_point() -> Node:
+	var wander_points = get_tree().get_nodes_in_group('WANDER_POINTS');
+	
+	return wander_points[randi_range(0, wander_points.size() - 1)];
 
 func _on_save_game(save_buffer: Dictionary):
 	save_buffer['agents'] = agents.values().map(func (a): return a.to_dict());

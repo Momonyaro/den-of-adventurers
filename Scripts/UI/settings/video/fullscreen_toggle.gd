@@ -22,6 +22,14 @@ func _on_new_value():
 		_composer.play("res://Audio/SFX/UI/maximize_006.ogg");
 
 func _set_mode(mode: Window.Mode):
+	var data = settings.data;
 	get_window().mode = mode;
+	var current = SettingsManager.string_to_vector2i(str(data['resolution'])) if data.has('resolution') else get_window().size;
+	_set_res(current.x, current.y);
 	settings.data['fullscreen'] = int(mode);
 	settings.save();
+
+func _set_res(w: int, h: int):
+	get_window().size = Vector2i(w, h);
+	
+	settings.data['resolution'] = Vector2i(w, h);

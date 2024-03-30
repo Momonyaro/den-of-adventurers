@@ -1,6 +1,11 @@
 extends BaseState;
 class_name TestDeleteDismissedState;
 
+
+var _agent = null;
+var _party: Party = null;
+var _activity = null;
+
 func _init():
 	_state_ref = StateReference.DELETE_DISMISSED;
 

@@ -5,9 +5,10 @@ var _current_state: BaseState = BaseState.new();
 var _states: Array[BaseState] = [
 	BaseState.new(),
 	StartActivityState.new(),
+	OnDismissedState.new(),
+	OnRecruitState.new(),
 	OnRequestState.new(),
 	WaveCameraState.new(),
-	TestDeleteDismissedState.new(),
 	CheerState.new(),
 	RestState.new(),
 	StartWanderState.new(),
@@ -28,6 +29,7 @@ func update(delta: float, adv_state: Adventurer.Status, is_moving: bool, agent: 
 
 			_current_state = state;
 			_current_state.start(_self.get_child(0).get_child(-1));
+			print(BaseState.StateReference.keys()[_current_state._state_ref]);
 			pass;
 	
 	_current_state.update(delta, agent, camera);

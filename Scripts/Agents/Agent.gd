@@ -5,6 +5,7 @@ class_name Agent
 
 @onready var adv_manager : AdventurerManager = get_node("/root/Root/Adventurers");
 @onready var agent_manager : AgentManager = get_node("/root/Root/Agents");
+@onready var act_manager : ActivityManager = get_node("/root/Root/Activities");
 @onready var game_manager : GameManager = get_node("/root/Root/Game");
 @onready var timers : TimerContainer = get_node("/root/Root/Timers");
 
@@ -29,9 +30,23 @@ func _process(delta):
 	if adventurer == null:
 		agent_manager.agents.erase(adv_id);
 		self.queue_free();
+		return;
 
 	if state_manager.pick_new_wander() && navigation.nav_finished():
-		navigation.update_target_pos(navigation.get_random_pos());
+		var point = agent_manager.get_wander_point() as Node3D;
+
+		var pr = point.point_radius;
+		var rand_x = randf_range(-pr, pr);
+		var rand_z = randf_range(-pr, pr);
+		var rand_magnitude = randf_range(0, pr);
+		var composite = Vector2(rand_x, rand_z).normalized() * rand_magnitude; 
+
+		var pos_in_point = point.global_position + Vector3(composite.x, 0, composite.y);
+
+		navigation.update_target_pos(pos_in_point);
+
+	if adventurer._status != Adventurer.Status.RESTING && adventurer._status != Adventurer.Status.EXHAUSTED && adventurer._status != Adventurer.Status.RECRUIT:
+		adventurer.tick_fatigue(delta * .25);
 
 	pass;
 
@@ -59,9 +74,9 @@ func _recruit():
 	pass;
 
 func _dismiss():
-	if adventurer._status == Adventurer.Status.RECRUIT && state_manager.allow_recruit():
-		timers.delete_timer(adventurer.TIMER_recruit);
-		adventurer.adv_dismiss();
+	act_manager.remove_all_reservations_for_reservee(self);
+	timers.delete_timer(adventurer.TIMER_recruit);
+	adventurer.adv_dismiss();
 	pass;
 
 func get_adv_party() -> Party:

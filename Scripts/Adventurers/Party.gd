@@ -22,19 +22,27 @@ static func copy(party: Party):
 	new_party._current_request_id = party._current_request_id;
 	return new_party;
 
-func get_atk_score() -> int:
+func get_atk_score(members: Array) -> int:
 	var score : int = 0;
-	for i in _members:
-		if i == null: continue;
-		score += i._level;
+	for adv in members:
+		var adv_class = ClassDataContainer.get_class_from_id(adv._class);
+		var off_scores = adv_class['baseOffScore'] as Array;
+		
+		var index = 1 if adv._defined else 0;
+		
+		score += off_scores[index] * adv._level;
 		
 	return score;
 
-func get_sup_score() -> int:
+func get_sup_score(members: Array) -> int:
 	var score : int = 0;
-	for i in _members:
-		if i == null: continue;
-		score += i._level;
+	for adv in members:
+		var adv_class = ClassDataContainer.get_class_from_id(adv._class);
+		var sup_scores = adv_class['baseSupScore'] as Array;
+		
+		var index = 1 if adv._defined else 0;
+		
+		score += sup_scores[index] * adv._level;
 		
 	return score;
 

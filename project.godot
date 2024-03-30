@@ -13,6 +13,7 @@ config_version=5
 config/name="Den Of Hungry Adventurers"
 run/main_scene="res://Scenes/POST.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+run/low_processor_mode=true
 
 [autoload]
 
@@ -22,7 +23,7 @@ Console="*res://addons/console/Console.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/resizable=false
+window/stretch/mode="viewport"
 
 [dotnet]
 

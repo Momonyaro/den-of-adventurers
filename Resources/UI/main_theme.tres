@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dh2bq5xlgec87" path="res://Textures/Icons/border_dotted.png" id="1_8117p"]
 [ext_resource type="Texture2D" uid="uid://nbpnedxy8jbp" path="res://Textures/Icons/tick.png" id="2_uhi7m"]
 [ext_resource type="FontFile" uid="uid://lbql25si3ptg" path="res://Fonts/sysfont.otf" id="3_smmle"]
-[ext_resource type="FontFile" uid="uid://c3yr2ft5uxgek" path="res://Fonts/Sysfont C.ttf" id="5_5eay4"]
+[ext_resource type="FontFile" uid="uid://y8hwagmk77ox" path="res://Fonts/Sysfont C.ttf" id="5_5eay4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ucswv"]
 content_margin_left = 12.0

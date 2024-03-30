@@ -2,7 +2,7 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c3yr2ft5uxgek"
+uid="uid://y8hwagmk77ox"
 path="res://.godot/imported/Sysfont C.ttf-2b374a41b263c9fc930cbbb7abb4024b.fontdata"
 
 [deps]
@@ -24,7 +24,7 @@ hinting=1
 subpixel_positioning=1
 oversampling=0.0
 Fallbacks=null
-fallbacks=[Resource("res://Fonts/VT323-Regular.ttf")]
+fallbacks=[]
 Compress=null
 compress=true
 preload=[]

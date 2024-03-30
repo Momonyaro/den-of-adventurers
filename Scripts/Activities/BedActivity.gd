@@ -28,9 +28,9 @@ func get_start() -> Vector3:
 func get_activity_point() -> Node3D:
 	return activity_point;
 
-func get_activity_state() -> BaseState:
+func get_activity_state(agent) -> BaseState:
 	var activity_state = BedActivityState.new();
-	_agent.fallback_position = start_point.global_position;
+	agent.fallback_position = start_point.global_position;
 	activity_state._activity = self;
 	return activity_state;
 

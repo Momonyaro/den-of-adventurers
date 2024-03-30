@@ -117,7 +117,9 @@ func _open_request():
 	for requirement in request._requirements:
 		var item = requirement.split('$');
 		var req_match = req_manager.get_requirement(item[0], int(item[1]) if item.size() > 1 else 0) as Requirement;
-		var req_validation = req_match.validate(adv_manager.get_party(dropdown._get_current_item()._value)) if dropdown._get_current_item() != null else false;
+		var party = adv_manager.get_party(dropdown._get_current_item()._value) if dropdown._get_current_item() != null else null;
+		var members = adv_manager.get_party_adventurers(party) if party != null else [];
+		var req_validation = req_match.validate(party, members) if dropdown._get_current_item() != null else false;
 		var instance = requirement_item.instantiate();
 		requirement_container.add_child(instance);
 		instance.get_child(0).visible = req_validation;

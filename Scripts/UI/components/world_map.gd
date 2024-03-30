@@ -28,7 +28,7 @@ func calculate_path(destination: String) -> float:
 
 		line_2d.add_point(positions[i]);
 
-	return (total_distance * 25) / ADV_MOVE_SPEED;
+	return (total_distance * 12) / ADV_MOVE_SPEED;
 
 func clear_path():
 	flag.visible = false;

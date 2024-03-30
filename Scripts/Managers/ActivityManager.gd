@@ -50,6 +50,13 @@ func reserve(id: String, reservee: Agent):
 			return;
 	print("Failed to find event for ID: ", id);
 
+func remove_all_reservations_for_reservee(reservee: Agent):
+	for activity in _activities:
+		if activity.occupied_by == reservee.adventurer._unique_id:
+			activity.occupied_by = "";
+			return;
+
+
 func set_free(id: String):
 	for activity in _activities:
 		if activity.activity_id == id:

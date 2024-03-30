@@ -4,7 +4,10 @@ class_name SettingsManager;
 @onready var settings: Persistence = $Settings;
 @onready var timers: TimerContainer = get_node("%Timers");
 
+var last_window_size = Vector2i();
+
 var TIMER_autosave = "";
+var resize_timer = null;
 
 func _ready():
 	_load_data();
@@ -17,6 +20,13 @@ func _ready():
 	else:
 		TIMER_autosave = "";
 
+func _process(_delta):
+	var window_size = DisplayServer.window_get_size();
+
+	if window_size != last_window_size:
+		last_window_size = window_size;
+		_on_resize();
+
 func _load_data():
 	var settings_dict = settings.data as Dictionary;
 	
@@ -28,9 +38,12 @@ func _load_data():
 			'resolution':
 				_set_res(SettingsManager.string_to_vector2i(str(settings_dict[key])));
 				continue;
-			'ui_scaling':
-				_set_ui_scaling(settings_dict[key]);
+			'window_size':
+				_set_win_size(SettingsManager.string_to_vector2i(str(settings_dict[key])));
 				continue;
+#			'ui_scaling':
+#				_set_ui_scaling(settings_dict[key]);
+#				continue;
 			'pan_speed':
 				_set_cam_pan_speed(settings_dict[key]);
 				continue;
@@ -39,9 +52,9 @@ func _load_data():
 				continue;
 
 func _set_res(size: Vector2i):
-	if get_window().mode == Window.Mode.MODE_FULLSCREEN:
-		return;
 	get_tree().root.size = size;
+
+func _set_win_size(size: Vector2i):
 	get_window().size = size;
 
 func _set_ui_scaling(value: int):
@@ -66,6 +79,9 @@ func reset_autosave_timer(new_time: int):
 	else:
 		TIMER_autosave = "";
 
+func _on_resize():
+	settings.data['window_size'] = str(last_window_size);
+	settings.save();
 
 func _on_timer_done(id: String):
 	if id == TIMER_autosave:
