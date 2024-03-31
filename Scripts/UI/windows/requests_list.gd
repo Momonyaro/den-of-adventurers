@@ -11,6 +11,9 @@ extends Panel
 @onready var time_remaining = get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/TIME_REMAINING/MarginContainer/VBoxContainer/HBoxContainer/VALUE");
 
 var current_request = "";
+var _window_base: Node = null;
+var _page: int = 0;
+const PAGE_SIZE = 8;
 
 func _ready():
 	_open_list();
@@ -165,22 +168,36 @@ func _open_request():
 		complete_btn.disconnect((sig['signal'] as Signal).get_name(), sig['callable']);
 	complete_btn.pressed.connect(complete_func);
 
-
-
+func change_page(delta: int):
+	var requests = req_manager.get_requests();
+	var req_list = requests['Active'];
+	req_list.append_array(requests['Available']);
+	req_list.append_array(requests['Completed']);
+	var zero_offset = 1 if req_list.size() % PAGE_SIZE == 0 else 0;
+	var page_max = floori(float(req_list.size()) / float(PAGE_SIZE));
+	_page = clampi(_page + delta, 0, page_max - zero_offset);
+	_page = maxi(0, _page);
+	_open_list();
 
 func _open_list():
 	request_container.visible = true;
 	detail_container.visible = false;
 	world_map.clear_path();
 	var requests = req_manager.get_requests();
+
 	
 	var req_container = request_container.get_child(1);
 	var req_list = requests['Active'];
 	req_list.append_array(requests['Available']);
 	req_list.append_array(requests['Completed']);
+	var draw_pagination = req_list.size() > PAGE_SIZE;
+
+	get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_LIST/PAGINATION").visible = draw_pagination;
+	get_node("HBoxContainer/REQUEST_HOLDER/REQUEST_LIST/PAGINATION/PAGE_NUM").text = str(_page + 1);
 
 	for i in req_container.get_child_count():
-		var item = req_list[i] if req_list.size() > i else null;
+		var has_item = req_list.size() > i + (_page * PAGE_SIZE);
+		var item = req_list[i + (_page * PAGE_SIZE)] if has_item else null;
 		var child = req_container.get_child(i);
 		var is_active = item._is_active if item != null else false;
 		var matches = adv_manager.try_get_party_with_request(item._id) if item != null else [];
@@ -192,10 +209,12 @@ func _open_list():
 func _on_click_open_btn(id: String):
 
 	current_request = id;
+	_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
 	_open_request();
 
 func _on_close_btn_pressed():
 	current_request = "";
+	_window_base.play_audio("res://Audio/SFX/UI/click_004.ogg");
 	_open_list();
 	pass # Replace with function body.
 
@@ -221,8 +240,13 @@ func _parse_reward_name(reward_key: String) -> String:
 		"g_xp": return "Guild Experience";
 		_: return "Item";
 
-func _on_dropdown_new_current(_label, _value, _id):
+func _on_pagination_plus_pressed():
+	change_page(1);
 
+func _on_pagination_minus_pressed():
+	change_page(-1);
+
+func _on_dropdown_new_current(_label, _value, _id):
 	_open_request();
 	pass # Replace with function body.
 

@@ -1,0 +1,10 @@
+[gd_resource type="JSON" format=3 uid="uid://cs1n21833de0r"]
+
+[resource]
+data = [{
+"advCap": 4.0,
+"minGuildTier": 0.0
+}, {
+"advCap": 8.0,
+"minGuildTier": 1.0
+}]

@@ -56,6 +56,7 @@ func _draw_basic_info():
 	var adventurer = _last_agent.adventurer;
 	var current_status = adventurer.adv_status();
 	var is_human = adventurer._race == Adventurer.Race.HUMAN;
+	#var adv_class = ClassDataContainer.get_class_from_id(adventurer._class);
 	var xp_ratio = adventurer.xp_percentage();
 	
 	get_node("%BaseInfoRect/name").text = str(adventurer.adv_name());
@@ -71,10 +72,20 @@ func _draw_basic_info():
 	get_node("%BaseInfoRect/star").visible = adventurer._defined;
 	get_node("%BaseInfoRect/recruit_btn").tooltip_text = "Your guild can't house any more recruits!" if !_check_capacity() else "Recruit a new adventurer to your guild";
 
+	var atk_score = str(Party.get_atk_score([adventurer]));
+	var sup_score = str(Party.get_sup_score([adventurer]));
+	get_node("%BaseInfoRect/VBoxContainer/Label3").text = atk_score;
+	get_node("%BaseInfoRect/VBoxContainer/Label4").text = sup_score;
+
 func _draw_health_info():
 	var adventurer = _last_agent.adventurer;
 	var current_status = adventurer.adv_status();
 	var resting = current_status == "RESTING" || current_status == "EXHAUSTED"
+	var party = _adv_manager.get_adventurer_party(adventurer._unique_id);
+	var can_dismiss = true;
+
+	if party != null:
+		can_dismiss = party._status == Party.PartyStatus.IDLE; 
 
 	get_node("%AdvHealthRect").visible = current_status != "RECRUIT" && current_status != "DISMISSED";
 	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer/health").text = str("Health: (", adventurer._health.x, "/", adventurer._health.y, ")");
@@ -88,7 +99,7 @@ func _draw_health_info():
 		get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/rest_btn").text = get_timer_text(adventurer._fatigue, adventurer.FATIGUE_REST_TIME);
 	else:
 		get_node("%AdvHealthRect/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/rest_btn").text = "Rest";
-	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/dismiss_btn").disabled = current_status == "DEAD" || current_status == "AWAY";
+	get_node("%AdvHealthRect/MarginContainer/VBoxContainer/dismiss_btn").disabled = (current_status == "DEAD" || current_status == "AWAY") && !can_dismiss;
 
 
 func _check_capacity():
@@ -132,6 +143,7 @@ func _on_dismiss_btn_pressed():
 		"Yes, I'm sure.",
 		'No',
 		func(): 
+			if _last_agent.adventurer._status == Adventurer.Status.RECRUIT:
+				timers.halve_timer(_adv_manager.TIMER_recruit_refresh);
 			_last_agent._dismiss();
-			timers.halve_timer(_adv_manager.TIMER_recruit_refresh);
 	);

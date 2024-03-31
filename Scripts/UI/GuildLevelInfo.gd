@@ -11,5 +11,6 @@ func _process(_delta):
 
 func populate(data: GuildData):
 	level_text.text = str(data.guild_level);
+	xp_bar.tooltip_text = str(data.guild_xp.x, ' / ', data.guild_xp.y);
 	xp_bar.value = data.guild_xp.x / float(data.guild_xp.y);
 	

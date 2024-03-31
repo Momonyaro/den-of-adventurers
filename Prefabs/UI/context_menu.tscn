@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bojaf0ukceod0"]
+[gd_scene load_steps=14 format=3 uid="uid://bojaf0ukceod0"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ContextMenu.gd" id="1_sxsst"]
 [ext_resource type="Script" path="res://Scripts/UI/GuildLevelInfo.gd" id="3_suiky"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="4_2u38p"]
 [ext_resource type="FontFile" uid="uid://4bfx615ld76k" path="res://Fonts/runescape_uf.ttf" id="5_rhku7"]
 [ext_resource type="Texture2D" uid="uid://cm5hb86ys2v3b" path="res://Textures/Icons/bar_inside.png" id="6_2iyr4"]
+[ext_resource type="Texture2D" uid="uid://cthkmsbwdwj8a" path="res://Textures/Icons/gold.png" id="6_6wp6g"]
 [ext_resource type="FontFile" uid="uid://lbql25si3ptg" path="res://Fonts/sysfont.otf" id="6_wlowf"]
+[ext_resource type="Script" path="res://Scripts/UI/GoldBalance.gd" id="8_4ry4g"]
 [ext_resource type="Script" path="res://Scripts/UI/AdvCapacity.gd" id="8_w4rr8"]
 [ext_resource type="Script" path="res://Scripts/UI/Clock.gd" id="9_dqgca"]
 
@@ -128,6 +130,29 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 24
 alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Guild Coffers"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("6_6wp6g")
+stretch_mode = 3
+
+[node name="GoldBalance" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_wlowf")
+theme_override_font_sizes/font_size = 18
+text = "0/10 Adv."
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("8_4ry4g")
 
 [node name="AdvCapacity" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
 texture_filter = 1

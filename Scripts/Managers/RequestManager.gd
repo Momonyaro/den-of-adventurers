@@ -41,9 +41,10 @@ func get_requests() -> Dictionary:
 	};
 	var _active_ids = _active_requests.keys();
 	var _completed_ids = _completed_requests;
+	var _guild_data = game_manager.guild_data;
 
 	var requests = request_data.map(func (d): return RequestItem.new(d)); # This won't filter out unavailable requests...
-	requests = requests.filter(func (r): return _validate_request(r, _completed_requests, 1));
+	requests = requests.filter(func (r): return _validate_request(r, _completed_requests, _guild_data.guild_level, _guild_data.guildhall_tier));
 
 	for request in requests:
 		if _completed_ids.has(request._id):
@@ -70,11 +71,16 @@ func _try_get_request(id: String) -> Array: # return (success, result)
 	else:
 		return [false, null]
 
-func _validate_request(request: RequestItem, completed: Array, guildTier: int) -> bool:
-	var guildRange = request._guild_tier_range;
+func _validate_request(request: RequestItem, completed: Array, guild_level: int, guild_tier: int) -> bool:
+	var guildLevelRange = request._guild_level_range;
+	var guildTierRange = request._guild_tier_range;
 
-	if guildRange[1] > 0:
-		if guildTier < guildRange[0] || guildTier >= guildRange[1]:
+	if guildLevelRange[1] > 0:
+		if guild_level < guildLevelRange[0] || guild_level >= guildLevelRange[1]:
+			return false;
+
+	if guildTierRange[1] > 0:
+		if guild_tier < guildTierRange[0] || guild_tier >= guildTierRange[1]:
 			return false;
 
 	var prerequisites = request._previous_requests;
@@ -103,7 +109,7 @@ func complete_request(request: RequestItem, party: Party):
 
 	var members = adv_manager.get_party_adventurers(party);
 	for member in members:
-		member.add_xp(guild_xp);
+		member.add_xp(guild_xp * 0.5);
 
 	game_manager.guild_data.add_xp(guild_xp);
 	game_manager.guild_data.guild_balance += gold;
@@ -116,8 +122,12 @@ func complete_request(request: RequestItem, party: Party):
 func get_requirement(type: String, value: int) -> Requirement:
 	match (type):
 		"PartyMembersAbove": return PartyMembersAbove.new(value);
+		"PartyMembersEqual": return PartyMembersEquals.new(value);
 		"NoDemiHumans": return NoDemiHumans.new();
 		"AtkScoreAbove": return PartyAtkScoreAbove.new(value);
+		"AtkScoreBelow": return PartyAtkScoreBelow.new(value);
+		"SupScoreAbove": return PartySupScoreAbove.new(value);
+		"SupScoreBelow": return PartySupScoreBelow.new(value);
 		_: return null;
 
 func _on_timer_done(id: String):
@@ -197,6 +207,7 @@ class RequestItem:
 	var _location: String = "";
 	var _duration: float = 0;
 	var _guild_tier_range: Array = [0, 0];
+	var _guild_level_range: Array = [0, 0];
 	var _previous_requests: Array = [];
 	var _requirements: Array = [];
 	var _rewards: Array = [];
@@ -211,6 +222,7 @@ class RequestItem:
 		_location = dict['Location'] if dict.has('Location') else '';
 		_duration = dict['Duration'] if dict.has('Duration') else 0;
 		_guild_tier_range = dict['GuildTierRange'] if dict.has('GuildTierRange') else _guild_tier_range;
+		_guild_level_range = dict['GuildLevelRange'] if dict.has('GuildLevelRange') else _guild_level_range;
 		_previous_requests = dict['PrevRequests'] if dict.has('PrevRequests') else [];
 		_requirements = dict['Requirements'] if dict.has('Requirements') else [];
 		_rewards = dict['Rewards'] if dict.has('Rewards') else [];

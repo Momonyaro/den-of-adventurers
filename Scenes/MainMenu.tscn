@@ -178,6 +178,7 @@ layout_mode = 1
 prompt = NodePath("../PromptContainer")
 notifications = NodePath("../Notifications")
 window_manager = NodePath("../WindowManager")
+show_gold_balance = false
 show_guild_level = false
 show_adv_cap = false
 data_src = 1

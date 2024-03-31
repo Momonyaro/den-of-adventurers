@@ -22,7 +22,7 @@ static func copy(party: Party):
 	new_party._current_request_id = party._current_request_id;
 	return new_party;
 
-func get_atk_score(members: Array) -> int:
+static func get_atk_score(members: Array) -> int:
 	var score : int = 0;
 	for adv in members:
 		var adv_class = ClassDataContainer.get_class_from_id(adv._class);
@@ -34,7 +34,7 @@ func get_atk_score(members: Array) -> int:
 		
 	return score;
 
-func get_sup_score(members: Array) -> int:
+static func get_sup_score(members: Array) -> int:
 	var score : int = 0;
 	for adv in members:
 		var adv_class = ClassDataContainer.get_class_from_id(adv._class);

@@ -93,7 +93,6 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_evbc6")
 
 [node name="REQUEST_LIST" type="Panel" parent="HBoxContainer/REQUEST_HOLDER"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,6 +165,7 @@ offset_right = -4.0
 offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 0
 alignment = 2
 
 [node name="ARROW_LEFT" type="TextureButton" parent="HBoxContainer/REQUEST_HOLDER/REQUEST_LIST/PAGINATION"]
@@ -188,6 +188,7 @@ texture_normal = ExtResource("2_ql2ty")
 stretch_mode = 3
 
 [node name="REQUEST_DETAILS" type="Panel" parent="HBoxContainer/REQUEST_HOLDER"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -602,5 +603,7 @@ offset_bottom = 64.0
 theme_override_font_sizes/font_size = 15
 text = "The Untamed Wilds"
 
+[connection signal="pressed" from="HBoxContainer/REQUEST_HOLDER/REQUEST_LIST/PAGINATION/ARROW_LEFT" to="." method="_on_pagination_minus_pressed"]
+[connection signal="pressed" from="HBoxContainer/REQUEST_HOLDER/REQUEST_LIST/PAGINATION/ARROW_RIGHT" to="." method="_on_pagination_plus_pressed"]
 [connection signal="pressed" from="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/close_btn" to="." method="_on_close_btn_pressed"]
 [connection signal="new_current" from="HBoxContainer/REQUEST_HOLDER/REQUEST_DETAILS/REQUIREMENTS/VBoxContainer/BTM_CONTAINER/dropdown" to="." method="_on_dropdown_new_current"]

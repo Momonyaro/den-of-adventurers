@@ -74,7 +74,7 @@ func add_xp(xp: int):
 	_xp.x += xp;
 	while _xp.x >= _xp.y:
 		_xp.x = _xp.x - _xp.y;
-		_level += 1;
+		_level = clampi(_level + 1, 0, 30);
 
 func set_status(new_status: Status) -> void:
 	_status = new_status;

@@ -5,15 +5,16 @@ const POOL_SIZE : int = 32;
 var _adv_pool : Dictionary = {};
 var _name_pool : NamePool = null;
 
-func _init(name_pool: NamePool):
+func _init(name_pool: NamePool, guild_level: int, guild_tier: int):
 	_name_pool = name_pool;
+	var level_range = GuildDataContainer.get_recruit_level_range(guild_level, guild_tier);
 	
 	define_adventurer("Aerithus", "Sól", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Blacholer, 19, 10, 2, "sourcerer", "MALE");
 	define_adventurer("Monrose", "Faertag", Adventurer.Race.DEMI_HUMAN, Adventurer.Nationality.Vignarran, 19, 10, 2, "spellsword", "MALE");
 	define_adventurer("Atou", "Graeli", Adventurer.Race.HUMAN, Adventurer.Nationality.Blacholer, 21, 10, 3, "ranger", "FEMALE");
 	
 	for i in POOL_SIZE - _adv_pool.keys().size():
-		generate_adventurer();
+		generate_adventurer(level_range);
 	pass;
 
 func define_adventurer(given_name: String, family_name: String, race: Adventurer.Race, nationality: Adventurer.Nationality, age: int, health: int, level: int, adv_class: String, gender: String):
@@ -31,7 +32,7 @@ func define_adventurer(given_name: String, family_name: String, race: Adventurer
 	_adv_pool[adv._unique_id] = adv;
 	pass;
 
-func generate_adventurer():
+func generate_adventurer(level_range: Vector2i):
 	var nationality = WorldDataContainer.get_rand_nationality_w();
 	var gender = WorldDataContainer.get_rand_gender_w(nationality);
 	var race = WorldDataContainer.get_rand_race_w(nationality);
@@ -40,7 +41,8 @@ func generate_adventurer():
 	var rand_name = _name_pool.get_new_name(nationality, gender);
 	
 	var adv_index = _adv_pool.keys().size();
-	var adv = Adventurer.new(rand_name[0], rand_name[1], 20, 10, 1, race, nationality, adv_index);
+	var level = randi_range(level_range.x, level_range.y);
+	var adv = Adventurer.new(rand_name[0], rand_name[1], 20, 10, level, race, nationality, adv_index);
 	
 	var class_appearance = rand_class['appearance'];
 	adv.LOOK_race = get_race_customization(race, nationality);
@@ -68,9 +70,10 @@ func get_defined_adv_pool() -> Array:
 func remove_adventurer(name_key: String):
 	_name_pool.delete_reserved_name(name_key);
 
-func get_rand_adventurer(guarantee_defined: bool = false) -> Adventurer:
+func get_rand_adventurer(guild_level: int, guild_tier: int, guarantee_defined: bool = false) -> Adventurer:
 	var defined_pool = get_defined_adv_pool();
 	var pool = defined_pool if (guarantee_defined and defined_pool.size() > 0) else _adv_pool.values();
+	var level_range = GuildDataContainer.get_recruit_level_range(guild_level, guild_tier);
 	
 	var size = pool.size();
 	var rand_index = randi() % size;
@@ -78,7 +81,7 @@ func get_rand_adventurer(guarantee_defined: bool = false) -> Adventurer:
 	
 	_adv_pool.erase(adv._unique_id);
 	if _adv_pool.size() < POOL_SIZE:
-		generate_adventurer(); # fill the pool back up
+		generate_adventurer(level_range); # fill the pool back up
 	
 	return adv;
 

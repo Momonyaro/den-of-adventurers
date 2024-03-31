@@ -29,7 +29,7 @@ func update(delta: float, adv_state: Adventurer.Status, is_moving: bool, agent: 
 
 			_current_state = state;
 			_current_state.start(_self.get_child(0).get_child(-1));
-			print(BaseState.StateReference.keys()[_current_state._state_ref]);
+			#print(BaseState.StateReference.keys()[_current_state._state_ref]);
 			pass;
 	
 	_current_state.update(delta, agent, camera);

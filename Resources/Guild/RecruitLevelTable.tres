@@ -1,0 +1,24 @@
+[gd_resource type="JSON" format=3 uid="uid://c44gi35hn6bcf"]
+
+[resource]
+data = [{
+"minGuildLevel": 0.0,
+"minGuildTier": 0.0,
+"rangeMax": 2.0,
+"rangeMin": 1.0
+}, {
+"minGuildLevel": 3.0,
+"minGuildTier": 0.0,
+"rangeMax": 4.0,
+"rangeMin": 2.0
+}, {
+"minGuildLevel": 7.0,
+"minGuildTier": 0.0,
+"rangeMax": 5.0,
+"rangeMin": 2.0
+}, {
+"minGuildLevel": 10.0,
+"minGuildTier": 1.0,
+"rangeMax": 5.0,
+"rangeMin": 2.0
+}]

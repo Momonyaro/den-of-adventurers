@@ -35,7 +35,7 @@ enabled=PackedStringArray("res://addons/console/plugin.cfg", "res://addons/persi
 
 [global]
 
-app_version="Full Circle -- (v1.6a)"
+app_version="First Light -- (v1.0b)"
 
 [input]
 

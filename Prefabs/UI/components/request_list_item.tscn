@@ -8,13 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://cthkmsbwdwj8a" path="res://Textures/Icons/gold.png" id="5_ilow1"]
 [ext_resource type="Texture2D" uid="uid://dsejrvql81x6p" path="res://Textures/Icons/avatar.png" id="7_7wt4c"]
 [ext_resource type="Texture2D" uid="uid://7bcoq6h35a7o" path="res://Textures/Icons/check2.png" id="7_8uxh0"]
-[ext_resource type="Texture2D" uid="uid://d1enbwehm7ko0" path="res://Textures/Icons/exclamation.png" id="7_xi1du"]
 [ext_resource type="Texture2D" uid="uid://rjt00bwx41uj" path="res://Textures/Icons/flag.png" id="9_145du"]
 [ext_resource type="Theme" uid="uid://m7mvoj5x6lb5" path="res://Resources/UI/main_theme.tres" id="10_1orss"]
 [ext_resource type="Texture2D" uid="uid://b78rlbuhxaln7" path="res://Textures/Icons/mail.png" id="11_himki"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6vu8"]
 bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iu8d0"]
+bg_color = Color(0.729412, 0.776471, 0.854902, 1)
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
@@ -52,6 +57,12 @@ theme = ExtResource("10_1orss")
 theme_override_styles/panel = SubResource("StyleBoxFlat_q6vu8")
 script = ExtResource("2_em3nu")
 
+[node name="COMPLETE_BG" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 301.0
+offset_bottom = 48.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_iu8d0")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -66,19 +77,6 @@ custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 texture = SubResource("AnimatedTexture_1f48w")
 expand_mode = 1
-stretch_mode = 2
-
-[node name="RETURNED_STRIP" type="MarginContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(24, 0)
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-
-[node name="ACTIVE_STRIP2" type="TextureRect" parent="HBoxContainer/RETURNED_STRIP"]
-texture_filter = 1
-custom_minimum_size = Vector2(8, 0)
-layout_mode = 2
-texture = ExtResource("7_xi1du")
 stretch_mode = 2
 
 [node name="COMPLETED_STRIP" type="MarginContainer" parent="HBoxContainer"]

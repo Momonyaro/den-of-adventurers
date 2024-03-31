@@ -75,6 +75,7 @@ func _recruit():
 
 func _dismiss():
 	act_manager.remove_all_reservations_for_reservee(self);
+	adv_manager.remove_party_member(adv_id);
 	timers.delete_timer(adventurer.TIMER_recruit);
 	adventurer.adv_dismiss();
 	pass;

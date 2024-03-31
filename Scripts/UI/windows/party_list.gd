@@ -48,9 +48,9 @@ func populate_item(list_item: Node, party: Party, index: int):
 
 	var members = _adv_manager.get_party_adventurers(party);
 	var off_score = list_item.get_child(2).get_child(1);
-	off_score.text = str(party.get_atk_score(members));
+	off_score.text = str(Party.get_atk_score(members));
 	var sup_score = list_item.get_child(2).get_child(4);
-	sup_score.text = str(party.get_sup_score(members));
+	sup_score.text = str(Party.get_sup_score(members));
 
 	var _edit_func = func(): _adv_manager.party_edited = Party.copy(_adv_manager.get_party_by_index(index)); _window_base._manager.process_command("WINDOW:RESET:EDIT_PARTY", get_global_mouse_position());
 	var _del_func = func(): _on_delete_btn(party._title, index);

@@ -285,10 +285,9 @@ camera_zoom_speed = 8.0
 camera_near_dist = 3.0
 camera_near_height = 1.5
 left = 9.0
-top = 6.0
+top = 8.0
 right = 9.0
 bottom = 6.0
-debug_draw = true
 
 [node name="CAMERA_FOOT" type="Node3D" parent="CAMERA_BASE"]
 
@@ -763,41 +762,34 @@ transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, -6.247
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.71219, 4.76837e-07, -0.0246115)
 script = ExtResource("23_4h3c2")
 point_radius = 1.74
-debug_draw = true
 
 [node name="WANDER_POINT2" type="Node3D" parent="MAP_OBJECTS/WANDER_POINTS" groups=["WANDER_POINTS"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.64537, 4.76837e-07, -0.0246115)
 script = ExtResource("23_4h3c2")
 point_radius = 1.74
-debug_draw = true
 
 [node name="WANDER_POINT8" type="Node3D" parent="MAP_OBJECTS/WANDER_POINTS" groups=["WANDER_POINTS"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.12232, 4.76837e-07, 2.30937)
 script = ExtResource("23_4h3c2")
 point_radius = 1.5
-debug_draw = true
 
 [node name="WANDER_POINT3" type="Node3D" parent="MAP_OBJECTS/WANDER_POINTS" groups=["WANDER_POINTS"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.17244, 4.76837e-07, -3.82402)
 script = ExtResource("23_4h3c2")
 point_radius = 1.5
-debug_draw = true
 
 [node name="WANDER_POINT4" type="Node3D" parent="MAP_OBJECTS/WANDER_POINTS" groups=["WANDER_POINTS"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67769, 4.76837e-07, -2.86145)
 script = ExtResource("23_4h3c2")
 point_radius = 1.5
-debug_draw = true
 
 [node name="WANDER_POINT5" type="Node3D" parent="MAP_OBJECTS/WANDER_POINTS" groups=["WANDER_POINTS"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.943329, 4.76837e-07, -3.63196)
 script = ExtResource("23_4h3c2")
-debug_draw = true
 
 [node name="WANDER_POINT9" type="Node3D" parent="MAP_OBJECTS/WANDER_POINTS" groups=["WANDER_POINTS"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3327, 4.76837e-07, -4.31733)
 script = ExtResource("23_4h3c2")
-debug_draw = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("23_e52xx")

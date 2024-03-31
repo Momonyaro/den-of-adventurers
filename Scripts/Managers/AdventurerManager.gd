@@ -21,6 +21,7 @@ var TIMER_recruit_refresh : String;
 
 
 @onready var timers = get_node("%Timers");
+@onready var game_manager: GameManager = get_node("/root/Root/Game");
 @onready var data = get_tree().current_scene; # Getting the root node.
 
 func _ready():
@@ -32,9 +33,12 @@ func _process(_delta):
 		return;
 
 	if recruits().size() == 0 and TIMER_recruit_refresh == "":
-		TIMER_recruit_refresh = timers.create_timer(60, "$RECRUIT_TIMER"); #1200
-		var adv = data.adv_pool.get_rand_adventurer();
-		adv.TIMER_recruit = timers.create_timer(30, str(adv.adv_name(), " dismissal timer.")); #300
+		TIMER_recruit_refresh = timers.create_timer(300, "$RECRUIT_TIMER"); 
+		
+		var guild_data = game_manager.guild_data;
+
+		var adv = data.adv_pool.get_rand_adventurer(guild_data.guild_level, guild_data.guildhall_tier);
+		adv.TIMER_recruit = timers.create_timer(120, str(adv.adv_name(), " dismissal timer."));
 		
 		_adventurers[adv._unique_id] = adv;
 		new_recruit.emit(adv._unique_id);
@@ -48,12 +52,12 @@ func recruits() -> Array:
 
 func recruited() -> Array:
 	return _adventurers.values().filter(
-		func(adv: Adventurer): return adv._status != Adventurer.Status.RECRUIT).map(
+		func(adv: Adventurer): return adv._status != Adventurer.Status.RECRUIT && adv._status != Adventurer.Status.DISMISSED).map(
 		func(adv: Adventurer): return adv._unique_id
 	);
 
 func recruited_adv() -> Array:
-	return _adventurers.values().filter(func(adv: Adventurer): return adv._status != Adventurer.Status.RECRUIT);
+	return recruited().map(func (id): return _adventurers[id]);
 
 func avg_level() -> float:
 	var _adv = recruited_adv();
@@ -125,6 +129,7 @@ func remove_party_member(unique_id: String):
 		if (_parties[i]._members.has(unique_id)):
 			_parties[i]._members.erase(unique_id);
 			break;
+	remove_empty_parties();
 
 func remove_empty_parties():
 	_parties = _parties.filter(func (p): return p._members.size() > 0);

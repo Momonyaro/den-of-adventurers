@@ -8,6 +8,7 @@ var section_divider_prefab = preload("res://Prefabs/UI/context_section_divider.t
 @export var prompt: Node = null;
 @export var notifications: Node = null;
 @export var window_manager: Node = null;
+@export var show_gold_balance: bool = true;
 @export var show_guild_level: bool = true;
 @export var show_adv_cap: bool = true;
 @export_enum("menu_data:0", "main_menu_data:1") var data_src: int = 0;
@@ -19,6 +20,8 @@ signal command_msg(msg: String);
 func _ready():
 	if !show_guild_level:
 		$MarginContainer/HBoxContainer2.queue_free();
+	if !show_gold_balance:
+		$MarginContainer/MarginContainer/HBoxContainer/HBoxContainer.queue_free();
 	if !show_adv_cap:
 		$MarginContainer/MarginContainer/HBoxContainer/AdvCapacity.queue_free();
 	create_menu();
